@@ -9,59 +9,46 @@
 /* Begin PBXBuildFile section */
 		140ABC3B249C04A4004D15BD /* SCSInSD-135px.png in Resources */ = {isa = PBXBuildFile; fileRef = 140ABC3A249C04A4004D15BD /* SCSInSD-135px.png */; };
 		141C5F70247EC92600CB8719 /* libusb-1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B79B0D244A315E00C3FC92 /* libusb-1.0.a */; };
-		141C5F71247F11A500CB8719 /* hidpacket.c in Sources */ = {isa = PBXBuildFile; fileRef = 14C54CAE244B9D9F0086316F /* hidpacket.c */; };
-		141C5F72247F11A900CB8719 /* Dfu.cc in Sources */ = {isa = PBXBuildFile; fileRef = 14AF8336243A1B220046D0DF /* Dfu.cc */; };
-		141C5F74247F11B300CB8719 /* hid.c in Sources */ = {isa = PBXBuildFile; fileRef = 14C271A2242637F6003AA991 /* hid.c */; };
 		141C5F782480D92200CB8719 /* ConfigUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 141C5F772480D92200CB8719 /* ConfigUtil.mm */; };
 		141C5F792480D92E00CB8719 /* ConfigUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 141C5F772480D92200CB8719 /* ConfigUtil.mm */; };
 		141C5F7C2480D96C00CB8719 /* SCSI2SD_HID.mm in Sources */ = {isa = PBXBuildFile; fileRef = 141C5F7B2480D96B00CB8719 /* SCSI2SD_HID.mm */; };
 		141C5F7D2480D97B00CB8719 /* SCSI2SD_HID.mm in Sources */ = {isa = PBXBuildFile; fileRef = 141C5F7B2480D96B00CB8719 /* SCSI2SD_HID.mm */; };
-		1458093524834B8A00159CB8 /* hwversion.c in Sources */ = {isa = PBXBuildFile; fileRef = 1458093424834B8A00159CB8 /* hwversion.c */; };
-		1458093624834B8A00159CB8 /* hwversion.c in Sources */ = {isa = PBXBuildFile; fileRef = 1458093424834B8A00159CB8 /* hwversion.c */; };
-		145809432486021F00159CB8 /* stm32f2xx_hal_gpio.c in Sources */ = {isa = PBXBuildFile; fileRef = 145809412486021E00159CB8 /* stm32f2xx_hal_gpio.c */; };
-		145809442486021F00159CB8 /* stm32f2xx_hal_gpio.c in Sources */ = {isa = PBXBuildFile; fileRef = 145809412486021E00159CB8 /* stm32f2xx_hal_gpio.c */; };
-		145809452486021F00159CB8 /* stm32f2xx_hal_flash.c in Sources */ = {isa = PBXBuildFile; fileRef = 145809422486021E00159CB8 /* stm32f2xx_hal_flash.c */; };
-		145809462486021F00159CB8 /* stm32f2xx_hal_flash.c in Sources */ = {isa = PBXBuildFile; fileRef = 145809422486021E00159CB8 /* stm32f2xx_hal_flash.c */; };
-		145809482486025300159CB8 /* stm32f2xx_hal.c in Sources */ = {isa = PBXBuildFile; fileRef = 145809472486025300159CB8 /* stm32f2xx_hal.c */; };
-		145809492486025300159CB8 /* stm32f2xx_hal.c in Sources */ = {isa = PBXBuildFile; fileRef = 145809472486025300159CB8 /* stm32f2xx_hal.c */; };
-		145809802486F90C00159CB8 /* stm32f2xx_hal_flash_ex.c in Sources */ = {isa = PBXBuildFile; fileRef = 1458097F2486F90C00159CB8 /* stm32f2xx_hal_flash_ex.c */; };
-		145809822486F96600159CB8 /* stm32f2xx_hal_cortex.c in Sources */ = {isa = PBXBuildFile; fileRef = 145809812486F96600159CB8 /* stm32f2xx_hal_cortex.c */; };
-		145809842486FA1000159CB8 /* stm32f2xx_hal_rcc.c in Sources */ = {isa = PBXBuildFile; fileRef = 145809832486FA0F00159CB8 /* stm32f2xx_hal_rcc.c */; };
-		1458098824871D8700159CB8 /* time.c in Sources */ = {isa = PBXBuildFile; fileRef = 1458098724871D8700159CB8 /* time.c */; };
-		1458098A24871E1F00159CB8 /* system_stm32f2xx.c in Sources */ = {isa = PBXBuildFile; fileRef = 1458098924871E1F00159CB8 /* system_stm32f2xx.c */; };
-		1458098B24871E2600159CB8 /* system_stm32f2xx.c in Sources */ = {isa = PBXBuildFile; fileRef = 1458098924871E1F00159CB8 /* system_stm32f2xx.c */; };
-		14580A7A248845CA00159CB8 /* dfu_file.c in Sources */ = {isa = PBXBuildFile; fileRef = 14580A69248845C900159CB8 /* dfu_file.c */; };
-		14580A7B248845CA00159CB8 /* quirks.c in Sources */ = {isa = PBXBuildFile; fileRef = 14580A6F248845C900159CB8 /* quirks.c */; };
-		14580A7C248845CA00159CB8 /* dfu_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 14580A71248845C900159CB8 /* dfu_util.c */; };
-		14580A7D248845CA00159CB8 /* dfu.c in Sources */ = {isa = PBXBuildFile; fileRef = 14580A73248845CA00159CB8 /* dfu.c */; };
-		14580A7E248845CA00159CB8 /* dfuse_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 14580A74248845CA00159CB8 /* dfuse_mem.c */; };
-		14580A7F248845CA00159CB8 /* dfuse.c in Sources */ = {isa = PBXBuildFile; fileRef = 14580A75248845CA00159CB8 /* dfuse.c */; };
-		14580A80248845CA00159CB8 /* lib_main.c in Sources */ = {isa = PBXBuildFile; fileRef = 14580A76248845CA00159CB8 /* lib_main.c */; };
-		14580A83248845CA00159CB8 /* dfu_load.c in Sources */ = {isa = PBXBuildFile; fileRef = 14580A79248845CA00159CB8 /* dfu_load.c */; };
-		14580A84248845F900159CB8 /* dfu_file.c in Sources */ = {isa = PBXBuildFile; fileRef = 14580A69248845C900159CB8 /* dfu_file.c */; };
-		14580A85248845FC00159CB8 /* dfu_load.c in Sources */ = {isa = PBXBuildFile; fileRef = 14580A79248845CA00159CB8 /* dfu_load.c */; };
-		14580A862488460000159CB8 /* dfu_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 14580A71248845C900159CB8 /* dfu_util.c */; };
-		14580A872488460500159CB8 /* dfu.c in Sources */ = {isa = PBXBuildFile; fileRef = 14580A73248845CA00159CB8 /* dfu.c */; };
-		14580A882488460900159CB8 /* dfuse_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 14580A74248845CA00159CB8 /* dfuse_mem.c */; };
-		14580A892488460C00159CB8 /* dfuse.c in Sources */ = {isa = PBXBuildFile; fileRef = 14580A75248845CA00159CB8 /* dfuse.c */; };
-		14580A8A2488461000159CB8 /* lib_main.c in Sources */ = {isa = PBXBuildFile; fileRef = 14580A76248845CA00159CB8 /* lib_main.c */; };
-		14580A8C2488461C00159CB8 /* quirks.c in Sources */ = {isa = PBXBuildFile; fileRef = 14580A6F248845C900159CB8 /* quirks.c */; };
-		14580A8F248886F100159CB8 /* stm32f2xx_hal_rcc.c in Sources */ = {isa = PBXBuildFile; fileRef = 145809832486FA0F00159CB8 /* stm32f2xx_hal_rcc.c */; };
-		14580A90248886F500159CB8 /* stm32f2xx_hal_cortex.c in Sources */ = {isa = PBXBuildFile; fileRef = 145809812486F96600159CB8 /* stm32f2xx_hal_cortex.c */; };
-		14580A91248886F900159CB8 /* stm32f2xx_hal_flash_ex.c in Sources */ = {isa = PBXBuildFile; fileRef = 1458097F2486F90C00159CB8 /* stm32f2xx_hal_flash_ex.c */; };
-		14580A92248887BB00159CB8 /* time.c in Sources */ = {isa = PBXBuildFile; fileRef = 1458098724871D8700159CB8 /* time.c */; };
 		146A539223BBEB800000A06B /* ConfigObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 146A539123BBEB800000A06B /* ConfigObject.mm */; };
+		147E4E0C249EA800005E31B7 /* dfu_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4DF3249EA800005E31B7 /* dfu_util.c */; };
+		147E4E0D249EA800005E31B7 /* lib_main.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4DF5249EA800005E31B7 /* lib_main.c */; };
+		147E4E0E249EA800005E31B7 /* dfuse_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4DF6249EA800005E31B7 /* dfuse_mem.c */; };
+		147E4E0F249EA800005E31B7 /* quirks.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 147E4DF7249EA800005E31B7 /* quirks.o */; };
+		147E4E10249EA800005E31B7 /* dfuse.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4DFA249EA800005E31B7 /* dfuse.c */; };
+		147E4E11249EA800005E31B7 /* dfu.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4DFB249EA800005E31B7 /* dfu.c */; };
+		147E4E12249EA800005E31B7 /* dfu_load.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 147E4DFD249EA800005E31B7 /* dfu_load.o */; };
+		147E4E13249EA800005E31B7 /* dfu_file.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 147E4DFF249EA800005E31B7 /* dfu_file.o */; };
+		147E4E14249EA800005E31B7 /* dfuse_mem.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 147E4E00249EA800005E31B7 /* dfuse_mem.o */; };
+		147E4E15249EA800005E31B7 /* dfu_util.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 147E4E02249EA800005E31B7 /* dfu_util.o */; };
+		147E4E16249EA800005E31B7 /* dfuse.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 147E4E06249EA800005E31B7 /* dfuse.o */; };
+		147E4E17249EA800005E31B7 /* quirks.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4E07249EA800005E31B7 /* quirks.c */; };
+		147E4E18249EA800005E31B7 /* dfu.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 147E4E08249EA800005E31B7 /* dfu.o */; };
+		147E4E19249EA800005E31B7 /* dfu_file.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4E0A249EA800005E31B7 /* dfu_file.c */; };
+		147E4E1A249EA800005E31B7 /* dfu_load.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4E0B249EA800005E31B7 /* dfu_load.c */; };
+		147E4E1E249EA80F005E31B7 /* time.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4E1D249EA80F005E31B7 /* time.c */; };
+		147E4E63249EC34F005E31B7 /* stm32f2xx_hal_rcc.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4E32249EC34E005E31B7 /* stm32f2xx_hal_rcc.c */; };
+		147E4E64249EC34F005E31B7 /* stm32f2xx_hal.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4E3A249EC34E005E31B7 /* stm32f2xx_hal.c */; };
+		147E4E65249EC34F005E31B7 /* system_stm32f2xx.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4E4F249EC34E005E31B7 /* system_stm32f2xx.c */; };
+		147E4E66249EC34F005E31B7 /* stm32f2xx_hal_cortex.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4E52249EC34E005E31B7 /* stm32f2xx_hal_cortex.c */; };
+		147E4E67249EC34F005E31B7 /* stm32f2xx_hal_gpio.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4E58249EC34E005E31B7 /* stm32f2xx_hal_gpio.c */; };
+		147E4E68249EC34F005E31B7 /* stm32f2xx_hal_flash_ex.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4E5B249EC34E005E31B7 /* stm32f2xx_hal_flash_ex.c */; };
+		147E4E69249EC34F005E31B7 /* stm32f2xx_hal_flash.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4E61249EC34E005E31B7 /* stm32f2xx_hal_flash.c */; };
+		147E4E6C249EC4A4005E31B7 /* hidpacket.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4E6B249EC4A4005E31B7 /* hidpacket.c */; };
+		147E4E70249EC4C1005E31B7 /* hwversion.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4E6F249EC4C1005E31B7 /* hwversion.c */; };
+		147E4E75249EC4F6005E31B7 /* hid.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4E73249EC4F6005E31B7 /* hid.c */; };
+		147E4E76249EC4F6005E31B7 /* Dfu.cc in Sources */ = {isa = PBXBuildFile; fileRef = 147E4E74249EC4F6005E31B7 /* Dfu.cc */; };
 		1482B1E923973F3E001BA513 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1482B1E823973F3E001BA513 /* AppDelegate.mm */; };
 		1482B1EB23973F42001BA513 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1482B1EA23973F42001BA513 /* Assets.xcassets */; };
 		1482B1EE23973F42001BA513 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1482B1EC23973F42001BA513 /* MainMenu.xib */; };
 		1482B1F123973F42001BA513 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1482B1F023973F42001BA513 /* main.m */; };
 		1482B20F239748DB001BA513 /* DeviceController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1482B203239748DB001BA513 /* DeviceController.mm */; };
 		1482B210239748DB001BA513 /* SettingsController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1482B204239748DB001BA513 /* SettingsController.mm */; };
-		14AF8337243A1B220046D0DF /* Dfu.cc in Sources */ = {isa = PBXBuildFile; fileRef = 14AF8336243A1B220046D0DF /* Dfu.cc */; };
 		14B8ABFB249C175000DD2E88 /* SCSI2SD-V6-util-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B8ABFA249C175000DD2E88 /* SCSI2SD-V6-util-512.png */; };
-		14C271A3242637F6003AA991 /* hid.c in Sources */ = {isa = PBXBuildFile; fileRef = 14C271A2242637F6003AA991 /* hid.c */; };
 		14C54CAB244A341B0086316F /* libusb-1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B79B0D244A315E00C3FC92 /* libusb-1.0.a */; };
-		14C54CAF244B9D9F0086316F /* hidpacket.c in Sources */ = {isa = PBXBuildFile; fileRef = 14C54CAE244B9D9F0086316F /* hidpacket.c */; };
 		14C54CB2244BBC5A0086316F /* dfu-util in Resources */ = {isa = PBXBuildFile; fileRef = 14C54CB1244BBC590086316F /* dfu-util */; };
 		14D96BCF23C935330008E7B3 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14D96BCE23C935330008E7B3 /* main.mm */; };
 		14DEC5E8239F456800ECD04A /* Functions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14DEC5E6239F456800ECD04A /* Functions.mm */; };
@@ -92,95 +79,6 @@
 		141C5F772480D92200CB8719 /* ConfigUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ConfigUtil.mm; sourceTree = "<group>"; };
 		141C5F7A2480D96B00CB8719 /* SCSI2SD_HID.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SCSI2SD_HID.hh; sourceTree = "<group>"; };
 		141C5F7B2480D96B00CB8719 /* SCSI2SD_HID.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SCSI2SD_HID.mm; sourceTree = "<group>"; };
-		14418B4623AAC77000C8EB09 /* hidpacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hidpacket.h; path = ../../../../include/hidpacket.h; sourceTree = "<group>"; };
-		1458093424834B8A00159CB8 /* hwversion.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hwversion.c; path = ../../../../src/firmware/hwversion.c; sourceTree = "<group>"; };
-		1458093924844F9300159CB8 /* stm32f2xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx.h; sourceTree = "<group>"; };
-		1458093A24849D6E00159CB8 /* core_cm3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = core_cm3.h; sourceTree = "<group>"; };
-		1458093B24849D9A00159CB8 /* core_cmInstr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = core_cmInstr.h; sourceTree = "<group>"; };
-		1458093C24849DBA00159CB8 /* core_cmFunc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = core_cmFunc.h; sourceTree = "<group>"; };
-		1458093D2485C60200159CB8 /* stm32f2xx_hal_def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_def.h; sourceTree = "<group>"; };
-		1458093E2485ED3D00159CB8 /* stm32f2xx_hal_gpio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_gpio.h; sourceTree = "<group>"; };
-		1458093F2485EDCC00159CB8 /* mxconstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mxconstants.h; sourceTree = "<group>"; };
-		145809402485EE7F00159CB8 /* stm32f2xx_hal_flash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_flash.h; sourceTree = "<group>"; };
-		145809412486021E00159CB8 /* stm32f2xx_hal_gpio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stm32f2xx_hal_gpio.c; sourceTree = "<group>"; };
-		145809422486021E00159CB8 /* stm32f2xx_hal_flash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stm32f2xx_hal_flash.c; sourceTree = "<group>"; };
-		145809472486025300159CB8 /* stm32f2xx_hal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stm32f2xx_hal.c; sourceTree = "<group>"; };
-		1458094A24861CC700159CB8 /* stm32f2xx_hal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal.h; sourceTree = "<group>"; };
-		1458094C24862A4F00159CB8 /* stm32f2xx_hal_conf_template.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_conf_template.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_conf_template.h"; sourceTree = "<group>"; };
-		1458094D24862B2A00159CB8 /* stm32_hal_legacy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32_hal_legacy.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h"; sourceTree = "<group>"; };
-		1458094E24862B6C00159CB8 /* stm32f217xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f217xx.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f217xx.h"; sourceTree = "<group>"; };
-		1458094F24862B6C00159CB8 /* stm32f215xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f215xx.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f215xx.h"; sourceTree = "<group>"; };
-		1458095024862B6C00159CB8 /* stm32f205xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f205xx.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f205xx.h"; sourceTree = "<group>"; };
-		1458095124862B6C00159CB8 /* stm32f207xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f207xx.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f207xx.h"; sourceTree = "<group>"; };
-		1458095224862B6C00159CB8 /* system_stm32f2xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = system_stm32f2xx.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/CMSIS/Device/ST/STM32F2xx/Include/system_stm32f2xx.h"; sourceTree = "<group>"; };
-		1458095324862CA400159CB8 /* stm32f2xx_hal_dac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_dac.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_dac.h"; sourceTree = "<group>"; };
-		1458095424862CA400159CB8 /* stm32f2xx_hal_rcc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_rcc.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_rcc.h"; sourceTree = "<group>"; };
-		1458095524862CA400159CB8 /* stm32f2xx_hal_iwdg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_iwdg.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_iwdg.h"; sourceTree = "<group>"; };
-		1458095624862CA400159CB8 /* stm32f2xx_hal_pcd_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_pcd_ex.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_pcd_ex.h"; sourceTree = "<group>"; };
-		1458095724862CA400159CB8 /* stm32f2xx_hal_pcd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_pcd.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_pcd.h"; sourceTree = "<group>"; };
-		1458095824862CA400159CB8 /* stm32f2xx_hal_pwr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_pwr.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_pwr.h"; sourceTree = "<group>"; };
-		1458095924862CA400159CB8 /* stm32f2xx_hal_smartcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_smartcard.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_smartcard.h"; sourceTree = "<group>"; };
-		1458095A24862CA500159CB8 /* stm32f2xx_hal_sram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_sram.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_sram.h"; sourceTree = "<group>"; };
-		1458095B24862CA500159CB8 /* stm32f2xx_hal_wwdg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_wwdg.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_wwdg.h"; sourceTree = "<group>"; };
-		1458095C24862CA500159CB8 /* stm32f2xx_hal_dma_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_dma_ex.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_dma_ex.h"; sourceTree = "<group>"; };
-		1458095D24862CA500159CB8 /* stm32f2xx_hal_rcc_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_rcc_ex.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_rcc_ex.h"; sourceTree = "<group>"; };
-		1458095E24862CA500159CB8 /* stm32f2xx_hal_pwr_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_pwr_ex.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_pwr_ex.h"; sourceTree = "<group>"; };
-		1458095F24862CA500159CB8 /* stm32f2xx_hal_gpio_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_gpio_ex.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_gpio_ex.h"; sourceTree = "<group>"; };
-		1458096024862CA500159CB8 /* stm32f2xx_hal_tim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_tim.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_tim.h"; sourceTree = "<group>"; };
-		1458096124862CA500159CB8 /* stm32f2xx_hal_rng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_rng.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_rng.h"; sourceTree = "<group>"; };
-		1458096224862CA500159CB8 /* stm32f2xx_hal_adc_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_adc_ex.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_adc_ex.h"; sourceTree = "<group>"; };
-		1458096324862CA500159CB8 /* stm32f2xx_hal_eth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_eth.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_eth.h"; sourceTree = "<group>"; };
-		1458096424862CA600159CB8 /* stm32f2xx_hal_i2c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_i2c.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_i2c.h"; sourceTree = "<group>"; };
-		1458096524862CA600159CB8 /* stm32f2xx_hal_nor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_nor.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_nor.h"; sourceTree = "<group>"; };
-		1458096624862CA600159CB8 /* stm32f2xx_hal_cryp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_cryp.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_cryp.h"; sourceTree = "<group>"; };
-		1458096724862CA600159CB8 /* stm32f2xx_hal_irda.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_irda.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_irda.h"; sourceTree = "<group>"; };
-		1458096824862CA600159CB8 /* stm32f2xx_hal_can.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_can.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_can.h"; sourceTree = "<group>"; };
-		1458096924862CA600159CB8 /* stm32f2xx_hal_adc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_adc.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_adc.h"; sourceTree = "<group>"; };
-		1458096A24862CA600159CB8 /* stm32f2xx_hal_rtc_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_rtc_ex.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_rtc_ex.h"; sourceTree = "<group>"; };
-		1458096B24862CA600159CB8 /* stm32f2xx_hal_tim_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_tim_ex.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_tim_ex.h"; sourceTree = "<group>"; };
-		1458096C24862CA600159CB8 /* stm32f2xx_hal_hcd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_hcd.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_hcd.h"; sourceTree = "<group>"; };
-		1458096D24862CA600159CB8 /* stm32f2xx_hal_rtc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_rtc.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_rtc.h"; sourceTree = "<group>"; };
-		1458096E24862CA600159CB8 /* stm32f2xx_ll_fsmc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_ll_fsmc.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_ll_fsmc.h"; sourceTree = "<group>"; };
-		1458096F24862CA700159CB8 /* stm32f2xx_hal_cortex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_cortex.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_cortex.h"; sourceTree = "<group>"; };
-		1458097024862CA700159CB8 /* stm32f2xx_ll_sdmmc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_ll_sdmmc.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_ll_sdmmc.h"; sourceTree = "<group>"; };
-		1458097124862CA700159CB8 /* stm32f2xx_hal_dac_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_dac_ex.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_dac_ex.h"; sourceTree = "<group>"; };
-		1458097224862CA700159CB8 /* stm32f2xx_hal_i2s.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_i2s.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_i2s.h"; sourceTree = "<group>"; };
-		1458097324862CA700159CB8 /* stm32f2xx_hal_spi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_spi.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_spi.h"; sourceTree = "<group>"; };
-		1458097424862CA700159CB8 /* stm32f2xx_hal_sd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_sd.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_sd.h"; sourceTree = "<group>"; };
-		1458097524862CA700159CB8 /* stm32f2xx_hal_flash_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_flash_ex.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_flash_ex.h"; sourceTree = "<group>"; };
-		1458097624862CA700159CB8 /* stm32f2xx_hal_dcmi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_dcmi.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_dcmi.h"; sourceTree = "<group>"; };
-		1458097724862CA700159CB8 /* stm32f2xx_ll_usb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_ll_usb.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_ll_usb.h"; sourceTree = "<group>"; };
-		1458097824862CA700159CB8 /* stm32f2xx_hal_pccard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_pccard.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_pccard.h"; sourceTree = "<group>"; };
-		1458097924862CA700159CB8 /* stm32f2xx_hal_usart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_usart.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_usart.h"; sourceTree = "<group>"; };
-		1458097A24862CA800159CB8 /* stm32f2xx_hal_dma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_dma.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_dma.h"; sourceTree = "<group>"; };
-		1458097B24862CA800159CB8 /* stm32f2xx_hal_hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_hash.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_hash.h"; sourceTree = "<group>"; };
-		1458097C24862CA800159CB8 /* stm32f2xx_hal_crc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_crc.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_crc.h"; sourceTree = "<group>"; };
-		1458097D24862CA800159CB8 /* stm32f2xx_hal_nand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_nand.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_nand.h"; sourceTree = "<group>"; };
-		1458097E24862CA800159CB8 /* stm32f2xx_hal_uart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stm32f2xx_hal_uart.h; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_uart.h"; sourceTree = "<group>"; };
-		1458097F2486F90C00159CB8 /* stm32f2xx_hal_flash_ex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stm32f2xx_hal_flash_ex.c; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_flash_ex.c"; sourceTree = "<group>"; };
-		145809812486F96600159CB8 /* stm32f2xx_hal_cortex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stm32f2xx_hal_cortex.c; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_cortex.c"; sourceTree = "<group>"; };
-		145809832486FA0F00159CB8 /* stm32f2xx_hal_rcc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stm32f2xx_hal_rcc.c; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_rcc.c"; sourceTree = "<group>"; };
-		1458098624871D8600159CB8 /* time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = time.h; path = ../../../../../src/firmware/time.h; sourceTree = "<group>"; };
-		1458098724871D8700159CB8 /* time.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = time.c; path = ../../../../../src/firmware/time.c; sourceTree = "<group>"; };
-		1458098924871E1F00159CB8 /* system_stm32f2xx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = system_stm32f2xx.c; path = "../../../../../STM32CubeMX/SCSI2SD-V6/Drivers/CMSIS/Device/ST/STM32F2xx/Source/Templates/system_stm32f2xx.c"; sourceTree = "<group>"; };
-		14580A67248845C900159CB8 /* dfu_file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dfu_file.h; path = "../../../../../src/scsi2sd-util6/dfu-util/src/dfu_file.h"; sourceTree = "<group>"; };
-		14580A68248845C900159CB8 /* dfu_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dfu_util.h; path = "../../../../../src/scsi2sd-util6/dfu-util/src/dfu_util.h"; sourceTree = "<group>"; };
-		14580A69248845C900159CB8 /* dfu_file.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dfu_file.c; path = "../../../../../src/scsi2sd-util6/dfu-util/src/dfu_file.c"; sourceTree = "<group>"; };
-		14580A6A248845C900159CB8 /* dfu_load.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dfu_load.h; path = "../../../../../src/scsi2sd-util6/dfu-util/src/dfu_load.h"; sourceTree = "<group>"; };
-		14580A6B248845C900159CB8 /* usb_dfu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = usb_dfu.h; path = "../../../../../src/scsi2sd-util6/dfu-util/src/usb_dfu.h"; sourceTree = "<group>"; };
-		14580A6C248845C900159CB8 /* quirks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = quirks.h; path = "../../../../../src/scsi2sd-util6/dfu-util/src/quirks.h"; sourceTree = "<group>"; };
-		14580A6D248845C900159CB8 /* portable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = portable.h; path = "../../../../../src/scsi2sd-util6/dfu-util/src/portable.h"; sourceTree = "<group>"; };
-		14580A6E248845C900159CB8 /* dfu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dfu.h; path = "../../../../../src/scsi2sd-util6/dfu-util/src/dfu.h"; sourceTree = "<group>"; };
-		14580A6F248845C900159CB8 /* quirks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = quirks.c; path = "../../../../../src/scsi2sd-util6/dfu-util/src/quirks.c"; sourceTree = "<group>"; };
-		14580A70248845C900159CB8 /* dfuse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dfuse.h; path = "../../../../../src/scsi2sd-util6/dfu-util/src/dfuse.h"; sourceTree = "<group>"; };
-		14580A71248845C900159CB8 /* dfu_util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dfu_util.c; path = "../../../../../src/scsi2sd-util6/dfu-util/src/dfu_util.c"; sourceTree = "<group>"; };
-		14580A72248845CA00159CB8 /* dfuse_mem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dfuse_mem.h; path = "../../../../../src/scsi2sd-util6/dfu-util/src/dfuse_mem.h"; sourceTree = "<group>"; };
-		14580A73248845CA00159CB8 /* dfu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dfu.c; path = "../../../../../src/scsi2sd-util6/dfu-util/src/dfu.c"; sourceTree = "<group>"; };
-		14580A74248845CA00159CB8 /* dfuse_mem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dfuse_mem.c; path = "../../../../../src/scsi2sd-util6/dfu-util/src/dfuse_mem.c"; sourceTree = "<group>"; };
-		14580A75248845CA00159CB8 /* dfuse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dfuse.c; path = "../../../../../src/scsi2sd-util6/dfu-util/src/dfuse.c"; sourceTree = "<group>"; };
-		14580A76248845CA00159CB8 /* lib_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lib_main.c; path = "../../../../../src/scsi2sd-util6/dfu-util/src/lib_main.c"; sourceTree = "<group>"; };
-		14580A79248845CA00159CB8 /* dfu_load.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dfu_load.c; path = "../../../../../src/scsi2sd-util6/dfu-util/src/dfu_load.c"; sourceTree = "<group>"; };
-		14580A8E248859C400159CB8 /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = config.h; path = "../../../../../src/scsi2sd-util6/dfu-util/config.h"; sourceTree = "<group>"; };
 		146A539023BBEB800000A06B /* ConfigObject.hh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ConfigObject.hh; sourceTree = "<group>"; };
 		146A539123BBEB800000A06B /* ConfigObject.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ConfigObject.mm; sourceTree = "<group>"; };
 		1474BFEB2399677E003C67D5 /* cybtldr_api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cybtldr_api.h; sourceTree = "<group>"; };
@@ -190,6 +88,110 @@
 		1474BFEF2399677E003C67D5 /* cybtldr_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cybtldr_utils.h; sourceTree = "<group>"; };
 		1474BFFB2399677E003C67D5 /* Firmware.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Firmware.hh; sourceTree = "<group>"; };
 		1474C0F723996A15003C67D5 /* SCSI2SD_Bootloader.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SCSI2SD_Bootloader.hh; sourceTree = "<group>"; };
+		147E4DF3249EA800005E31B7 /* dfu_util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dfu_util.c; sourceTree = "<group>"; };
+		147E4DF4249EA800005E31B7 /* usb_dfu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = usb_dfu.h; sourceTree = "<group>"; };
+		147E4DF5249EA800005E31B7 /* lib_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lib_main.c; sourceTree = "<group>"; };
+		147E4DF6249EA800005E31B7 /* dfuse_mem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dfuse_mem.c; sourceTree = "<group>"; };
+		147E4DF7249EA800005E31B7 /* quirks.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = quirks.o; sourceTree = "<group>"; };
+		147E4DF8249EA800005E31B7 /* quirks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quirks.h; sourceTree = "<group>"; };
+		147E4DF9249EA800005E31B7 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		147E4DFA249EA800005E31B7 /* dfuse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dfuse.c; sourceTree = "<group>"; };
+		147E4DFB249EA800005E31B7 /* dfu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dfu.c; sourceTree = "<group>"; };
+		147E4DFC249EA800005E31B7 /* dfu_load.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfu_load.h; sourceTree = "<group>"; };
+		147E4DFD249EA800005E31B7 /* dfu_load.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = dfu_load.o; sourceTree = "<group>"; };
+		147E4DFE249EA800005E31B7 /* dfu_file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfu_file.h; sourceTree = "<group>"; };
+		147E4DFF249EA800005E31B7 /* dfu_file.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = dfu_file.o; sourceTree = "<group>"; };
+		147E4E00249EA800005E31B7 /* dfuse_mem.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = dfuse_mem.o; sourceTree = "<group>"; };
+		147E4E01249EA800005E31B7 /* dfuse_mem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfuse_mem.h; sourceTree = "<group>"; };
+		147E4E02249EA800005E31B7 /* dfu_util.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = dfu_util.o; sourceTree = "<group>"; };
+		147E4E03249EA800005E31B7 /* dfu_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfu_util.h; sourceTree = "<group>"; };
+		147E4E04249EA800005E31B7 /* dfuse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfuse.h; sourceTree = "<group>"; };
+		147E4E05249EA800005E31B7 /* portable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = portable.h; sourceTree = "<group>"; };
+		147E4E06249EA800005E31B7 /* dfuse.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = dfuse.o; sourceTree = "<group>"; };
+		147E4E07249EA800005E31B7 /* quirks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = quirks.c; sourceTree = "<group>"; };
+		147E4E08249EA800005E31B7 /* dfu.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = dfu.o; sourceTree = "<group>"; };
+		147E4E09249EA800005E31B7 /* dfu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfu.h; sourceTree = "<group>"; };
+		147E4E0A249EA800005E31B7 /* dfu_file.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dfu_file.c; sourceTree = "<group>"; };
+		147E4E0B249EA800005E31B7 /* dfu_load.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dfu_load.c; sourceTree = "<group>"; };
+		147E4E1C249EA80F005E31B7 /* time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = time.h; sourceTree = "<group>"; };
+		147E4E1D249EA80F005E31B7 /* time.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = time.c; sourceTree = "<group>"; };
+		147E4E20249EC34E005E31B7 /* stm32f2xx_hal_eth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_eth.h; sourceTree = "<group>"; };
+		147E4E21249EC34E005E31B7 /* stm32f2xx_hal_dcmi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_dcmi.h; sourceTree = "<group>"; };
+		147E4E22249EC34E005E31B7 /* stm32f2xx_hal_hcd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_hcd.h; sourceTree = "<group>"; };
+		147E4E23249EC34E005E31B7 /* stm32f2xx_hal_rng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_rng.h; sourceTree = "<group>"; };
+		147E4E24249EC34E005E31B7 /* system_stm32f2xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = system_stm32f2xx.h; sourceTree = "<group>"; };
+		147E4E25249EC34E005E31B7 /* stm32f2xx_hal_hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_hash.h; sourceTree = "<group>"; };
+		147E4E26249EC34E005E31B7 /* stm32f2xx_hal_can.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_can.h; sourceTree = "<group>"; };
+		147E4E27249EC34E005E31B7 /* stm32f207xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f207xx.h; sourceTree = "<group>"; };
+		147E4E28249EC34E005E31B7 /* stm32f205xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f205xx.h; sourceTree = "<group>"; };
+		147E4E29249EC34E005E31B7 /* stm32f2xx_hal_dac_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_dac_ex.h; sourceTree = "<group>"; };
+		147E4E2A249EC34E005E31B7 /* stm32f2xx_hal_irda.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_irda.h; sourceTree = "<group>"; };
+		147E4E2B249EC34E005E31B7 /* stm32f2xx_hal_crc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_crc.h; sourceTree = "<group>"; };
+		147E4E2C249EC34E005E31B7 /* stm32f2xx_hal_pwr_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_pwr_ex.h; sourceTree = "<group>"; };
+		147E4E2D249EC34E005E31B7 /* stm32f2xx_hal_dma_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_dma_ex.h; sourceTree = "<group>"; };
+		147E4E2E249EC34E005E31B7 /* stm32f2xx_hal_cortex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_cortex.h; sourceTree = "<group>"; };
+		147E4E2F249EC34E005E31B7 /* stm32f215xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f215xx.h; sourceTree = "<group>"; };
+		147E4E30249EC34E005E31B7 /* stm32f2xx_hal_cryp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_cryp.h; sourceTree = "<group>"; };
+		147E4E31249EC34E005E31B7 /* stm32f217xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f217xx.h; sourceTree = "<group>"; };
+		147E4E32249EC34E005E31B7 /* stm32f2xx_hal_rcc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stm32f2xx_hal_rcc.c; sourceTree = "<group>"; };
+		147E4E33249EC34E005E31B7 /* stm32f2xx_ll_usb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_ll_usb.h; sourceTree = "<group>"; };
+		147E4E34249EC34E005E31B7 /* stm32f2xx_hal_i2s.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_i2s.h; sourceTree = "<group>"; };
+		147E4E35249EC34E005E31B7 /* stm32f2xx_hal_rcc_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_rcc_ex.h; sourceTree = "<group>"; };
+		147E4E36249EC34E005E31B7 /* core_cm3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = core_cm3.h; sourceTree = "<group>"; };
+		147E4E37249EC34E005E31B7 /* stm32f2xx_hal_gpio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_gpio.h; sourceTree = "<group>"; };
+		147E4E38249EC34E005E31B7 /* stm32f2xx_hal_pwr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_pwr.h; sourceTree = "<group>"; };
+		147E4E39249EC34E005E31B7 /* stm32f2xx_hal_sd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_sd.h; sourceTree = "<group>"; };
+		147E4E3A249EC34E005E31B7 /* stm32f2xx_hal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stm32f2xx_hal.c; sourceTree = "<group>"; };
+		147E4E3B249EC34E005E31B7 /* stm32f2xx_hal_adc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_adc.h; sourceTree = "<group>"; };
+		147E4E3C249EC34E005E31B7 /* stm32f2xx_hal_flash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_flash.h; sourceTree = "<group>"; };
+		147E4E3D249EC34E005E31B7 /* stm32f2xx_hal_tim_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_tim_ex.h; sourceTree = "<group>"; };
+		147E4E3E249EC34E005E31B7 /* stm32f2xx_hal_gpio_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_gpio_ex.h; sourceTree = "<group>"; };
+		147E4E3F249EC34E005E31B7 /* stm32f2xx_hal_pcd_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_pcd_ex.h; sourceTree = "<group>"; };
+		147E4E40249EC34E005E31B7 /* stm32f2xx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx.h; sourceTree = "<group>"; };
+		147E4E41249EC34E005E31B7 /* stm32f2xx_hal_dac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_dac.h; sourceTree = "<group>"; };
+		147E4E42249EC34E005E31B7 /* stm32f2xx_hal_sram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_sram.h; sourceTree = "<group>"; };
+		147E4E43249EC34E005E31B7 /* stm32f2xx_hal_flash_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_flash_ex.h; sourceTree = "<group>"; };
+		147E4E44249EC34E005E31B7 /* stm32f2xx_hal_smartcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_smartcard.h; sourceTree = "<group>"; };
+		147E4E45249EC34E005E31B7 /* stm32f2xx_hal_dma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_dma.h; sourceTree = "<group>"; };
+		147E4E46249EC34E005E31B7 /* core_cmInstr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = core_cmInstr.h; sourceTree = "<group>"; };
+		147E4E47249EC34E005E31B7 /* stm32_hal_legacy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32_hal_legacy.h; sourceTree = "<group>"; };
+		147E4E48249EC34E005E31B7 /* stm32f2xx_hal_iwdg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_iwdg.h; sourceTree = "<group>"; };
+		147E4E49249EC34E005E31B7 /* stm32f2xx_hal_uart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_uart.h; sourceTree = "<group>"; };
+		147E4E4A249EC34E005E31B7 /* stm32f2xx_ll_fsmc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_ll_fsmc.h; sourceTree = "<group>"; };
+		147E4E4B249EC34E005E31B7 /* stm32f2xx_hal_adc_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_adc_ex.h; sourceTree = "<group>"; };
+		147E4E4C249EC34E005E31B7 /* core_cmFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = core_cmFunc.h; sourceTree = "<group>"; };
+		147E4E4D249EC34E005E31B7 /* stm32f2xx_hal_nor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_nor.h; sourceTree = "<group>"; };
+		147E4E4E249EC34E005E31B7 /* stm32f2xx_hal_i2c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_i2c.h; sourceTree = "<group>"; };
+		147E4E4F249EC34E005E31B7 /* system_stm32f2xx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = system_stm32f2xx.c; sourceTree = "<group>"; };
+		147E4E50249EC34E005E31B7 /* stm32f2xx_hal_rcc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_rcc.h; sourceTree = "<group>"; };
+		147E4E51249EC34E005E31B7 /* stm32f2xx_ll_sdmmc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_ll_sdmmc.h; sourceTree = "<group>"; };
+		147E4E52249EC34E005E31B7 /* stm32f2xx_hal_cortex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stm32f2xx_hal_cortex.c; sourceTree = "<group>"; };
+		147E4E53249EC34E005E31B7 /* stm32f2xx_hal_def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_def.h; sourceTree = "<group>"; };
+		147E4E54249EC34E005E31B7 /* stm32f2xx_hal_rtc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_rtc.h; sourceTree = "<group>"; };
+		147E4E55249EC34E005E31B7 /* stm32f2xx_hal_conf_template.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_conf_template.h; sourceTree = "<group>"; };
+		147E4E56249EC34E005E31B7 /* stm32f2xx_hal_pccard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_pccard.h; sourceTree = "<group>"; };
+		147E4E57249EC34E005E31B7 /* stm32f2xx_hal_rtc_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_rtc_ex.h; sourceTree = "<group>"; };
+		147E4E58249EC34E005E31B7 /* stm32f2xx_hal_gpio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stm32f2xx_hal_gpio.c; sourceTree = "<group>"; };
+		147E4E59249EC34E005E31B7 /* stm32f2xx_hal_tim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_tim.h; sourceTree = "<group>"; };
+		147E4E5A249EC34E005E31B7 /* stm32f2xx_hal_spi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_spi.h; sourceTree = "<group>"; };
+		147E4E5B249EC34E005E31B7 /* stm32f2xx_hal_flash_ex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stm32f2xx_hal_flash_ex.c; sourceTree = "<group>"; };
+		147E4E5C249EC34E005E31B7 /* stm32f2xx_hal_usart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_usart.h; sourceTree = "<group>"; };
+		147E4E5D249EC34E005E31B7 /* stm32f2xx_hal_pcd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_pcd.h; sourceTree = "<group>"; };
+		147E4E5E249EC34E005E31B7 /* stm32f2xx_hal_nand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_nand.h; sourceTree = "<group>"; };
+		147E4E5F249EC34E005E31B7 /* stm32f2xx_hal_wwdg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_wwdg.h; sourceTree = "<group>"; };
+		147E4E60249EC34E005E31B7 /* mxconstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mxconstants.h; sourceTree = "<group>"; };
+		147E4E61249EC34E005E31B7 /* stm32f2xx_hal_flash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stm32f2xx_hal_flash.c; sourceTree = "<group>"; };
+		147E4E62249EC34E005E31B7 /* stm32f2xx_hal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal.h; sourceTree = "<group>"; };
+		147E4E6A249EC4A3005E31B7 /* hidpacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hidpacket.h; sourceTree = "<group>"; };
+		147E4E6B249EC4A4005E31B7 /* hidpacket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hidpacket.c; sourceTree = "<group>"; };
+		147E4E6D249EC4C1005E31B7 /* hwversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hwversion.h; sourceTree = "<group>"; };
+		147E4E6E249EC4C1005E31B7 /* hidapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hidapi.h; sourceTree = "<group>"; };
+		147E4E6F249EC4C1005E31B7 /* hwversion.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hwversion.c; sourceTree = "<group>"; };
+		147E4E71249EC4F6005E31B7 /* Dfu.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Dfu.hh; sourceTree = "<group>"; };
+		147E4E72249EC4F6005E31B7 /* scsi2sd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scsi2sd.h; sourceTree = "<group>"; };
+		147E4E73249EC4F6005E31B7 /* hid.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hid.c; sourceTree = "<group>"; };
+		147E4E74249EC4F6005E31B7 /* Dfu.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dfu.cc; sourceTree = "<group>"; };
+		147E4F09249EC5AD005E31B7 /* libusb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libusb.h; sourceTree = "<group>"; };
 		1482B1E423973F3E001BA513 /* SCSI2SD-util-v6.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SCSI2SD-util-v6.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1482B1E723973F3E001BA513 /* AppDelegate.hh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AppDelegate.hh; sourceTree = "<group>"; };
 		1482B1E823973F3E001BA513 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -200,15 +202,9 @@
 		1482B1FA239748DB001BA513 /* DeviceController.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DeviceController.hh; sourceTree = "<group>"; };
 		1482B203239748DB001BA513 /* DeviceController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceController.mm; sourceTree = "<group>"; };
 		1482B204239748DB001BA513 /* SettingsController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SettingsController.mm; sourceTree = "<group>"; };
-		14AF8335243A1B220046D0DF /* Dfu.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Dfu.hh; path = "../../../../src/scsi2sd-util6/Dfu.hh"; sourceTree = "<group>"; };
-		14AF8336243A1B220046D0DF /* Dfu.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Dfu.cc; path = "../../../../src/scsi2sd-util6/Dfu.cc"; sourceTree = "<group>"; };
 		14B79B0D244A315E00C3FC92 /* libusb-1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libusb-1.0.a"; path = "../../src/scsi2sd-util6/libusb-1.0.23/libusb/libs/libusb-1.0.a"; sourceTree = "<group>"; };
 		14B8ABFA249C175000DD2E88 /* SCSI2SD-V6-util-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SCSI2SD-V6-util-512.png"; sourceTree = "<group>"; };
-		14C271A1242637B7003AA991 /* hidapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hidapi.h; path = "../../../../src/scsi2sd-util6/hidapi/hidapi/hidapi.h"; sourceTree = "<group>"; };
-		14C271A2242637F6003AA991 /* hid.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hid.c; path = "../../../../src/scsi2sd-util6/hidapi/mac/hid.c"; sourceTree = "<group>"; };
-		14C271A424265240003AA991 /* scsi2sd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scsi2sd.h; path = ../../../../include/scsi2sd.h; sourceTree = "<group>"; };
 		14C54CAD244B5B710086316F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		14C54CAE244B9D9F0086316F /* hidpacket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hidpacket.c; path = ../../../../src/firmware/hidpacket.c; sourceTree = "<group>"; };
 		14C54CB1244BBC590086316F /* dfu-util */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "dfu-util"; sourceTree = "<group>"; };
 		14C63FE7244A339500848412 /* libusb-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusb-1.0.0.dylib"; path = "../../../../src/scsi2sd-util6/libusb-1.0.23/libusb/libs/libusb-1.0.0.dylib"; sourceTree = "<group>"; };
 		14CF47CF248EFFD900D2B6AF /* SCSI2SD-util-v6.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "SCSI2SD-util-v6.entitlements"; sourceTree = "<group>"; };
@@ -234,6 +230,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				147E4E18249EA800005E31B7 /* dfu.o in Frameworks */,
+				147E4E0F249EA800005E31B7 /* quirks.o in Frameworks */,
+				147E4E14249EA800005E31B7 /* dfuse_mem.o in Frameworks */,
+				147E4E13249EA800005E31B7 /* dfu_file.o in Frameworks */,
+				147E4E16249EA800005E31B7 /* dfuse.o in Frameworks */,
+				147E4E12249EA800005E31B7 /* dfu_load.o in Frameworks */,
+				147E4E15249EA800005E31B7 /* dfu_util.o in Frameworks */,
 				14C54CAB244A341B0086316F /* libusb-1.0.a in Frameworks */,
 				DD7DCB0BEFAC1D7A075B511E /* libPods-SCSI2SD-util-v6.a in Frameworks */,
 			);
@@ -250,114 +253,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1458094B24861CEF00159CB8 /* Driver */ = {
-			isa = PBXGroup;
-			children = (
-				1458098924871E1F00159CB8 /* system_stm32f2xx.c */,
-				145809832486FA0F00159CB8 /* stm32f2xx_hal_rcc.c */,
-				145809812486F96600159CB8 /* stm32f2xx_hal_cortex.c */,
-				1458097F2486F90C00159CB8 /* stm32f2xx_hal_flash_ex.c */,
-				1458096224862CA500159CB8 /* stm32f2xx_hal_adc_ex.h */,
-				1458096924862CA600159CB8 /* stm32f2xx_hal_adc.h */,
-				1458096824862CA600159CB8 /* stm32f2xx_hal_can.h */,
-				1458096F24862CA700159CB8 /* stm32f2xx_hal_cortex.h */,
-				1458097C24862CA800159CB8 /* stm32f2xx_hal_crc.h */,
-				1458096624862CA600159CB8 /* stm32f2xx_hal_cryp.h */,
-				1458097124862CA700159CB8 /* stm32f2xx_hal_dac_ex.h */,
-				1458095324862CA400159CB8 /* stm32f2xx_hal_dac.h */,
-				1458097624862CA700159CB8 /* stm32f2xx_hal_dcmi.h */,
-				1458095C24862CA500159CB8 /* stm32f2xx_hal_dma_ex.h */,
-				1458097A24862CA800159CB8 /* stm32f2xx_hal_dma.h */,
-				1458096324862CA500159CB8 /* stm32f2xx_hal_eth.h */,
-				1458097524862CA700159CB8 /* stm32f2xx_hal_flash_ex.h */,
-				1458095F24862CA500159CB8 /* stm32f2xx_hal_gpio_ex.h */,
-				1458097B24862CA800159CB8 /* stm32f2xx_hal_hash.h */,
-				1458096C24862CA600159CB8 /* stm32f2xx_hal_hcd.h */,
-				1458096424862CA600159CB8 /* stm32f2xx_hal_i2c.h */,
-				1458097224862CA700159CB8 /* stm32f2xx_hal_i2s.h */,
-				1458096724862CA600159CB8 /* stm32f2xx_hal_irda.h */,
-				1458095524862CA400159CB8 /* stm32f2xx_hal_iwdg.h */,
-				1458097D24862CA800159CB8 /* stm32f2xx_hal_nand.h */,
-				1458096524862CA600159CB8 /* stm32f2xx_hal_nor.h */,
-				1458097824862CA700159CB8 /* stm32f2xx_hal_pccard.h */,
-				1458095624862CA400159CB8 /* stm32f2xx_hal_pcd_ex.h */,
-				1458095724862CA400159CB8 /* stm32f2xx_hal_pcd.h */,
-				1458095E24862CA500159CB8 /* stm32f2xx_hal_pwr_ex.h */,
-				1458095824862CA400159CB8 /* stm32f2xx_hal_pwr.h */,
-				1458095D24862CA500159CB8 /* stm32f2xx_hal_rcc_ex.h */,
-				1458095424862CA400159CB8 /* stm32f2xx_hal_rcc.h */,
-				1458096124862CA500159CB8 /* stm32f2xx_hal_rng.h */,
-				1458096A24862CA600159CB8 /* stm32f2xx_hal_rtc_ex.h */,
-				1458096D24862CA600159CB8 /* stm32f2xx_hal_rtc.h */,
-				1458097424862CA700159CB8 /* stm32f2xx_hal_sd.h */,
-				1458095924862CA400159CB8 /* stm32f2xx_hal_smartcard.h */,
-				1458097324862CA700159CB8 /* stm32f2xx_hal_spi.h */,
-				1458095A24862CA500159CB8 /* stm32f2xx_hal_sram.h */,
-				1458096B24862CA600159CB8 /* stm32f2xx_hal_tim_ex.h */,
-				1458096024862CA500159CB8 /* stm32f2xx_hal_tim.h */,
-				1458097E24862CA800159CB8 /* stm32f2xx_hal_uart.h */,
-				1458097924862CA700159CB8 /* stm32f2xx_hal_usart.h */,
-				1458095B24862CA500159CB8 /* stm32f2xx_hal_wwdg.h */,
-				1458096E24862CA600159CB8 /* stm32f2xx_ll_fsmc.h */,
-				1458097024862CA700159CB8 /* stm32f2xx_ll_sdmmc.h */,
-				1458097724862CA700159CB8 /* stm32f2xx_ll_usb.h */,
-				1458095024862B6C00159CB8 /* stm32f205xx.h */,
-				1458095124862B6C00159CB8 /* stm32f207xx.h */,
-				1458094F24862B6C00159CB8 /* stm32f215xx.h */,
-				1458094E24862B6C00159CB8 /* stm32f217xx.h */,
-				1458095224862B6C00159CB8 /* system_stm32f2xx.h */,
-				1458094D24862B2A00159CB8 /* stm32_hal_legacy.h */,
-				1458094C24862A4F00159CB8 /* stm32f2xx_hal_conf_template.h */,
-				1458094A24861CC700159CB8 /* stm32f2xx_hal.h */,
-				1458093F2485EDCC00159CB8 /* mxconstants.h */,
-				1458093C24849DBA00159CB8 /* core_cmFunc.h */,
-				1458093B24849D9A00159CB8 /* core_cmInstr.h */,
-				1458093A24849D6E00159CB8 /* core_cm3.h */,
-				1458093924844F9300159CB8 /* stm32f2xx.h */,
-				145809422486021E00159CB8 /* stm32f2xx_hal_flash.c */,
-				145809402485EE7F00159CB8 /* stm32f2xx_hal_flash.h */,
-				145809412486021E00159CB8 /* stm32f2xx_hal_gpio.c */,
-				1458093E2485ED3D00159CB8 /* stm32f2xx_hal_gpio.h */,
-				1458093D2485C60200159CB8 /* stm32f2xx_hal_def.h */,
-				145809472486025300159CB8 /* stm32f2xx_hal.c */,
-			);
-			path = Driver;
-			sourceTree = "<group>";
-		};
-		1458098524871D6400159CB8 /* Firmware */ = {
-			isa = PBXGroup;
-			children = (
-				1458098724871D8700159CB8 /* time.c */,
-				1458098624871D8600159CB8 /* time.h */,
-			);
-			path = Firmware;
-			sourceTree = "<group>";
-		};
-		14580A662488455200159CB8 /* DFU */ = {
-			isa = PBXGroup;
-			children = (
-				14580A8E248859C400159CB8 /* config.h */,
-				14580A69248845C900159CB8 /* dfu_file.c */,
-				14580A67248845C900159CB8 /* dfu_file.h */,
-				14580A79248845CA00159CB8 /* dfu_load.c */,
-				14580A6A248845C900159CB8 /* dfu_load.h */,
-				14580A71248845C900159CB8 /* dfu_util.c */,
-				14580A68248845C900159CB8 /* dfu_util.h */,
-				14580A73248845CA00159CB8 /* dfu.c */,
-				14580A6E248845C900159CB8 /* dfu.h */,
-				14580A74248845CA00159CB8 /* dfuse_mem.c */,
-				14580A72248845CA00159CB8 /* dfuse_mem.h */,
-				14580A75248845CA00159CB8 /* dfuse.c */,
-				14580A70248845C900159CB8 /* dfuse.h */,
-				14580A76248845CA00159CB8 /* lib_main.c */,
-				14580A6D248845C900159CB8 /* portable.h */,
-				14580A6F248845C900159CB8 /* quirks.c */,
-				14580A6C248845C900159CB8 /* quirks.h */,
-				14580A6B248845C900159CB8 /* usb_dfu.h */,
-			);
-			path = DFU;
-			sourceTree = "<group>";
-		};
 		146A538F23BBEB5B0000A06B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -425,25 +320,142 @@
 		1474C0FB23998F0D003C67D5 /* CPPModules */ = {
 			isa = PBXGroup;
 			children = (
-				14580A662488455200159CB8 /* DFU */,
-				1458098524871D6400159CB8 /* Firmware */,
-				1458094B24861CEF00159CB8 /* Driver */,
+				147E4DF2249EA800005E31B7 /* DFU */,
+				147E4E1B249EA80F005E31B7 /* Firmware */,
+				147E4E1F249EC34E005E31B7 /* Driver */,
+				147E4E74249EC4F6005E31B7 /* Dfu.cc */,
+				147E4E71249EC4F6005E31B7 /* Dfu.hh */,
+				147E4E73249EC4F6005E31B7 /* hid.c */,
+				147E4E72249EC4F6005E31B7 /* scsi2sd.h */,
+				147E4E6E249EC4C1005E31B7 /* hidapi.h */,
+				147E4E6F249EC4C1005E31B7 /* hwversion.c */,
+				147E4E6D249EC4C1005E31B7 /* hwversion.h */,
+				147E4E6B249EC4A4005E31B7 /* hidpacket.c */,
+				147E4E6A249EC4A3005E31B7 /* hidpacket.h */,
+				147E4F09249EC5AD005E31B7 /* libusb.h */,
 				141C5F7A2480D96B00CB8719 /* SCSI2SD_HID.hh */,
 				141C5F7B2480D96B00CB8719 /* SCSI2SD_HID.mm */,
 				141C5F762480D92200CB8719 /* ConfigUtil.hh */,
 				141C5F772480D92200CB8719 /* ConfigUtil.mm */,
-				14C54CAE244B9D9F0086316F /* hidpacket.c */,
-				14418B4623AAC77000C8EB09 /* hidpacket.h */,
-				1458093424834B8A00159CB8 /* hwversion.c */,
-				14C271A1242637B7003AA991 /* hidapi.h */,
-				14AF8336243A1B220046D0DF /* Dfu.cc */,
-				14AF8335243A1B220046D0DF /* Dfu.hh */,
-				14C271A2242637F6003AA991 /* hid.c */,
-				14C271A424265240003AA991 /* scsi2sd.h */,
 				14DEC5E6239F456800ECD04A /* Functions.mm */,
 				14DEC5E7239F456800ECD04A /* Functions.hh */,
 			);
 			path = CPPModules;
+			sourceTree = "<group>";
+		};
+		147E4DF2249EA800005E31B7 /* DFU */ = {
+			isa = PBXGroup;
+			children = (
+				147E4DF3249EA800005E31B7 /* dfu_util.c */,
+				147E4DF4249EA800005E31B7 /* usb_dfu.h */,
+				147E4DF5249EA800005E31B7 /* lib_main.c */,
+				147E4DF6249EA800005E31B7 /* dfuse_mem.c */,
+				147E4DF7249EA800005E31B7 /* quirks.o */,
+				147E4DF8249EA800005E31B7 /* quirks.h */,
+				147E4DF9249EA800005E31B7 /* config.h */,
+				147E4DFA249EA800005E31B7 /* dfuse.c */,
+				147E4DFB249EA800005E31B7 /* dfu.c */,
+				147E4DFC249EA800005E31B7 /* dfu_load.h */,
+				147E4DFD249EA800005E31B7 /* dfu_load.o */,
+				147E4DFE249EA800005E31B7 /* dfu_file.h */,
+				147E4DFF249EA800005E31B7 /* dfu_file.o */,
+				147E4E00249EA800005E31B7 /* dfuse_mem.o */,
+				147E4E01249EA800005E31B7 /* dfuse_mem.h */,
+				147E4E02249EA800005E31B7 /* dfu_util.o */,
+				147E4E03249EA800005E31B7 /* dfu_util.h */,
+				147E4E04249EA800005E31B7 /* dfuse.h */,
+				147E4E05249EA800005E31B7 /* portable.h */,
+				147E4E06249EA800005E31B7 /* dfuse.o */,
+				147E4E07249EA800005E31B7 /* quirks.c */,
+				147E4E08249EA800005E31B7 /* dfu.o */,
+				147E4E09249EA800005E31B7 /* dfu.h */,
+				147E4E0A249EA800005E31B7 /* dfu_file.c */,
+				147E4E0B249EA800005E31B7 /* dfu_load.c */,
+			);
+			path = DFU;
+			sourceTree = "<group>";
+		};
+		147E4E1B249EA80F005E31B7 /* Firmware */ = {
+			isa = PBXGroup;
+			children = (
+				147E4E1C249EA80F005E31B7 /* time.h */,
+				147E4E1D249EA80F005E31B7 /* time.c */,
+			);
+			path = Firmware;
+			sourceTree = "<group>";
+		};
+		147E4E1F249EC34E005E31B7 /* Driver */ = {
+			isa = PBXGroup;
+			children = (
+				147E4E20249EC34E005E31B7 /* stm32f2xx_hal_eth.h */,
+				147E4E21249EC34E005E31B7 /* stm32f2xx_hal_dcmi.h */,
+				147E4E22249EC34E005E31B7 /* stm32f2xx_hal_hcd.h */,
+				147E4E23249EC34E005E31B7 /* stm32f2xx_hal_rng.h */,
+				147E4E24249EC34E005E31B7 /* system_stm32f2xx.h */,
+				147E4E25249EC34E005E31B7 /* stm32f2xx_hal_hash.h */,
+				147E4E26249EC34E005E31B7 /* stm32f2xx_hal_can.h */,
+				147E4E27249EC34E005E31B7 /* stm32f207xx.h */,
+				147E4E28249EC34E005E31B7 /* stm32f205xx.h */,
+				147E4E29249EC34E005E31B7 /* stm32f2xx_hal_dac_ex.h */,
+				147E4E2A249EC34E005E31B7 /* stm32f2xx_hal_irda.h */,
+				147E4E2B249EC34E005E31B7 /* stm32f2xx_hal_crc.h */,
+				147E4E2C249EC34E005E31B7 /* stm32f2xx_hal_pwr_ex.h */,
+				147E4E2D249EC34E005E31B7 /* stm32f2xx_hal_dma_ex.h */,
+				147E4E2E249EC34E005E31B7 /* stm32f2xx_hal_cortex.h */,
+				147E4E2F249EC34E005E31B7 /* stm32f215xx.h */,
+				147E4E30249EC34E005E31B7 /* stm32f2xx_hal_cryp.h */,
+				147E4E31249EC34E005E31B7 /* stm32f217xx.h */,
+				147E4E32249EC34E005E31B7 /* stm32f2xx_hal_rcc.c */,
+				147E4E33249EC34E005E31B7 /* stm32f2xx_ll_usb.h */,
+				147E4E34249EC34E005E31B7 /* stm32f2xx_hal_i2s.h */,
+				147E4E35249EC34E005E31B7 /* stm32f2xx_hal_rcc_ex.h */,
+				147E4E36249EC34E005E31B7 /* core_cm3.h */,
+				147E4E37249EC34E005E31B7 /* stm32f2xx_hal_gpio.h */,
+				147E4E38249EC34E005E31B7 /* stm32f2xx_hal_pwr.h */,
+				147E4E39249EC34E005E31B7 /* stm32f2xx_hal_sd.h */,
+				147E4E3A249EC34E005E31B7 /* stm32f2xx_hal.c */,
+				147E4E3B249EC34E005E31B7 /* stm32f2xx_hal_adc.h */,
+				147E4E3C249EC34E005E31B7 /* stm32f2xx_hal_flash.h */,
+				147E4E3D249EC34E005E31B7 /* stm32f2xx_hal_tim_ex.h */,
+				147E4E3E249EC34E005E31B7 /* stm32f2xx_hal_gpio_ex.h */,
+				147E4E3F249EC34E005E31B7 /* stm32f2xx_hal_pcd_ex.h */,
+				147E4E40249EC34E005E31B7 /* stm32f2xx.h */,
+				147E4E41249EC34E005E31B7 /* stm32f2xx_hal_dac.h */,
+				147E4E42249EC34E005E31B7 /* stm32f2xx_hal_sram.h */,
+				147E4E43249EC34E005E31B7 /* stm32f2xx_hal_flash_ex.h */,
+				147E4E44249EC34E005E31B7 /* stm32f2xx_hal_smartcard.h */,
+				147E4E45249EC34E005E31B7 /* stm32f2xx_hal_dma.h */,
+				147E4E46249EC34E005E31B7 /* core_cmInstr.h */,
+				147E4E47249EC34E005E31B7 /* stm32_hal_legacy.h */,
+				147E4E48249EC34E005E31B7 /* stm32f2xx_hal_iwdg.h */,
+				147E4E49249EC34E005E31B7 /* stm32f2xx_hal_uart.h */,
+				147E4E4A249EC34E005E31B7 /* stm32f2xx_ll_fsmc.h */,
+				147E4E4B249EC34E005E31B7 /* stm32f2xx_hal_adc_ex.h */,
+				147E4E4C249EC34E005E31B7 /* core_cmFunc.h */,
+				147E4E4D249EC34E005E31B7 /* stm32f2xx_hal_nor.h */,
+				147E4E4E249EC34E005E31B7 /* stm32f2xx_hal_i2c.h */,
+				147E4E4F249EC34E005E31B7 /* system_stm32f2xx.c */,
+				147E4E50249EC34E005E31B7 /* stm32f2xx_hal_rcc.h */,
+				147E4E51249EC34E005E31B7 /* stm32f2xx_ll_sdmmc.h */,
+				147E4E52249EC34E005E31B7 /* stm32f2xx_hal_cortex.c */,
+				147E4E53249EC34E005E31B7 /* stm32f2xx_hal_def.h */,
+				147E4E54249EC34E005E31B7 /* stm32f2xx_hal_rtc.h */,
+				147E4E55249EC34E005E31B7 /* stm32f2xx_hal_conf_template.h */,
+				147E4E56249EC34E005E31B7 /* stm32f2xx_hal_pccard.h */,
+				147E4E57249EC34E005E31B7 /* stm32f2xx_hal_rtc_ex.h */,
+				147E4E58249EC34E005E31B7 /* stm32f2xx_hal_gpio.c */,
+				147E4E59249EC34E005E31B7 /* stm32f2xx_hal_tim.h */,
+				147E4E5A249EC34E005E31B7 /* stm32f2xx_hal_spi.h */,
+				147E4E5B249EC34E005E31B7 /* stm32f2xx_hal_flash_ex.c */,
+				147E4E5C249EC34E005E31B7 /* stm32f2xx_hal_usart.h */,
+				147E4E5D249EC34E005E31B7 /* stm32f2xx_hal_pcd.h */,
+				147E4E5E249EC34E005E31B7 /* stm32f2xx_hal_nand.h */,
+				147E4E5F249EC34E005E31B7 /* stm32f2xx_hal_wwdg.h */,
+				147E4E60249EC34E005E31B7 /* mxconstants.h */,
+				147E4E61249EC34E005E31B7 /* stm32f2xx_hal_flash.c */,
+				147E4E62249EC34E005E31B7 /* stm32f2xx_hal.h */,
+			);
+			path = Driver;
 			sourceTree = "<group>";
 		};
 		1482B1DB23973F3E001BA513 = {
@@ -664,35 +676,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14AF8337243A1B220046D0DF /* Dfu.cc in Sources */,
+				147E4E17249EA800005E31B7 /* quirks.c in Sources */,
+				147E4E11249EA800005E31B7 /* dfu.c in Sources */,
+				147E4E76249EC4F6005E31B7 /* Dfu.cc in Sources */,
+				147E4E68249EC34F005E31B7 /* stm32f2xx_hal_flash_ex.c in Sources */,
+				147E4E0E249EA800005E31B7 /* dfuse_mem.c in Sources */,
 				141C5F7C2480D96C00CB8719 /* SCSI2SD_HID.mm in Sources */,
 				14DEC5EF23A4C76000ECD04A /* NSString+Extensions.m in Sources */,
-				14C271A3242637F6003AA991 /* hid.c in Sources */,
+				147E4E10249EA800005E31B7 /* dfuse.c in Sources */,
+				147E4E6C249EC4A4005E31B7 /* hidpacket.c in Sources */,
+				147E4E63249EC34F005E31B7 /* stm32f2xx_hal_rcc.c in Sources */,
 				1482B20F239748DB001BA513 /* DeviceController.mm in Sources */,
-				145809482486025300159CB8 /* stm32f2xx_hal.c in Sources */,
-				1458093524834B8A00159CB8 /* hwversion.c in Sources */,
+				147E4E69249EC34F005E31B7 /* stm32f2xx_hal_flash.c in Sources */,
+				147E4E75249EC4F6005E31B7 /* hid.c in Sources */,
+				147E4E1E249EA80F005E31B7 /* time.c in Sources */,
+				147E4E0D249EA800005E31B7 /* lib_main.c in Sources */,
+				147E4E64249EC34F005E31B7 /* stm32f2xx_hal.c in Sources */,
 				141C5F782480D92200CB8719 /* ConfigUtil.mm in Sources */,
 				146A539223BBEB800000A06B /* ConfigObject.mm in Sources */,
+				147E4E67249EC34F005E31B7 /* stm32f2xx_hal_gpio.c in Sources */,
 				1482B1F123973F42001BA513 /* main.m in Sources */,
-				14580A83248845CA00159CB8 /* dfu_load.c in Sources */,
-				1458098824871D8700159CB8 /* time.c in Sources */,
-				145809802486F90C00159CB8 /* stm32f2xx_hal_flash_ex.c in Sources */,
+				147E4E19249EA800005E31B7 /* dfu_file.c in Sources */,
 				14DEC5E8239F456800ECD04A /* Functions.mm in Sources */,
-				14580A7E248845CA00159CB8 /* dfuse_mem.c in Sources */,
-				145809842486FA1000159CB8 /* stm32f2xx_hal_rcc.c in Sources */,
-				145809432486021F00159CB8 /* stm32f2xx_hal_gpio.c in Sources */,
+				147E4E1A249EA800005E31B7 /* dfu_load.c in Sources */,
+				147E4E70249EC4C1005E31B7 /* hwversion.c in Sources */,
+				147E4E66249EC34F005E31B7 /* stm32f2xx_hal_cortex.c in Sources */,
+				147E4E65249EC34F005E31B7 /* system_stm32f2xx.c in Sources */,
 				1482B210239748DB001BA513 /* SettingsController.mm in Sources */,
-				1458098A24871E1F00159CB8 /* system_stm32f2xx.c in Sources */,
-				14580A80248845CA00159CB8 /* lib_main.c in Sources */,
-				145809822486F96600159CB8 /* stm32f2xx_hal_cortex.c in Sources */,
-				14580A7B248845CA00159CB8 /* quirks.c in Sources */,
-				14C54CAF244B9D9F0086316F /* hidpacket.c in Sources */,
-				14580A7F248845CA00159CB8 /* dfuse.c in Sources */,
-				14580A7D248845CA00159CB8 /* dfu.c in Sources */,
-				14580A7A248845CA00159CB8 /* dfu_file.c in Sources */,
 				1482B1E923973F3E001BA513 /* AppDelegate.mm in Sources */,
-				145809452486021F00159CB8 /* stm32f2xx_hal_flash.c in Sources */,
-				14580A7C248845CA00159CB8 /* dfu_util.c in Sources */,
+				147E4E0C249EA800005E31B7 /* dfu_util.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,33 +712,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14580A8F248886F100159CB8 /* stm32f2xx_hal_rcc.c in Sources */,
-				14580A8C2488461C00159CB8 /* quirks.c in Sources */,
 				14F2F96C23CA23F700169DD2 /* NSString+Extensions.m in Sources */,
-				14580A882488460900159CB8 /* dfuse_mem.c in Sources */,
-				1458093624834B8A00159CB8 /* hwversion.c in Sources */,
-				14580A91248886F900159CB8 /* stm32f2xx_hal_flash_ex.c in Sources */,
-				145809462486021F00159CB8 /* stm32f2xx_hal_flash.c in Sources */,
 				14F2F96523C94A4400169DD2 /* SCSI2SDTask.mm in Sources */,
-				141C5F74247F11B300CB8719 /* hid.c in Sources */,
-				145809442486021F00159CB8 /* stm32f2xx_hal_gpio.c in Sources */,
 				141C5F7D2480D97B00CB8719 /* SCSI2SD_HID.mm in Sources */,
-				145809492486025300159CB8 /* stm32f2xx_hal.c in Sources */,
 				14F2F96D23CA23FA00169DD2 /* ConfigObject.mm in Sources */,
-				14580A84248845F900159CB8 /* dfu_file.c in Sources */,
-				141C5F71247F11A500CB8719 /* hidpacket.c in Sources */,
-				1458098B24871E2600159CB8 /* system_stm32f2xx.c in Sources */,
 				14F2F96B23CA23F000169DD2 /* Functions.mm in Sources */,
-				14580A92248887BB00159CB8 /* time.c in Sources */,
-				14580A8A2488461000159CB8 /* lib_main.c in Sources */,
-				141C5F72247F11A900CB8719 /* Dfu.cc in Sources */,
-				14580A90248886F500159CB8 /* stm32f2xx_hal_cortex.c in Sources */,
-				14580A892488460C00159CB8 /* dfuse.c in Sources */,
 				14D96BCF23C935330008E7B3 /* main.mm in Sources */,
-				14580A85248845FC00159CB8 /* dfu_load.c in Sources */,
 				141C5F792480D92E00CB8719 /* ConfigUtil.mm in Sources */,
-				14580A862488460000159CB8 /* dfu_util.c in Sources */,
-				14580A872488460500159CB8 /* dfu.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
