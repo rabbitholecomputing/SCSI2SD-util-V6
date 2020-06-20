@@ -1,0 +1,6 @@
+platform :macos
+inhibit_all_warnings!
+
+target 'SCSI2SD-util-v6' do
+  pod 'Base64', '~> 1.1'
+end

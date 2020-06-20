@@ -1,0 +1,16 @@
+PODS:
+  - Base64 (1.1.2)
+
+DEPENDENCIES:
+  - Base64 (~> 1.1)
+
+SPEC REPOS:
+  trunk:
+    - Base64
+
+SPEC CHECKSUMS:
+  Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
+
+PODFILE CHECKSUM: 9ae1ea6320b00d55d2b8ebacf8d267b4e67b59e6
+
+COCOAPODS: 1.8.4
