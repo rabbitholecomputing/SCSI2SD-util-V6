@@ -924,7 +924,7 @@ out:
                 }
                 versionChecked = true;
                 // versionChecked = false; // for testing...
-                [self logStringToPanel: @"Resetting SCSI2SD into bootloader"];
+                [self logStringToPanel: @"Resetting SCSI2SD into bootloader\n"];
                 myHID->enterBootloader();
                 myHID.reset();
             }
