@@ -87,22 +87,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A78A6DD6-8DCA-438E-905A-2082C571917D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "scsi2sd-util-v6-cli/main.mm"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "main(argc, argv)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "A8540939-F36C-4491-A905-5B8812EA1DE1"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -126,8 +110,8 @@
             filePath = "SCSI2SD-util/CPPModules/DFU/lib_main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "344"
-            endingLineNumber = "344"
+            startingLineNumber = "348"
+            endingLineNumber = "348"
             landmarkName = "dfu_util(argc, argv, buf)"
             landmarkType = "9">
          </BreakpointContent>
@@ -142,8 +126,8 @@
             filePath = "SCSI2SD-util/CPPModules/DFU/lib_main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "281"
-            endingLineNumber = "281"
+            startingLineNumber = "285"
+            endingLineNumber = "285"
             landmarkName = "dfu_util(argc, argv, buf)"
             landmarkType = "9">
          </BreakpointContent>
@@ -158,8 +142,8 @@
             filePath = "SCSI2SD-util/CPPModules/DFU/lib_main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
             landmarkName = "dfu_util(argc, argv, buf)"
             landmarkType = "9">
          </BreakpointContent>
@@ -174,8 +158,8 @@
             filePath = "SCSI2SD-util/CPPModules/DFU/lib_main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "284"
-            endingLineNumber = "284"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
             landmarkName = "dfu_util(argc, argv, buf)"
             landmarkType = "9">
          </BreakpointContent>
@@ -190,8 +174,8 @@
             filePath = "SCSI2SD-util/CPPModules/DFU/lib_main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "287"
-            endingLineNumber = "287"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
             landmarkName = "dfu_util(argc, argv, buf)"
             landmarkType = "9">
          </BreakpointContent>

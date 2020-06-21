@@ -251,12 +251,16 @@ int dfu_util(int argc, char **argv, unsigned char *buf)
 	uint16_t runtime_product;
 
 	memset(&file, 0, sizeof(file));
+    
+    /* Dump args */
+    /*
     int i = 0;
     for (i = 0; i < argc; i++)
     {
         printf("%d %s\n", i, argv[i]);
     }
-
+     */
+    
 	/* make sure all prints are flushed */
 	setvbuf(stdout, NULL, _IONBF, 0);
     optind = 1;
