@@ -947,12 +947,15 @@ out:
             if (myDfu.hasDevice())
             {
                 [self logStringToPanel: @"\n\nSTM DFU Bootloader found\n"];
-                NSString *dfuPath = [[NSBundle mainBundle] pathForResource:@"dfu-util" ofType:@""];
+                NSString *dfuPath = @"dfu-util"; // [[NSBundle mainBundle] pathForResource:@"dfu-util" ofType:@""];
                 NSString *commandString = [NSString stringWithFormat:@"%@ -D %@ -a 0 -R", [dfuPath lastPathComponent], filename];
                 NSArray *commandArray = [commandString componentsSeparatedByString: @" "];
                 char **array = convertNSArrayToCArray(commandArray);
                 int count = (int)[commandArray count];
+                
+                // Load firmware
                 dfu_util(count, array, NULL);
+                [self reset_hid];
                 [self performSelectorOnMainThread:@selector(reset_hid)
                                        withObject:nil
                                     waitUntilDone:YES];
