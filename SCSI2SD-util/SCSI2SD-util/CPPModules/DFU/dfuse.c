@@ -35,9 +35,9 @@
 #include "dfuse_mem.h"
 
 #define DFU_TIMEOUT 5000
-
+/*
 extern int verbose;
-static unsigned int last_erased_page = 1; /* non-aligned value, won't match */
+static unsigned int last_erased_page = 1; // non-aligned value, won't match
 static struct memsegment *mem_layout;
 static unsigned int dfuse_address = 0;
 static unsigned int dfuse_length = 0;
@@ -45,6 +45,18 @@ static int dfuse_force = 0;
 static int dfuse_leave = 0;
 static int dfuse_unprotect = 0;
 static int dfuse_mass_erase = 0;
+*/
+
+extern int verbose;
+unsigned int last_erased_page = 1; /* non-aligned value, won't match */
+struct memsegment *mem_layout;
+unsigned int dfuse_address = 0;
+unsigned int dfuse_length = 0;
+int dfuse_force = 0;
+int dfuse_leave = 0;
+int dfuse_unprotect = 0;
+int dfuse_mass_erase = 0;
+
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wconversion"
@@ -640,7 +652,8 @@ int dfuse_do_dnload(struct dfu_if *dif, int xfer_size, struct dfu_file *file,
 		}
 		dfuse_special_command(dif, 0, READ_UNPROTECT);
 		dfu_printf("Device disconnects, erases flash and resets now\n");
-		exit(0);
+		// exit(0);
+        return 0;
 	}
 	if (dfuse_mass_erase) {
 		if (!dfuse_force) {
@@ -653,7 +666,7 @@ int dfuse_do_dnload(struct dfu_if *dif, int xfer_size, struct dfu_file *file,
 	if (dfuse_address) {
 		if (file->bcdDFU == 0x11a) {
 			errx(EX_IOERR, "This is a DfuSe file, not "
-				"meant for raw download");
+			 	"meant for raw download");
 		}
 		ret = dfuse_do_bin_dnload(dif, xfer_size, file, dfuse_address);
 	} else {
@@ -672,6 +685,16 @@ int dfuse_do_dnload(struct dfu_if *dif, int xfer_size, struct dfu_file *file,
 		dfuse_special_command(dif, dfuse_address, SET_ADDRESS);
 		dfuse_dnload_chunk(dif, NULL, 0, 2); /* Zero-size */
 	}
+        
+    // Reset all
+    last_erased_page = 1; /* non-aligned value, won't match */
+    dfuse_address = 0;
+    dfuse_length = 0;
+    dfuse_force = 0;
+    dfuse_leave = 0;
+    dfuse_unprotect = 0;
+    dfuse_mass_erase = 0;
+    
 	return ret;
 }
 

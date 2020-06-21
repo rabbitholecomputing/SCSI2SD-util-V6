@@ -251,10 +251,15 @@ int dfu_util(int argc, char **argv, unsigned char *buf)
 	uint16_t runtime_product;
 
 	memset(&file, 0, sizeof(file));
+    int i = 0;
+    for (i = 0; i < argc; i++)
+    {
+        printf("%d %s\n", i, argv[i]);
+    }
 
 	/* make sure all prints are flushed */
 	setvbuf(stdout, NULL, _IONBF, 0);
-
+    optind = 1;
 	while (1) {
 		int c, option_index = 0;
 		c = getopt_long(argc, argv, "hVvleE:d:p:c:i:a:S:t:U:D:Rs:Z:", opts,
@@ -393,10 +398,13 @@ int dfu_util(int argc, char **argv, unsigned char *buf)
 		 * with same vendor/product ID, since during DFU we need to do
 		 * a USB bus reset, after which the target device will get a
 		 * new address */
+        /*
 		errx(EX_IOERR, "More than one DFU capable USB device found! "
 		       "Try `--list' and specify the serial number "
 		       "or disconnect all but one device\n");
-	}
+         */
+        puts("More than one DFU capable device, autoselecting 0");
+	 }
 
 	/* We have exactly one device. Its libusb_device is now in dfu_root->dev */
 
@@ -511,9 +519,11 @@ int dfu_util(int argc, char **argv, unsigned char *buf)
 		if (dfu_root == NULL) {
 			errx(EX_IOERR, "Lost device after RESET?");
 		} else if (dfu_root->next != NULL) {
+            /*
 			errx(EX_IOERR, "More than one DFU capable USB device found! "
 				"Try `--list' and specify the serial number "
-				"or disconnect all but one device");
+				"or disconnect all but one device"); */
+            puts("More than one DFU capable device, autoselecting 0");
 		}
 
 		/* Check for DFU mode device */

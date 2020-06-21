@@ -539,7 +539,7 @@ out:
             if (myDfu.hasDevice())
             {
                 [self logStringToPanel: @"\n\nSTM DFU Bootloader found\n"];
-                NSString *dfuPath = [[NSBundle mainBundle] pathForResource:@"dfu-util" ofType:@""];
+                NSString *dfuPath = @"dfu-path"; // [[NSBundle mainBundle] pathForResource:@"dfu-util" ofType:@""];
                 NSString *commandString = [NSString stringWithFormat:@"%@ -D %@ -a 0 -R" /*-s %s"*/, [dfuPath lastPathComponent], filename]; //, serial];
                 NSArray *commandArray = [commandString componentsSeparatedByString: @" "];
                 char **array = convertNSArrayToCArray(commandArray);
@@ -549,14 +549,14 @@ out:
                 dfu_util(count, array, NULL);
 
                 // Detach...
+                // commandString = [NSString stringWithFormat:@"%@ -e -a 0", [dfuPath lastPathComponent]];
                 /*
-                commandString = [NSString stringWithFormat:@"%@ -e", [dfuPath lastPathComponent]];
+                commandString = [NSString stringWithFormat:@"%@ -e -E 2 -a 0", [dfuPath lastPathComponent]];
                 commandArray = [commandString componentsSeparatedByString:@" "];
                 array = convertNSArrayToCArray(commandArray);
                 count = (int)[commandArray count];
                 dfu_util(count, array, NULL);
                 */
-                
                 [self performSelectorOnMainThread:@selector(reset_hid)
                                        withObject:nil
                                     waitUntilDone:YES];
