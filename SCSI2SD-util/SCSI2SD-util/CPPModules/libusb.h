@@ -50,6 +50,9 @@ typedef unsigned __int32  uint32_t;
 #include <stdint.h>
 #endif
 
+// GJC, define NULL and such.... 
+#include <stdlib.h> 
+
 #if !defined(_WIN32_WCE)
 #include <sys/types.h>
 #endif

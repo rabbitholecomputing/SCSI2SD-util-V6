@@ -15,9 +15,18 @@
 #include "Functions.hh"
 #include "Dfu.hh"
 
+#ifndef GNUSTEP
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSComboBoxDataSource>
+#else
+@interface AppDelegate : NSObject <NSApplicationDelegate>
+#endif
 {
+#ifndef GNUSTEP
     std::shared_ptr<SCSI2SD::HID> myHID;
+#else
+    SCSI2SD::HID *myHID;
+#endif
+    
     // std::shared_ptr<SCSI2SD::Bootloader> myBootloader;
     SCSI2SD::Dfu myDfu;
     
@@ -25,7 +34,7 @@
     //std::vector<TargetConfig *> myTargets;
     
     uint8_t myTickCounter;
-    time_t myLastPollTime;
+    NSTimeInterval myLastPollTime;
     
     NSTimer *pollDeviceTimer;
     NSLock *aLock;

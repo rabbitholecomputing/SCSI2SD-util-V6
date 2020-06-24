@@ -9,11 +9,15 @@
 #import "AppDelegate.hh"
 #import "DeviceController.hh"
 #import "SettingsController.hh"
+#import <Foundation/NSDate.h>
 
 #include <vector>
 #include <string>
 #include "zipper.hh"
 #include <signal.h>
+
+#include <time.h>
+#include <stdio.h>
 
 // #include "z.h"
 // #include "ConfigUtil.hh"
@@ -118,7 +122,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 @property (nonatomic) IBOutlet NSMenuItem *scsiLogData;
 
 @property (nonatomic) IBOutlet SettingsController *settings;
-@property (weak) IBOutlet NSWindow *customAboutWindow;
+@property (nonatomic) IBOutlet NSWindow *customAboutWindow;
 
 @end
 
@@ -275,7 +279,11 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 {
     try
     {
+#ifndef GNUSTEP
         myHID.reset(SCSI2SD::HID::Open());
+#else
+        myHID = SCSI2SD::HID::Open();
+#endif
         if(myHID)
         {
             NSString *msg = [NSString stringWithFormat: @"SCSI2SD Ready, firmware version %s",myHID->getFirmwareVersionStr().c_str()];
@@ -294,7 +302,11 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 {
     try
     {
+#ifndef GNUSTEP
         myHID.reset();
+#else
+        myHID = NULL;
+#endif
     }
     catch (std::exception& e)
     {
@@ -450,7 +462,12 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     catch (std::exception& e)
     {
         [self logStringToPanel: @"%s", e.what()];
+#ifndef GNUSTEP
         myHID.reset();
+#else
+        myHID = NULL;
+#endif
+
     }
 }
 
@@ -473,7 +490,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 - (void) doTimer
 {
     [self logScsiData];
-    time_t now = time(NULL);
+    NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
     if (now == myLastPollTime) return;
     myLastPollTime = now;
 
@@ -483,12 +500,21 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
         if (myHID && !myHID->ping())
         {
             // Verify the USB HID connection is valid
+            // myHID.reset();
+#ifndef GNUSTEP
             myHID.reset();
+#else
+            myHID = NULL;
+#endif            
         }
 
         if (!myHID)
         {
+#ifndef GNUSTEP
             myHID.reset(SCSI2SD::HID::Open());
+#else
+            myHID = SCSI2SD::HID::Open();
+#endif  
             if (myHID)
             {
                 [self logStringToLabel: @"SCSI2SD Ready, firmware version %s", myHID->getFirmwareVersionStr().c_str()];
@@ -908,7 +934,15 @@ out:
     {
         try
         {
-            if (!myHID) myHID.reset(SCSI2SD::HID::Open());
+            if (!myHID)
+            {
+#ifndef GNUSTEP
+                myHID.reset(SCSI2SD::HID::Open());      
+#else
+                myHID = SCSI2SD::HID::Open();      
+#endif            
+            }
+            
             if (myHID)
             {
                 std::string fn = std::string([filename cStringUsingEncoding:NSUTF8StringEncoding]);
@@ -926,7 +960,11 @@ out:
                 // versionChecked = false; // for testing...
                 [self logStringToPanel: @"Resetting SCSI2SD into bootloader\n"];
                 myHID->enterBootloader();
-                myHID.reset();
+#ifndef GNUSTEP
+                myHID.reset(); 
+#else
+                myHID = NULL; 
+#endif 
             }
 
             if (myDfu.hasDevice() && !versionChecked)
@@ -965,7 +1003,11 @@ out:
         catch (std::exception& e)
         {
             [self logStringToPanel: @"%s",e.what()];
-            myHID.reset();
+#ifndef GNUSTEP
+            myHID.reset(); 
+#else
+            myHID = NULL; 
+#endif 
         }
     }
     
