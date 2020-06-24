@@ -2,14 +2,15 @@
 
 echo "Configuring..."
 
-FILE=./SCSI2SD-util/CPPModules/hid.c.orig
+FILE=./SCSI2SD-util/CPPModules/hid.c
+ORIG=${FILE}.orig
 LINUXFILE=./linux/hid.c
 
-if [ -f "$FILE" ]; then
+if [ -f "$ORIG" ]; then
     echo "Already configured for Linux build."
 else
     echo "Copying file..."
-    cp $FILE ${FILE}.orig
+    cp $FILE ${ORIG}
     cp $LINUXFILE $FILE
 fi
 
