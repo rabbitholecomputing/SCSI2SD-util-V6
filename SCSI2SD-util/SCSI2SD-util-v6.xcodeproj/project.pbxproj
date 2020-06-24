@@ -38,8 +38,6 @@
 		147E4FA2249EC804005E31B7 /* hwversion.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F7C249EC646005E31B7 /* hwversion.c */; };
 		147E4FA3249EC808005E31B7 /* hid.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F78249EC646005E31B7 /* hid.c */; };
 		147E4FA4249EC80B005E31B7 /* Functions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F77249EC646005E31B7 /* Functions.mm */; };
-		147E4FA5249EC81A005E31B7 /* scsi2sd_util_actions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F72249EC645005E31B7 /* scsi2sd_util_actions.mm */; };
-		147E4FA6249EC81B005E31B7 /* scsi2sd_util_actions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F72249EC645005E31B7 /* scsi2sd_util_actions.mm */; };
 		147E4FA7249EC837005E31B7 /* dfu_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F0F249EC645005E31B7 /* dfu_util.c */; };
 		147E4FA8249EC83D005E31B7 /* lib_main.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F11249EC645005E31B7 /* lib_main.c */; };
 		147E4FA9249EC840005E31B7 /* dfuse_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F12249EC645005E31B7 /* dfuse_mem.c */; };
@@ -184,9 +182,7 @@
 		147E4F6D249EC645005E31B7 /* stm32f2xx_hal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal.h; sourceTree = "<group>"; };
 		147E4F6E249EC645005E31B7 /* hidpacket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hidpacket.c; sourceTree = "<group>"; };
 		147E4F6F249EC645005E31B7 /* SCSI2SD_HID.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SCSI2SD_HID.mm; sourceTree = "<group>"; };
-		147E4F70249EC645005E31B7 /* scsi2sd_util_actions.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = scsi2sd_util_actions.hh; sourceTree = "<group>"; };
 		147E4F71249EC645005E31B7 /* SCSI2SD_HID.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SCSI2SD_HID.hh; sourceTree = "<group>"; };
-		147E4F72249EC645005E31B7 /* scsi2sd_util_actions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = scsi2sd_util_actions.mm; sourceTree = "<group>"; };
 		147E4F73249EC645005E31B7 /* hwversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hwversion.h; sourceTree = "<group>"; };
 		147E4F74249EC645005E31B7 /* Dfu.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Dfu.hh; sourceTree = "<group>"; };
 		147E4F75249EC645005E31B7 /* libusb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libusb.h; sourceTree = "<group>"; };
@@ -315,9 +311,7 @@
 				147E4F29249EC645005E31B7 /* ConfigUtil.hh */,
 				147E4F6E249EC645005E31B7 /* hidpacket.c */,
 				147E4F6F249EC645005E31B7 /* SCSI2SD_HID.mm */,
-				147E4F70249EC645005E31B7 /* scsi2sd_util_actions.hh */,
 				147E4F71249EC645005E31B7 /* SCSI2SD_HID.hh */,
-				147E4F72249EC645005E31B7 /* scsi2sd_util_actions.mm */,
 				147E4F73249EC645005E31B7 /* hwversion.h */,
 				147E4F74249EC645005E31B7 /* Dfu.hh */,
 				147E4F75249EC645005E31B7 /* libusb.h */,
@@ -662,7 +656,6 @@
 				147E4F99249EC646005E31B7 /* Functions.mm in Sources */,
 				147E4F81249EC646005E31B7 /* dfuse_mem.c in Sources */,
 				147E4F8A249EC646005E31B7 /* quirks.c in Sources */,
-				147E4FA6249EC81B005E31B7 /* scsi2sd_util_actions.mm in Sources */,
 				147E4F8C249EC646005E31B7 /* dfu_file.c in Sources */,
 				14DEC5EF23A4C76000ECD04A /* NSString+Extensions.m in Sources */,
 				147E4F80249EC646005E31B7 /* lib_main.c in Sources */,
@@ -694,7 +687,6 @@
 			files = (
 				147E4FA8249EC83D005E31B7 /* lib_main.c in Sources */,
 				147E4F9E249EC7F5005E31B7 /* hidpacket.c in Sources */,
-				147E4FA5249EC81A005E31B7 /* scsi2sd_util_actions.mm in Sources */,
 				147E4FA1249EC801005E31B7 /* Dfu.cc in Sources */,
 				147E4F9F249EC7F8005E31B7 /* SCSI2SD_HID.mm in Sources */,
 				147E4FB5249EC930005E31B7 /* stm32f2xx_hal_flash_ex.c in Sources */,
