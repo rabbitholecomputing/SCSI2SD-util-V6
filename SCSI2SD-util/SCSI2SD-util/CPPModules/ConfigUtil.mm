@@ -28,7 +28,7 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSXMLElement.h>
 
-#import <Base64/MF_Base64Additions.h>
+#import "MF_Base64Additions.h"
 
 // #include <wx/wxprec.h>
 // #ifndef WX_PRECOMP
