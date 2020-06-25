@@ -6,7 +6,7 @@
 //  Copyright © 2018 Open Logic. All rights reserved.
 //
 
-#import "DeviceController.hh"
+#import "DeviceController.h"
 #import "NSString+Extensions.h"
 
 #include "ConfigUtil.hh"
@@ -138,10 +138,7 @@
 
 - (NSString *) toXml
 {
-    S2S_TargetCfg config = [self getTargetConfig];
-    // std::string str = SCSI2SD::ConfigUtil::toXML(config);
-    NSString *result = [ConfigUtil toXML: config]; // [NSString stringWithCString:str.c_str() encoding:NSUTF8StringEncoding];
-    return result;
+    return [ConfigUtil targetCfgToXML: [self getTargetConfig]]; // [NSString stringWithCString:str.c_str() encoding:NSUTF8StringEncoding];
 }
 
 - (BOOL) evaluate

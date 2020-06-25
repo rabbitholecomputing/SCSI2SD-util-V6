@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
-#include "ConfigUtil.hh"
+#include "ConfigUtil.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

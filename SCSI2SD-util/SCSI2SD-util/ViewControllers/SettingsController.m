@@ -6,7 +6,7 @@
 //  Copyright © 2018 Open Logic. All rights reserved.
 //
 
-#import "SettingsController.hh"
+#import "SettingsController.h"
 
 @interface SettingsController ()
 
@@ -29,10 +29,7 @@
 
 - (NSString *) toXml
 {
-    S2S_BoardCfg config = [self getConfig];
-    std::string s = SCSI2SD::ConfigUtil::toXML(config);
-    NSString *string = [NSString stringWithCString:s.c_str() encoding:NSUTF8StringEncoding];
-    return string;
+    return [ConfigUtil boardCfgToXML:[self getConfig]];
 }
 
 - (void) awakeFromNib

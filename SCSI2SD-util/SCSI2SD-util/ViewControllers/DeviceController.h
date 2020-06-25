@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+#import "ConfigUtil.h"
+
 // #import "TargetConfig.h"
 #include "scsi2sd.h"
 
