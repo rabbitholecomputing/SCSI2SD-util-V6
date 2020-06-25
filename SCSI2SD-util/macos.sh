@@ -4,12 +4,12 @@ echo "Resetting..."
 
 FILE=./SCSI2SD-util/CPPModules/hid.c
 ORIG=${FILE}.orig
-LINUXFILE=./linux/hid.c
+MACFILE=./macos/hid.c
 
-if [ -f "$ORIG" ]; then
-    echo "Resetting file..."
-    cp ${ORIG} ${FILE}
-    cp $LINUXFILE $FILE
+if [ -f "$FILE" ]; then
+    echo "Copying Mac file..."
+    cp ${FILE} ${ORIG}
+    cp $MACFILE $FILE
 else
     echo "No file to reset."
 fi
