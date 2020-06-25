@@ -6,10 +6,8 @@ FILE=./SCSI2SD-util/CPPModules/hid.c
 ORIG=${FILE}.orig
 LINUXFILE=./linux/hid.c
 
-if [ -f "$ORIG" ]; then
-    echo "Already configured for Linux build."
-else
-    echo "Copying file..."
+if [ -f "$FILE" ]; then
+    echo "Copying Linux file..."
     cp $FILE ${ORIG}
     cp $LINUXFILE $FILE
 fi
