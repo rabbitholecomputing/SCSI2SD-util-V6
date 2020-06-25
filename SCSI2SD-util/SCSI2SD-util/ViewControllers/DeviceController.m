@@ -139,8 +139,8 @@
 - (NSString *) toXml
 {
     S2S_TargetCfg config = [self getTargetConfig];
-    std::string str = SCSI2SD::ConfigUtil::toXML(config);
-    NSString *result = [NSString stringWithCString:str.c_str() encoding:NSUTF8StringEncoding];
+    // std::string str = SCSI2SD::ConfigUtil::toXML(config);
+    NSString *result = [ConfigUtil toXML: config]; // [NSString stringWithCString:str.c_str() encoding:NSUTF8StringEncoding];
     return result;
 }
 

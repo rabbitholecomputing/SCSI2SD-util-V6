@@ -6,9 +6,9 @@
 //  Copyright © 2018 Open Logic. All rights reserved.
 //
 
-#import "AppDelegate.hh"
-#import "DeviceController.hh"
-#import "SettingsController.hh"
+#import "AppDelegate.h"
+#import "DeviceController.h"
+#import "SettingsController.h"
 #import <Foundation/NSDate.h>
 
 #include <vector>

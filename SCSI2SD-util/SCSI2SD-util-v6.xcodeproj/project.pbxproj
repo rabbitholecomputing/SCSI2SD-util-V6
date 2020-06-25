@@ -18,7 +18,7 @@
 		147E4F8A249EC646005E31B7 /* quirks.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F23249EC645005E31B7 /* quirks.c */; };
 		147E4F8C249EC646005E31B7 /* dfu_file.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F26249EC645005E31B7 /* dfu_file.c */; };
 		147E4F8D249EC646005E31B7 /* dfu_load.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F27249EC645005E31B7 /* dfu_load.c */; };
-		147E4F8E249EC646005E31B7 /* ConfigUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F28249EC645005E31B7 /* ConfigUtil.mm */; };
+		147E4F8E249EC646005E31B7 /* ConfigUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F28249EC645005E31B7 /* ConfigUtil.m */; };
 		147E4F8F249EC646005E31B7 /* stm32f2xx_hal_rcc.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F3D249EC645005E31B7 /* stm32f2xx_hal_rcc.c */; };
 		147E4F90249EC646005E31B7 /* stm32f2xx_hal.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F45249EC645005E31B7 /* stm32f2xx_hal.c */; };
 		147E4F91249EC646005E31B7 /* system_stm32f2xx.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F5A249EC645005E31B7 /* system_stm32f2xx.c */; };
@@ -27,18 +27,18 @@
 		147E4F94249EC646005E31B7 /* stm32f2xx_hal_flash_ex.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F66249EC645005E31B7 /* stm32f2xx_hal_flash_ex.c */; };
 		147E4F95249EC646005E31B7 /* stm32f2xx_hal_flash.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F6C249EC645005E31B7 /* stm32f2xx_hal_flash.c */; };
 		147E4F96249EC646005E31B7 /* hidpacket.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F6E249EC645005E31B7 /* hidpacket.c */; };
-		147E4F97249EC646005E31B7 /* SCSI2SD_HID.mm in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F6F249EC645005E31B7 /* SCSI2SD_HID.mm */; };
-		147E4F99249EC646005E31B7 /* Functions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F77249EC646005E31B7 /* Functions.mm */; };
+		147E4F97249EC646005E31B7 /* SCSI2SD_HID.m in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F6F249EC645005E31B7 /* SCSI2SD_HID.m */; };
+		147E4F99249EC646005E31B7 /* Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F77249EC646005E31B7 /* Functions.m */; };
 		147E4F9A249EC646005E31B7 /* hid.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F78249EC646005E31B7 /* hid.c */; };
 		147E4F9B249EC646005E31B7 /* hwversion.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F7C249EC646005E31B7 /* hwversion.c */; };
 		147E4F9C249EC646005E31B7 /* Dfu.cc in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F7D249EC646005E31B7 /* Dfu.cc */; };
-		147E4F9D249EC7F1005E31B7 /* ConfigUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F28249EC645005E31B7 /* ConfigUtil.mm */; };
+		147E4F9D249EC7F1005E31B7 /* ConfigUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F28249EC645005E31B7 /* ConfigUtil.m */; };
 		147E4F9E249EC7F5005E31B7 /* hidpacket.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F6E249EC645005E31B7 /* hidpacket.c */; };
-		147E4F9F249EC7F8005E31B7 /* SCSI2SD_HID.mm in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F6F249EC645005E31B7 /* SCSI2SD_HID.mm */; };
+		147E4F9F249EC7F8005E31B7 /* SCSI2SD_HID.m in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F6F249EC645005E31B7 /* SCSI2SD_HID.m */; };
 		147E4FA1249EC801005E31B7 /* Dfu.cc in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F7D249EC646005E31B7 /* Dfu.cc */; };
 		147E4FA2249EC804005E31B7 /* hwversion.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F7C249EC646005E31B7 /* hwversion.c */; };
 		147E4FA3249EC808005E31B7 /* hid.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F78249EC646005E31B7 /* hid.c */; };
-		147E4FA4249EC80B005E31B7 /* Functions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F77249EC646005E31B7 /* Functions.mm */; };
+		147E4FA4249EC80B005E31B7 /* Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F77249EC646005E31B7 /* Functions.m */; };
 		147E4FA7249EC837005E31B7 /* dfu_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F0F249EC645005E31B7 /* dfu_util.c */; };
 		147E4FA8249EC83D005E31B7 /* lib_main.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F11249EC645005E31B7 /* lib_main.c */; };
 		147E4FA9249EC840005E31B7 /* dfuse_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F12249EC645005E31B7 /* dfuse_mem.c */; };
@@ -55,12 +55,12 @@
 		147E4FB4249EC929005E31B7 /* stm32f2xx_hal_gpio.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F63249EC645005E31B7 /* stm32f2xx_hal_gpio.c */; };
 		147E4FB5249EC930005E31B7 /* stm32f2xx_hal_flash_ex.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F66249EC645005E31B7 /* stm32f2xx_hal_flash_ex.c */; };
 		147E4FB6249EC936005E31B7 /* stm32f2xx_hal_flash.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F6C249EC645005E31B7 /* stm32f2xx_hal_flash.c */; };
-		1482B1E923973F3E001BA513 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1482B1E823973F3E001BA513 /* AppDelegate.mm */; };
+		1482B1E923973F3E001BA513 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1482B1E823973F3E001BA513 /* AppDelegate.m */; };
 		1482B1EB23973F42001BA513 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1482B1EA23973F42001BA513 /* Assets.xcassets */; };
 		1482B1EE23973F42001BA513 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1482B1EC23973F42001BA513 /* MainMenu.xib */; };
 		1482B1F123973F42001BA513 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1482B1F023973F42001BA513 /* main.m */; };
-		1482B20F239748DB001BA513 /* DeviceController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1482B203239748DB001BA513 /* DeviceController.mm */; };
-		1482B210239748DB001BA513 /* SettingsController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1482B204239748DB001BA513 /* SettingsController.mm */; };
+		1482B20F239748DB001BA513 /* DeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1482B203239748DB001BA513 /* DeviceController.m */; };
+		1482B210239748DB001BA513 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1482B204239748DB001BA513 /* SettingsController.m */; };
 		14B8ABFB249C175000DD2E88 /* SCSI2SD-V6-util-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B8ABFA249C175000DD2E88 /* SCSI2SD-V6-util-512.png */; };
 		14C54CB2244BBC5A0086316F /* dfu-util in Resources */ = {isa = PBXBuildFile; fileRef = 14C54CB1244BBC590086316F /* dfu-util */; };
 		14D96BCF23C935330008E7B3 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14D96BCE23C935330008E7B3 /* main.mm */; };
@@ -112,8 +112,8 @@
 		147E4F25249EC645005E31B7 /* dfu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfu.h; sourceTree = "<group>"; };
 		147E4F26249EC645005E31B7 /* dfu_file.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dfu_file.c; sourceTree = "<group>"; };
 		147E4F27249EC645005E31B7 /* dfu_load.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dfu_load.c; sourceTree = "<group>"; };
-		147E4F28249EC645005E31B7 /* ConfigUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ConfigUtil.mm; sourceTree = "<group>"; };
-		147E4F29249EC645005E31B7 /* ConfigUtil.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ConfigUtil.hh; sourceTree = "<group>"; };
+		147E4F28249EC645005E31B7 /* ConfigUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigUtil.m; sourceTree = "<group>"; };
+		147E4F29249EC645005E31B7 /* ConfigUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigUtil.h; sourceTree = "<group>"; };
 		147E4F2B249EC645005E31B7 /* stm32f2xx_hal_eth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_eth.h; sourceTree = "<group>"; };
 		147E4F2C249EC645005E31B7 /* stm32f2xx_hal_dcmi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_dcmi.h; sourceTree = "<group>"; };
 		147E4F2D249EC645005E31B7 /* stm32f2xx_hal_hcd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal_hcd.h; sourceTree = "<group>"; };
@@ -182,29 +182,29 @@
 		147E4F6C249EC645005E31B7 /* stm32f2xx_hal_flash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stm32f2xx_hal_flash.c; sourceTree = "<group>"; };
 		147E4F6D249EC645005E31B7 /* stm32f2xx_hal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stm32f2xx_hal.h; sourceTree = "<group>"; };
 		147E4F6E249EC645005E31B7 /* hidpacket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hidpacket.c; sourceTree = "<group>"; };
-		147E4F6F249EC645005E31B7 /* SCSI2SD_HID.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SCSI2SD_HID.mm; sourceTree = "<group>"; };
-		147E4F71249EC645005E31B7 /* SCSI2SD_HID.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SCSI2SD_HID.hh; sourceTree = "<group>"; };
+		147E4F6F249EC645005E31B7 /* SCSI2SD_HID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSI2SD_HID.m; sourceTree = "<group>"; };
+		147E4F71249EC645005E31B7 /* SCSI2SD_HID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSI2SD_HID.h; sourceTree = "<group>"; };
 		147E4F73249EC645005E31B7 /* hwversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hwversion.h; sourceTree = "<group>"; };
 		147E4F74249EC645005E31B7 /* Dfu.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Dfu.hh; sourceTree = "<group>"; };
 		147E4F75249EC645005E31B7 /* libusb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libusb.h; sourceTree = "<group>"; };
 		147E4F76249EC645005E31B7 /* hidapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hidapi.h; sourceTree = "<group>"; };
-		147E4F77249EC646005E31B7 /* Functions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Functions.mm; sourceTree = "<group>"; };
+		147E4F77249EC646005E31B7 /* Functions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Functions.m; sourceTree = "<group>"; };
 		147E4F78249EC646005E31B7 /* hid.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hid.c; sourceTree = "<group>"; };
-		147E4F79249EC646005E31B7 /* Functions.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Functions.hh; sourceTree = "<group>"; };
+		147E4F79249EC646005E31B7 /* Functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Functions.h; sourceTree = "<group>"; };
 		147E4F7A249EC646005E31B7 /* hidpacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hidpacket.h; sourceTree = "<group>"; };
 		147E4F7B249EC646005E31B7 /* scsi2sd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scsi2sd.h; sourceTree = "<group>"; };
 		147E4F7C249EC646005E31B7 /* hwversion.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hwversion.c; sourceTree = "<group>"; };
 		147E4F7D249EC646005E31B7 /* Dfu.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dfu.cc; sourceTree = "<group>"; };
 		1482B1E423973F3E001BA513 /* SCSI2SD-util-v6.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SCSI2SD-util-v6.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1482B1E723973F3E001BA513 /* AppDelegate.hh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AppDelegate.hh; sourceTree = "<group>"; };
-		1482B1E823973F3E001BA513 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		1482B1E723973F3E001BA513 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1482B1E823973F3E001BA513 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1482B1EA23973F42001BA513 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1482B1EF23973F42001BA513 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1482B1F023973F42001BA513 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		1482B1F9239748DB001BA513 /* SettingsController.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SettingsController.hh; sourceTree = "<group>"; };
-		1482B1FA239748DB001BA513 /* DeviceController.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DeviceController.hh; sourceTree = "<group>"; };
-		1482B203239748DB001BA513 /* DeviceController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceController.mm; sourceTree = "<group>"; };
-		1482B204239748DB001BA513 /* SettingsController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SettingsController.mm; sourceTree = "<group>"; };
+		1482B1F9239748DB001BA513 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
+		1482B1FA239748DB001BA513 /* DeviceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceController.h; sourceTree = "<group>"; };
+		1482B203239748DB001BA513 /* DeviceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceController.m; sourceTree = "<group>"; };
+		1482B204239748DB001BA513 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		14B8ABFA249C175000DD2E88 /* SCSI2SD-V6-util-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SCSI2SD-V6-util-512.png"; sourceTree = "<group>"; };
 		14C54CB1244BBC590086316F /* dfu-util */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "dfu-util"; sourceTree = "<group>"; };
 		14C63FE7244A339500848412 /* libusb-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusb-1.0.0.dylib"; path = "../../../../src/scsi2sd-util6/libusb-1.0.23/libusb/libs/libusb-1.0.0.dylib"; sourceTree = "<group>"; };
@@ -297,18 +297,18 @@
 				147E4F0B249EC645005E31B7 /* Firmware */,
 				147E4F0E249EC645005E31B7 /* DFU */,
 				147E4F2A249EC645005E31B7 /* Driver */,
-				147E4F28249EC645005E31B7 /* ConfigUtil.mm */,
-				147E4F29249EC645005E31B7 /* ConfigUtil.hh */,
+				147E4F28249EC645005E31B7 /* ConfigUtil.m */,
+				147E4F29249EC645005E31B7 /* ConfigUtil.h */,
 				147E4F6E249EC645005E31B7 /* hidpacket.c */,
-				147E4F6F249EC645005E31B7 /* SCSI2SD_HID.mm */,
-				147E4F71249EC645005E31B7 /* SCSI2SD_HID.hh */,
+				147E4F6F249EC645005E31B7 /* SCSI2SD_HID.m */,
+				147E4F71249EC645005E31B7 /* SCSI2SD_HID.h */,
 				147E4F73249EC645005E31B7 /* hwversion.h */,
 				147E4F74249EC645005E31B7 /* Dfu.hh */,
 				147E4F75249EC645005E31B7 /* libusb.h */,
 				147E4F76249EC645005E31B7 /* hidapi.h */,
-				147E4F77249EC646005E31B7 /* Functions.mm */,
+				147E4F77249EC646005E31B7 /* Functions.m */,
 				147E4F78249EC646005E31B7 /* hid.c */,
-				147E4F79249EC646005E31B7 /* Functions.hh */,
+				147E4F79249EC646005E31B7 /* Functions.h */,
 				147E4F7A249EC646005E31B7 /* hidpacket.h */,
 				147E4F7B249EC646005E31B7 /* scsi2sd.h */,
 				147E4F7C249EC646005E31B7 /* hwversion.c */,
@@ -452,8 +452,8 @@
 				14DEC5EC23A4C67A00ECD04A /* Categories */,
 				1482B1F8239748DB001BA513 /* ViewControllers */,
 				147E4F0A249EC645005E31B7 /* CPPModules */,
-				1482B1E723973F3E001BA513 /* AppDelegate.hh */,
-				1482B1E823973F3E001BA513 /* AppDelegate.mm */,
+				1482B1E723973F3E001BA513 /* AppDelegate.h */,
+				1482B1E823973F3E001BA513 /* AppDelegate.m */,
 				1482B1F023973F42001BA513 /* main.m */,
 				1482B1EC23973F42001BA513 /* MainMenu.xib */,
 				1482B1EF23973F42001BA513 /* Info.plist */,
@@ -466,10 +466,10 @@
 		1482B1F8239748DB001BA513 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1482B1F9239748DB001BA513 /* SettingsController.hh */,
-				1482B204239748DB001BA513 /* SettingsController.mm */,
-				1482B1FA239748DB001BA513 /* DeviceController.hh */,
-				1482B203239748DB001BA513 /* DeviceController.mm */,
+				1482B1F9239748DB001BA513 /* SettingsController.h */,
+				1482B204239748DB001BA513 /* SettingsController.m */,
+				1482B1FA239748DB001BA513 /* DeviceController.h */,
+				1482B203239748DB001BA513 /* DeviceController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -598,7 +598,7 @@
 				147E4F7E249EC646005E31B7 /* time.c in Sources */,
 				147E4F94249EC646005E31B7 /* stm32f2xx_hal_flash_ex.c in Sources */,
 				147E4F8D249EC646005E31B7 /* dfu_load.c in Sources */,
-				147E4F99249EC646005E31B7 /* Functions.mm in Sources */,
+				147E4F99249EC646005E31B7 /* Functions.m in Sources */,
 				147E4F81249EC646005E31B7 /* dfuse_mem.c in Sources */,
 				147E4F8A249EC646005E31B7 /* quirks.c in Sources */,
 				147E4F8C249EC646005E31B7 /* dfu_file.c in Sources */,
@@ -609,20 +609,20 @@
 				147E4F9A249EC646005E31B7 /* hid.c in Sources */,
 				147E4F92249EC646005E31B7 /* stm32f2xx_hal_cortex.c in Sources */,
 				1414360A24A393F600521DB6 /* MF_Base64Additions.m in Sources */,
-				1482B20F239748DB001BA513 /* DeviceController.mm in Sources */,
+				1482B20F239748DB001BA513 /* DeviceController.m in Sources */,
 				147E4F93249EC646005E31B7 /* stm32f2xx_hal_gpio.c in Sources */,
-				147E4F8E249EC646005E31B7 /* ConfigUtil.mm in Sources */,
+				147E4F8E249EC646005E31B7 /* ConfigUtil.m in Sources */,
 				147E4F95249EC646005E31B7 /* stm32f2xx_hal_flash.c in Sources */,
 				147E4F91249EC646005E31B7 /* system_stm32f2xx.c in Sources */,
 				1482B1F123973F42001BA513 /* main.m in Sources */,
-				1482B210239748DB001BA513 /* SettingsController.mm in Sources */,
+				1482B210239748DB001BA513 /* SettingsController.m in Sources */,
 				147E4F90249EC646005E31B7 /* stm32f2xx_hal.c in Sources */,
 				147E4F9B249EC646005E31B7 /* hwversion.c in Sources */,
 				147E4F84249EC646005E31B7 /* dfu.c in Sources */,
 				147E4F9C249EC646005E31B7 /* Dfu.cc in Sources */,
-				1482B1E923973F3E001BA513 /* AppDelegate.mm in Sources */,
+				1482B1E923973F3E001BA513 /* AppDelegate.m in Sources */,
 				147E4F7F249EC646005E31B7 /* dfu_util.c in Sources */,
-				147E4F97249EC646005E31B7 /* SCSI2SD_HID.mm in Sources */,
+				147E4F97249EC646005E31B7 /* SCSI2SD_HID.m in Sources */,
 				147E4F8F249EC646005E31B7 /* stm32f2xx_hal_rcc.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -634,13 +634,13 @@
 				147E4FA8249EC83D005E31B7 /* lib_main.c in Sources */,
 				147E4F9E249EC7F5005E31B7 /* hidpacket.c in Sources */,
 				147E4FA1249EC801005E31B7 /* Dfu.cc in Sources */,
-				147E4F9F249EC7F8005E31B7 /* SCSI2SD_HID.mm in Sources */,
+				147E4F9F249EC7F8005E31B7 /* SCSI2SD_HID.m in Sources */,
 				147E4FB5249EC930005E31B7 /* stm32f2xx_hal_flash_ex.c in Sources */,
 				147E4FAB249EC847005E31B7 /* dfu.c in Sources */,
 				147E4FA9249EC840005E31B7 /* dfuse_mem.c in Sources */,
 				14F2F96C23CA23F700169DD2 /* NSString+Extensions.m in Sources */,
 				147E4FB3249EC923005E31B7 /* stm32f2xx_hal_cortex.c in Sources */,
-				147E4F9D249EC7F1005E31B7 /* ConfigUtil.mm in Sources */,
+				147E4F9D249EC7F1005E31B7 /* ConfigUtil.m in Sources */,
 				147E4FB2249EC91C005E31B7 /* system_stm32f2xx.c in Sources */,
 				147E4FB0249EC902005E31B7 /* stm32f2xx_hal_rcc.c in Sources */,
 				147E4FA3249EC808005E31B7 /* hid.c in Sources */,
@@ -650,7 +650,7 @@
 				147E4FAE249EC876005E31B7 /* dfu_load.c in Sources */,
 				14F2F96523C94A4400169DD2 /* SCSI2SDTask.mm in Sources */,
 				147E4FA2249EC804005E31B7 /* hwversion.c in Sources */,
-				147E4FA4249EC80B005E31B7 /* Functions.mm in Sources */,
+				147E4FA4249EC80B005E31B7 /* Functions.m in Sources */,
 				14D96BCF23C935330008E7B3 /* main.mm in Sources */,
 				147E4FAC249EC870005E31B7 /* quirks.c in Sources */,
 				147E4FA7249EC837005E31B7 /* dfu_util.c in Sources */,
@@ -799,7 +799,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = X34KG7M8TP;
+				DEVELOPMENT_TEAM = 768T4SN737;
 				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -822,12 +822,8 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
-					"-l\"z\"",
-					"-framework",
-					"\"CoreFoundation\"",
 					"-framework",
 					"\"IOKit\"",
-					"-l\"zipper\"",
 					"-l\"usb-1.0\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rabbitholecomputing.SCSI2SD-util";
@@ -844,7 +840,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = X34KG7M8TP;
+				DEVELOPMENT_TEAM = 768T4SN737;
 				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -867,12 +863,8 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
-					"-l\"z\"",
-					"-framework",
-					"\"CoreFoundation\"",
 					"-framework",
 					"\"IOKit\"",
-					"-l\"zipper\"",
 					"-l\"usb-1.0\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rabbitholecomputing.SCSI2SD-util";
