@@ -23,13 +23,13 @@
 
 enum { Vendor = 0x0483, Product = 0xdf11 };
 
-@interface Dfu : NSObject
+@interface DeviceFirmwareUpdate : NSObject
 {
     libusb_context* m_usbctx;
     NSString *m_filename;
 }
 
-+ (Dfu *) dfu;
++ (DeviceFirmwareUpdate *) dfu;
 - (BOOL) hasDevice;
 
 @end

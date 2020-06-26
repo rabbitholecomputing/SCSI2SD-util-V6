@@ -13,7 +13,7 @@
 // #include "Firmware.h"
 #include "scsi2sd.h"
 #include "Functions.h"
-#include "Dfu.h"
+#include "DeviceFirmwareUpdate.h"
 
 #ifndef GNUSTEP
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSComboBoxDataSource>
@@ -21,17 +21,10 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 #endif
 {
-#ifndef GNUSTEP
-    std::shared_ptr<SCSI2SD::HID> myHID;
-#else
-    SCSI2SD::HID *myHID;
-#endif
+    HID *myHID;
+    DeviceFirmwareUpdate *myDFU;
     
-    // std::shared_ptr<SCSI2SD::Bootloader> myBootloader;
-    SCSI2SD::Dfu myDfu;
-    
-    bool myInitialConfig;
-    //std::vector<TargetConfig *> myTargets;
+    BOOL myInitialConfig;
     
     uint8_t myTickCounter;
     NSTimeInterval myLastPollTime;

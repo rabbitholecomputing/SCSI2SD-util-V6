@@ -15,10 +15,10 @@
 //	You should have received a copy of the GNU General Public License
 //	along with SCSI2SD.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "Dfu.h"
+#include "DeviceFirmwareUpdate.h"
 #import <Foundation/Foundation.h>
 
-@implementation Dfu
+@implementation DeviceFirmwareUpdate
 
 - (instancetype) init
 {
@@ -39,7 +39,7 @@
     }
 }
 
-+ (Dfu *) dfu
++ (DeviceFirmwareUpdate *) dfu
 {
     return [[self alloc] init];
 }

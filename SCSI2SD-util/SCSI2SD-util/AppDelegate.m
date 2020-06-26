@@ -11,11 +11,6 @@
 #import "SettingsController.h"
 #import <Foundation/NSDate.h>
 
-#include <vector>
-#include <string>
-#include "zipper.hh"
-#include <signal.h>
-
 #include <time.h>
 #include <stdio.h>
 
@@ -25,8 +20,6 @@
 
 NSString *dfuOutputNotification = @"DFUOutputNotification";
 NSString *dfuProgressNotification = @"DFUProgressNotification";
-
-extern "C" {
 
 int dfu_util(int argc, char **argv, unsigned char *buf); // our one and only interface with the dfu library...
 
@@ -48,8 +41,6 @@ void dfu_report_progress(double percent)
     [[NSNotificationCenter defaultCenter]
      postNotificationName: dfuProgressNotification
      object: [NSNumber numberWithDouble:percent]];
-}
-
 }
 
 void clean_exit_on_sig(int sig_num)
@@ -277,52 +268,42 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 // Reset the HID...
 - (void) reset_hid
 {
-    try
+    @try
     {
-#ifndef GNUSTEP
-        myHID.reset(SCSI2SD::HID::Open());
-#else
-        myHID = SCSI2SD::HID::Open();
-#endif
+        myHID = [HID open];
         if(myHID)
         {
-            NSString *msg = [NSString stringWithFormat: @"SCSI2SD Ready, firmware version %s",myHID->getFirmwareVersionStr().c_str()];
+            NSString *msg = [NSString stringWithFormat: @"SCSI2SD Ready, firmware version %@",[myHID getFirmwareVersionStr]];
             [self logStringToLabel:msg];
         }
-        
-        // myDfu = new SCSI2SD::Dfu;
     }
-    catch (std::exception& e)
+    @catch (NSException *e)
     {
-        NSLog(@"Exception caught : %s\n", e.what());
+        NSLog(@"Exception caught : %@\n", [e reason]);
     }
 }
 
 - (void) close_hid
 {
-    try
+    @try
     {
-#ifndef GNUSTEP
-        myHID.reset();
-#else
-        myHID = NULL;
-#endif
+        myHID = nil;
     }
-    catch (std::exception& e)
+    @catch (NSException *e)
     {
-        NSLog(@"Exception caught : %s\n", e.what());
+        NSLog(@"Exception caught : %@\n", [e reason]);
     }
 }
 
 - (void) reset_bootloader
 {
-    try
+    @try
     {
         // myBootloader.reset(SCSI2SD::Bootloader::Open());
     }
-    catch (std::exception& e)
+    @catch (NSException *e)
     {
-        NSLog(@"Exception caught : %s\n", e.what());
+        NSLog(@"Exception caught : %@\n", [e reason]);
     }
 }
 
@@ -379,15 +360,15 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     signal(SIGSEGV, clean_exit_on_sig); // <-- this one is for segmentation fault
     signal(SIGTERM , clean_exit_on_sig);
     
-    try
+    @try
     {
         //myHID.reset(SCSI2SD::HID::Open());
         //myBootloader.reset(SCSI2SD::Bootloader::Open());
         [self reset_hid];
     }
-    catch (std::exception& e)
+    @catch (NSException *e)
     {
-        NSLog(@"Exception caught : %s\n", e.what());
+        NSLog(@"Exception caught : %@\n",[e reason]);
     }
     
     deviceControllers = [[NSMutableArray alloc] initWithCapacity: 7];
@@ -433,12 +414,13 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     [deviceControllers removeAllObjects];
 }
 
-- (void) dumpScsiData: (std::vector<uint8_t>) buf
+- (void) dumpScsiData: (NSMutableData *) buffer
 {
     NSString *msg = @"";
-    for (size_t i = 0; i < 32 && i < buf.size(); ++i)
+    uint8_t *buf = (uint8_t *)[buffer bytes];
+    for (size_t i = 0; i < 32 && i < [buffer length]; ++i)
     {
-        msg = [msg stringByAppendingFormat:@"%02x ", static_cast<int>(buf[i])];
+        msg = [msg stringByAppendingFormat:@"%02x ", buf[i]];
     }
     [self logStringToPanel: msg];
     [self logStringToPanel: @"\n"];
@@ -451,23 +433,18 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     {
         return;
     }
-    try
+    @try
     {
-        std::vector<uint8_t> info;
-        if (myHID->readSCSIDebugInfo(info))
+        NSMutableData *info = [NSMutableData data];
+        if ([myHID readSCSIDebugInfo:info])
         {
             [self dumpScsiData: info];
         }
     }
-    catch (std::exception& e)
+    @catch (NSException *e)
     {
-        [self logStringToPanel: @"%s", e.what()];
-#ifndef GNUSTEP
-        myHID.reset();
-#else
-        myHID = NULL;
-#endif
-
+        [self logStringToPanel: @"%@", [e reason]];
+        myHID = nil;
     }
 }
 
@@ -475,7 +452,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 {
     int errcode;
     [self logStringToPanel: @"SCSI Self-Test: "];
-    if (myHID->scsiSelfTest(errcode))
+    if ([myHID scsiSelfTest: &errcode])
     {
         [self logStringToPanel: @"Passed"];
     }
@@ -495,45 +472,37 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     myLastPollTime = now;
 
     // Check if we are connected to the HID device.
-    try
+    @try
     {
-        if (myHID && !myHID->ping())
+        if (myHID && ![myHID ping])
         {
             // Verify the USB HID connection is valid
             // myHID.reset();
-#ifndef GNUSTEP
-            myHID.reset();
-#else
-            myHID = NULL;
-#endif            
+            myHID = nil;
         }
 
         if (!myHID)
         {
-#ifndef GNUSTEP
-            myHID.reset(SCSI2SD::HID::Open());
-#else
-            myHID = SCSI2SD::HID::Open();
-#endif  
+            myHID = [HID open];
             if (myHID)
             {
-                [self logStringToLabel: @"SCSI2SD Ready, firmware version %s", myHID->getFirmwareVersionStr().c_str()];
-                [self logStringToPanel: @"SCSI2SD Ready, firmware version %s\n", myHID->getFirmwareVersionStr().c_str()];
-                [self logStringToPanel: @"Hardware version: %s\n", myHID->getHardwareVersion().c_str()];
-                [self logStringToPanel: @"Serial Number: %s\n", myHID->getSerialNumber().c_str()];
-                std::vector<uint8_t> csd(myHID->getSD_CSD());
-                std::vector<uint8_t> cid(myHID->getSD_CID());
-                [self logStringToPanel: @"SD Capacity (512-byte sectors): %d\n", myHID->getSDCapacity()];
+                [self logStringToLabel: @"SCSI2SD Ready, firmware version %@", [myHID getFirmwareVersionStr]];
+                [self logStringToPanel: @"SCSI2SD Ready, firmware version %@\n", [myHID getFirmwareVersionStr]];
+                [self logStringToPanel: @"Hardware version: %@\n", [myHID getHardwareVersion]];
+                [self logStringToPanel: @"Serial Number: %@\n", [myHID getSerialNumber]];
+                uint8_t *csd = [myHID getSD_CSD];
+                uint8_t *cid = [myHID getSD_CID];
+                [self logStringToPanel: @"SD Capacity (512-byte sectors): %d\n", [myHID getSDCapacity]];
 
                 [self logStringToPanel: @"SD CSD Register: "];
-                for (size_t i = 0; i < csd.size(); ++i)
+                for (size_t i = 0; i < 16 /*csd.size()*/; ++i)
                 {
-                    [self logStringToPanel: @"%0X", static_cast<int>(csd[i])];
+                    [self logStringToPanel: @"%0X", (int)csd[i]];
                 }
                 [self logStringToPanel: @"\nSD CID Register: "];
-                for (size_t i = 0; i < cid.size(); ++i)
+                for (size_t i = 0; i < 16 /*cid.size()*/; ++i)
                 {
-                    [self logStringToPanel: @"%0X", static_cast<int>(cid[i])];
+                    [self logStringToPanel: @"%0X", (int)cid[i]];
                 }
                 [self logStringToPanel: @"\n"];
 
@@ -559,9 +528,9 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
             }
         }
     }
-    catch (std::runtime_error& e)
+    @catch (NSException *e)
     {
-        [self logStringToPanel:@"%s", e.what()];
+        [self logStringToPanel:@"%@", [e reason]];
     }
     [self evaluate];
 }
@@ -607,7 +576,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 // Open XML file...
 - (void) openFileEnd: (NSOpenPanel *)panel
 {
-    try
+    @try
     {
         NSArray *paths = [panel filenames];
         if([paths count] == 0)
@@ -615,33 +584,31 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
         
         NSString *path = [paths objectAtIndex: 0];
         char *sPath = (char *)[path cStringUsingEncoding:NSUTF8StringEncoding];
-        std::pair<S2S_BoardCfg, std::vector<S2S_TargetCfg>> configs(
-            SCSI2SD::ConfigUtil::fromXML(std::string(sPath)));
-
+        Pair *configs = [ConfigUtil fromXML: path];
+        
         // myBoardPanel->setConfig(configs.first);
-        [self.settings setConfig:configs.first];
+        [self.settings setConfig: [configs boardCfg]];
         size_t i;
-        for (i = 0; i < configs.second.size() && i < [self->deviceControllers count]; ++i)
+        for (i = 0; i < [configs targetCount] && i < [self->deviceControllers count]; ++i)
         {
             DeviceController *devCon = [self->deviceControllers objectAtIndex:i];
-            [devCon setTargetConfig: configs.second[i]];
+            [devCon setTargetConfig: [configs targetCfgAtIndex:i]];
         }
 
         for (; i < [self->deviceControllers count]; ++i)
         {
             DeviceController *devCon = [self->deviceControllers objectAtIndex:i];
-            [devCon setTargetConfig: configs.second[i]];
+            [devCon setTargetConfig: [configs targetCfgAtIndex: i]];
         }
     }
-    catch (std::exception& e)
+    @catch (NSException *e)
     {
         NSArray *paths = [panel filenames];
         NSString *path = [paths objectAtIndex: 0];
-        char *sPath = (char *)[path cStringUsingEncoding:NSUTF8StringEncoding];
         [self logStringToPanel:[NSString stringWithFormat: @
-            "Cannot load settings from file '%s'.\n%s",
-            sPath,
-            e.what()]];
+            "Cannot load settings from file '%@'.\n%@",
+            path,
+            [e reason]]];
     }
 }
 
@@ -663,12 +630,12 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 - (IBAction) loadDefaults: (id)sender
 {
     // myBoardPanel->setConfig(ConfigUtil::DefaultBoardConfig());
-    [self.settings setConfig: SCSI2SD::ConfigUtil::DefaultBoardConfig()];
+    [self.settings setConfig: [ConfigUtil defaultBoardConfig]];
     for (size_t i = 0; i < [deviceControllers count]; ++i)
     {
         // myTargets[i]->setConfig(ConfigUtil::Default(i));
         DeviceController *devCon = [self->deviceControllers objectAtIndex:i];
-        [devCon setTargetConfig: SCSI2SD::ConfigUtil::Default(i)];
+        [devCon setTargetConfig: [ConfigUtil defaultTargetConfig:i]];
     }
 }
 
