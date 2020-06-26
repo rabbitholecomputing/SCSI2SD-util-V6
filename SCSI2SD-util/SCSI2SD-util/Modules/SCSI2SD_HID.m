@@ -422,7 +422,7 @@
 - (void) dealloc
 {
     [self destroy];
-    // [super dealloc];
+    [super dealloc];
 }
 
 @end
