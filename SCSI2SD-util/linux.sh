@@ -2,14 +2,10 @@
 
 echo "Configuring..."
 
-FILE=./SCSI2SD-util/CPPModules/hid.c
-ORIG=${FILE}.orig
+FILE=./SCSI2SD-util/Modules/hid.c
 LINUXFILE=./linux/hid.c
 
-if [ -f "$FILE" ]; then
-    echo "Copying Linux file..."
-    cp $FILE ${ORIG}
-    cp $LINUXFILE $FILE
-fi
+echo "Copying Linux file..."
+cp $LINUXFILE $FILE
 
 echo "Done..."
