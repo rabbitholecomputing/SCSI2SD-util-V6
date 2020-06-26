@@ -15,34 +15,24 @@
 //	You should have received a copy of the GNU General Public License
 //	along with SCSI2SD.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "libusb.h"
-
-#include <string>
+#import <Foundation/Foundation.h>
+#import "libusb.h"
 
 #ifndef SCSI2SD_DFU_H
 #define SCSI2SD_DFU_H
 
-namespace SCSI2SD
+enum { Vendor = 0x0483, Product = 0xdf11 };
+
+@interface Dfu : NSObject
 {
+    libusb_context* m_usbctx;
+    NSString *m_filename;
+}
 
-class Dfu
-{
-public:
-	Dfu();
++ (Dfu *) dfu;
+- (BOOL) hasDevice;
 
-	~Dfu();
-
-	bool hasDevice();
-
-private:
-	enum { Vendor = 0x0483, Product = 0xdf11 };
-
-	libusb_context* m_usbctx;
-
-	std::string m_filename;
-};
-
-} // namespace
+@end
 
 #endif
 

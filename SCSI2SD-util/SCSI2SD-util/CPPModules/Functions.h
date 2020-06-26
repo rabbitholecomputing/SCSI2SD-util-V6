@@ -11,15 +11,6 @@
 
 #include <stdio.h>
 #include "scsi2sd.h"
-
-#if __cplusplus >= 201103L
-#include <cstdint>
-#else
 #include <stdint.h>
-#endif
-
-#include <utility>
-// #include "scsi2sd.h"
-
 
 #endif /* Functions_hpp */
