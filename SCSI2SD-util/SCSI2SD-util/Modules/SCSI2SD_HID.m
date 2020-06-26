@@ -22,25 +22,23 @@
 
 @implementation HID
 
-- (instancetype) initWithHidInfo: (struct hid_device_info*) hidInfo
+- (instancetype) initWithHidInfo: (struct hid_device_info *) hidInfo
 {
     self = [super init];
     if (self != nil)
     {
-        myHidInfo = hidInfo;
+        myHidInfo = (struct hid_device_info *)hidInfo;
         myConfigHandle = NULL;
         myFirmwareVersion = 0;
         mySDCapacity = 0;
     
         @try {
-            myConfigHandle = hid_open_path(hidInfo->path);
+            myConfigHandle = hid_open_path(myHidInfo->path);
             if (!myConfigHandle) [NSException raise: NSInternalInconsistencyException format: @"Unable to initialize config handle"];
             [self readNewDebugData];
         } @catch (NSException *exception) {
             [self destroy];
-        } @finally {
-            
-        }
+        } 
     }
     return self;
 }
@@ -50,7 +48,7 @@
     struct hid_device_info* dev = hid_enumerate(VENDOR_ID, PRODUCT_ID);
     if (dev)
     {
-        return [[self alloc] hid: dev];
+        return [HID hid: dev];
     }
     else
     {
@@ -424,7 +422,7 @@
 - (void) dealloc
 {
     [self destroy];
-    // [super dealloc];
+    [super dealloc];
 }
 
 @end

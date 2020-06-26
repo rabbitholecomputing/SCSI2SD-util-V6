@@ -674,7 +674,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
             [self logStringToPanel:  @"\nLoad Complete\n"];
         }
 
-        NSMutableData *sdData;
+        NSMutableData *sdData = [NSMutableData data];
         @try
         {
             [myHID readSector:sector++ output:sdData];

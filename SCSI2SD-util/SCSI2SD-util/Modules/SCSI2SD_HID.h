@@ -39,6 +39,8 @@ static const size_t HID_TIMEOUT_MS = 256; // 2x HID Interval.
     uint32_t mySDCapacity;
 }
 
+- (instancetype) initWithHidInfo: (struct hid_device_info *) hidInfo;
+
 + (HID *) open;
 - (void) close;
 
@@ -61,7 +63,7 @@ static const size_t HID_TIMEOUT_MS = 256; // 2x HID Interval.
 - (NSString *) getHardwareVersion;
 - (BOOL) isCorrectFirmware: (NSString *) path;
 
-+ (HID *) hid: (struct hid_device_info*) hidInfo;
++ (HID *) hid: (struct hid_device_info *) hidInfo;
 - (void) destroy;
 - (void) readNewDebugData;
 - (void) readHID: (uint8_t*)buffer length: (size_t)len;

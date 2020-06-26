@@ -815,6 +815,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/lib",
+					"$(PROJECT_DIR)/SCSI2SD-util/Modules/libusb-1.0.23/libusb/libs",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
@@ -858,6 +859,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/lib",
+					"$(PROJECT_DIR)/SCSI2SD-util/Modules/libusb-1.0.23/libusb/libs",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (

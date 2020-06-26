@@ -32,6 +32,10 @@
 + (NSString *)stringFromWchar:(const wchar_t *)charText
 {
     //used ARC
+    if (charText == NULL)
+    {
+        return nil;
+    }
     return [[NSString alloc] initWithBytes:charText length:wcslen(charText)*sizeof(*charText) encoding:NSUTF32LittleEndianStringEncoding];
 }
 
