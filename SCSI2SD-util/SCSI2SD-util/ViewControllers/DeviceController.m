@@ -9,7 +9,7 @@
 #import "DeviceController.h"
 #import "NSString+Extensions.h"
 
-#include "ConfigUtil.hh"
+#include "ConfigUtil.h"
 @interface DeviceController ()
 
 @property (nonatomic) IBOutlet NSButton *enableSCSITarget;

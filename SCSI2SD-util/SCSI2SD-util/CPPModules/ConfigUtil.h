@@ -52,7 +52,7 @@
 + (NSString *) boardCfgToXML: (const S2S_BoardCfg) config;
 
 + (uint64_t) parseInt: (NSXMLNode *)node limit: (uint64_t) limit;
-+ (S2S_TargetCfg) parseTarget: (NSXMLElement*) node
++ (S2S_TargetCfg) parseTarget: (NSXMLElement*) node;
 
 + (Pair *) fromXML: (NSString *)filename;
 

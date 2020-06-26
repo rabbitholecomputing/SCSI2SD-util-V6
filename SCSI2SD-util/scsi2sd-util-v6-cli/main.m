@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SCSI2SDTask.hh"
+#import "SCSI2SDTask.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {

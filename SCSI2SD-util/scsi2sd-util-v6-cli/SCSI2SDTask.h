@@ -9,22 +9,21 @@
 #import <Foundation/Foundation.h>
 
 // #include "SCSI2SD_Bootloader.hh"
-#include "SCSI2SD_HID.hh"
-#include "Firmware.hh"
+#include "SCSI2SD_HID.h"
+#include "Firmware.h"
 #include "scsi2sd.h"
-#include "Functions.hh"
+#include "Functions.h"
 #include "Dfu.hh"
-#include "ConfigUtil.hh"
+#include "ConfigUtil.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SCSI2SDTask : NSObject
 {
-    std::shared_ptr<SCSI2SD::HID> myHID;
+    HID *myHID;
     time_t myLastPollTime;
     uint8_t myTickCounter;
-    SCSI2SD::Dfu myDfu;
-
+    Dfu *myDfu;
 }
 
 @property (nonatomic, assign) BOOL repeatMode;
