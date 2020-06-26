@@ -9,11 +9,11 @@
 #import <Cocoa/Cocoa.h>
 
 // #include "SCSI2SD_Bootloader.hh"
-#include "SCSI2SD_HID.hh"
-#include "Firmware.hh"
+#include "SCSI2SD_HID.h"
+// #include "Firmware.h"
 #include "scsi2sd.h"
-#include "Functions.hh"
-#include "Dfu.hh"
+#include "Functions.h"
+#include "Dfu.h"
 
 #ifndef GNUSTEP
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSComboBoxDataSource>
