@@ -583,7 +583,6 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
             return;
         
         NSString *path = [paths objectAtIndex: 0];
-        char *sPath = (char *)[path cStringUsingEncoding:NSUTF8StringEncoding];
         Pair *configs = [ConfigUtil fromXML: path];
         
         // myBoardPanel->setConfig(configs.first);
@@ -664,8 +663,8 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     int currentProgress = 0;
     int totalProgress = 2;
 
-    std::vector<uint8_t> cfgData(S2S_CFG_SIZE);
-    uint32_t sector = myHID->getSDCapacity() - 2;
+    NSMutableData *cfgData = [NSMutableData dataWithCapacity:S2S_CFG_SIZE];
+    uint32_t sector = [myHID getSDCapacity] - 2;
     for (size_t i = 0; i < 2; ++i)
     {
         [self logStringToPanel:  @"\nReading sector %d", sector];
@@ -675,28 +674,32 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
             [self logStringToPanel:  @"\nLoad Complete\n"];
         }
 
-        std::vector<uint8_t> sdData;
-        try
+        NSMutableData *sdData;
+        @try
         {
-            myHID->readSector(sector++, sdData);
+            [myHID readSector:sector++ output:sdData];
+            // myHID->readSector(sector++, sdData);
         }
-        catch (std::runtime_error& e)
+        @catch (NSException *e)
         {
-            [self logStringToPanel:@"\nException: %s", e.what()];
+            [self logStringToPanel:@"\nException: %@", [e reason]];
             goto err;
         }
 
-        std::copy(
+        [cfgData appendData:sdData];
+        /* std::copy(
             sdData.begin(),
             sdData.end(),
-            &cfgData[i * 512]);
+            &cfgData[i * 512]); */
     }
 
-    [_settings setConfig: SCSI2SD::ConfigUtil::boardConfigFromBytes(&cfgData[0])];
+    [_settings setConfig: [ConfigUtil boardConfigFromBytes: cfgData]];  //SCSI2SD::ConfigUtil::boardConfigFromBytes(&cfgData[0])];
     for (int i = 0; i < S2S_MAX_TARGETS; ++i)
     {
         DeviceController *dc = [deviceControllers objectAtIndex: i];
-        S2S_TargetCfg target = SCSI2SD::ConfigUtil::fromBytes(&cfgData[sizeof(S2S_BoardCfg) + i * sizeof(S2S_TargetCfg)]);
+        NSRange dataRange = NSMakeRange(sizeof(S2S_BoardCfg) + i * sizeof(S2S_TargetCfg), sizeof(S2S_TargetCfg));
+        NSData *subData = [cfgData subdataWithRange: dataRange];
+        S2S_TargetCfg target = [ConfigUtil targetCfgFromBytes: subData]; // SCSI2SD::ConfigUtil::fromBytes(&cfgData[sizeof(S2S_BoardCfg) + i * sizeof(S2S_TargetCfg)]);
         [dc setTargetConfig: target];
     }
 
@@ -755,17 +758,14 @@ out:
     int totalProgress = 2; // (int)[deviceControllers count]; // * SCSI_CONFIG_ROWS + 1;
 
     // Write board config first.
-    std::vector<uint8_t> cfgData (
-        SCSI2SD::ConfigUtil::boardConfigToBytes([self.settings getConfig]));
+    NSMutableData *cfgData = [[ConfigUtil boardConfigToBytes:[self.settings getConfig]] mutableCopy];
     for (int i = 0; i < S2S_MAX_TARGETS; ++i)
     {
-        std::vector<uint8_t> raw(
-            SCSI2SD::ConfigUtil::toBytes([[deviceControllers objectAtIndex:i] getTargetConfig])
-            );
-        cfgData.insert(cfgData.end(), raw.begin(), raw.end());
+        NSData *raw = [ConfigUtil targetCfgToBytes:[[deviceControllers objectAtIndex:i] getTargetConfig]];
+        [cfgData appendData:raw];
     }
     
-    uint32_t sector = myHID->getSDCapacity() - 2;
+    uint32_t sector = [myHID getSDCapacity]; //  myHID->getSDCapacity() - 2;
     for (size_t i = 0; i < 2; ++i)
     {
         [self logStringToPanel: @"\nWriting SD Sector %zu",sector];
@@ -776,15 +776,16 @@ out:
             [self logStringToPanel: @"\nSave Complete\n"];
         }
 
-        try
+        @try
         {
-            std::vector<uint8_t> buf;
+/*            std::vector<uint8_t> buf;
             buf.insert(buf.end(), &cfgData[i * 512], &cfgData[(i+1) * 512]);
-            myHID->writeSector(sector++, buf);
+            myHID->writeSector(sector++, buf);*/
+            [myHID writeSector:sector++ input: cfgData];
         }
-        catch (std::runtime_error& e)
+        @catch (NSException *e)
         {
-            [self logStringToPanel:  @"\nException %s",e.what()];
+            [self logStringToPanel:  @"\nException %@",[e reason]];
             goto err;
         }
     }
@@ -897,23 +898,18 @@ out:
                         waitUntilDone:YES];
     
     BOOL versionChecked = NO;
-    while (true)
+    while (YES)
     {
-        try
+        @try
         {
             if (!myHID)
             {
-#ifndef GNUSTEP
-                myHID.reset(SCSI2SD::HID::Open());      
-#else
-                myHID = SCSI2SD::HID::Open();      
-#endif            
+                myHID = [HID open];
             }
             
             if (myHID)
             {
-                std::string fn = std::string([filename cStringUsingEncoding:NSUTF8StringEncoding]);
-                if (!myHID->isCorrectFirmware(fn))
+                if (![myHID isCorrectFirmware:filename])//!myHID->isCorrectFirmware(fn))
                 {
                     [self hideProgress:self];
 
@@ -923,18 +919,14 @@ out:
                     [self logStringToPanel: @"Firmware does not match hardware"];
                     return;
                 }
-                versionChecked = true;
+                versionChecked = YES;
                 // versionChecked = false; // for testing...
                 [self logStringToPanel: @"Resetting SCSI2SD into bootloader\n"];
-                myHID->enterBootloader();
-#ifndef GNUSTEP
-                myHID.reset(); 
-#else
-                myHID = NULL; 
-#endif 
+                [myHID enterBootloader];
+                myHID = nil;
             }
 
-            if (myDfu.hasDevice() && !versionChecked)
+            if ([myDFU hasDevice] && !versionChecked)
             {
                  [self logStringToPanel:@"STM DFU Bootloader found, checking compatibility"];
                 // [self updateProgress:[NSNumber numberWithFloat:0.0]];
@@ -949,7 +941,7 @@ out:
                 versionChecked = true;
             }
             
-            if (myDfu.hasDevice())
+            if ([myDFU hasDevice])
             {
                 [self logStringToPanel: @"\n\nSTM DFU Bootloader found\n"];
                 NSString *dfuPath = @"dfu-util"; // [[NSBundle mainBundle] pathForResource:@"dfu-util" ofType:@""];
@@ -967,14 +959,10 @@ out:
                 break;
             }
         }
-        catch (std::exception& e)
+        @catch (NSException *e)
         {
-            [self logStringToPanel: @"%s",e.what()];
-#ifndef GNUSTEP
-            myHID.reset(); 
-#else
-            myHID = NULL; 
-#endif 
+            [self logStringToPanel: @"%@",[e reason]];
+            myHID = nil;
         }
     }
     
@@ -1073,17 +1061,18 @@ out:
     {
         return;
     }
-    try
+    @try
     {
-        std::vector<uint8_t> info(SCSI2SD::HID::HID_PACKET_SIZE);
-        if (myHID->readSCSIDebugInfo(info))
+        // std::vector<uint8_t> info(SCSI2SD::HID::HID_PACKET_SIZE);
+        NSMutableData *info = [NSMutableData dataWithCapacity:HID_PACKET_SIZE];
+        if ([myHID readSCSIDebugInfo:info]) //myHID->readSCSIDebugInfo(info))
         {
             [self dumpScsiData: info];
         }
     }
-    catch (std::exception& e)
+    @catch (NSException *e)
     {
-        NSString *warning = [NSString stringWithFormat: @"Warning: %s", e.what()];
+        NSString *warning = [NSString stringWithFormat: @"Warning: %@", [e reason]];
         [self logStringToPanel: warning];
         // myHID = SCSI2SD::HID::Open();
         [self reset_hid]; // myHID->reset();
@@ -1115,10 +1104,8 @@ out:
     BOOL valid = YES;
     
     // Check for duplicate SCSI IDs
-    std::vector<uint8_t> enabledID;
 
     // Check for overlapping SD sectors.
-    std::vector<std::pair<uint32_t, uint64_t> > sdSectors;
 
     bool isTargetEnabled = false; // Need at least one enabled
     for (size_t i = 0; i < [deviceControllers count]; ++i)
@@ -1178,7 +1165,7 @@ out:
             {
                 if (myHID)
                 {
-                    NSUInteger size = myHID->getSDCapacity();  // get the number of sectors...
+                    NSUInteger size = [myHID getSDCapacity];  // get the number of sectors...
                     if (total > size - 2) // if total sectors invades the config area...
                     {
                         valid = false;
@@ -1200,8 +1187,8 @@ out:
     
     if(myHID)
     {
-        self.saveMenu.enabled = valid && (myHID->getFirmwareVersion() >= MIN_FIRMWARE_VERSION);
-        self.openMenu.enabled = valid && (myHID->getFirmwareVersion() >= MIN_FIRMWARE_VERSION);
+        self.saveMenu.enabled = valid && ([myHID getFirmwareVersion] >= MIN_FIRMWARE_VERSION);
+        self.openMenu.enabled = valid && ([myHID getFirmwareVersion] >= MIN_FIRMWARE_VERSION);
     }
 /*
     mySaveButton->Enable(
