@@ -16,6 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSString (Extensions)
 
 + (NSString *) stringWithCString: (char *)cstring length: (NSUInteger)length;
++ (NSString *)stringFromChar:(const char *)charText;
++ (const char *)charFromString:(NSString *)string;
++ (NSString *)stringFromWchar:(const wchar_t *)charText;
++ (const char /*wchar_t*/ *)wcharFromString:(NSString *)string;
 
 @end
 

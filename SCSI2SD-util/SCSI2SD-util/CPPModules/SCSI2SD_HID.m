@@ -14,337 +14,238 @@
 //
 //	You should have received a copy of the GNU General Public License
 //	along with SCSI2SD.  If not, see <http://www.gnu.org/licenses/>.
+
 #include "SCSI2SD_HID.h"
 #include "scsi2sd.h"
 #include "hidpacket.h"
+#import "NSString+Extensions.h"
 
-// For compilers that support precompilation, includes "wx/wx.h".
-//#include <wx/wxprec.h>
-//#ifndef WX_PRECOMP
-//#include <wx/wx.h>
-//#endif
+@implementation HID
 
-// #include <wx/utils.h>
-
-#include <cassert>
-#include <stdexcept>
-#include <sstream>
-
-#include <iostream>
-#include <string.h> // memcpy
-
-using namespace SCSI2SD;
-
-HID::HID(hid_device_info* hidInfo) :
-	myHidInfo(hidInfo),
-	myConfigHandle(NULL),
-	myFirmwareVersion(0),
-	mySDCapacity(0)
+- (instancetype) initWithHidInfo: (struct hid_device_info*) hidInfo
 {
-
-	try
-	{
-		std::stringstream msg;
-		msg << "Error opening HID device " << hidInfo->path << std::endl;
-
-		myConfigHandle = hid_open_path(hidInfo->path);
-		if (!myConfigHandle) throw std::runtime_error(msg.str());
-		readNewDebugData();
-	}
-	catch (std::runtime_error& e)
-	{
-		destroy();
-		throw e;
-	}
+    self = [super init];
+    if (self != nil)
+    {
+        myHidInfo = hidInfo;
+        myConfigHandle = NULL;
+        myFirmwareVersion = 0;
+        mySDCapacity = 0;
+    
+        @try {
+            myConfigHandle = hid_open_path(hidInfo->path);
+            if (!myConfigHandle) [NSException raise: NSInternalInconsistencyException format: @"Unable to initialize config handle"];
+            [self readNewDebugData];
+        } @catch (NSException *exception) {
+            [self destroy];
+        } @finally {
+            
+        }
+    }
+    return self;
 }
 
-void
-HID::destroy()
++ (HID *) open
 {
-	if (myConfigHandle)
-	{
-		hid_close(myConfigHandle);
-		myConfigHandle = NULL;
-	}
-
-
-	hid_free_enumeration(myHidInfo);
-	myHidInfo = NULL;
+    struct hid_device_info* dev = hid_enumerate(VENDOR_ID, PRODUCT_ID);
+    if (dev)
+    {
+        return [[self alloc] hid: dev];
+    }
+    else
+    {
+        return nil;
+    }
 }
 
-HID::~HID()
+- (void) close
 {
-	destroy();
+    
 }
 
-HID*
-HID::Open()
+- (uint16_t) getFirmwareVersion
 {
-	hid_device_info* dev = hid_enumerate(VENDOR_ID, PRODUCT_ID);
-	if (dev)
-	{
-		return new HID(dev);
-	}
-	else
-	{
-		return NULL;
-	}
+    return myFirmwareVersion;
 }
 
-void
-HID::enterBootloader()
+- (NSString *) getFirmwareVersionStr
 {
-	std::vector<uint8_t> out;
-	std::vector<uint8_t> cmd { S2S_CMD_REBOOT };
-	sendHIDPacket(cmd, out, 1);
+    NSString *ver = [NSString stringWithFormat: @"%d.%d", (myFirmwareVersion >> 8), ((myFirmwareVersion & 0xF0) >> 4)];
+    int rev = myFirmwareVersion & 0xF;
+    if (rev)
+    {
+        ver = [ver stringByAppendingFormat: @".%d", rev];
+    }
+    return ver;
 }
 
-void
-HID::readSector(uint32_t sector, std::vector<uint8_t>& out)
+- (uint32_t) getSDCapacity; //() const { return mySDCapacity; }
 {
-	std::vector<uint8_t> cmd
-	{
-		S2S_CMD_SD_READ,
-		static_cast<uint8_t>(sector >> 24),
-		static_cast<uint8_t>(sector >> 16),
-		static_cast<uint8_t>(sector >> 8),
-		static_cast<uint8_t>(sector)
-	};
-	sendHIDPacket(cmd, out, HIDPACKET_MAX_LEN / 62);
+    return mySDCapacity;
 }
 
-void
-HID::writeSector(uint32_t sector, const std::vector<uint8_t>& in)
+- (uint8_t *) getSD_CSD
 {
-	std::vector<uint8_t> cmd
-	{
-		S2S_CMD_SD_WRITE,
-		static_cast<uint8_t>(sector >> 24),
-		static_cast<uint8_t>(sector >> 16),
-		static_cast<uint8_t>(sector >> 8),
-		static_cast<uint8_t>(sector)
-	};
-	cmd.insert(cmd.end(), in.begin(), in.end());
-	std::vector<uint8_t> out;
-	sendHIDPacket(cmd, out, 1);
-	if ((out.size() < 1) || (out[0] != S2S_CFG_STATUS_GOOD))
-	{
-		std::stringstream ss;
-		ss << "Error writing sector " << sector;
-		throw std::runtime_error(ss.str());
-	}
+    uint8_t cmd[1] = { S2S_CMD_SDINFO };
+    NSMutableData *output = [NSMutableData dataWithLength: 16];
+    @try
+    {
+        [self sendHIDPacket:[NSMutableData dataWithBytes:cmd length:1]
+                     output:output
+                     length:16];
+    }
+    @catch (NSException *e)
+    {
+        return (uint8_t *)[output bytes];
+    }
+
+    return (uint8_t *)[[output subdataWithRange:NSMakeRange(0, 16)] bytes];
 }
 
-bool
-HID::readSCSIDebugInfo(std::vector<uint8_t>& buf)
+- (uint8_t *) getSD_CID
 {
-	std::vector<uint8_t> cmd { S2S_CMD_DEBUG };
-	sendHIDPacket(cmd, buf, 1);
-	return buf.size() > 0;
+    uint8_t cmd[1] = { S2S_CMD_SDINFO };
+    NSMutableData *outputData = [NSMutableData dataWithLength: 16];
+    @try
+    {
+        [self sendHIDPacket:[NSMutableData dataWithBytes:cmd length:1]
+                     output:outputData
+                     length:16];
+    }
+    @catch (NSException *e)
+    {
+        return (uint8_t *)[outputData bytes];
+    }
+    
+    uint8_t *result = (uint8_t *)calloc(16, sizeof(uint8_t));
+    uint8_t *output = (uint8_t *)[outputData bytes];
+    for (size_t i = 0; i < 16; ++i) result[i] = output[16 + i];
+    return result;
 }
 
-
-void
-HID::readHID(uint8_t* buffer, size_t len)
+- (BOOL) scsiSelfTest: (int*)code
 {
-	assert(len >= 0);
-	buffer[0] = 0; // report id
-
-	int result = -1;
-	for (int retry = 0; retry < 3 && result <= 0; ++retry)
-	{
-		result = hid_read_timeout(myConfigHandle, buffer, len, HID_TIMEOUT_MS);
-	}
-
-	if (result < 0)
-	{
-		const wchar_t* err = hid_error(myConfigHandle);
-		std::stringstream ss;
-		ss << "USB HID read failure: " << err;
-		throw std::runtime_error(ss.str());
-	}
+    uint8_t cmd[1] = { S2S_CMD_SCSITEST };
+    NSMutableData *outputData = [NSMutableData data];
+    @try
+    {
+        [self sendHIDPacket:[NSMutableData dataWithBytes:cmd length:1]
+                     output:outputData
+                     length:16];
+    }
+    @catch (NSException *e)
+    {
+        return NO;
+    }
+    
+    *code = [outputData length] >= 2 ? ((uint8_t *)[outputData bytes])[1] : -1;
+    return ([outputData length] >= 1) && (((uint8_t *)[outputData bytes])[1] == S2S_CFG_STATUS_GOOD);
 }
 
-void
-HID::readNewDebugData()
+- (void) enterBootloader
 {
-	// Newer devices only have a single HID interface, and present
-	// a command to obtain the data
-	std::vector<uint8_t> cmd { S2S_CMD_DEVINFO, 0xDE, 0xAD, 0xBE, 0xEF };
-	std::vector<uint8_t> out;
-	try
-	{
-		sendHIDPacket(cmd, out, 6);
-	}
-	catch (std::runtime_error& e)
-	{
-		myFirmwareVersion = 0;
-		mySDCapacity = 0;
-		return;
-	}
-
-	out.resize(6);
-	myFirmwareVersion = (out[0] << 8) | out[1];
-	mySDCapacity =
-		(((uint32_t)out[2]) << 24) |
-		(((uint32_t)out[3]) << 16) |
-		(((uint32_t)out[4]) << 8) |
-		((uint32_t)out[5]);
+    uint8_t cmd[1] = { S2S_CMD_REBOOT };
+    [self sendHIDPacket: [NSMutableData dataWithBytes:cmd length: 1]
+                 output: [NSMutableData data]
+                 length: 1];
 }
 
-std::string
-HID::getFirmwareVersionStr() const
+- (void) readSector: (uint32_t)sector output: (NSMutableData *)output
 {
-	std::stringstream ver;
-	ver <<
-		(myFirmwareVersion >> 8) <<
-		'.' << ((myFirmwareVersion & 0xF0) >> 4);
-
-	int rev = myFirmwareVersion & 0xF;
-	if (rev)
-	{
-		ver << "." << rev;
-	}
-	return ver.str();
+    uint8_t cmd[5] =
+    {
+        S2S_CMD_SD_READ,
+        (uint8_t)(sector >> 24),
+        (uint8_t)(sector >> 16),
+        (uint8_t)(sector >> 8),
+        (uint8_t)(sector)
+    };
+    
+    // output = (uint8_t *)calloc((HIDPACKET_MAX_LEN / 62), sizeof(uint8_t));
+    [self sendHIDPacket: [NSMutableData dataWithBytes:cmd length: 5]
+                 output: output
+                 length: (HIDPACKET_MAX_LEN / 62)];
 }
 
-
-bool
-HID::ping()
+- (void) writeSector: (uint32_t)sector input: (NSMutableData *)input
 {
-	std::vector<uint8_t> cmd { S2S_CMD_PING };
-	std::vector<uint8_t> out;
-	try
-	{
-		sendHIDPacket(cmd, out, 1);
-	}
-	catch (std::runtime_error& e)
-	{
-		return false;
-	}
-
-	return (out.size() >= 1) && (out[0] == S2S_CFG_STATUS_GOOD);
+    uint8_t cmds[5] =
+    {
+        S2S_CMD_SD_WRITE,
+        (uint8_t)(sector >> 24),
+        (uint8_t)(sector >> 16),
+        (uint8_t)(sector >> 8),
+        (uint8_t)(sector)
+    };
+    // add input to commands...
+    [input appendBytes:cmds length:5];
+    [input appendData:input];
+    
+    NSMutableData *output = [NSMutableData data];
+    [self sendHIDPacket: [input bytes]
+                 output: output
+                 length: 1];
+    
+    if ([output length] < 1)
+    {
+        [NSException raise:NSInternalInconsistencyException format:@"Could not write sector"];
+    }
+    
+    if (((int *)[output bytes])[0] != S2S_CFG_STATUS_GOOD)
+    {
+        [NSException raise:NSInternalInconsistencyException format:@"Could not write sector"];
+    }
 }
 
-std::vector<uint8_t>
-HID::getSD_CSD()
+- (BOOL) ping
 {
-	std::vector<uint8_t> cmd { S2S_CMD_SDINFO };
-	std::vector<uint8_t> out;
-	try
-	{
-		sendHIDPacket(cmd, out, 16);
-	}
-	catch (std::runtime_error& e)
-	{
-		return std::vector<uint8_t>(16);
-	}
+    uint8_t cmd[1] = { S2S_CMD_PING };
+    NSMutableData *output = [NSMutableData data];
+    @try
+    {
+        [self sendHIDPacket:[NSMutableData dataWithBytes:cmd length:1]
+                     output:output
+                     length:1];
+    }
+    @catch (NSException *e)
+    {
+        return NO;
+    }
 
-	out.resize(16);
-	return out;
+    return ([output length] >= 1 && ((uint8_t *)[output bytes])[0] == S2S_CFG_STATUS_GOOD);
 }
 
-std::vector<uint8_t>
-HID::getSD_CID()
+- (BOOL) readSCSIDebugInfo: (NSMutableData *) buf
 {
-	std::vector<uint8_t> cmd { S2S_CMD_SDINFO };
-	std::vector<uint8_t> out;
-	try
-	{
-		sendHIDPacket(cmd, out, 16);
-	}
-	catch (std::runtime_error& e)
-	{
-		return std::vector<uint8_t>(16);
-	}
+    uint8_t cmd[1] = { S2S_CMD_DEBUG };
+    [self sendHIDPacket:[NSMutableData dataWithBytes:cmd length:1] output:buf length:1];
+    return [buf length] > 0;
+}
+    
+- (NSString *) getSerialNumber
+{
+    const size_t maxUsbString = 255;
+    wchar_t wstr[maxUsbString];
+    int res = hid_get_serial_number_string(myConfigHandle, wstr, maxUsbString);
+    if (res == 0)
+    {
+        NSString *string = [NSString stringFromWchar:wstr];
+        return string;
+    }
 
-	std::vector<uint8_t> result(16);
-	for (size_t i = 0; i < 16; ++i) result[i] = out[16 + i];
-	return result;
+    return [NSString string];
 }
 
-bool
-HID::scsiSelfTest(int& code)
-{
-	std::vector<uint8_t> cmd { S2S_CMD_SCSITEST };
-	std::vector<uint8_t> out;
-	try
-	{
-		sendHIDPacket(cmd, out, 2);
-	}
-	catch (std::runtime_error& e)
-	{
-		return false;
-	}
-	code = out.size() >= 2 ? out[1] : -1;
-	return (out.size() >= 1) && (out[0] == S2S_CFG_STATUS_GOOD);
-}
-
-
-void
-HID::sendHIDPacket(
-	const std::vector<uint8_t>& cmd,
-	std::vector<uint8_t>& out,
-	size_t responseLength)
-{
-	assert(cmd.size() <= HIDPACKET_MAX_LEN);
-	hidPacket_send(&cmd[0], cmd.size());
-
-	uint8_t hidBuf[HID_PACKET_SIZE];
-	const uint8_t* chunk = hidPacket_getHIDBytes(hidBuf);
-
-	while (chunk)
-	{
-		uint8_t reportBuf[HID_PACKET_SIZE + 1] = { 0x00 }; // Report ID
-		memcpy(&reportBuf[1], chunk, HID_PACKET_SIZE);
-		int result = -1;
-		for (int retry = 0; retry < 10 && result <= 0; ++retry)
-		{
-			result = hid_write(myConfigHandle, reportBuf, sizeof(reportBuf));
-		}
-
-		if (result <= 0)
-		{
-			const wchar_t* err = hid_error(myConfigHandle);
-			std::stringstream ss;
-			ss << "USB HID write failure: " << err;
-			throw std::runtime_error(ss.str());
-		}
-		chunk = hidPacket_getHIDBytes(hidBuf);
-	}
-
-	const uint8_t* resp = NULL;
-	size_t respLen;
-	resp = hidPacket_getPacket(&respLen);
-
-	for (unsigned int retry = 0; retry < responseLength * 2 && !resp; ++retry)
-	{
-		readHID(hidBuf, sizeof(hidBuf)); // Will block
-		hidPacket_recv(hidBuf, HID_PACKET_SIZE);
-		resp = hidPacket_getPacket(&respLen);
-	}
-
-	if (!resp)
-	{
-		throw std::runtime_error("SCSI2SD config protocol error");
-	}
-	out.insert(
-		out.end(),
-		resp,
-		resp + respLen);
-}
-
-std::string
-HID::getHardwareVersion()
+- (NSString *) getHardwareVersion
 {
     if (myFirmwareVersion < 0x0630)
     {
         // Definitely the 2020c or newer hardware.
-        return "V6, Rev F or older";
+        return @"V6, Rev F or older";
     }
     else if (myFirmwareVersion == 0x0630)
     {
-        return "V6, unknown.";
+        return @"V6, unknown.";
     }
     else
     {
@@ -353,46 +254,29 @@ HID::getHardwareVersion()
         int res = hid_get_product_string(myConfigHandle, wstr, maxUsbString);
         if (res == 0)
         {
-            std::wstring prodStr(wstr);
-            if (prodStr.find(L"2020") != std::string::npos)
+            NSString *prodStr = [NSString stringFromWchar:wstr];
+            if ([prodStr rangeOfString:@"2020"].location != NSNotFound)
             {
                 // Definitely the 2020c or newer hardware.
-                return "V6, 2020c or newer";
+                return @"V6, 2020c or newer";
             }
             else
             {
-                return "V6, Rev F or older";
+                return @"V6, Rev F or older";
             }
         }
     }
 
-    return "Unknown";
+    return @"Unknown";
 }
 
-std::string
-HID::getSerialNumber()
-{
-    const size_t maxUsbString = 255;
-    wchar_t wstr[maxUsbString];
-    int res = hid_get_serial_number_string(myConfigHandle, wstr, maxUsbString);
-    if (res == 0)
-    {
-        std::wstring wideString(wstr);
-        return std::string(wideString.begin(), wideString.end());
-    }
-
-    return std::string();
-}
-
-
-bool
-HID::isCorrectFirmware(const std::string& path)
+- (BOOL) isCorrectFirmware: (NSString *) path
 {
     if (myFirmwareVersion < 0x0630)
     {
         // Definitely the 2020c or newer hardware.
-        return path.rfind("firmware.V6.revF.dfu") != std::string::npos ||
-            path.rfind("firmware.dfu") != std::string::npos;
+        return [path rangeOfString: @"firmware.V6.revF.dfu"].location != NSNotFound ||
+            [path rangeOfString: @"firmware.dfu"].location != NSNotFound;
     }
     else if (myFirmwareVersion == 0x0630)
     {
@@ -400,7 +284,7 @@ HID::isCorrectFirmware(const std::string& path)
         // v6.3.0
         // So for now we CANNOT bundle ? User will need to selet the correct
         // file.
-        return true;
+        return YES;
     }
     else
     {
@@ -409,20 +293,138 @@ HID::isCorrectFirmware(const std::string& path)
         int res = hid_get_product_string(myConfigHandle, wstr, maxUsbString);
         if (res == 0)
         {
-            std::wstring prodStr(wstr);
-            if (prodStr.find(L"2020") != std::string::npos)
+            NSString *prodStr = [NSString stringFromWchar:wstr];
+            if ([prodStr rangeOfString:@"2020"].location != NSNotFound)
             {
                 // Definitely the 2020c or newer hardware.
-                return path.rfind("firmware.V6.2020.dfu") != std::string::npos;
+                return [prodStr rangeOfString:@"firmware.V6.2020.dfu"].location != NSNotFound;
             }
             else
             {
-                return path.rfind("firmware.V6.revF.dfu") != std::string::npos ||
-                    path.rfind("firmware.dfu") != std::string::npos;
+                return [prodStr rangeOfString:@"firmware.V6.revF.dfu"].location != NSNotFound ||
+                    [prodStr rangeOfString:@"firmware.dfu"].location != NSNotFound;
             }
         }
     }
 
-    return false;
+    return NO;
 }
 
++ (HID *) hid: (struct hid_device_info*) hidInfo
+{
+    return  [[HID alloc] initWithHidInfo:hidInfo];
+}
+
+- (void) destroy
+{
+    if (myConfigHandle)
+    {
+        hid_close(myConfigHandle);
+        myConfigHandle = NULL;
+    }
+
+    hid_free_enumeration(myHidInfo);
+    myHidInfo = NULL;
+}
+
+- (void) readNewDebugData
+{
+    // Newer devices only have a single HID interface, and present
+    // a command to obtain the data
+    uint8_t cmd[5] = { S2S_CMD_DEVINFO, 0xDE, 0xAD, 0xBE, 0xEF };
+    NSMutableData *cmdData = [NSMutableData dataWithBytes:cmd length:5];
+    NSMutableData *outData = [NSMutableData data];
+    @try
+    {
+        [self sendHIDPacket:cmdData output:outData length:6];
+    }
+    @catch (NSException *ex)
+    {
+        myFirmwareVersion = 0;
+        mySDCapacity = 0;
+        return;
+    }
+
+    uint8_t *output = (uint8_t *)[outData bytes]; //.resize(6);
+    myFirmwareVersion = (output[0] << 8) | output[1];
+    mySDCapacity =
+        (((uint32_t)output[2]) << 24) |
+        (((uint32_t)output[3]) << 16) |
+        (((uint32_t)output[4]) << 8) |
+        ((uint32_t)output[5]);
+}
+
+- (void) readHID: (uint8_t*)buffer length: (size_t)len
+{
+    NSAssert(len >= 0, @"readHID length should be >= 0");
+    buffer[1] = 0; // report id
+
+    int result = -1;
+    for (int retry = 0; retry < 3 && result <= 0; ++retry)
+    {
+        result = hid_read_timeout(myConfigHandle, buffer, len, HID_TIMEOUT_MS);
+    }
+
+    if (result < 0)
+    {
+        const wchar_t* err = hid_error(myConfigHandle);
+        [NSException raise:NSInternalInconsistencyException format:@"USB HID Read Failure: %@", [NSString stringFromWchar:err]];
+    }
+}
+
+- (void) sendHIDPacket: (NSMutableData *)cmdData
+                output: (NSMutableData *)outputData
+                length: (size_t)responseLength
+{
+    NSAssert([cmdData length] <= HIDPACKET_MAX_LEN, @"Packet length too long");
+    uint8_t *cmd = (uint8_t *)[cmdData bytes];
+    hidPacket_send(&cmd[0], [cmdData length]);
+
+    uint8_t hidBuf[HID_PACKET_SIZE];
+    const uint8_t* chunk = hidPacket_getHIDBytes(hidBuf);
+
+    while (chunk)
+    {
+        uint8_t reportBuf[HID_PACKET_SIZE + 1] = { 0x00 }; // Report ID
+        memcpy(&reportBuf[1], chunk, HID_PACKET_SIZE);
+        int result = -1;
+        for (int retry = 0; retry < 10 && result <= 0; ++retry)
+        {
+            result = hid_write(myConfigHandle, reportBuf, sizeof(reportBuf));
+        }
+
+        if (result <= 0)
+        {
+            const wchar_t* err = hid_error(myConfigHandle);
+            [NSException raise:NSInternalInconsistencyException format:@"USB HID write failure: %@", [NSString stringFromWchar:err]];
+        }
+        chunk = hidPacket_getHIDBytes(hidBuf);
+    }
+
+    const uint8_t* resp = NULL;
+    size_t respLen;
+    resp = hidPacket_getPacket(&respLen);
+
+    for (unsigned int retry = 0; retry < responseLength * 2 && !resp; ++retry)
+    {
+        [self readHID: hidBuf length:sizeof(hidBuf)];
+        hidPacket_recv(hidBuf, HID_PACKET_SIZE);
+        resp = hidPacket_getPacket(&respLen);
+    }
+
+    if (!resp)
+    {
+        [NSException raise:NSInternalInconsistencyException format:@"SCSI2SD config protocol error"];
+    }
+
+    // Append to the response...
+    [outputData appendBytes:resp length: respLen];
+}
+
+- (void) dealloc
+{
+    [self destroy];
+    // [super dealloc];
+}
+
+@end

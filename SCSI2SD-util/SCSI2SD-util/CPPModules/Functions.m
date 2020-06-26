@@ -6,6 +6,6 @@
 //  Copyright © 2019 RabbitHole Computing, LLC. All rights reserved.
 //
 
-#include "Functions.hh"
+#include "Functions.h"
 
 
