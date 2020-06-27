@@ -61,6 +61,14 @@ char** convertNSArrayToCArrayForMain(NSArray *array)
 
 @implementation SCSI2SDTask
 
++ (void) initialize
+{
+    if (self == [SCSI2SDTask class])
+    {
+        // nothing...
+    }
+}
+
 + (instancetype) task
 {
     SCSI2SDTask *task = [[SCSI2SDTask alloc] init];
@@ -93,6 +101,7 @@ char** convertNSArrayToCArrayForMain(NSArray *array)
                                                  selector:@selector(handleDFUProgressNotification:)
                                                      name:dfuProgressNotification
                                                    object:nil];
+        myDFU = [[DeviceFirmwareUpdate alloc] init];
     }
     return self;
 }
@@ -122,8 +131,10 @@ char** convertNSArrayToCArrayForMain(NSArray *array)
         if(myHID)
         {
             NSString *msg = [NSString stringWithFormat: @"SCSI2SD Ready, firmware version %@",[myHID getFirmwareVersionStr]];
-            [self logStringToLabel:msg];
+            [self logStringToPanel:msg];
         }
+        
+        myDFU = [[DeviceFirmwareUpdate alloc] init];
     }
     @catch (NSException *e)
     {

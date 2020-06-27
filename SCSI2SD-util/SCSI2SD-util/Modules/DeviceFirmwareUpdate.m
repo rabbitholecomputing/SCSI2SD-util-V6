@@ -46,12 +46,12 @@
 
 - (BOOL) hasDevice
 {
-    bool found = NO;
+    BOOL found = NO;
 
     libusb_device **list;
     ssize_t cnt = libusb_get_device_list(m_usbctx, &list);
     ssize_t i = 0;
-    if (cnt < 0) return false;
+    if (cnt < 0) return NO;
 
     for (i = 0; i < cnt; i++) {
         libusb_device *device = list[i];

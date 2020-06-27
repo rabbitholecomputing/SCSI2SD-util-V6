@@ -15,8 +15,8 @@ int main(int argc, const char * argv[]) {
         SCSI2SDTask *task = [SCSI2SDTask task];
         // NSMutableArray *arguments = @[@"", @"-l", @"/Users/heron/config.xml"];
         // NSString *exec = [[info arguments] objectAtIndex: 0];
-        // NSMutableArray *arguments = [[NSMutableArray alloc] initWithArray:info.arguments];
-        NSMutableArray *arguments = [[NSMutableArray alloc] initWithObjects: @"dfu-util", @"-r", @"-f", @"/Users/heron/Downloads/firmware.dfu", nil];
+        NSMutableArray *arguments = [[NSMutableArray alloc] initWithArray:info.arguments];
+        // NSMutableArray *arguments = [[NSMutableArray alloc] initWithObjects: @"dfu-util", @"-r", @"-f", @"/Users/heron/Downloads/firmware.dfu", nil];
         BOOL parseSuccessful = NO;
         BOOL repeatMode = NO;
 

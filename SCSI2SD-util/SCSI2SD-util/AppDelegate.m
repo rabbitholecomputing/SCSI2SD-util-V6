@@ -276,6 +276,9 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
             NSString *msg = [NSString stringWithFormat: @"SCSI2SD Ready, firmware version %@",[myHID getFirmwareVersionStr]];
             [self logStringToLabel:msg];
         }
+        
+        myDFU = [[DeviceFirmwareUpdate alloc] init];
+        NSLog(@"Allocated DFU");
     }
     @catch (NSException *e)
     {
@@ -365,6 +368,8 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
         //myHID.reset(SCSI2SD::HID::Open());
         //myBootloader.reset(SCSI2SD::Bootloader::Open());
         [self reset_hid];
+        myDFU = [[DeviceFirmwareUpdate alloc] init];
+
     }
     @catch (NSException *e)
     {
