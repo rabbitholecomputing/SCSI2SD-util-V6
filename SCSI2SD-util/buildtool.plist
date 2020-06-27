@@ -1,0 +1,4 @@
+{
+        "substitutions" = { "-l\"IOKit\"" = "" };
+        "additional" = ("-lusb-1.0", "-ludev");
+}
