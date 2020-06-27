@@ -83,6 +83,16 @@ uint32_t fromLE32(uint32_t in)
 
 @implementation Pair
 
+- (instancetype) init
+{
+    self = [super init];
+    if (self != nil)
+    {
+        _targets = [[NSMutableArray alloc] initWithCapacity: 10];
+    }
+    return self;
+}
+
 - (instancetype) initWithBoardCfg: (S2S_BoardCfg)boardCfg
                      targetConfig: (S2S_TargetCfg *)targetCfgs
                             count: (NSUInteger)c
@@ -677,6 +687,12 @@ uint32_t fromLE32(uint32_t in)
 + (Pair *) fromXML: (NSString *)filename
 {
     NSData *data = [NSData dataWithContentsOfFile: filename];
+    if(data == nil)
+    {
+        puts("Could not read file.");
+        return nil;
+    }
+    
     NSXMLDocument *doc = [[NSXMLDocument alloc] initWithData: data
                                                      options: NSXMLNodeOptionsNone
                                                        error: NULL];

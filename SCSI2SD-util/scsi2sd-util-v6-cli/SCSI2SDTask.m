@@ -355,8 +355,10 @@ char** convertNSArrayToCArrayForMain(NSArray *array)
 
 - (void) saveToDeviceFromFilename: (NSString *)filename
 {
-    if(filename == nil || [filename isEqualToString:@""])
+    NSFileManager *mgr = [NSFileManager defaultManager];
+    if(filename == nil || [filename isEqualToString:@""] || [mgr fileExistsAtPath:filename] == NO)
     {
+        puts("File doesn't exist.");
         return;
     }
  
