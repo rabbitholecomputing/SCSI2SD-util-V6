@@ -6,16 +6,13 @@
 //  Copyright © 2020 RabbitHole Computing, LLC. All rights reserved.
 //
 
-#import "SCSI2SDTask.hh"
-#import "zipper.hh"
+#import "SCSI2SDTask.h"
 
 #define MIN_FIRMWARE_VERSION 0x0400
 #define MIN_FIRMWARE_VERSION 0x0400
 
 NSString *dfuOutputNotification = @"DFUOutputNotification";
 NSString *dfuProgressNotification = @"DFUProgressNotification";
-
-extern "C" {
 
 int dfu_util(int argc, char **argv, unsigned char *buf); // our one and only interface with the dfu library...
 
@@ -37,8 +34,6 @@ void dfu_report_progress(double percent)
     [[NSNotificationCenter defaultCenter]
      postNotificationName: dfuProgressNotification
      object: [NSNumber numberWithDouble:percent]];
-}
-
 }
 
 char** convertNSArrayToCArray(NSArray *array)
@@ -121,108 +116,100 @@ char** convertNSArrayToCArrayForMain(NSArray *array)
 // Reset the HID...
 - (void) reset_hid
 {
-    try
+    @try
     {
-        myHID.reset(SCSI2SD::HID::Open());
+        myHID = [HID open];
         if(myHID)
         {
-            NSString *msg = [NSString stringWithFormat: @"SCSI2SD Ready, firmware version %s\n",myHID->getFirmwareVersionStr().c_str()];
-            [self logStringToPanel: msg];
-            [self logStringToPanel: @"SCSI2SD Ready, firmware version %s\n", myHID->getFirmwareVersionStr().c_str()];
-            [self logStringToPanel: @"Hardware version: %s\n", myHID->getHardwareVersion().c_str()];
-            [self logStringToPanel: @"Serial Number: %s\n", myHID->getSerialNumber().c_str()];
+            NSString *msg = [NSString stringWithFormat: @"SCSI2SD Ready, firmware version %@",[myHID getFirmwareVersionStr]];
+            [self logStringToLabel:msg];
         }
-        
-        // myDfu = new SCSI2SD::Dfu;
     }
-    catch (std::exception& e)
+    @catch (NSException *e)
     {
-        NSLog(@"Exception caught : %s\n", e.what());
+        NSLog(@"Exception caught : %@\n", [e reason]);
     }
 }
 
 - (void) close_hid
 {
-    try
+    @try
     {
-        myHID.reset();
+        myHID = nil;
     }
-    catch (std::exception& e)
+    @catch (NSException *e)
     {
-        NSLog(@"Exception caught : %s\n", e.what());
+        NSLog(@"Exception caught : %@\n", [e reason]);
     }
 }
 
 - (void) reset_bootloader
 {
-    try
+    @try
     {
         // myBootloader.reset(SCSI2SD::Bootloader::Open());
     }
-    catch (std::exception& e)
+    @catch (NSException *e)
     {
-        NSLog(@"Exception caught : %s\n", e.what());
+        NSLog(@"Exception caught : %@\n", [e reason]);
     }
 }
 
 - (BOOL) getHid
 {
-    BOOL gotHID = NO;
-    // Check if we are connected to the HID device.
-    // AND/or bootloader device.
-    
-    time_t now = time(NULL);
+    NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
     if (now == myLastPollTime) return NO;
     myLastPollTime = now;
 
     // Check if we are connected to the HID device.
-    try
+    @try
     {
-        if (myHID && !myHID->ping())
+        if (myHID && ![myHID ping])
         {
             // Verify the USB HID connection is valid
-            myHID.reset();
+            // myHID.reset();
+            myHID = nil;
         }
 
         if (!myHID)
         {
-            myHID.reset(SCSI2SD::HID::Open());
+            myHID = [HID open];
             if (myHID)
             {
-                [self logStringToPanel: @"SCSI2SD Ready, firmware version %s\n", myHID->getFirmwareVersionStr().c_str()];
-                [self logStringToPanel: @"Hardware version: %s\n", myHID->getHardwareVersion().c_str()];
-                [self logStringToPanel: @"Serial Number: %s\n", myHID->getSerialNumber().c_str()];
-                std::vector<uint8_t> csd(myHID->getSD_CSD());
-                std::vector<uint8_t> cid(myHID->getSD_CID());
-                [self logStringToPanel: @"SD Capacity (512-byte sectors): %d\n", myHID->getSDCapacity()];
+                [self logStringToPanel: @"SCSI2SD Ready, firmware version %@\n", [myHID getFirmwareVersionStr]];
+                [self logStringToPanel: @"Hardware version: %@\n", [myHID getHardwareVersion]];
+                [self logStringToPanel: @"Serial Number: %@\n", [myHID getSerialNumber]];
+                uint8_t *csd = [myHID getSD_CSD];
+                uint8_t *cid = [myHID getSD_CID];
+                [self logStringToPanel: @"SD Capacity (512-byte sectors): %d\n", [myHID getSDCapacity]];
 
                 [self logStringToPanel: @"SD CSD Register: "];
-                for (size_t i = 0; i < csd.size(); ++i)
+                for (size_t i = 0; i < 16 /*csd.size()*/; ++i)
                 {
-                    [self logStringToPanel: @"%0X", static_cast<int>(csd[i])];
+                    [self logStringToPanel: @"%0X", (int)csd[i]];
                 }
                 [self logStringToPanel: @"\nSD CID Register: "];
-                for (size_t i = 0; i < cid.size(); ++i)
+                for (size_t i = 0; i < 16 /*cid.size()*/; ++i)
                 {
-                    [self logStringToPanel: @"%0X", static_cast<int>(cid[i])];
+                    [self logStringToPanel: @"%0X", (int)cid[i]];
                 }
-                [self logStringToPanel:@"\n"];
-                gotHID = YES;
+                [self logStringToPanel: @"\n"];
+                [self runScsiSelfTest];
             }
             else
             {
                 char ticks[] = {'/', '-', '\\', '|'};
                 myTickCounter++;
-                [self logStringToPanel:@"Searching for SCSI2SD device %c\r", ticks[myTickCounter % sizeof(ticks)]];
+                [self logStringToPanel:@"Searching for SCSI2SD device %c", ticks[myTickCounter % sizeof(ticks)]];
             }
         }
     }
-    catch (std::runtime_error& e)
+    @catch (NSException *e)
     {
-        [self logStringToPanel:@"%s", e.what()];
+        [self logStringToPanel:@"%@", [e reason]];
+        return NO;
     }
-    
-    return gotHID;
+    return YES;
 }
 
 - (void) waitForHidConnection
@@ -238,34 +225,32 @@ char** convertNSArrayToCArrayForMain(NSArray *array)
 {
     int errcode;
     [self logStringToPanel: @"SCSI Self-Test: "];
-    if (myHID->scsiSelfTest(errcode))
+    if ([myHID scsiSelfTest: &errcode])
     {
-        [self logStringToPanel: @"Passed\n"];
+        [self logStringToPanel: @"Passed"];
     }
     else
     {
-        [self logStringToPanel: @"FAIL (%d)\n", errcode];
+        [self logStringToPanel: @"FAIL (%d)", errcode];
     }
-    [self logStringToPanel:@"\n"];
+    [self logStringToPanel: @"\n"];
 }
 
-- (void)saveConfigs: (std::pair<S2S_BoardCfg, std::vector<S2S_TargetCfg>>)configs
+- (void)saveConfigs: (Pair *)configs
              toFile: (NSString *)filename
 {
     if([filename isEqualToString:@""] || filename == nil)
-    return;
+        return;
 
     NSString *outputString = @"";
     outputString = [outputString stringByAppendingString: @"<SCSI2SD>\n"];
-    std::string s = SCSI2SD::ConfigUtil::toXML(configs.first);
-    NSString *string = [NSString stringWithCString:s.c_str() encoding:NSUTF8StringEncoding];
+    NSString *string = [ConfigUtil boardCfgToXML: [configs boardCfg]];
     outputString = [outputString stringByAppendingString:string];
 
     NSUInteger i = 0;
-    for(i = 0; i < configs.second.size(); i++)
+    for(i = 0; i < [configs targetCount]; i++)
     {
-        std::string s = SCSI2SD::ConfigUtil::toXML(configs.second[i]);
-        NSString *string = [NSString stringWithCString:s.c_str() encoding:NSUTF8StringEncoding];
+        NSString *string = [ConfigUtil targetCfgToXML:[configs targetCfgAtIndex:i]];
         outputString = [outputString stringByAppendingString:string];
     }
     outputString = [outputString stringByAppendingString: @"</SCSI2SD>\n"];
@@ -296,8 +281,8 @@ char** convertNSArrayToCArrayForMain(NSArray *array)
     int currentProgress = 0;
     int totalProgress = 2;
 
-    std::vector<uint8_t> cfgData(S2S_CFG_SIZE);
-    uint32_t sector = myHID->getSDCapacity() - 2;
+    NSMutableData *cfgData = [NSMutableData dataWithLength: S2S_CFG_SIZE];
+    uint32_t sector = [myHID getSDCapacity] - 2;
     for (size_t i = 0; i < 2; ++i)
     {
         [self logStringToPanel:  @"\nReading sector %d", sector];
@@ -307,45 +292,43 @@ char** convertNSArrayToCArrayForMain(NSArray *array)
             [self logStringToPanel:  @"\nSave from device Complete\n"];
         }
 
-        std::vector<uint8_t> sdData;
-        try
+        NSMutableData *sdData = [NSMutableData data];
+        @try
         {
-            myHID->readSector(sector++, sdData);
+            [myHID readSector:sector++ output:sdData];
         }
-        catch (std::runtime_error& e)
+        @catch (NSException *e)
         {
-            [self logStringToPanel:@"\nException: %s", e.what()];
+            [self logStringToPanel:@"\nException: %@", [e reason]];
             return;
         }
-
+        [cfgData appendData:sdData];
+        /*
         std::copy(
             sdData.begin(),
             sdData.end(),
-            &cfgData[i * 512]);
+            &cfgData[i * 512]);*/
     }
 
     // Create structures...
-    std::vector<S2S_TargetCfg> targetVector;
+    Pair *p = [[Pair alloc] init];
     for (int i = 0; i < S2S_MAX_TARGETS; ++i)
     {
-        S2S_TargetCfg target = SCSI2SD::ConfigUtil::fromBytes(&cfgData[sizeof(S2S_BoardCfg) + i * sizeof(S2S_TargetCfg)]);
-        targetVector.push_back(target);
+        NSRange dataRange = NSMakeRange(sizeof(S2S_BoardCfg) + i * sizeof(S2S_TargetCfg), sizeof(S2S_TargetCfg));
+        NSData *subData = [cfgData subdataWithRange: dataRange];
+        S2S_TargetCfg target = [ConfigUtil targetCfgFromBytes: subData]; // SCSI2SD::ConfigUtil::fromBytes(&cfgData[sizeof(S2S_BoardCfg) + i * sizeof(S2S_TargetCfg)]);
+        [p addTargetConfig: target];
     }
-    std::pair<S2S_BoardCfg, std::vector<S2S_TargetCfg>> pair;
-    pair.first = SCSI2SD::ConfigUtil::boardConfigFromBytes(&cfgData[0]);
-    pair.second = targetVector;
+    [p setBoardConfig:[ConfigUtil boardConfigFromBytes:cfgData]];
     
     // Build file...
     NSString *outputString = @"";
     outputString = [outputString stringByAppendingString: @"<SCSI2SD>\n"];
-    std::string boardXML = SCSI2SD::ConfigUtil::toXML(pair.first);
-    outputString = [outputString stringByAppendingString: [NSString stringWithCString:boardXML.c_str()
-                                                                             encoding:NSUTF8StringEncoding]];
+    outputString = [outputString stringByAppendingString:[ConfigUtil boardCfgToXML:[p boardCfg]]];
     for (int i = 0; i < S2S_MAX_TARGETS; ++i)
     {
-        std::string deviceXML = SCSI2SD::ConfigUtil::toXML(pair.second[i]);
-        outputString = [outputString stringByAppendingString: [NSString stringWithCString:deviceXML.c_str()
-                                                                                 encoding:NSUTF8StringEncoding]];
+        NSString *deviceXML = [ConfigUtil targetCfgToXML: [p targetCfgAtIndex:i]];
+        outputString = [outputString stringByAppendingString: deviceXML];
     }
     outputString = [outputString stringByAppendingString: @"</SCSI2SD>\n"];
     [outputString writeToFile:filename atomically:YES encoding:NSUTF8StringEncoding error:NULL];
@@ -358,8 +341,6 @@ char** convertNSArrayToCArrayForMain(NSArray *array)
     
     return;
 }
-
-
 
 - (void) saveToDeviceFromFilename: (NSString *)filename
 {
@@ -377,18 +358,15 @@ char** convertNSArrayToCArrayForMain(NSArray *array)
     int totalProgress = 2; // (int)[deviceControllers count]; // * SCSI_CONFIG_ROWS + 1;
 
     // Write board config first.
-    const char *sPath = [filename cStringUsingEncoding:NSUTF8StringEncoding];
-    std::pair<S2S_BoardCfg, std::vector<S2S_TargetCfg>> configs(
-        SCSI2SD::ConfigUtil::fromXML(std::string(sPath)));
-    
-    std::vector<uint8_t> cfgData(SCSI2SD::ConfigUtil::boardConfigToBytes(configs.first));
+    Pair *configs = [ConfigUtil fromXML: filename];
+    NSMutableData *cfgData = [[ConfigUtil boardConfigToBytes:[configs boardCfg]] mutableCopy];
     for (int i = 0; i < S2S_MAX_TARGETS; ++i)
     {
-        std::vector<uint8_t> raw(SCSI2SD::ConfigUtil::toBytes(configs.second[i]));
-        cfgData.insert(cfgData.end(), raw.begin(), raw.end());
+        NSMutableData *raw = [[ConfigUtil targetCfgToBytes:[configs targetCfgAtIndex:i]] mutableCopy];
+        [cfgData appendData: raw];
     }
     
-    uint32_t sector = myHID->getSDCapacity() - 2;
+    uint32_t sector = [myHID getSDCapacity] - 2; // myHID->getSDCapacity() - 2;
     for (size_t i = 0; i < 2; ++i)
     {
         [self logStringToPanel: @"\nWriting SD Sector %zu",sector];
@@ -399,15 +377,15 @@ char** convertNSArrayToCArrayForMain(NSArray *array)
             [self logStringToPanel: @"\nSave Complete\n"];
         }
 
-        try
+        @try
         {
-            std::vector<uint8_t> buf;
-            buf.insert(buf.end(), &cfgData[i * 512], &cfgData[(i+1) * 512]);
-            myHID->writeSector(sector++, buf);
+            NSRange range = NSMakeRange(i * 512, 512); // starting at sector i, get one sector of info...
+            NSData *buf = [cfgData subdataWithRange:range];
+            [myHID writeSector:sector++ input:  buf];
         }
-        catch (std::runtime_error& e)
+        @catch (NSException *e)
         {
-            [self logStringToPanel:  @"\nException %s",e.what()];
+            [self logStringToPanel:  @"\nException %@",[e reason]];
             goto err;
         }
     }
@@ -441,7 +419,7 @@ out:
     unsigned char *buf = NULL;
     
     buf = (unsigned char *)calloc(0x4000, sizeof(unsigned char));
-    // unsigned char buf[0x80000]; // alloc 512k
+    // unsigned char buf[0x80000]; // alloc 512k@@
     if (dfu_util(count, array, buf) == 0)
     {
         free(buf);
@@ -501,29 +479,32 @@ out:
 
     while (true)
     {
-        try
+        @try
         {
-            const char *serial = NULL;
-            if (!myHID) myHID.reset(SCSI2SD::HID::Open());
+            NSString *serial = nil;
+            if (!myHID)
+            {
+                myHID = [HID open];
+            }
+            
             if (myHID)
             {
-                serial = myHID->getSerialNumber().c_str();
+                serial = [myHID getSerialNumber];// myHID->getSerialNumber().c_str();
                 [self runScsiSelfTest];  // run the scsi self test when updating the firmware.
-                std::string fn = std::string([filename cStringUsingEncoding:NSUTF8StringEncoding]);
-                if (!myHID->isCorrectFirmware(fn))
+                if (![myHID isCorrectFirmware:filename]) //  myHID->isCorrectFirmware(fn))
                 {
                     [self logStringToPanel: @"Wrong filename!"];
                     [self logStringToPanel: @"Firmware does not match device hardware!"];
                     return;
                 }
-                versionChecked = true;
+                versionChecked = YES;
                 // versionChecked = false; // for testing...
                 [self logStringToPanel: @"Resetting SCSI2SD into bootloader\n"];
-                myHID->enterBootloader();
-                myHID.reset();
+                [myHID enterBootloader];
+                myHID = nil;
             }
 
-            if (myDfu.hasDevice() && !versionChecked)
+            if ([myDFU hasDevice] && !versionChecked) //  myDfu.hasDevice() && !versionChecked)
             {
                 [self logStringToPanel:@"STM DFU Bootloader found, checking compatibility"];
                 // [self updateProgress:[NSNumber numberWithFloat:0.0]];
@@ -533,10 +514,10 @@ out:
                     [self logStringToPanel: @"Firmware does not match device hardware!"];
                     return;
                 }
-                versionChecked = true;
+                versionChecked = YES;
             }
             
-            if (myDfu.hasDevice())
+            if ([myDFU hasDevice]) //  myDfu.hasDevice())
             {
                 [self logStringToPanel: @"\n\nSTM DFU Bootloader found\n"];
                 NSString *dfuPath = @"dfu-util"; // [[NSBundle mainBundle] pathForResource:@"dfu-util" ofType:@""];
@@ -563,61 +544,12 @@ out:
                 break;
             }
         }
-        catch (std::exception& e)
+        @catch (NSException *e)
         {
-            [self logStringToPanel: @"%s",e.what()];
-            myHID.reset();
+            [self logStringToPanel: @"%@",[e reason]];
+            myHID = nil;
         }
     }
 }
-
-/*
-- (void) upgradeFirmwareDeviceFromFilename: (NSString *)filename
-{
-    if ([[filename pathExtension] isEqualToString: @"dfu"] == NO)
-    {
-        [self logStringToPanel: @"SCSI2SD-V6 requires .dfu extension"];
-    }
-    
-    while (true)
-    {
-        try
-        {
-            if (!myHID) myHID.reset(SCSI2SD::HID::Open());
-            if (myHID)
-            {
-                if (!myHID->isCorrectFirmware(filename))
-                {
-                    [self logStringToPanel: @"Wrong filename!"];
-                    [self logStringToPanel: @"Firmware does not match device hardware!"];
-                    return;
-                }
-                [self logStringToPanel: @"Resetting SCSI2SD into bootloader\n"];
-                myHID->enterBootloader();
-                myHID.reset();
-            }
-
-            if (myDfu.hasDevice())
-            {
-                [self logStringToPanel: @"\n\nSTM DFU Bootloader found\n"];
-                NSString *dfuPath = [[NSBundle mainBundle] pathForResource:@"dfu-util" ofType:@""];
-                NSString *commandString = [NSString stringWithFormat:@"%@ -D %@ -a 0 -R", [dfuPath lastPathComponent], filename];
-                NSArray *commandArray = [commandString componentsSeparatedByString: @" "];
-                char **array = convertNSArrayToCArray(commandArray);
-                int count = (int)[commandArray count];
-                dfu_util(count, array);
-                [self performSelectorOnMainThread:@selector(reset_hid)
-                                       withObject:nil
-                                    waitUntilDone:YES];
-                break;
-            }
-        }
-        catch (std::exception& e)
-        {
-            [self logStringToPanel: @"%s",e.what()];
-            myHID.reset();
-        }
-    }
-} */
 
 @end

@@ -54,7 +54,7 @@ static const size_t HID_TIMEOUT_MS = 256; // 2x HID Interval.
 - (void) enterBootloader;
 
 - (void) readSector: (uint32_t)sector output: (NSMutableData *)output;
-- (void) writeSector: (uint32_t)sector input: (NSMutableData *)input;
+- (void) writeSector: (uint32_t)sector input: (NSData *)input;
 - (BOOL) ping;
 
 - (BOOL) readSCSIDebugInfo: (NSMutableData *) buf;

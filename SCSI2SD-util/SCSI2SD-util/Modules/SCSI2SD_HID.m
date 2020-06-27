@@ -165,7 +165,7 @@
                  length: (HIDPACKET_MAX_LEN / 62)];
 }
 
-- (void) writeSector: (uint32_t)sector input: (NSMutableData *)input
+- (void) writeSector: (uint32_t)sector input: (NSData *)input
 {
     uint8_t cmds[5] =
     {
@@ -176,11 +176,12 @@
         (uint8_t)(sector)
     };
     // add input to commands...
-    [input appendBytes:cmds length:5];
-    [input appendData:input];
+    NSMutableData *myInput = [input mutableCopy];
+    [myInput appendBytes:cmds length:5];
+    [myInput appendData:input];
     
     NSMutableData *output = [NSMutableData data];
-    [self sendHIDPacket: [input bytes]
+    [self sendHIDPacket: [myInput bytes]
                  output: output
                  length: 1];
     

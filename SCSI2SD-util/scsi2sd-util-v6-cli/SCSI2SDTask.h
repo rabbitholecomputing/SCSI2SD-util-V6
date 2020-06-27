@@ -10,10 +10,9 @@
 
 // #include "SCSI2SD_Bootloader.hh"
 #include "SCSI2SD_HID.h"
-#include "Firmware.h"
 #include "scsi2sd.h"
 #include "Functions.h"
-#include "Dfu.hh"
+#include "DeviceFirmwareUpdate.h"
 #include "ConfigUtil.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
     HID *myHID;
     time_t myLastPollTime;
     uint8_t myTickCounter;
-    Dfu *myDfu;
+    DeviceFirmwareUpdate *myDFU;
 }
 
 @property (nonatomic, assign) BOOL repeatMode;

@@ -815,7 +815,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/lib",
-					"$(PROJECT_DIR)/SCSI2SD-util/Modules/libusb-1.0.23/libusb/libs",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
@@ -859,7 +858,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/lib",
-					"$(PROJECT_DIR)/SCSI2SD-util/Modules/libusb-1.0.23/libusb/libs",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
@@ -877,6 +875,8 @@
 		14D96BD023C935330008E7B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = "scsi2sd-util-v6-cli/scsi2sd-util-cli.entitlements";
 				CODE_SIGN_IDENTITY = "-";
@@ -894,18 +894,14 @@
 				INFOPLIST_FILE = "$(SRCROOT)/SCSI2SD-util/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"${BUILD_DIR}/Debug/Base64",
 					"$(PROJECT_DIR)/libs/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
-					"-l\"z\"",
-					"-l\"zipper\"",
 					"-ObjC",
 					"-framework",
 					"\"IOKit\"",
-					"-framework",
-					"\"CoreFoundation\"",
+					"-l\"usb1.0\"",
 				);
 				PRODUCT_NAME = "scsi2sd-util-v6-cli";
 			};
@@ -914,6 +910,8 @@
 		14D96BD123C935330008E7B3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = "scsi2sd-util-v6-cli/scsi2sd-util-cli.entitlements";
 				CODE_SIGN_IDENTITY = "-";
@@ -931,18 +929,14 @@
 				INFOPLIST_FILE = "$(SRCROOT)/SCSI2SD-util/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"${BUILD_DIR}Release/Base64",
 					"$(PROJECT_DIR)/libs/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
-					"-l\"z\"",
-					"-l\"zipper\"",
 					"-ObjC",
 					"-framework",
 					"\"IOKit\"",
-					"-framework",
-					"\"CoreFoundation\"",
+					"-l\"usb1.0\"",
 				);
 				PRODUCT_NAME = "scsi2sd-util-v6-cli";
 			};
