@@ -898,10 +898,11 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-ObjC",
 					"-framework",
 					"\"IOKit\"",
-					"-l\"usb1.0\"",
+					"-l\"usb-1.0\"",
 				);
 				PRODUCT_NAME = "scsi2sd-util-v6-cli";
 			};
@@ -933,10 +934,11 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-ObjC",
 					"-framework",
 					"\"IOKit\"",
-					"-l\"usb1.0\"",
+					"-l\"usb-1.0\"",
 				);
 				PRODUCT_NAME = "scsi2sd-util-v6-cli";
 			};
