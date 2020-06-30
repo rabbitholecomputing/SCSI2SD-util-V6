@@ -12,24 +12,24 @@
 #include "ConfigUtil.h"
 @interface DeviceController ()
 
-@property (nonatomic) IBOutlet NSButton *enableSCSITarget;
-@property (nonatomic) IBOutlet NSComboBox *SCSIID;
-@property (nonatomic) IBOutlet NSPopUpButton *deviceType;
-@property (nonatomic) IBOutlet NSTextField *sdCardStartSector;
-@property (nonatomic) IBOutlet NSTextField *sectorSize;
-@property (nonatomic) IBOutlet NSTextField *sectorCount;
-@property (nonatomic) IBOutlet NSTextField *deviceSize;
-@property (nonatomic) IBOutlet NSPopUpButton *deviceUnit;
-@property (nonatomic) IBOutlet NSTextField *vendor;
-@property (nonatomic) IBOutlet NSTextField *productId;
-@property (nonatomic) IBOutlet NSTextField *revsion;
-@property (nonatomic) IBOutlet NSTextField *serialNumber;
-@property (nonatomic) IBOutlet NSButton *autoStartSector;
-@property (nonatomic) IBOutlet NSTextField *sectorsPerTrack;
-@property (nonatomic) IBOutlet NSTextField *headsPerCylinder;
+@property IBOutlet NSButton *enableSCSITarget;
+@property IBOutlet NSComboBox *SCSIID;
+@property IBOutlet NSPopUpButton *deviceType;
+@property IBOutlet NSTextField *sdCardStartSector;
+@property IBOutlet NSTextField *sectorSize;
+@property IBOutlet NSTextField *sectorCount;
+@property IBOutlet NSTextField *deviceSize;
+@property IBOutlet NSPopUpButton *deviceUnit;
+@property IBOutlet NSTextField *vendor;
+@property IBOutlet NSTextField *productId;
+@property IBOutlet NSTextField *revsion;
+@property IBOutlet NSTextField *serialNumber;
+@property IBOutlet NSButton *autoStartSector;
+@property IBOutlet NSTextField *sectorsPerTrack;
+@property IBOutlet NSTextField *headsPerCylinder;
 
-@property (nonatomic) IBOutlet NSTextField *autoErrorText;
-@property (nonatomic) IBOutlet NSTextField *scsiIdErrorText;
+@property IBOutlet NSTextField *autoErrorText;
+@property IBOutlet NSTextField *scsiIdErrorText;
 
 @property BOOL duplicateId;
 @property BOOL sectorOverlap;
