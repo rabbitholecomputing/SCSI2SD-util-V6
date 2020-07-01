@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1414360A24A393F600521DB6 /* MF_Base64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1414360924A393F600521DB6 /* MF_Base64Additions.m */; };
 		1414360B24A3940600521DB6 /* MF_Base64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1414360924A393F600521DB6 /* MF_Base64Additions.m */; };
+		145E1E7424AD070E0007344C /* libusb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 145E1E7324AD070E0007344C /* libusb.a */; };
 		147E4F7E249EC646005E31B7 /* time.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F0D249EC645005E31B7 /* time.c */; };
 		147E4F7F249EC646005E31B7 /* dfu_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F0F249EC645005E31B7 /* dfu_util.c */; };
 		147E4F80249EC646005E31B7 /* lib_main.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F11249EC645005E31B7 /* lib_main.c */; };
@@ -86,6 +87,10 @@
 		1414360C24A3958200521DB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		145E1C3024A64F700007344C /* SCSI2SDTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSI2SDTask.h; sourceTree = "<group>"; };
 		145E1C3124A650F50007344C /* SCSI2SD_HID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSI2SD_HID.h; sourceTree = "<group>"; };
+		145E1E6B24ABF1140007344C /* libusb-1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libusb-1.0.a"; path = "libs/lib/libusb-1.0.a"; sourceTree = "<group>"; };
+		145E1E6D24ABF9840007344C /* clock_gettime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = clock_gettime.h; sourceTree = "<group>"; };
+		145E1E6E24ABF9840007344C /* clock_gettime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = clock_gettime.c; sourceTree = "<group>"; };
+		145E1E7324AD070E0007344C /* libusb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libusb.a; path = libs/lib/libusb.a; sourceTree = "<group>"; };
 		1474BFEB2399677E003C67D5 /* cybtldr_api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cybtldr_api.h; sourceTree = "<group>"; };
 		1474BFEC2399677E003C67D5 /* cybtldr_api2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cybtldr_api2.h; sourceTree = "<group>"; };
 		1474BFED2399677E003C67D5 /* cybtldr_parse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cybtldr_parse.h; sourceTree = "<group>"; };
@@ -228,12 +233,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				145E1E7424AD070E0007344C /* libusb.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		145E1E6A24ABF1130007344C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				145E1E7324AD070E0007344C /* libusb.a */,
+				145E1E6B24ABF1140007344C /* libusb-1.0.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1474BFE223996564003C67D5 /* libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +326,8 @@
 				147E4F76249EC645005E31B7 /* hidapi.h */,
 				147E4F78249EC646005E31B7 /* hid.c */,
 				147E4F7B249EC646005E31B7 /* scsi2sd.h */,
+				145E1E6D24ABF9840007344C /* clock_gettime.h */,
+				145E1E6E24ABF9840007344C /* clock_gettime.c */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -430,6 +447,7 @@
 				14D96BCD23C935330008E7B3 /* scsi2sd-util-v6-cli */,
 				1482B1E523973F3E001BA513 /* Products */,
 				1474BFE223996564003C67D5 /* libs */,
+				145E1E6A24ABF1130007344C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -902,7 +920,6 @@
 					"-ObjC",
 					"-framework",
 					"\"IOKit\"",
-					"-l\"usb-1.0\"",
 				);
 				PRODUCT_NAME = "scsi2sd-util-v6-cli";
 			};
@@ -938,7 +955,6 @@
 					"-ObjC",
 					"-framework",
 					"\"IOKit\"",
-					"-l\"usb-1.0\"",
 				);
 				PRODUCT_NAME = "scsi2sd-util-v6-cli";
 			};

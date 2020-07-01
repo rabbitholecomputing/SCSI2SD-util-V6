@@ -45,12 +45,6 @@ typedef struct pthread_barrier {
     int trip_count;
 } pthread_barrier_t;
 
-int clock_gettime( clockid_t clock_id,
-struct timespec *tp )
-{
-    return 0;
-}
-
 static int pthread_barrier_init(pthread_barrier_t *barrier, const pthread_barrierattr_t *attr, unsigned int count)
 {
 	if(count == 0) {
