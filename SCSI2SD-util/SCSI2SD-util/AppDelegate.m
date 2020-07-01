@@ -646,6 +646,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 // Load from device...
 - (void) loadFromDeviceThread: (id)obj
 {
+    NSAutoreleasePool *my_pool = [[NSAutoreleasePool alloc] init];
     [aLock lock];
     [self performSelectorOnMainThread:@selector(stopTimer)
                            withObject:NULL
@@ -733,6 +734,7 @@ out:
                            withObject:nil
                         waitUntilDone:NO];
     
+    [my_pool release];
     [aLock unlock];
     return;
 }
@@ -745,6 +747,7 @@ out:
 // Save information to device on background thread....
 - (void) saveToDeviceThread: (id)obj
 {
+    NSAutoreleasePool *my_pool = [[NSAutoreleasePool alloc] init];
     [aLock lock];
     [self performSelectorOnMainThread:@selector(stopTimer)
                            withObject:NULL
@@ -764,6 +767,7 @@ out:
 
     // Write board config first.
     NSMutableData *cfgData = [[ConfigUtil boardConfigToBytes:[self.settings getConfig]] mutableCopy];
+    [cfgData retain];
     for (int i = 0; i < S2S_MAX_TARGETS; ++i)
     {
         NSData *raw = [ConfigUtil targetCfgToBytes:[[deviceControllers objectAtIndex:i] getTargetConfig]];
@@ -819,6 +823,7 @@ out:
     [self performSelectorOnMainThread:@selector(showWriteCompletionPanel:)
                            withObject:nil
                         waitUntilDone:NO];
+    [my_pool release];
     [aLock unlock];
     return;
 }
@@ -888,6 +893,7 @@ out:
 // Upgrade firmware...
 - (void) upgradeFirmwareThread: (NSString *)filename
 {
+    NSAutoreleasePool *my_pool = [[NSAutoreleasePool alloc] init];
     if ([[filename pathExtension] isEqualToString: @"dfu"] == NO)
     {
         [self logStringToPanel: @"SCSI2SD-V6 requires .dfu extension"];
@@ -974,6 +980,7 @@ out:
     [self performSelectorOnMainThread:@selector(startTimer)
                            withObject:nil
                         waitUntilDone:YES];
+    [my_pool release];
 }
 
 - (void) upgradeFirmwareEnd: (NSOpenPanel *)panel

@@ -180,8 +180,8 @@
     [myInput appendBytes:cmds length:5];
     [myInput appendData:input];
     
-    NSMutableData *output = [NSMutableData data];
-    [self sendHIDPacket: [myInput bytes]
+    NSMutableData *output = [[NSMutableData alloc] init];
+    [self sendHIDPacket: myInput
                  output: output
                  length: 1];
     
@@ -375,7 +375,7 @@
                 output: (NSMutableData *)outputData
                 length: (size_t)responseLength
 {
-    NSAssert([cmdData length] <= HIDPACKET_MAX_LEN, @"Packet length too long");
+   //  NSAssert([cmdData length] <= HIDPACKET_MAX_LEN, @"Packet length too long");
     uint8_t *cmd = (uint8_t *)[cmdData bytes];
     hidPacket_send(&cmd[0], [cmdData length]);
 
