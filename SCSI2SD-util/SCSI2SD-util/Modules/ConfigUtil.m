@@ -197,7 +197,7 @@ uint32_t fromLE32(uint32_t in)
     result.sdSectorStart = toLE32(result.sdSectorStart);
     result.scsiSectors = toLE32(result.scsiSectors);
     result.bytesPerSector = toLE16(result.bytesPerSector);
-    result.sectorsPerTrack = toLE16(result.sectorsPerTrack);
+    result.sectorsPerTrack = (result.sectorsPerTrack == 0 ? 63 : toLE16(result.sectorsPerTrack));  // some devices ignore this.
     result.headsPerCylinder = toLE16(result.headsPerCylinder);
     return result;
 }
@@ -281,7 +281,7 @@ uint32_t fromLE32(uint32_t in)
         @"    0x2    Optical drive  (ie. CD drive).\n"
         @"    0x3    1.44MB Floppy Drive.\n"
         @"    ********************************************************* -->\n"
-        @"    <deviceType>%x<deviceType>\n"
+        @"    <deviceType>%x</deviceType>\n"
         @"\n\n"
         @"    <!-- ********************************************************\n"
         @"    Device type modifier is usually 0x00. Only change this if your\n"
@@ -552,31 +552,55 @@ uint32_t fromLE32(uint32_t in)
         }
         else if ([[child name] isEqualToString: @"vendor"])
         {
-            NSString *s = [child stringValue];
-            s = [s substringToIndex:sizeof(result.vendor)];
-            memset(result.vendor, ' ', sizeof(result.vendor));
-            memcpy(result.vendor, [s cStringUsingEncoding:NSUTF8StringEncoding], [s length]);
+            @try {
+                NSString *s = [child stringValue];
+                s = [s substringToIndex:sizeof(result.vendor)];
+                memset(result.vendor, ' ', sizeof(result.vendor));
+                memcpy(result.vendor, [s cStringUsingEncoding:NSUTF8StringEncoding], [s length]);
+            } @catch (NSException *exception) {
+                NSLog(@"%@", [exception reason]);
+            } @finally {
+                // Code that gets executed whether or not an Exception is thrown....
+            }
         }
         else if ([[child name] isEqualToString: @"prodId"])
         {
-            NSString *s = [child stringValue];
-            s = [s substringToIndex:sizeof(result.prodId)];
-            memset(result.prodId, ' ', sizeof(result.prodId));
-            memcpy(result.prodId, [s cStringUsingEncoding:NSUTF8StringEncoding], [s length]);
+            @try {
+                NSString *s = [child stringValue];
+                s = [s substringToIndex:sizeof(result.prodId)];
+                memset(result.prodId, ' ', sizeof(result.prodId));
+                memcpy(result.prodId, [s cStringUsingEncoding:NSUTF8StringEncoding], [s length]);
+            } @catch (NSException *exception) {
+                NSLog(@"%@", [exception reason]);
+            } @finally {
+                // Code that gets executed whether or not an Exception is thrown....
+            }
         }
         else if ([[child name] isEqualToString: @"revision"])
         {
-            NSString *s = [child stringValue];
-            s = [s substringToIndex:sizeof(result.revision)];
-            memset(result.revision, ' ', sizeof(result.revision));
-            memcpy(result.revision, [s cStringUsingEncoding:NSUTF8StringEncoding], [s length]);
+            @try {
+                NSString *s = [child stringValue];
+                s = [s substringToIndex:sizeof(result.revision)];
+                memset(result.revision, ' ', sizeof(result.revision));
+                memcpy(result.revision, [s cStringUsingEncoding:NSUTF8StringEncoding], [s length]);
+            } @catch (NSException *exception) {
+               NSLog(@"%@", [exception reason]);
+            } @finally {
+               // Code that gets executed whether or not an Exception is thrown....
+            }
         }
         else if ([[child name] isEqualToString: @"serial"])
         {
-            NSString *s = [child stringValue];
-            s = [s substringToIndex:sizeof(result.serial)];
-            memset(result.serial, ' ', sizeof(result.serial));
-            memcpy(result.serial, [s cStringUsingEncoding:NSUTF8StringEncoding], [s length]);
+            @try {
+                NSString *s = [child stringValue];
+                s = [s substringToIndex:sizeof(result.serial)];
+                memset(result.serial, ' ', sizeof(result.serial));
+                memcpy(result.serial, [s cStringUsingEncoding:NSUTF8StringEncoding], [s length]);
+            } @catch (NSException *exception) {
+               NSLog(@"%@", [exception reason]);
+            } @finally {
+               // Code that gets executed whether or not an Exception is thrown....
+            }
         }
 
         child = [en nextObject];
@@ -693,9 +717,15 @@ uint32_t fromLE32(uint32_t in)
         return nil;
     }
     
+    NSError *error = nil;
     NSXMLDocument *doc = [[NSXMLDocument alloc] initWithData: data
                                                      options: NSXMLNodeOptionsNone
-                                                       error: NULL];
+                                                       error: &error];
+    if (error != nil)
+    {
+        NSLog(@"%@", error);
+    }
+    
     Pair *p = [[Pair alloc] init];
     if (doc == nil)
     {

@@ -13,13 +13,11 @@ int main(int argc, const char * argv[]) {
     @autoreleasepool {
         NSProcessInfo *info = [NSProcessInfo processInfo];
         SCSI2SDTask *task = [SCSI2SDTask task];
-        // NSMutableArray *arguments = @[@"", @"-l", @"config.xml"];
-        NSMutableArray *arguments = [[NSMutableArray alloc] initWithObjects: @"", @"-s", @"config.xml", nil];
-        // NSString *exec = [[info arguments] objectAtIndex: 0];
-        // NSMutableArray *arguments = [[NSMutableArray alloc] initWithArray:info.arguments];
-        // NSMutableArray *arguments = [[NSMutableArray alloc] initWithObjects: @"", @"-r", @"-f", @"/Users/heron/Downloads/firmware.dfu", nil];
-        // NSMutableArray *arguments = [[NSMutableArray alloc] initWithArray:info.arguments];
-        // NSMutableArray *arguments = [[NSMutableArray alloc] initWithObjects: @"dfu-util", @"-r", @"-f", @"/Users/heron/Downloads/firmware.dfu", nil];
+        NSMutableArray *arguments = [[NSMutableArray alloc] initWithArray:info.arguments];
+        // NSMutableArray *arguments = [[NSMutableArray alloc] initWithObjects:
+             // @"dfu-util", @"-r", @"-f", @"/Users/heron/Downloads/firmware.dfu", nil]; // test dfu
+        // NSMutableArray *arguments = @[@"", @"-l", @"config.xml"]; // test loading
+        // NSMutableArray *arguments = [[NSMutableArray alloc] initWithObjects: @"", @"-s", @"config.xml", nil]; // test saving
         BOOL parseSuccessful = NO;
         BOOL repeatMode = NO;
 
