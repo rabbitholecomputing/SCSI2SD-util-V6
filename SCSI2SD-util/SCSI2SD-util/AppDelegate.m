@@ -826,6 +826,7 @@ out:
     [my_pool release];
     [aLock unlock];
     return;
+
 }
 
 - (IBAction)saveToDevice:(id)sender
@@ -835,59 +836,65 @@ out:
 
 - (BOOL) checkVersionMarker: (NSString *)firmware
 {
-    NSString *tmpFile = [NSHomeDirectory() stringByAppendingPathComponent: [NSString stringWithFormat: @"SCSI_MARKER-%f",
-                                                                                 [[NSDate date] timeIntervalSince1970]]];
-    NSString *cmdString = [NSString stringWithFormat: @"dfu-util --alt 2 -s 0x1FFF7800:4 -U \"%@\"", tmpFile];
-    NSArray *commandArray = [cmdString componentsSeparatedByString: @" "];
-    char **array = convertNSArrayToCArray(commandArray);
-    int count = (int)[commandArray count];
-    unsigned char *buf = NULL;
-    
-    buf = (unsigned char *)calloc(0x4000, sizeof(unsigned char));
-    // unsigned char buf[0x80000]; // alloc 512k
-    if (dfu_util(count, array, buf) == 0)
-    {
-        free(buf);
-        return NO;
-    }
-    
-    // NSData *fileData = [NSData dataWithContentsOfFile:tmpFile];
-    if (buf != NULL)
-    {
-        const uint8_t *data = (const uint8_t *)buf;
-        uint32_t value =
-            (((uint32_t)(data[0]))) |
-            (((uint32_t)(data[1])) << 8) |
-            (((uint32_t)(data[2])) << 16) |
-            (((uint32_t)(data[3])) << 24);
+    @try {
+        NSString *tmpFile = [NSHomeDirectory() stringByAppendingPathComponent: [NSString stringWithFormat: @"SCSI_MARKER-%f",
+                                                                                     [[NSDate date] timeIntervalSince1970]]];
+        NSString *cmdString = [NSString stringWithFormat: @"dfu-util --alt 2 -s 0x1FFF7800:4 -U \"%@\"", tmpFile];
+        NSArray *commandArray = [cmdString componentsSeparatedByString: @" "];
+        char **array = convertNSArrayToCArray(commandArray);
+        int count = (int)[commandArray count];
+        unsigned char *buf = NULL;
         
-        if (value == 0xFFFFFFFF)
+        buf = (unsigned char *)calloc(0x4000, sizeof(unsigned char));
+        // unsigned char buf[0x80000]; // alloc 512k
+        if (dfu_util(count, array, buf) == 0)
         {
-            // Not set, ignore.
-            [self logStringToDFUPanel: @"OTP Hardware version not set. Ignoring."];
-            return YES;
+            free(buf);
+            return NO;
         }
-        else if (value == 0x06002020)
+        
+        // NSData *fileData = [NSData dataWithContentsOfFile:tmpFile];
+        if (buf != NULL)
         {
-            [self logStringToDFUPanel: @"Found V6 2020 hardware marker"];
-            return YES; //return firmware.rfind("firmware.V6.2020.dfu") != std::string::npos;
+            const uint8_t *data = (const uint8_t *)buf;
+            uint32_t value =
+                (((uint32_t)(data[0]))) |
+                (((uint32_t)(data[1])) << 8) |
+                (((uint32_t)(data[2])) << 16) |
+                (((uint32_t)(data[3])) << 24);
+            
+            if (value == 0xFFFFFFFF)
+            {
+                // Not set, ignore.
+                [self logStringToDFUPanel: @"OTP Hardware version not set. Ignoring."];
+                return YES;
+            }
+            else if (value == 0x06002020)
+            {
+                [self logStringToDFUPanel: @"Found V6 2020 hardware marker"];
+                return YES; //return firmware.rfind("firmware.V6.2020.dfu") != std::string::npos;
+            }
+            else if (value == 0x06002019)
+            {
+                [self logStringToDFUPanel: @"Found V6 revF hardware marker"];
+                // return firmware.rfind("firmware.V6.revF.dfu") != std::string::npos ||
+                //    firmware.rfind("firmware.dfu") != std::string::npos;
+                return YES;
+            }
+            else
+            {
+                [self logStringToDFUPanel: @"Found unknown hardware marker: %u", value];
+                return NO; // Some unknown version.
+            }
         }
-        else if (value == 0x06002019)
-        {
-            [self logStringToDFUPanel: @"Found V6 revF hardware marker"];
-            // return firmware.rfind("firmware.V6.revF.dfu") != std::string::npos ||
-            //    firmware.rfind("firmware.dfu") != std::string::npos;
-            return YES;
-        }
-        else
-        {
-            [self logStringToDFUPanel: @"Found unknown hardware marker: %u", value];
-            return NO; // Some unknown version.
-        }
+        
+        free(buf);  // release the memory...
+        return NO;
+
+    } @catch (NSException *exception) {
+        [self logStringToPanel: [exception reason]];
+    } @finally {
     }
-    
-    free(buf);  // release the memory...
-    return NO;
 }
 
 // Upgrade firmware...
