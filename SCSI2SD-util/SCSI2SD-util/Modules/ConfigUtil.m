@@ -756,6 +756,7 @@ uint32_t fromLE32(uint32_t in)
         else if ([[child name] isEqualToString: @"S2S_BoardCfg"])
         {
             boardConfig = [self parseBoardConfig: child];
+            [p setBoardConfig: boardConfig];
             boardConfigFound = 1;
         }
         child = [en nextObject];
