@@ -91,10 +91,9 @@
 {
     S2S_TargetCfg config = [self dataToStruct: data];
     
-    self.enableSCSITarget.state = (config.scsiId & 0x80) ? NSOnState : NSOffState;
+    self.enableSCSITarget.state = (config.scsiId & S2S_CFG_TARGET_ENABLED) ? NSOnState : NSOffState;
     [self.SCSIID setStringValue:
-     [NSString stringWithFormat: @"%d", (config.scsiId & 0x80) ?
-      (config.scsiId - 0x80) : config.scsiId]];
+     [NSString stringWithFormat: @"%d", (config.scsiId & S2S_CFG_TARGET_ID_BITS)]];
     [self.deviceType selectItemAtIndex: config.deviceType];
     [self.sdCardStartSector setStringValue:[NSString stringWithFormat:@"%d", config.sdSectorStart]];
     [self.sectorSize setStringValue: [NSString stringWithFormat: @"%d", config.bytesPerSector]];
@@ -115,7 +114,11 @@
 {
     S2S_TargetCfg targetConfig;
     
-    targetConfig.scsiId = self.SCSIID.intValue + self.enableSCSITarget.state == NSOnState ? 0x80 : 0x0;
+    targetConfig.scsiId = self.SCSIID.intValue & S2S_CFG_TARGET_ID_BITS;
+    if (self.enableSCSITarget.state == NSOnState)
+    {
+        targetConfig.scsiId = targetConfig.scsiId | S2S_CFG_TARGET_ENABLED;
+    }
     targetConfig.deviceType = self.deviceType.indexOfSelectedItem;
     targetConfig.sdSectorStart = self.sdCardStartSector.intValue;
     targetConfig.bytesPerSector = self.sectorSize.intValue;
