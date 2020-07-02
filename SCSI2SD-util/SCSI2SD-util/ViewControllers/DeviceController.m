@@ -114,6 +114,7 @@
 - (void) getTargetConfigData: (NSMutableData *)d
 {
     S2S_TargetCfg targetConfig;
+    
     targetConfig.scsiId = self.SCSIID.intValue + self.enableSCSITarget.state == NSOnState ? 0x80 : 0x0;
     targetConfig.deviceType = self.deviceType.indexOfSelectedItem;
     targetConfig.sdSectorStart = self.sdCardStartSector.intValue;

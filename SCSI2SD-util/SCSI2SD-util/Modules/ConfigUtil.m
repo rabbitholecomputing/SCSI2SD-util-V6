@@ -313,23 +313,31 @@ uint32_t fromLE32(uint32_t in)
         @"\n"
         @"    <!-- 8 character vendor string -->\n"
         @"    <!-- For Apple HD SC Setup/Drive Setup, use ' SEAGATE' -->\n"
-        @"    <vendor>%8s</vendor>\n"
+        @"    <vendor>%@</vendor>\n"
         @"\n"
         @"    <!-- 16 character produce identifier -->\n"
         @"    <!-- For Apple HD SC Setup/Drive Setup, use '          ST225N' -->\n"
-        @"    <prodId>%16s</prodId>\n"
+        @"    <prodId>%@</prodId>\n"
         @"\n"
         @"    <!-- 4 character product revision number -->\n"
         @"    <!-- For Apple HD SC Setup/Drive Setup, use '1.0 ' -->\n"
-        @"    <revision>%4s</revision>\n"
+        @"    <revision>%@</revision>\n"
         @"\n"
         @"    <!-- 16 character serial number -->\n"
-        @"    <serial>%16s</serial>\n"
+        @"    <serial>%@</serial>\n"
         @"\n"
         @"</SCSITarget>\n"];
-    
+        
+    char vendor[9] =    "        \0";
+    char prodId[17] =   "                \0";
+    char revision[5] =  "    \0";
+    char serial[17] =   "                \0";
+    memcpy(vendor, config.vendor, 8);
+    memcpy(prodId, config.prodId, 16);
+    memcpy(revision, config.revision, 4);
+    memcpy(serial, config.serial, 8);
     NSString *str = [NSString stringWithFormat:s,
-                     config.scsiId & S2S_CFG_TARGET_ID_BITS,
+                     (int)config.scsiId, // & S2S_CFG_TARGET_ID_BITS,
                      config.scsiId & S2S_CFG_TARGET_ENABLED ? "true" : "false",
                      config.deviceType,
                      config.deviceTypeModifier,
@@ -338,10 +346,10 @@ uint32_t fromLE32(uint32_t in)
                      config.bytesPerSector,
                      config.sectorsPerTrack,
                      config.headsPerCylinder,
-                     config.vendor,
-                     config.prodId,
-                     config.revision,
-                     config.serial
+                     [[NSString stringWithCString: vendor encoding:NSUTF8StringEncoding] substringToIndex:8],
+                     [[NSString stringWithCString: prodId encoding:NSUTF8StringEncoding] substringToIndex:16],
+                     [[NSString stringWithCString: revision encoding:NSUTF8StringEncoding] substringToIndex:4],
+                     [[NSString stringWithCString: serial encoding:NSUTF8StringEncoding] substringToIndex:16]
                      ];
     
     return str;
