@@ -69,7 +69,7 @@
 
 - (NSData *) structToData: (S2S_TargetCfg)config
 {
-    return [self structToData:config withMutableData:[NSMutableData data]];
+    return [self structToData:config withMutableData:[[NSMutableData alloc] init]];
 }
 
 - (S2S_TargetCfg) dataToStruct: (NSData *)d

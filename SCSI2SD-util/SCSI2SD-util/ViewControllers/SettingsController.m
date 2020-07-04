@@ -57,7 +57,7 @@
 
 - (NSData *) structToData: (S2S_BoardCfg)config
 {
-    return [self structToData:config withMutableData:[NSMutableData data]];
+    return [self structToData: config withMutableData: [[NSMutableData alloc] init]];
 }
 
 - (S2S_BoardCfg) dataToStruct: (NSData *)d
@@ -95,7 +95,7 @@
 - (void) getConfigData: (NSMutableData *)d
 {
     S2S_BoardCfg config;
-    config.flags |= self.enableSCSITerminator.intValue;
+    // config.flags |= self.enableSCSITerminator.intValue;
     config.flags =
         (self.enableParity.state == NSOnState ? S2S_CFG_ENABLE_PARITY : 0) |
         (self.enableUnitAttention.state == NSOnState ? S2S_CFG_ENABLE_UNIT_ATTENTION : 0) |

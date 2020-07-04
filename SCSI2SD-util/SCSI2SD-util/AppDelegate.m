@@ -787,10 +787,14 @@ out:
 
         @try
         {
-/*            std::vector<uint8_t> buf;
+            NSRange r = NSMakeRange(i * 512, 512);
+            NSData *sd = [cfgData subdataWithRange:r];
+            [myHID writeSector:sector++ input: sd];
+            /*
+            std::vector<uint8_t> buf;
             buf.insert(buf.end(), &cfgData[i * 512], &cfgData[(i+1) * 512]);
-            myHID->writeSector(sector++, buf);*/
-            [myHID writeSector:sector++ input: cfgData];
+            myHID->writeSector(sector++, buf);
+             */
         }
         @catch (NSException *e)
         {

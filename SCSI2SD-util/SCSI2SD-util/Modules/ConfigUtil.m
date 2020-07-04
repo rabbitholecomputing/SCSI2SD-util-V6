@@ -204,7 +204,7 @@ uint32_t fromLE32(uint32_t in)
 
 + (NSData *) targetCfgToBytes: (const S2S_TargetCfg) _config
 {
-    S2S_TargetCfg config;
+    S2S_TargetCfg config = (S2S_TargetCfg)_config;
     config.sdSectorStart = fromLE32(_config.sdSectorStart);
     config.scsiSectors = fromLE32(_config.scsiSectors);
     config.bytesPerSector = fromLE16(_config.bytesPerSector);
@@ -231,8 +231,7 @@ uint32_t fromLE32(uint32_t in)
 
 + (NSData *) boardConfigToBytes: (const S2S_BoardCfg) cfg
 {
-    S2S_BoardCfg config = cfg;
-
+    S2S_BoardCfg config = (S2S_BoardCfg)cfg;
     memcpy(&config.magic, "BCFG", 4);
     // const uint8_t* begin = reinterpret_cast<const uint8_t*>(&config);
     // return std::vector<uint8_t>(begin, begin + sizeof(config));
@@ -257,19 +256,19 @@ uint32_t fromLE32(uint32_t in)
         @"    <quirks>";
     if (config.quirks == S2S_CFG_QUIRKS_APPLE)
     {
-        s = [s stringByAppendingString: @"apple"];
+        s = [s stringByAppendingString: @"apple "];
     }
     else if (config.quirks == S2S_CFG_QUIRKS_OMTI)
     {
-        s = [s stringByAppendingString: @"omti"];
+        s = [s stringByAppendingString: @"omti "];
     }
     else if (config.quirks == S2S_CFG_QUIRKS_XEBEC)
     {
-        s = [s stringByAppendingString: @"xebec"];
+        s = [s stringByAppendingString: @"xebec "];
     }
     else if (config.quirks == S2S_CFG_QUIRKS_VMS)
     {
-        s = [s stringByAppendingString: @"vms"];
+        s = [s stringByAppendingString: @"vms "];
     }
 
     s = [s stringByAppendingString:
