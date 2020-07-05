@@ -870,35 +870,36 @@ out:
             if (value == 0xFFFFFFFF)
             {
                 // Not set, ignore.
-                [self logStringToDFUPanel: @"OTP Hardware version not set. Ignoring."];
+                [self logStringToDFUPanel: @"OTP Hardware version not set. Ignoring.\n"];
                 return YES;
             }
             else if (value == 0x06002020)
             {
-                [self logStringToDFUPanel: @"Found V6 2020 hardware marker"];
+                [self logStringToDFUPanel: @"Found V6 2020 hardware marker\n"];
                 return YES; //return firmware.rfind("firmware.V6.2020.dfu") != std::string::npos;
             }
             else if (value == 0x06002019)
             {
-                [self logStringToDFUPanel: @"Found V6 revF hardware marker"];
+                [self logStringToDFUPanel: @"Found V6 revF hardware marker\n"];
                 // return firmware.rfind("firmware.V6.revF.dfu") != std::string::npos ||
                 //    firmware.rfind("firmware.dfu") != std::string::npos;
                 return YES;
             }
             else
             {
-                [self logStringToDFUPanel: @"Found unknown hardware marker: %u", value];
+                [self logStringToDFUPanel: @"Found unknown hardware marker: %u\n", value];
                 return NO; // Some unknown version.
             }
         }
         
         free(buf);  // release the memory...
-        return NO;
 
-    } @catch (NSException *exception) {
-        [self logStringToPanel: [exception reason]];
-    } @finally {
     }
+    @catch (NSException *exception) {
+        [self logStringToPanel: [exception reason]];
+    }
+    
+    return NO;
 }
 
 // Upgrade firmware...
@@ -960,7 +961,7 @@ out:
                     [self logStringToPanel: @"Firmware does not match hardware"];
                     return;
                 }
-                versionChecked = true;
+                versionChecked = YES;
             }
             
             if ([myDFU hasDevice])

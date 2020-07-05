@@ -452,24 +452,24 @@ out:
         if (value == 0xFFFFFFFF)
         {
             // Not set, ignore.
-            [self logStringToPanel: @"OTP Hardware version not set. Ignoring."];
+            [self logStringToPanel: @"OTP Hardware version not set. Ignoring.\n"];
             return YES;
         }
         else if (value == 0x06002020)
         {
-            [self logStringToPanel: @"Found V6 2020 hardware marker"];
+            [self logStringToPanel: @"Found V6 2020 hardware marker\n"];
             return YES; //return firmware.rfind("firmware.V6.2020.dfu") != std::string::npos;
         }
         else if (value == 0x06002019)
         {
-            [self logStringToPanel: @"Found V6 revF hardware marker"];
+            [self logStringToPanel: @"Found V6 revF hardware marker\n"];
             // return firmware.rfind("firmware.V6.revF.dfu") != std::string::npos ||
             //    firmware.rfind("firmware.dfu") != std::string::npos;
             return YES;
         }
         else
         {
-            [self logStringToPanel: @"Found unknown hardware marker: %u", value];
+            [self logStringToPanel: @"Found unknown hardware marker: %u\n", value];
             return NO; // Some unknown version.
         }
     }

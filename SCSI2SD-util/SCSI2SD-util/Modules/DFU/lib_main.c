@@ -232,6 +232,23 @@ static struct option opts[] = {
 	{ 0, 0, 0, 0 }
 };
 
+void reset_globals()
+{
+    int verbose = 1;
+    dfu_root = NULL;
+    match_path = NULL;
+    match_vendor = -1;
+    match_product = -1;
+    match_vendor_dfu = -1;
+    match_product_dfu = -1;
+    match_config_index = -1;
+    match_iface_index = -1;
+    match_iface_alt_index = -1;
+    match_iface_alt_name = NULL;
+    match_serial = NULL;
+    match_serial_dfu = NULL;
+}
+
 int dfu_util(int argc, char **argv, unsigned char *buf)
 {
 	int expected_size = 0;
@@ -249,7 +266,7 @@ int dfu_util(int argc, char **argv, unsigned char *buf)
 	int detach_delay = 5;
 	uint16_t runtime_vendor;
 	uint16_t runtime_product;
-
+    
 	memset(&file, 0, sizeof(file));
     
     /* Dump args */
@@ -264,6 +281,7 @@ int dfu_util(int argc, char **argv, unsigned char *buf)
 	/* make sure all prints are flushed */
 	setvbuf(stdout, NULL, _IONBF, 0);
     optind = 1;
+    reset_globals();  // reset global vars...
 	while (1) {
 		int c, option_index = 0;
 		c = getopt_long(argc, argv, "hVvleE:d:p:c:i:a:S:t:U:D:Rs:Z:", opts,

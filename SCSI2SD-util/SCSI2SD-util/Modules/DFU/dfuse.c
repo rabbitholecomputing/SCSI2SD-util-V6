@@ -61,6 +61,17 @@ int dfuse_mass_erase = 0;
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wconversion"
 
+void reset_dfuse_globals()
+{
+    last_erased_page = 1; /* non-aligned value, won't match */
+    dfuse_address = 0;
+    dfuse_length = 0;
+    dfuse_force = 0;
+    dfuse_leave = 0;
+    dfuse_unprotect = 0;
+    dfuse_mass_erase = 0;
+}
+
 unsigned int quad2uint(unsigned char *p)
 {
 	return (*p + (*(p + 1) << 8) + (*(p + 2) << 16) + (*(p + 3) << 24));
@@ -72,6 +83,8 @@ void dfuse_parse_options(const char *options)
 	const char *endword;
 	unsigned int number;
 
+    reset_dfuse_globals();
+    
 	/* address, possibly empty, must be first */
 	if (*options != ':') {
 		endword = strchr(options, ':');
@@ -133,7 +146,7 @@ int dfuse_upload(struct dfu_if *dif, const unsigned short length,
 		 unsigned char *data, unsigned short transaction)
 {
 	int status;
-
+    // reset_dfuse_globals();
 	status = libusb_control_transfer(dif->dev_handle,
 		 /* bmRequestType */	 LIBUSB_ENDPOINT_IN |
 					 LIBUSB_REQUEST_TYPE_CLASS |
@@ -156,7 +169,7 @@ int dfuse_download(struct dfu_if *dif, const unsigned short length,
 		   unsigned char *data, unsigned short transaction)
 {
 	int status;
-
+    // reset_dfuse_globals();
 	status = libusb_control_transfer(dif->dev_handle,
 		 /* bmRequestType */	 LIBUSB_ENDPOINT_OUT |
 					 LIBUSB_REQUEST_TYPE_CLASS |
@@ -312,8 +325,8 @@ int dfuse_do_upload(struct dfu_if *dif, int xfer_size, unsigned char *abuf,
 	int transaction;
 	int ret;
 
-	buf = dfu_malloc(xfer_size);
-
+    buf = dfu_malloc(xfer_size);
+    reset_dfuse_globals();
 	if (dfuse_options)
 		dfuse_parse_options(dfuse_options);
 	if (dfuse_length)
@@ -637,7 +650,7 @@ int dfuse_do_dnload(struct dfu_if *dif, int xfer_size, struct dfu_file *file,
 		    const char *dfuse_options)
 {
 	int ret;
-
+    reset_dfuse_globals();
 	if (dfuse_options)
 		dfuse_parse_options(dfuse_options);
 	mem_layout = parse_memory_layout((char *)dif->alt_name);
