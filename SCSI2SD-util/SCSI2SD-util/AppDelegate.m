@@ -774,7 +774,7 @@ out:
         [cfgData appendData:raw];
     }
     
-    uint32_t sector = [myHID getSDCapacity]; //  myHID->getSDCapacity() - 2;
+    uint32_t sector = [myHID getSDCapacity] - 2;
     for (size_t i = 0; i < 2; ++i)
     {
         [self logStringToPanel: @"\nWriting SD Sector %zu",sector];
