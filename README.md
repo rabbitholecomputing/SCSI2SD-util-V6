@@ -21,6 +21,6 @@ Building for Linux and other UNIX's
 
 make sure you installed the following packages as well:
 
-apt install libudev-dev
-apt install libusb-1.0
+* apt install libudev-dev
+* apt install libusb-1.0
 
