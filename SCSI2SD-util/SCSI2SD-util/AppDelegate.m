@@ -239,13 +239,33 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     [alert runModal];
 }
 
+- (void) showReadErrorPanel: (id)sender
+{
+    NSAlert *alert = [[NSAlert alloc] init];
+
+    [self hideProgress:self];
+    alert.messageText = @"Operation not Completed!!";
+    alert.informativeText = @"Configuration was read NOT from device!!!";
+    [alert runModal];
+}
+
 - (void) showWriteCompletionPanel: (id)sender
 {
     NSAlert *alert = [[NSAlert alloc] init];
 
     [self hideProgress:self];
-    alert.messageText = @"Operation Completed";
+    alert.messageText = @"Operation Completed!!";
     alert.informativeText = @"Configuration was written to device";
+    [alert runModal];
+}
+
+- (void) showWriteErrorPanel: (id)sender
+{
+    NSAlert *alert = [[NSAlert alloc] init];
+
+    [self hideProgress:self];
+    alert.messageText = @"Operation not Complete!!";
+    alert.informativeText = @"Configuration was NOT written to device";
     [alert runModal];
 }
 
@@ -647,6 +667,8 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 - (void) loadFromDeviceThread: (id)obj
 {
     NSAutoreleasePool *my_pool = [[NSAutoreleasePool alloc] init];
+    BOOL error = NO;
+    
     [aLock lock];
     [self performSelectorOnMainThread:@selector(stopTimer)
                            withObject:NULL
@@ -661,7 +683,8 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     // myHID.reset(SCSI2SD::HID::Open()); // reopen hid
     if (!myHID) // goto out;
     {
-        return;
+        error = YES;
+        goto err;
     }
     
     [self logStringToPanel: @"\nLoad config settings"];
@@ -717,6 +740,7 @@ err:
                            withObject:[NSNumber numberWithDouble:(double)100.0]
                         waitUntilDone:NO];
     [self logStringToPanel: @"\nLoad Failed."];
+    error = YES;
     goto out;
 
 out:
@@ -730,9 +754,18 @@ out:
     [self performSelectorOnMainThread:@selector(startTimer)
                            withObject:NULL
                         waitUntilDone:NO];
-    [self performSelectorOnMainThread:@selector(showReadCompletionPanel:)
-                           withObject:nil
-                        waitUntilDone:NO];
+    if (error)
+    {
+        [self performSelectorOnMainThread:@selector(showReadErrorPanel:)
+                               withObject:nil
+                            waitUntilDone:NO];
+    }
+    else
+    {
+        [self performSelectorOnMainThread:@selector(showReadCompletionPanel:)
+                               withObject:nil
+                            waitUntilDone:NO];
+    }
     
     [my_pool release];
     [aLock unlock];
@@ -748,6 +781,8 @@ out:
 - (void) saveToDeviceThread: (id)obj
 {
     NSAutoreleasePool *my_pool = [[NSAutoreleasePool alloc] init];
+    BOOL error = NO;
+    
     [aLock lock];
     [self performSelectorOnMainThread:@selector(stopTimer)
                            withObject:NULL
@@ -759,7 +794,11 @@ out:
     [self performSelectorOnMainThread:@selector(showProgress:)
                            withObject:nil
                         waitUntilDone:NO];
-    if (!myHID) return;
+    if (!myHID)
+    {
+        error = YES;
+        goto err;
+    }
 
     [self logStringToPanel:@"Saving configuration"];
     int currentProgress = 0;
@@ -799,6 +838,7 @@ out:
         @catch (NSException *e)
         {
             [self logStringToPanel:  @"\nException %@",[e reason]];
+            error = YES;
             goto err;
         }
     }
@@ -811,6 +851,7 @@ err:
                            withObject:[NSNumber numberWithDouble: (double)100.0]
                         waitUntilDone:NO];
     [self logStringToPanel: @"\nSave Failed"];
+    error = YES;
     goto out;
 
 out:
@@ -824,9 +865,18 @@ out:
     [self performSelectorOnMainThread:@selector(startTimer)
                            withObject:NULL
                         waitUntilDone:NO];
-    [self performSelectorOnMainThread:@selector(showWriteCompletionPanel:)
-                           withObject:nil
-                        waitUntilDone:NO];
+    if (error)
+    {
+        [self performSelectorOnMainThread:@selector(showWriteErrorPanel:)
+                               withObject:nil
+                            waitUntilDone:NO];
+    }
+    else
+    {
+        [self performSelectorOnMainThread:@selector(showWriteCompletionPanel:)
+                               withObject:nil
+                            waitUntilDone:NO];
+    }
     [my_pool release];
     [aLock unlock];
     return;
