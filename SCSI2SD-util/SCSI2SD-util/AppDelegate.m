@@ -245,7 +245,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 
     [self hideProgress:self];
     alert.messageText = @"Operation not Completed!!";
-    alert.informativeText = @"Configuration was read NOT from device!!!";
+    alert.informativeText = @"Configuration was NOT read from device!!!";
     [alert runModal];
 }
 
@@ -740,6 +740,7 @@ err:
                            withObject:[NSNumber numberWithDouble:(double)100.0]
                         waitUntilDone:NO];
     [self logStringToPanel: @"\nLoad Failed."];
+    [self reset_hid];
     error = YES;
     goto out;
 
@@ -851,6 +852,7 @@ err:
                            withObject:[NSNumber numberWithDouble: (double)100.0]
                         waitUntilDone:NO];
     [self logStringToPanel: @"\nSave Failed"];
+    [self reset_hid];
     error = YES;
     goto out;
 
