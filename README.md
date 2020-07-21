@@ -24,3 +24,14 @@ make sure you installed the following packages as well:
 * apt install libudev-dev
 * apt install libusb-1.0
 
+In the SCSI2SD-V6-Cocoa/SCSI2SD-util directory do this:
+
+* buildtool clean
+* buildtool
+
+This will clean the existing build and rebuild the app.
+
+Also copy the script in udev in the parent directory to /etc/udev/rules.d
+
+To run the app you should be able to open the app wrapper using gopen or invoke it directly ./SCSI2SD-v6-util/build/SCSI2SD-v6-util/Products/SCSI2SD-v6-util.app/SCSI2SD-v6-util
+
