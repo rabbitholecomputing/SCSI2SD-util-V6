@@ -10,18 +10,18 @@
 
 @interface SettingsController ()
 
-@property (nonatomic) IBOutlet NSButton *enableSCSITerminator;
-@property (nonatomic) IBOutlet NSPopUpButton *speedLimit;
-@property (nonatomic) IBOutlet NSTextField *startupDelay;
-@property (nonatomic) IBOutlet NSTextField *startupSelectionDelay;
-@property (nonatomic) IBOutlet NSButton *enableParity;
-@property (nonatomic) IBOutlet NSButton *enableUnitAttention;
-@property (nonatomic) IBOutlet NSButton *enableSCSI2Mode;
-@property (nonatomic) IBOutlet NSButton *respondToShortSCSISelection;
-@property (nonatomic) IBOutlet NSButton *mapLUNStoSCSIIDs;
-@property (nonatomic) IBOutlet NSButton *enableGlitch;
-@property (nonatomic) IBOutlet NSButton *enableCache;
-@property (nonatomic) IBOutlet NSButton *enableDisconnect;
+@property (nonatomic, retain) IBOutlet NSButton *enableSCSITerminator;
+@property (nonatomic, retain) IBOutlet NSPopUpButton *speedLimit;
+@property (nonatomic, retain) IBOutlet NSTextField *startupDelay;
+@property (nonatomic, retain) IBOutlet NSTextField *startupSelectionDelay;
+@property (nonatomic, retain) IBOutlet NSButton *enableParity;
+@property (nonatomic, retain) IBOutlet NSButton *enableUnitAttention;
+@property (nonatomic, retain) IBOutlet NSButton *enableSCSI2Mode;
+@property (nonatomic, retain) IBOutlet NSButton *respondToShortSCSISelection;
+@property (nonatomic, retain) IBOutlet NSButton *mapLUNStoSCSIIDs;
+@property (nonatomic, retain) IBOutlet NSButton *enableGlitch;
+@property (nonatomic, retain) IBOutlet NSButton *enableCache;
+@property (nonatomic, retain) IBOutlet NSButton *enableDisconnect;
 
 @end
 
