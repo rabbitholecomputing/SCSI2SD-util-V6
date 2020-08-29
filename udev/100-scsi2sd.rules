@@ -1,0 +1,1 @@
+ATTRS{idVendor}=="16d0", ATTRS{idProduct}=="0bd4", ENV{SCSI2SD_VENDER}="MCS"
