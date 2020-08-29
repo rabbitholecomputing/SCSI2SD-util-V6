@@ -15,6 +15,9 @@
 #include "Functions.h"
 #include "DeviceFirmwareUpdate.h"
 
+@class DeviceController;
+@class SettingsController;
+
 #ifndef GNUSTEP
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSComboBoxDataSource>
 #else
@@ -34,7 +37,39 @@
     
     BOOL shouldLogScsiData;
     BOOL doScsiSelfTest;
+    NSMutableArray *deviceControllers;
 }
+
+@property  IBOutlet NSWindow *window;
+@property  IBOutlet NSWindow *mainWindow;
+@property  IBOutlet NSTextField *infoLabel;
+@property  IBOutlet NSPanel *logPanel;
+@property  IBOutlet NSPanel *dfuPanel;
+@property  IBOutlet NSTextView *logTextView;
+@property  IBOutlet NSTextView *dfuTextView;
+@property  IBOutlet NSTabView *tabView;
+
+@property  IBOutlet DeviceController *device1;
+@property  IBOutlet DeviceController *device2;
+@property  IBOutlet DeviceController *device3;
+@property  IBOutlet DeviceController *device4;
+@property  IBOutlet DeviceController *device5;
+@property  IBOutlet DeviceController *device6;
+@property  IBOutlet DeviceController *device7;
+
+@property  IBOutlet NSProgressIndicator *progress;
+
+@property  IBOutlet NSMenuItem *saveMenu;
+@property  IBOutlet NSMenuItem *openMenu;
+@property  IBOutlet NSMenuItem *readMenu;
+@property  IBOutlet NSMenuItem *writeMenu;
+@property  IBOutlet NSMenuItem *scsiSelfTest;
+@property  IBOutlet NSMenuItem *scsiLogData;
+
+@property  IBOutlet SettingsController *settings;
+@property  IBOutlet NSWindow *customAboutWindow;
+
+- (IBAction) loadDefaults: (id)sender;
 
 @end
 

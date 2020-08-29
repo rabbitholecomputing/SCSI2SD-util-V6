@@ -58,8 +58,7 @@ ADDITIONAL_INCLUDE_DIRS += -I. \
 
 ADDITIONAL_OBJCFLAGS += -fobjc-exceptions
 
-ADDITIONAL_LDFLAGS += -lusb-1.0 \
-	-ludev 
+ADDITIONAL_LDFLAGS += -lusb-1.0
 
 include $(GNUSTEP_MAKEFILES)/common.make
 include $(GNUSTEP_MAKEFILES)/application.make

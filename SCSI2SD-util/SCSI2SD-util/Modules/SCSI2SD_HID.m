@@ -117,7 +117,8 @@
     
     uint8_t *result = (uint8_t *)calloc(16, sizeof(uint8_t));
     uint8_t *output = (uint8_t *)[outputData bytes];
-    for (size_t i = 0; i < 16; ++i) result[i] = output[16 + i];
+    size_t i = 0;
+    for (i = 0; i < 16; ++i) result[i] = output[16 + i];
     return result;
 }
 
@@ -359,7 +360,8 @@
     buffer[1] = 0; // report id
 
     int result = -1;
-    for (int retry = 0; retry < 3 && result <= 0; ++retry)
+    int retry = 0;
+    for (retry = 0; retry < 3 && result <= 0; ++retry)
     {
         result = hid_read_timeout(myConfigHandle, buffer, len, HID_TIMEOUT_MS);
     }
@@ -384,10 +386,16 @@
 
     while (chunk)
     {
+#ifndef __MINGW32__
         uint8_t reportBuf[HID_PACKET_SIZE + 1] = { 0x00 }; // Report ID
+#else
+        uint8_t reportBuf[HID_PACKET_SIZE + 1]; //  = { 0x00 }; // Report ID
+	memset(reportBuf, 0, HID_PACKET_SIZE + 1);
+#endif
         memcpy(&reportBuf[1], chunk, HID_PACKET_SIZE);
         int result = -1;
-        for (int retry = 0; retry < 10 && result <= 0; ++retry)
+	int retry = 0;
+        for (retry = 0; retry < 10 && result <= 0; ++retry)
         {
             result = hid_write(myConfigHandle, reportBuf, sizeof(reportBuf));
         }
@@ -404,7 +412,8 @@
     size_t respLen;
     resp = hidPacket_getPacket(&respLen);
 
-    for (unsigned int retry = 0; retry < responseLength * 2 && !resp; ++retry)
+    unsigned int retry = 0;
+    for (retry = 0; retry < responseLength * 2 && !resp; ++retry)
     {
         [self readHID: hidBuf length:sizeof(hidBuf)];
         hidPacket_recv(hidBuf, HID_PACKET_SIZE);
@@ -421,7 +430,7 @@
 }
 
 - (void) dealloc
-{
+{ 
     [self destroy];
     [super dealloc];
 }

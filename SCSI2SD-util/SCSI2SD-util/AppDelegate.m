@@ -55,7 +55,8 @@ char** convertNSArrayToCArray(NSArray *array)
     int c = (int)[array count];
     
     carray = (char **)calloc(c, sizeof(char*));
-    for (int i = 0; i < [array count]; i++)
+    int i = 0;
+    for (i = 0; i < [array count]; i++)
     {
         NSString *s = [array objectAtIndex: i];
         char *cs = (char *)[s cStringUsingEncoding:NSUTF8StringEncoding];
@@ -80,42 +81,6 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 
 #define MIN_FIRMWARE_VERSION 0x0400
 #define MIN_FIRMWARE_VERSION 0x0400
-
-@interface AppDelegate ()
-{
-    NSMutableArray *deviceControllers;
-}
-
-@property (nonatomic) IBOutlet NSWindow *window;
-@property (nonatomic) IBOutlet NSWindow *mainWindow;
-@property (nonatomic) IBOutlet NSTextField *infoLabel;
-@property (nonatomic) IBOutlet NSPanel *logPanel;
-@property (nonatomic) IBOutlet NSPanel *dfuPanel;
-@property (nonatomic) IBOutlet NSTextView *logTextView;
-@property (nonatomic) IBOutlet NSTextView *dfuTextView;
-@property (nonatomic) IBOutlet NSTabView *tabView;
-
-@property (nonatomic) IBOutlet DeviceController *device1;
-@property (nonatomic) IBOutlet DeviceController *device2;
-@property (nonatomic) IBOutlet DeviceController *device3;
-@property (nonatomic) IBOutlet DeviceController *device4;
-@property (nonatomic) IBOutlet DeviceController *device5;
-@property (nonatomic) IBOutlet DeviceController *device6;
-@property (nonatomic) IBOutlet DeviceController *device7;
-
-@property (nonatomic) IBOutlet NSProgressIndicator *progress;
-
-@property (nonatomic) IBOutlet NSMenuItem *saveMenu;
-@property (nonatomic) IBOutlet NSMenuItem *openMenu;
-@property (nonatomic) IBOutlet NSMenuItem *readMenu;
-@property (nonatomic) IBOutlet NSMenuItem *writeMenu;
-@property (nonatomic) IBOutlet NSMenuItem *scsiSelfTest;
-@property (nonatomic) IBOutlet NSMenuItem *scsiLogData;
-
-@property (nonatomic) IBOutlet SettingsController *settings;
-@property (nonatomic) IBOutlet NSWindow *customAboutWindow;
-
-@end
 
 @implementation AppDelegate
 
@@ -377,13 +342,13 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     }
     
     deviceControllers = [[NSMutableArray alloc] initWithCapacity: 7];
-    [deviceControllers addObject: _device1];
-    [deviceControllers addObject: _device2];
-    [deviceControllers addObject: _device3];
-    [deviceControllers addObject: _device4];
-    [deviceControllers addObject: _device5];
-    [deviceControllers addObject: _device6];
-    [deviceControllers addObject: _device7];
+    [deviceControllers addObject: self.device1];
+    [deviceControllers addObject: self.device2];
+    [deviceControllers addObject: self.device3];
+    [deviceControllers addObject: self.device4];
+    [deviceControllers addObject: self.device5];
+    [deviceControllers addObject: self.device6];
+    [deviceControllers addObject: self.device7];
     
     [self.tabView selectTabViewItemAtIndex:0];
     [self.progress setMinValue: 0.0];
@@ -423,7 +388,8 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 {
     NSString *msg = @"";
     uint8_t *buf = (uint8_t *)[buffer bytes];
-    for (size_t i = 0; i < 32 && i < [buffer length]; ++i)
+    size_t i = 0;
+    for (i = 0; i < 32 && i < [buffer length]; ++i)
     {
         msg = [msg stringByAppendingFormat:@"%02x ", buf[i]];
     }
@@ -500,12 +466,13 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
                 [self logStringToPanel: @"SD Capacity (512-byte sectors): %d\n", [myHID getSDCapacity]];
 
                 [self logStringToPanel: @"SD CSD Register: "];
-                for (size_t i = 0; i < 16 /*csd.size()*/; ++i)
+		size_t i = 0;
+                for (i = 0; i < 16 /*csd.size()*/; ++i)
                 {
                     [self logStringToPanel: @"%0X", (int)csd[i]];
                 }
                 [self logStringToPanel: @"\nSD CID Register: "];
-                for (size_t i = 0; i < 16 /*cid.size()*/; ++i)
+                for (i = 0; i < 16 /*cid.size()*/; ++i)
                 {
                     [self logStringToPanel: @"%0X", (int)cid[i]];
                 }
@@ -550,7 +517,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     NSString *outputString = @"";
     filename = [filename stringByAppendingPathExtension:@"xml"];
     outputString = [outputString stringByAppendingString: @"<SCSI2SD>\n"];
-    outputString = [outputString stringByAppendingString: [self->_settings toXml]];
+    outputString = [outputString stringByAppendingString: [self.settings toXml]];
     
     DeviceController *dc = nil;
     NSEnumerator *en = [self->deviceControllers objectEnumerator];
@@ -635,7 +602,8 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 {
     // myBoardPanel->setConfig(ConfigUtil::DefaultBoardConfig());
     [self.settings setConfig: [ConfigUtil defaultBoardConfig]];
-    for (size_t i = 0; i < [deviceControllers count]; ++i)
+    size_t i = 0;
+    for (i = 0; i < [deviceControllers count]; ++i)
     {
         // myTargets[i]->setConfig(ConfigUtil::Default(i));
         DeviceController *devCon = [self->deviceControllers objectAtIndex:i];
@@ -670,7 +638,8 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 
     NSMutableData *cfgData = [NSMutableData dataWithCapacity:S2S_CFG_SIZE];
     uint32_t sector = [myHID getSDCapacity] - 2;
-    for (size_t i = 0; i < 2; ++i)
+    size_t i = 0;
+    for (i = 0; i < 2; ++i)
     {
         [self logStringToPanel:  @"\nReading sector %d", sector];
         currentProgress += 1;
@@ -698,8 +667,9 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
             &cfgData[i * 512]); */
     }
 
-    [_settings setConfig: [ConfigUtil boardConfigFromBytes: cfgData]];  //SCSI2SD::ConfigUtil::boardConfigFromBytes(&cfgData[0])];
-    for (int i = 0; i < S2S_MAX_TARGETS; ++i)
+    [self.settings setConfig: [ConfigUtil boardConfigFromBytes: cfgData]];  //SCSI2SD::ConfigUtil::boardConfigFromBytes(&cfgData[0])];
+    // int i = 0;
+    for (i = 0; i < S2S_MAX_TARGETS; ++i)
     {
         DeviceController *dc = [deviceControllers objectAtIndex: i];
         NSRange dataRange = NSMakeRange(sizeof(S2S_BoardCfg) + i * sizeof(S2S_TargetCfg), sizeof(S2S_TargetCfg));
@@ -764,14 +734,16 @@ out:
 
     // Write board config first.
     NSMutableData *cfgData = [[ConfigUtil boardConfigToBytes:[self.settings getConfig]] mutableCopy];
-    for (int i = 0; i < S2S_MAX_TARGETS; ++i)
+    int i = 0;
+    for (i = 0; i < S2S_MAX_TARGETS; ++i)
     {
         NSData *raw = [ConfigUtil targetCfgToBytes:[[deviceControllers objectAtIndex:i] getTargetConfig]];
         [cfgData appendData:raw];
     }
     
     uint32_t sector = [myHID getSDCapacity]; //  myHID->getSDCapacity() - 2;
-    for (size_t i = 0; i < 2; ++i)
+    // size_t i = 0;
+    for (i = 0; i < 2; ++i)
     {
         [self logStringToPanel: @"\nWriting SD Sector %zu",sector];
         currentProgress += 1;
@@ -1113,7 +1085,8 @@ out:
     // Check for overlapping SD sectors.
 
     bool isTargetEnabled = false; // Need at least one enabled
-    for (size_t i = 0; i < [deviceControllers count]; ++i)
+    size_t i = 0;
+    for (i = 0; i < [deviceControllers count]; ++i)
     {
         DeviceController *target = [deviceControllers objectAtIndex: i];
         
@@ -1123,7 +1096,8 @@ out:
         {
             isTargetEnabled = true;
             uint8_t scsiID = [target getSCSIId];
-            for (size_t j = 0; j < [deviceControllers count]; ++j)
+	    size_t j = 0;
+            for (j = 0; j < [deviceControllers count]; ++j)
             {
                 DeviceController *t2 = [deviceControllers objectAtIndex: j];
                 if (![t2 isEnabled] || t2 == target)
@@ -1145,7 +1119,8 @@ out:
             NSRange sdSectorRange = [target getSDSectorRange];
             NSUInteger total = 0;
 
-            for (size_t k = 0; k < [deviceControllers count]; ++k)
+	    size_t k = 0;
+            for (k = 0; k < [deviceControllers count]; ++k)
             {
                 DeviceController *t3 = [deviceControllers objectAtIndex: k];
                 if (![t3 isEnabled] || t3 == target)
@@ -1220,12 +1195,12 @@ out:
     return 8;
 }
 
-- (nullable id)comboBox:(NSComboBox *)comboBox objectValueForItemAtIndex:(NSInteger)index
+- (id)comboBox:(NSComboBox *)comboBox objectValueForItemAtIndex:(NSInteger)index
 {
     return [NSString stringWithFormat:@"%ld", (long)index];
 }
 
-- (nullable id)comboBoxCall:(NSComboBox *)comboBox objectValueForItemAtIndex:(NSInteger)index
+- (id)comboBoxCall:(NSComboBox *)comboBox objectValueForItemAtIndex:(NSInteger)index
 {
     return [NSString stringWithFormat:@"%ld", (long)index];
 }
