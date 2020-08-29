@@ -58,6 +58,8 @@ ADDITIONAL_INCLUDE_DIRS += -I. \
 
 ADDITIONAL_OBJCFLAGS += -fobjc-exceptions
 
+SCSI2SD-util-v6_LDFLAGS = -lusb-1.0
+LDFLAGS += -lusb-1.0
 ADDITIONAL_LDFLAGS += -lusb-1.0
 
 include $(GNUSTEP_MAKEFILES)/common.make
