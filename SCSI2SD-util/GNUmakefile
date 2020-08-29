@@ -56,6 +56,8 @@ ADDITIONAL_INCLUDE_DIRS += -I. \
 	-I./SCSI2SD-util/ViewControllers \
 	-I./SCSI2SD-util 
 
+ADDITIONAL_OBJCFLAGS += -fobjc-exceptions
+
 ADDITIONAL_LDFLAGS += -lusb-1.0 \
 	-ludev 
 
