@@ -9,8 +9,10 @@
 #import <Cocoa/Cocoa.h>
 
 int main(int argc, const char * argv[]) {
+#ifndef __MINGW32__
     @autoreleasepool {
         // Setup code that might create autoreleased objects goes here.
     }
+#endif
     return NSApplicationMain(argc, argv);
 }
