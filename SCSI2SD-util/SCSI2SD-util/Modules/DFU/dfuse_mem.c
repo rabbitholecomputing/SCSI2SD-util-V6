@@ -28,6 +28,9 @@
 #include "dfu_file.h"
 #include "dfuse_mem.h"
 
+// forward declaration
+void dfu_printf(char *,...);
+
 int add_segment(struct memsegment **segment_list, struct memsegment segment)
 {
 	struct memsegment *new_element;
@@ -105,13 +108,13 @@ struct memsegment *parse_memory_layout(char *intf_desc)
 	intf_desc += scanned;
 	typestring = dfu_malloc(strlen(intf_desc));
 
-	while (ret = sscanf(intf_desc, "/0x%x/%n", &address, &scanned),
+    while ((void)(ret = sscanf(intf_desc, "/0x%x/%n", &address, &scanned)),
 	       ret > 0) {
 
 		intf_desc += scanned;
-		while (ret = sscanf(intf_desc, "%d*%d%c%[^,/]%n",
-				    &sectors, &size, &multiplier, typestring,
-				    &scanned), ret > 2) {
+        while ((void)(ret = sscanf(intf_desc, "%d*%d%c%[^,/]%n",
+                                   &sectors, &size, &multiplier, typestring,
+                                   &scanned)), ret > 2) {
 			intf_desc += scanned;
 
 			count++;

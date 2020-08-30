@@ -37,6 +37,7 @@
         libusb_exit(m_usbctx);
         m_usbctx = NULL;
     }
+    [super dealloc];
 }
 
 + (DeviceFirmwareUpdate *) dfu

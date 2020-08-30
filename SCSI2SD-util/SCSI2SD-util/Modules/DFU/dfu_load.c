@@ -40,6 +40,9 @@
 #include "dfu_load.h"
 #include "quirks.h"
 
+// forward declaration
+void dfu_printf(char *,...);
+
 int dfuload_do_upload(struct dfu_if *dif, int xfer_size,
     int expected_size, unsigned char *abuf)
 {
@@ -131,7 +134,7 @@ int dfuload_do_dnload(struct dfu_if *dif, int xfer_size, struct dfu_file *file)
 			ret = dfu_get_status(dif, &dst);
 			if (ret < 0) {
 				errx(EX_IOERR, "Error during download get_status");
-				goto out;
+				// goto out;
 			}
 
 			if (dst.bState == DFU_STATE_dfuDNLOAD_IDLE ||
@@ -158,7 +161,7 @@ int dfuload_do_dnload(struct dfu_if *dif, int xfer_size, struct dfu_file *file)
 	    0, transaction, NULL);
 	if (ret < 0) {
 		errx(EX_IOERR, "Error sending completion packet");
-		goto out;
+		//goto out;
 	}
 
 	dfu_progress_bar("Download", bytes_sent, bytes_sent);

@@ -89,62 +89,62 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 // Update progress...
 - (void) updateProgress: (NSNumber *)prog
 {
-    [self.progress setDoubleValue: [prog doubleValue]];
+    [progress setDoubleValue: [prog doubleValue]];
 }
 
 - (void) showProgress: (id)sender
 {
-    [self.progress setHidden:NO];
+    [progress setHidden:NO];
 }
 
 - (void) hideProgress: (id)sender
 {
-    [self.progress setHidden:YES];
+    [progress setHidden:YES];
 }
 
 - (IBAction)handleAboutPanel:(id)sender
 {
-    [self.customAboutWindow orderFrontRegardless];
+    [customAboutWindow orderFrontRegardless];
 }
 
 - (IBAction)handleLogPanel:(id)sender {
-    if ([self.logPanel isVisible])
+    if ([logPanel isVisible])
     {
-        [self.logPanel setIsVisible: NO];
+        [logPanel setIsVisible: NO];
     }
     else
     {
-        [self.logPanel setIsVisible: YES];
-        [self.logPanel orderFrontRegardless];
+        [logPanel setIsVisible: YES];
+        [logPanel orderFrontRegardless];
     }
 }
 
 - (IBAction)handleDFUPanel:(id)sender {
-    if ([self.dfuPanel isVisible])
+    if ([dfuPanel isVisible])
     {
-        [self.dfuPanel setIsVisible: NO];
+        [dfuPanel setIsVisible: NO];
     }
     else
     {
-        [self.dfuPanel setIsVisible: YES];
-        [self.dfuPanel orderFrontRegardless];
+        [dfuPanel setIsVisible: YES];
+        [dfuPanel orderFrontRegardless];
     }
 }
 
 - (void) outputToPanel: (NSString* )formatString
 {
-    NSString *string = [self.logTextView string];
+    NSString *string = [logTextView string];
     string = [string stringByAppendingString: formatString];
-    [self.logTextView setString: string];
-    [self.logTextView scrollToEndOfDocument:self];
+    [logTextView setString: string];
+    [logTextView scrollToEndOfDocument:self];
 }
 
 - (void) outputToDFUPanel: (NSString* )formatString
 {
-    NSString *string = [self.dfuTextView string];
+    NSString *string = [dfuTextView string];
     string = [string stringByAppendingString: formatString];
-    [self.dfuTextView setString: string];
-    [self.dfuTextView scrollToEndOfDocument:self];
+    [dfuTextView setString: string];
+    [dfuTextView scrollToEndOfDocument:self];
 }
 
 // Output to the debug info panel...
@@ -165,7 +165,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     va_list args;
     va_start(args, format);
     NSString *formatString = [[NSString alloc] initWithFormat:format arguments:args];
-    [self.infoLabel performSelectorOnMainThread:@selector(setStringValue:)
+    [infoLabel performSelectorOnMainThread:@selector(setStringValue:)
                                      withObject:formatString
                                   waitUntilDone:YES];
     va_end(args);
@@ -342,17 +342,17 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     }
     
     deviceControllers = [[NSMutableArray alloc] initWithCapacity: 7];
-    [deviceControllers addObject: self.device1];
-    [deviceControllers addObject: self.device2];
-    [deviceControllers addObject: self.device3];
-    [deviceControllers addObject: self.device4];
-    [deviceControllers addObject: self.device5];
-    [deviceControllers addObject: self.device6];
-    [deviceControllers addObject: self.device7];
+    [deviceControllers addObject: device1];
+    [deviceControllers addObject: device2];
+    [deviceControllers addObject: device3];
+    [deviceControllers addObject: device4];
+    [deviceControllers addObject: device5];
+    [deviceControllers addObject: device6];
+    [deviceControllers addObject: device7];
     
-    [self.tabView selectTabViewItemAtIndex:0];
-    [self.progress setMinValue: 0.0];
-    [self.progress setMaxValue: 100.0];
+    [tabView selectTabViewItemAtIndex:0];
+    [progress setMinValue: 0.0];
+    [progress setMaxValue: 100.0];
     
     doScsiSelfTest = NO;
     shouldLogScsiData = NO;
@@ -368,8 +368,8 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
                                                object:nil];
     
     // Order out...
-    [self.dfuPanel orderOut: self];
-    [self.logPanel orderOut: self];
+    [dfuPanel orderOut: self];
+    [logPanel orderOut: self];
     
     [self startTimer];
     aLock = [[NSLock alloc] init];
@@ -399,7 +399,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 
 - (void) logSCSI
 {
-    if ([[self scsiSelfTest] state] == NSControlStateValueOn ||
+    if ([scsiSelfTest state] == NSControlStateValueOn ||
         !myHID)
     {
         return;
@@ -478,7 +478,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
                 }
                 [self logStringToPanel: @"\n"];
 
-                if ([[self scsiSelfTest] state] == NSControlStateValueOn)
+                if ([scsiSelfTest state] == NSControlStateValueOn)
                 {
                     [self runScsiSelfTest];
                 }
@@ -517,7 +517,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     NSString *outputString = @"";
     filename = [filename stringByAppendingPathExtension:@"xml"];
     outputString = [outputString stringByAppendingString: @"<SCSI2SD>\n"];
-    outputString = [outputString stringByAppendingString: [self.settings toXml]];
+    outputString = [outputString stringByAppendingString: [settings toXml]];
     
     DeviceController *dc = nil;
     NSEnumerator *en = [self->deviceControllers objectEnumerator];
@@ -539,7 +539,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     NSSavePanel *panel = [NSSavePanel savePanel];
     [panel beginSheetForDirectory:NSHomeDirectory()
                              file:nil
-                   modalForWindow:[self mainWindow]
+                   modalForWindow:[NSApp mainWindow]
                     modalDelegate:self
                    didEndSelector:@selector(saveFileEnd:)
                       contextInfo:nil];
@@ -558,7 +558,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
         Pair *configs = [ConfigUtil fromXML: path];
         
         // myBoardPanel->setConfig(configs.first);
-        [self.settings setConfig: [configs boardCfg]];
+        [settings setConfig: [configs boardCfg]];
         size_t i;
         for (i = 0; i < [configs targetCount] && i < [self->deviceControllers count]; ++i)
         {
@@ -591,7 +591,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     [panel beginSheetForDirectory:nil
                              file:nil
                             types:[NSArray arrayWithObject: @"xml"]
-                   modalForWindow:[self mainWindow]
+                   modalForWindow:[NSApp mainWindow]
                     modalDelegate:self
                    didEndSelector:@selector(openFileEnd:)
                       contextInfo:NULL];
@@ -601,7 +601,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 - (IBAction) loadDefaults: (id)sender
 {
     // myBoardPanel->setConfig(ConfigUtil::DefaultBoardConfig());
-    [self.settings setConfig: [ConfigUtil defaultBoardConfig]];
+    [settings setConfig: [ConfigUtil defaultBoardConfig]];
     size_t i = 0;
     for (i = 0; i < [deviceControllers count]; ++i)
     {
@@ -667,7 +667,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
             &cfgData[i * 512]); */
     }
 
-    [self.settings setConfig: [ConfigUtil boardConfigFromBytes: cfgData]];  //SCSI2SD::ConfigUtil::boardConfigFromBytes(&cfgData[0])];
+    [settings setConfig: [ConfigUtil boardConfigFromBytes: cfgData]];  //SCSI2SD::ConfigUtil::boardConfigFromBytes(&cfgData[0])];
     // int i = 0;
     for (i = 0; i < S2S_MAX_TARGETS; ++i)
     {
@@ -733,7 +733,7 @@ out:
     int totalProgress = 2; // (int)[deviceControllers count]; // * SCSI_CONFIG_ROWS + 1;
 
     // Write board config first.
-    NSMutableData *cfgData = [[ConfigUtil boardConfigToBytes:[self.settings getConfig]] mutableCopy];
+    NSMutableData *cfgData = [[ConfigUtil boardConfigToBytes:[settings getConfig]] mutableCopy];
     int i = 0;
     for (i = 0; i < S2S_MAX_TARGETS; ++i)
     {
@@ -866,7 +866,7 @@ out:
         return;
     }
 
-    [self.dfuPanel performSelectorOnMainThread: @selector( orderFrontRegardless )
+    [dfuPanel performSelectorOnMainThread: @selector( orderFrontRegardless )
                                     withObject: nil
                                  waitUntilDone: YES];
     
@@ -964,7 +964,7 @@ out:
     [panel beginSheetForDirectory:NULL
                              file:NULL
                             types:[NSArray arrayWithObject:@"dfu"]
-                   modalForWindow:[self mainWindow]
+                   modalForWindow:[NSApp mainWindow]
                     modalDelegate:self
                    didEndSelector: @selector(upgradeFirmwareEnd:)
                       contextInfo:NULL];
@@ -993,7 +993,7 @@ out:
     [panel beginSheetForDirectory:nil
                              file:nil
                             types:nil
-                   modalForWindow:[self mainWindow]
+                   modalForWindow:[NSApp mainWindow]
                     modalDelegate:self
                    didEndSelector:@selector(bootLoaderUpdateEnd:)
                       contextInfo:nil];
@@ -1167,8 +1167,8 @@ out:
     
     if(myHID)
     {
-        self.saveMenu.enabled = valid && ([myHID getFirmwareVersion] >= MIN_FIRMWARE_VERSION);
-        self.openMenu.enabled = valid && ([myHID getFirmwareVersion] >= MIN_FIRMWARE_VERSION);
+        saveMenu.enabled = valid && ([myHID getFirmwareVersion] >= MIN_FIRMWARE_VERSION);
+        openMenu.enabled = valid && ([myHID getFirmwareVersion] >= MIN_FIRMWARE_VERSION);
     }
 /*
     mySaveButton->Enable(

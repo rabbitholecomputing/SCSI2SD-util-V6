@@ -57,6 +57,8 @@ int dfuse_leave = 0;
 int dfuse_unprotect = 0;
 int dfuse_mass_erase = 0;
 
+// forward declaration
+void dfu_printf(char *,...);
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wconversion"

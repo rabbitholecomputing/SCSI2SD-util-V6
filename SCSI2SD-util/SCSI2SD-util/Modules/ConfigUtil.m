@@ -695,7 +695,7 @@ uint32_t fromLE32(uint32_t in)
     S2S_BoardCfg boardConfig = [self defaultBoardConfig];
     int boardConfigFound = 0;
 
-    S2S_TargetCfg *targets;
+    S2S_TargetCfg *targets = NULL;
     NSArray *children = [[doc rootElement] children]; // doc.GetRoot()->GetChildren();
     NSEnumerator *en = [children objectEnumerator];
     NSXMLElement *child = [en nextObject];

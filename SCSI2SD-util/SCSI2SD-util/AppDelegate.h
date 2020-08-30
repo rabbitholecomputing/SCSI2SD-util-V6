@@ -38,38 +38,39 @@
     BOOL shouldLogScsiData;
     BOOL doScsiSelfTest;
     NSMutableArray *deviceControllers;
+    IBOutlet NSWindow *window;
+    IBOutlet NSWindow *mainWindow;
+    IBOutlet NSTextField *infoLabel;
+    IBOutlet NSPanel *logPanel;
+    IBOutlet NSPanel *dfuPanel;
+    IBOutlet NSTextView *logTextView;
+    IBOutlet NSTextView *dfuTextView;
+    IBOutlet NSTabView *tabView;
+
+    IBOutlet DeviceController *device1;
+    IBOutlet DeviceController *device2;
+    IBOutlet DeviceController *device3;
+    IBOutlet DeviceController *device4;
+    IBOutlet DeviceController *device5;
+    IBOutlet DeviceController *device6;
+    IBOutlet DeviceController *device7;
+
+    IBOutlet NSProgressIndicator *progress;
+
+    IBOutlet NSMenuItem *saveMenu;
+    IBOutlet NSMenuItem *openMenu;
+    IBOutlet NSMenuItem *readMenu;
+    IBOutlet NSMenuItem *writeMenu;
+    IBOutlet NSMenuItem *scsiSelfTest;
+    IBOutlet NSMenuItem *scsiLogData;
+
+    IBOutlet SettingsController *settings;
+    IBOutlet NSWindow *customAboutWindow;
 }
 
-@property  IBOutlet NSWindow *window;
-@property  IBOutlet NSWindow *mainWindow;
-@property  IBOutlet NSTextField *infoLabel;
-@property  IBOutlet NSPanel *logPanel;
-@property  IBOutlet NSPanel *dfuPanel;
-@property  IBOutlet NSTextView *logTextView;
-@property  IBOutlet NSTextView *dfuTextView;
-@property  IBOutlet NSTabView *tabView;
-
-@property  IBOutlet DeviceController *device1;
-@property  IBOutlet DeviceController *device2;
-@property  IBOutlet DeviceController *device3;
-@property  IBOutlet DeviceController *device4;
-@property  IBOutlet DeviceController *device5;
-@property  IBOutlet DeviceController *device6;
-@property  IBOutlet DeviceController *device7;
-
-@property  IBOutlet NSProgressIndicator *progress;
-
-@property  IBOutlet NSMenuItem *saveMenu;
-@property  IBOutlet NSMenuItem *openMenu;
-@property  IBOutlet NSMenuItem *readMenu;
-@property  IBOutlet NSMenuItem *writeMenu;
-@property  IBOutlet NSMenuItem *scsiSelfTest;
-@property  IBOutlet NSMenuItem *scsiLogData;
-
-@property  IBOutlet SettingsController *settings;
-@property  IBOutlet NSWindow *customAboutWindow;
-
 - (IBAction) loadDefaults: (id)sender;
+- (IBAction) scsiSelfTest:(id)sender;
+- (IBAction) shouldLogScsiData: (id)sender;
 
 @end
 

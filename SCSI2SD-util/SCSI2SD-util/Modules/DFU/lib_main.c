@@ -244,7 +244,7 @@ int dfu_util(int argc, char **argv, unsigned char *buf)
 	int final_reset = 0;
 	int ret;
 	int dfuse_device = 0;
-	int fd;
+	int fd = 0;
 	const char *dfuse_options = NULL;
 	int detach_delay = 5;
 	uint16_t runtime_vendor;
