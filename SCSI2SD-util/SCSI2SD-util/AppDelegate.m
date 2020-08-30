@@ -204,13 +204,33 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     [alert runModal];
 }
 
+- (void) showReadErrorPanel: (id)sender
+{
+    NSAlert *alert = [[NSAlert alloc] init];
+
+    [self hideProgress:self];
+    alert.messageText = @"Operation not Completed!!";
+    alert.informativeText = @"Configuration was NOT read from device!!!";
+    [alert runModal];
+}
+
 - (void) showWriteCompletionPanel: (id)sender
 {
     NSAlert *alert = [[NSAlert alloc] init];
 
     [self hideProgress:self];
-    alert.messageText = @"Operation Completed";
+    alert.messageText = @"Operation Completed!!";
     alert.informativeText = @"Configuration was written to device";
+    [alert runModal];
+}
+
+- (void) showWriteErrorPanel: (id)sender
+{
+    NSAlert *alert = [[NSAlert alloc] init];
+
+    [self hideProgress:self];
+    alert.messageText = @"Operation not Complete!!";
+    alert.informativeText = @"Configuration was NOT written to device";
     [alert runModal];
 }
 
@@ -614,6 +634,9 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 // Load from device...
 - (void) loadFromDeviceThread: (id)obj
 {
+    NSAutoreleasePool *my_pool = [[NSAutoreleasePool alloc] init];
+    BOOL error = NO;
+    
     [aLock lock];
     [self performSelectorOnMainThread:@selector(stopTimer)
                            withObject:NULL
@@ -628,7 +651,8 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     // myHID.reset(SCSI2SD::HID::Open()); // reopen hid
     if (!myHID) // goto out;
     {
-        return;
+        error = YES;
+        goto err;
     }
     
     [self logStringToPanel: @"\nLoad config settings"];
@@ -686,6 +710,8 @@ err:
                            withObject:[NSNumber numberWithDouble:(double)100.0]
                         waitUntilDone:NO];
     [self logStringToPanel: @"\nLoad Failed."];
+    [self reset_hid];
+    error = YES;
     goto out;
 
 out:
@@ -699,10 +725,20 @@ out:
     [self performSelectorOnMainThread:@selector(startTimer)
                            withObject:NULL
                         waitUntilDone:NO];
-    [self performSelectorOnMainThread:@selector(showReadCompletionPanel:)
-                           withObject:nil
-                        waitUntilDone:NO];
+    if (error)
+    {
+        [self performSelectorOnMainThread:@selector(showReadErrorPanel:)
+                               withObject:nil
+                            waitUntilDone:NO];
+    }
+    else
+    {
+        [self performSelectorOnMainThread:@selector(showReadCompletionPanel:)
+                               withObject:nil
+                            waitUntilDone:NO];
+    }
     
+    [my_pool release];
     [aLock unlock];
     return;
 }
@@ -715,6 +751,9 @@ out:
 // Save information to device on background thread....
 - (void) saveToDeviceThread: (id)obj
 {
+    NSAutoreleasePool *my_pool = [[NSAutoreleasePool alloc] init];
+    BOOL error = NO;
+    
     [aLock lock];
     [self performSelectorOnMainThread:@selector(stopTimer)
                            withObject:NULL
@@ -726,13 +765,18 @@ out:
     [self performSelectorOnMainThread:@selector(showProgress:)
                            withObject:nil
                         waitUntilDone:NO];
-    if (!myHID) return;
+    if (!myHID)
+    {
+        error = YES;
+        goto err;
+    }
 
     [self logStringToPanel:@"Saving configuration"];
     int currentProgress = 0;
     int totalProgress = 2; // (int)[deviceControllers count]; // * SCSI_CONFIG_ROWS + 1;
 
     // Write board config first.
+
     NSMutableData *cfgData = [[ConfigUtil boardConfigToBytes:[settings getConfig]] mutableCopy];
     int i = 0;
     for (i = 0; i < S2S_MAX_TARGETS; ++i)
@@ -755,14 +799,19 @@ out:
 
         @try
         {
-/*            std::vector<uint8_t> buf;
+            NSRange r = NSMakeRange(i * 512, 512);
+            NSData *sd = [cfgData subdataWithRange:r];
+            [myHID writeSector:sector++ input: sd];
+            /*
+            std::vector<uint8_t> buf;
             buf.insert(buf.end(), &cfgData[i * 512], &cfgData[(i+1) * 512]);
-            myHID->writeSector(sector++, buf);*/
-            [myHID writeSector:sector++ input: cfgData];
+            myHID->writeSector(sector++, buf);
+             */
         }
         @catch (NSException *e)
         {
             [self logStringToPanel:  @"\nException %@",[e reason]];
+            error = YES;
             goto err;
         }
     }
@@ -775,6 +824,8 @@ err:
                            withObject:[NSNumber numberWithDouble: (double)100.0]
                         waitUntilDone:NO];
     [self logStringToPanel: @"\nSave Failed"];
+    [self reset_hid];
+    error = YES;
     goto out;
 
 out:
@@ -788,11 +839,22 @@ out:
     [self performSelectorOnMainThread:@selector(startTimer)
                            withObject:NULL
                         waitUntilDone:NO];
-    [self performSelectorOnMainThread:@selector(showWriteCompletionPanel:)
-                           withObject:nil
-                        waitUntilDone:NO];
+    if (error)
+    {
+        [self performSelectorOnMainThread:@selector(showWriteErrorPanel:)
+                               withObject:nil
+                            waitUntilDone:NO];
+    }
+    else
+    {
+        [self performSelectorOnMainThread:@selector(showWriteCompletionPanel:)
+                               withObject:nil
+                            waitUntilDone:NO];
+    }
+    [my_pool release];
     [aLock unlock];
     return;
+
 }
 
 - (IBAction)saveToDevice:(id)sender
@@ -802,64 +864,72 @@ out:
 
 - (BOOL) checkVersionMarker: (NSString *)firmware
 {
-    NSString *tmpFile = [NSHomeDirectory() stringByAppendingPathComponent: [NSString stringWithFormat: @"SCSI_MARKER-%f",
-                                                                                 [[NSDate date] timeIntervalSince1970]]];
-    NSString *cmdString = [NSString stringWithFormat: @"dfu-util --alt 2 -s 0x1FFF7800:4 -U \"%@\"", tmpFile];
-    NSArray *commandArray = [cmdString componentsSeparatedByString: @" "];
-    char **array = convertNSArrayToCArray(commandArray);
-    int count = (int)[commandArray count];
-    unsigned char *buf = NULL;
-    
-    buf = (unsigned char *)calloc(0x4000, sizeof(unsigned char));
-    // unsigned char buf[0x80000]; // alloc 512k
-    if (dfu_util(count, array, buf) == 0)
-    {
-        free(buf);
-        return NO;
-    }
-    
-    // NSData *fileData = [NSData dataWithContentsOfFile:tmpFile];
-    if (buf != NULL)
-    {
-        const uint8_t *data = (const uint8_t *)buf;
-        uint32_t value =
-            (((uint32_t)(data[0]))) |
-            (((uint32_t)(data[1])) << 8) |
-            (((uint32_t)(data[2])) << 16) |
-            (((uint32_t)(data[3])) << 24);
+    @try {
+        NSString *tmpFile = [NSHomeDirectory() stringByAppendingPathComponent: [NSString stringWithFormat: @"SCSI_MARKER-%f",
+                                                                                     [[NSDate date] timeIntervalSince1970]]];
+        NSString *cmdString = [NSString stringWithFormat: @"dfu-util --alt 2 -s 0x1FFF7800:4 -U \"%@\"", tmpFile];
+        NSArray *commandArray = [cmdString componentsSeparatedByString: @" "];
+        char **array = convertNSArrayToCArray(commandArray);
+        int count = (int)[commandArray count];
+        unsigned char *buf = NULL;
         
-        if (value == 0xFFFFFFFF)
+        buf = (unsigned char *)calloc(0x4000, sizeof(unsigned char));
+        // unsigned char buf[0x80000]; // alloc 512k
+        if (dfu_util(count, array, buf) == 0)
         {
-            // Not set, ignore.
-            [self logStringToDFUPanel: @"OTP Hardware version not set. Ignoring."];
-            return YES;
+            free(buf);
+            return NO;
         }
-        else if (value == 0x06002020)
+        
+        // NSData *fileData = [NSData dataWithContentsOfFile:tmpFile];
+        if (buf != NULL)
         {
-            [self logStringToDFUPanel: @"Found V6 2020 hardware marker"];
-            return YES; //return firmware.rfind("firmware.V6.2020.dfu") != std::string::npos;
+            const uint8_t *data = (const uint8_t *)buf;
+            uint32_t value =
+                (((uint32_t)(data[0]))) |
+                (((uint32_t)(data[1])) << 8) |
+                (((uint32_t)(data[2])) << 16) |
+                (((uint32_t)(data[3])) << 24);
+            
+            if (value == 0xFFFFFFFF)
+            {
+                // Not set, ignore.
+                [self logStringToDFUPanel: @"OTP Hardware version not set. Ignoring.\n"];
+                return YES;
+            }
+            else if (value == 0x06002020)
+            {
+                [self logStringToDFUPanel: @"Found V6 2020 hardware marker\n"];
+                return YES; //return firmware.rfind("firmware.V6.2020.dfu") != std::string::npos;
+            }
+            else if (value == 0x06002019)
+            {
+                [self logStringToDFUPanel: @"Found V6 revF hardware marker\n"];
+                // return firmware.rfind("firmware.V6.revF.dfu") != std::string::npos ||
+                //    firmware.rfind("firmware.dfu") != std::string::npos;
+                return YES;
+            }
+            else
+            {
+                [self logStringToDFUPanel: @"Found unknown hardware marker: %u\n", value];
+                return NO; // Some unknown version.
+            }
         }
-        else if (value == 0x06002019)
-        {
-            [self logStringToDFUPanel: @"Found V6 revF hardware marker"];
-            // return firmware.rfind("firmware.V6.revF.dfu") != std::string::npos ||
-            //    firmware.rfind("firmware.dfu") != std::string::npos;
-            return YES;
-        }
-        else
-        {
-            [self logStringToDFUPanel: @"Found unknown hardware marker: %u", value];
-            return NO; // Some unknown version.
-        }
+        
+        free(buf);  // release the memory...
+
+    }
+    @catch (NSException *exception) {
+        [self logStringToPanel: [exception reason]];
     }
     
-    free(buf);  // release the memory...
     return NO;
 }
 
 // Upgrade firmware...
 - (void) upgradeFirmwareThread: (NSString *)filename
 {
+    NSAutoreleasePool *my_pool = [[NSAutoreleasePool alloc] init];
     if ([[filename pathExtension] isEqualToString: @"dfu"] == NO)
     {
         [self logStringToPanel: @"SCSI2SD-V6 requires .dfu extension"];
@@ -915,7 +985,7 @@ out:
                     [self logStringToPanel: @"Firmware does not match hardware"];
                     return;
                 }
-                versionChecked = true;
+                versionChecked = YES;
             }
             
             if ([myDFU hasDevice])
@@ -946,6 +1016,7 @@ out:
     [self performSelectorOnMainThread:@selector(startTimer)
                            withObject:nil
                         waitUntilDone:YES];
+    [my_pool release];
 }
 
 - (void) upgradeFirmwareEnd: (NSOpenPanel *)panel

@@ -12,8 +12,6 @@
 #include "ConfigUtil.h"
 @interface DeviceController ()
 
-
-
 @end
 
 @implementation DeviceController
@@ -49,7 +47,7 @@
 
 - (NSData *) structToData: (S2S_TargetCfg)config
 {
-    return [self structToData:config withMutableData:[NSMutableData data]];
+    return [self structToData:config withMutableData:[[NSMutableData alloc] init]];
 }
 
 - (S2S_TargetCfg) dataToStruct: (NSData *)d
@@ -70,7 +68,7 @@
 - (void) setTargetConfigData: (NSData *)data
 {
     S2S_TargetCfg config = [self dataToStruct: data];
-    
+
     enableSCSITarget.state = (config.scsiId & 0x80) ? NSOnState : NSOffState;
     [SCSIID setStringValue:
      [NSString stringWithFormat: @"%d", (config.scsiId & 0x80) ?
@@ -80,7 +78,7 @@
     [sectorSize setStringValue: [NSString stringWithFormat: @"%d", config.bytesPerSector]];
     [sectorCount setStringValue: [NSString stringWithFormat: @"%d", config.scsiSectors]];
     [deviceSize setStringValue: [NSString stringWithFormat: @"%d", (((config.scsiSectors * config.bytesPerSector) / (1024 * 1024)) + 1) / 1024]];
-    // Heads per cylinder is missing... should add it here.
+
     // Sectors per track...
     [vendor setStringValue: [NSString stringWithCString:config.vendor length:8]];
     [productId setStringValue: [NSString stringWithCString:config.prodId length:16]];
@@ -94,12 +92,17 @@
 - (void) getTargetConfigData: (NSMutableData *)d
 {
     S2S_TargetCfg targetConfig;
-    targetConfig.scsiId = SCSIID.intValue + enableSCSITarget.state == NSOnState ? 0x80 : 0x0;
+    targetConfig.scsiId = SCSIID.intValue & S2S_CFG_TARGET_ID_BITS;
+    if (enableSCSITarget.state == NSOnState)
+    {
+        targetConfig.scsiId = targetConfig.scsiId | S2S_CFG_TARGET_ENABLED;
+    }
     targetConfig.deviceType = deviceType.indexOfSelectedItem;
     targetConfig.sdSectorStart = sdCardStartSector.intValue;
     targetConfig.bytesPerSector = sectorSize.intValue;
     targetConfig.scsiSectors = sectorCount.intValue;
     targetConfig.headsPerCylinder = headsPerCylinder.intValue;
+    targetConfig.sectorsPerTrack = sectorsPerTrack.intValue;
     strncpy(targetConfig.vendor, [vendor.stringValue cStringUsingEncoding:NSUTF8StringEncoding], 8);
     strncpy(targetConfig.prodId, [productId.stringValue cStringUsingEncoding:NSUTF8StringEncoding], 16);
     strncpy(targetConfig.revision, [revsion.stringValue cStringUsingEncoding:NSUTF8StringEncoding], 4);

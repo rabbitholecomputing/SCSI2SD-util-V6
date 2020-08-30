@@ -177,12 +177,12 @@
         (uint8_t)(sector)
     };
     // add input to commands...
-    NSMutableData *myInput = [input mutableCopy];
-    [myInput appendBytes:cmds length:5];
-    [myInput appendData:input];
+    NSMutableData *cmdData = [NSMutableData dataWithCapacity: 1024];
+    [cmdData appendBytes: cmds length: 5];
+    [cmdData appendData: input];
     
     NSMutableData *output = [NSMutableData data];
-    [self sendHIDPacket: [myInput bytes]
+    [self sendHIDPacket: cmdData
                  output: output
                  length: 1];
     
@@ -193,7 +193,7 @@
     
     if (((int *)[output bytes])[0] != S2S_CFG_STATUS_GOOD)
     {
-        [NSException raise:NSInternalInconsistencyException format:@"Could not write sector"];
+        [NSException raise:NSInternalInconsistencyException format:@"Could not write sector, got bad status"];
     }
 }
 
@@ -357,7 +357,7 @@
 - (void) readHID: (uint8_t*)buffer length: (size_t)len
 {
     NSAssert(len >= 0, @"readHID length should be >= 0");
-    buffer[1] = 0; // report id
+    buffer[0] = 0; // report id
 
     int result = -1;
     int retry = 0;

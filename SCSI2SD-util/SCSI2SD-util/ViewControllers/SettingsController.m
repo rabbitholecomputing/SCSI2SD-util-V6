@@ -10,8 +10,6 @@
 
 @interface SettingsController ()
 
-
-
 @end
 
 @implementation SettingsController
@@ -46,7 +44,7 @@
 
 - (NSData *) structToData: (S2S_BoardCfg)config
 {
-    return [self structToData:config withMutableData:[NSMutableData data]];
+    return [self structToData: config withMutableData: [[NSMutableData alloc] init]];
 }
 
 - (S2S_BoardCfg) dataToStruct: (NSData *)d

@@ -83,6 +83,16 @@ uint32_t fromLE32(uint32_t in)
 
 @implementation Pair
 
+- (instancetype) init
+{
+    self = [super init];
+    if (self != nil)
+    {
+        _targets = [[NSMutableArray alloc] initWithCapacity: 10];
+    }
+    return self;
+}
+
 - (instancetype) initWithBoardCfg: (S2S_BoardCfg)boardCfg
                      targetConfig: (S2S_TargetCfg *)targetCfgs
                             count: (NSUInteger)c
@@ -187,14 +197,14 @@ uint32_t fromLE32(uint32_t in)
     result.sdSectorStart = toLE32(result.sdSectorStart);
     result.scsiSectors = toLE32(result.scsiSectors);
     result.bytesPerSector = toLE16(result.bytesPerSector);
-    result.sectorsPerTrack = toLE16(result.sectorsPerTrack);
+    result.sectorsPerTrack = (result.sectorsPerTrack == 0 ? 63 : toLE16(result.sectorsPerTrack));  // some devices ignore this.
     result.headsPerCylinder = toLE16(result.headsPerCylinder);
     return result;
 }
 
 + (NSData *) targetCfgToBytes: (const S2S_TargetCfg) _config
 {
-    S2S_TargetCfg config;
+    S2S_TargetCfg config = (S2S_TargetCfg)_config;
     config.sdSectorStart = fromLE32(_config.sdSectorStart);
     config.scsiSectors = fromLE32(_config.scsiSectors);
     config.bytesPerSector = fromLE16(_config.bytesPerSector);
@@ -221,8 +231,7 @@ uint32_t fromLE32(uint32_t in)
 
 + (NSData *) boardConfigToBytes: (const S2S_BoardCfg) cfg
 {
-    S2S_BoardCfg config = cfg;
-
+    S2S_BoardCfg config = (S2S_BoardCfg)cfg;
     memcpy(&config.magic, "BCFG", 4);
     // const uint8_t* begin = reinterpret_cast<const uint8_t*>(&config);
     // return std::vector<uint8_t>(begin, begin + sizeof(config));
@@ -247,19 +256,19 @@ uint32_t fromLE32(uint32_t in)
         @"    <quirks>";
     if (config.quirks == S2S_CFG_QUIRKS_APPLE)
     {
-        s = [s stringByAppendingString: @"apple"];
+        s = [s stringByAppendingString: @"apple "];
     }
     else if (config.quirks == S2S_CFG_QUIRKS_OMTI)
     {
-        s = [s stringByAppendingString: @"omti"];
+        s = [s stringByAppendingString: @"omti "];
     }
     else if (config.quirks == S2S_CFG_QUIRKS_XEBEC)
     {
-        s = [s stringByAppendingString: @"xebec"];
+        s = [s stringByAppendingString: @"xebec "];
     }
     else if (config.quirks == S2S_CFG_QUIRKS_VMS)
     {
-        s = [s stringByAppendingString: @"vms"];
+        s = [s stringByAppendingString: @"vms "];
     }
 
     s = [s stringByAppendingString:
@@ -271,7 +280,7 @@ uint32_t fromLE32(uint32_t in)
         @"    0x2    Optical drive  (ie. CD drive).\n"
         @"    0x3    1.44MB Floppy Drive.\n"
         @"    ********************************************************* -->\n"
-        @"    <deviceType>%x<deviceType>\n"
+        @"    <deviceType>%x</deviceType>\n"
         @"\n\n"
         @"    <!-- ********************************************************\n"
         @"    Device type modifier is usually 0x00. Only change this if your\n"
@@ -303,23 +312,31 @@ uint32_t fromLE32(uint32_t in)
         @"\n"
         @"    <!-- 8 character vendor string -->\n"
         @"    <!-- For Apple HD SC Setup/Drive Setup, use ' SEAGATE' -->\n"
-        @"    <vendor>%8s</vendor>\n"
+        @"    <vendor>%@</vendor>\n"
         @"\n"
         @"    <!-- 16 character produce identifier -->\n"
         @"    <!-- For Apple HD SC Setup/Drive Setup, use '          ST225N' -->\n"
-        @"    <prodId>%16s</prodId>\n"
+        @"    <prodId>%@</prodId>\n"
         @"\n"
         @"    <!-- 4 character product revision number -->\n"
         @"    <!-- For Apple HD SC Setup/Drive Setup, use '1.0 ' -->\n"
-        @"    <revision>%4s</revision>\n"
+        @"    <revision>%@</revision>\n"
         @"\n"
         @"    <!-- 16 character serial number -->\n"
-        @"    <serial>%16s</serial>\n"
+        @"    <serial>%@</serial>\n"
         @"\n"
         @"</SCSITarget>\n"];
-    
+        
+    char vendor[9] =    "        \0";
+    char prodId[17] =   "                \0";
+    char revision[5] =  "    \0";
+    char serial[17] =   "                \0";
+    memcpy(vendor, config.vendor, 8);
+    memcpy(prodId, config.prodId, 16);
+    memcpy(revision, config.revision, 4);
+    memcpy(serial, config.serial, 8);
     NSString *str = [NSString stringWithFormat:s,
-                     config.scsiId & S2S_CFG_TARGET_ID_BITS,
+                     (int)config.scsiId, // & S2S_CFG_TARGET_ID_BITS,
                      config.scsiId & S2S_CFG_TARGET_ENABLED ? "true" : "false",
                      config.deviceType,
                      config.deviceTypeModifier,
@@ -328,10 +345,10 @@ uint32_t fromLE32(uint32_t in)
                      config.bytesPerSector,
                      config.sectorsPerTrack,
                      config.headsPerCylinder,
-                     config.vendor,
-                     config.prodId,
-                     config.revision,
-                     config.serial
+                     [[NSString stringWithCString: vendor encoding:NSUTF8StringEncoding] substringToIndex:8],
+                     [[NSString stringWithCString: prodId encoding:NSUTF8StringEncoding] substringToIndex:16],
+                     [[NSString stringWithCString: revision encoding:NSUTF8StringEncoding] substringToIndex:4],
+                     [[NSString stringWithCString: serial encoding:NSUTF8StringEncoding] substringToIndex:16]
                      ];
     
     return str;
@@ -542,31 +559,55 @@ uint32_t fromLE32(uint32_t in)
         }
         else if ([[child name] isEqualToString: @"vendor"])
         {
-            NSString *s = [child stringValue];
-            s = [s substringToIndex:sizeof(result.vendor)];
-            memset(result.vendor, ' ', sizeof(result.vendor));
-            memcpy(result.vendor, [s cStringUsingEncoding:NSUTF8StringEncoding], [s length]);
+            @try {
+                NSString *s = [child stringValue];
+                s = [s substringToIndex:sizeof(result.vendor)];
+                memset(result.vendor, ' ', sizeof(result.vendor));
+                memcpy(result.vendor, [s cStringUsingEncoding:NSUTF8StringEncoding], [s length]);
+            } @catch (NSException *exception) {
+                NSLog(@"%@", [exception reason]);
+            } @finally {
+                // Code that gets executed whether or not an Exception is thrown....
+            }
         }
         else if ([[child name] isEqualToString: @"prodId"])
         {
-            NSString *s = [child stringValue];
-            s = [s substringToIndex:sizeof(result.prodId)];
-            memset(result.prodId, ' ', sizeof(result.prodId));
-            memcpy(result.prodId, [s cStringUsingEncoding:NSUTF8StringEncoding], [s length]);
+            @try {
+                NSString *s = [child stringValue];
+                s = [s substringToIndex:sizeof(result.prodId)];
+                memset(result.prodId, ' ', sizeof(result.prodId));
+                memcpy(result.prodId, [s cStringUsingEncoding:NSUTF8StringEncoding], [s length]);
+            } @catch (NSException *exception) {
+                NSLog(@"%@", [exception reason]);
+            } @finally {
+                // Code that gets executed whether or not an Exception is thrown....
+            }
         }
         else if ([[child name] isEqualToString: @"revision"])
         {
-            NSString *s = [child stringValue];
-            s = [s substringToIndex:sizeof(result.revision)];
-            memset(result.revision, ' ', sizeof(result.revision));
-            memcpy(result.revision, [s cStringUsingEncoding:NSUTF8StringEncoding], [s length]);
+            @try {
+                NSString *s = [child stringValue];
+                s = [s substringToIndex:sizeof(result.revision)];
+                memset(result.revision, ' ', sizeof(result.revision));
+                memcpy(result.revision, [s cStringUsingEncoding:NSUTF8StringEncoding], [s length]);
+            } @catch (NSException *exception) {
+               NSLog(@"%@", [exception reason]);
+            } @finally {
+               // Code that gets executed whether or not an Exception is thrown....
+            }
         }
         else if ([[child name] isEqualToString: @"serial"])
         {
-            NSString *s = [child stringValue];
-            s = [s substringToIndex:sizeof(result.serial)];
-            memset(result.serial, ' ', sizeof(result.serial));
-            memcpy(result.serial, [s cStringUsingEncoding:NSUTF8StringEncoding], [s length]);
+            @try {
+                NSString *s = [child stringValue];
+                s = [s substringToIndex:sizeof(result.serial)];
+                memset(result.serial, ' ', sizeof(result.serial));
+                memcpy(result.serial, [s cStringUsingEncoding:NSUTF8StringEncoding], [s length]);
+            } @catch (NSException *exception) {
+               NSLog(@"%@", [exception reason]);
+            } @finally {
+               // Code that gets executed whether or not an Exception is thrown....
+            }
         }
 
         child = [en nextObject];
@@ -677,9 +718,21 @@ uint32_t fromLE32(uint32_t in)
 + (Pair *) fromXML: (NSString *)filename
 {
     NSData *data = [NSData dataWithContentsOfFile: filename];
+    if(data == nil)
+    {
+        puts("Could not read file.");
+        return nil;
+    }
+    
+    NSError *error = nil;
     NSXMLDocument *doc = [[NSXMLDocument alloc] initWithData: data
                                                      options: NSXMLNodeOptionsNone
-                                                       error: NULL];
+                                                       error: &error];
+    if (error != nil)
+    {
+        NSLog(@"%@", error);
+    }
+    
     Pair *p = [[Pair alloc] init];
     if (doc == nil)
     {
@@ -710,6 +763,7 @@ uint32_t fromLE32(uint32_t in)
         else if ([[child name] isEqualToString: @"S2S_BoardCfg"])
         {
             boardConfig = [self parseBoardConfig: child];
+            [p setBoardConfig: boardConfig];
             boardConfigFound = 1;
         }
         child = [en nextObject];
