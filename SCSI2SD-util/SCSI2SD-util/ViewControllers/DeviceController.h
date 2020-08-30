@@ -16,6 +16,29 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DeviceController : NSObject
+{
+     IBOutlet NSButton *enableSCSITarget;
+     IBOutlet NSComboBox *SCSIID;
+     IBOutlet NSPopUpButton *deviceType;
+     IBOutlet NSTextField *sdCardStartSector;
+     IBOutlet NSTextField *sectorSize;
+     IBOutlet NSTextField *sectorCount;
+     IBOutlet NSTextField *deviceSize;
+     IBOutlet NSPopUpButton *deviceUnit;
+     IBOutlet NSTextField *vendor;
+     IBOutlet NSTextField *productId;
+     IBOutlet NSTextField *revsion;
+     IBOutlet NSTextField *serialNumber;
+     IBOutlet NSButton *autoStartSector;
+     IBOutlet NSTextField *sectorsPerTrack;
+     IBOutlet NSTextField *headsPerCylinder;
+
+     IBOutlet NSTextField *autoErrorText;
+     IBOutlet NSTextField *scsiIdErrorText;
+
+    BOOL duplicateId;
+    BOOL sectorOverlap;
+}
 
 - (void) setTargetConfigData: (NSData *)data;
 - (void) setTargetConfig: (S2S_TargetCfg)config;

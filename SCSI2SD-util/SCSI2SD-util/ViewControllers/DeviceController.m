@@ -12,27 +12,7 @@
 #include "ConfigUtil.h"
 @interface DeviceController ()
 
-@property (nonatomic, retain) IBOutlet NSButton *enableSCSITarget;
-@property (nonatomic, retain) IBOutlet NSComboBox *SCSIID;
-@property (nonatomic, retain) IBOutlet NSPopUpButton *deviceType;
-@property (nonatomic, retain) IBOutlet NSTextField *sdCardStartSector;
-@property (nonatomic, retain) IBOutlet NSTextField *sectorSize;
-@property (nonatomic, retain) IBOutlet NSTextField *sectorCount;
-@property (nonatomic, retain) IBOutlet NSTextField *deviceSize;
-@property (nonatomic, retain) IBOutlet NSPopUpButton *deviceUnit;
-@property (nonatomic, retain) IBOutlet NSTextField *vendor;
-@property (nonatomic, retain) IBOutlet NSTextField *productId;
-@property (nonatomic, retain) IBOutlet NSTextField *revsion;
-@property (nonatomic, retain) IBOutlet NSTextField *serialNumber;
-@property (nonatomic, retain) IBOutlet NSButton *autoStartSector;
-@property (nonatomic, retain) IBOutlet NSTextField *sectorsPerTrack;
-@property (nonatomic, retain) IBOutlet NSTextField *headsPerCylinder;
 
-@property (nonatomic, retain) IBOutlet NSTextField *autoErrorText;
-@property (nonatomic, retain) IBOutlet NSTextField *scsiIdErrorText;
-
-@property BOOL duplicateId;
-@property BOOL sectorOverlap;
 
 @end
 
@@ -40,25 +20,25 @@
 
 - (void) awakeFromNib
 {
-    self.enableSCSITarget.toolTip = @"Enable this device";
-    self.SCSIID.toolTip = @"Unique SCSI ID for target device";
-    self.deviceType.toolTip = @"Dervice type: HD, Removable, etc";
-    self.sdCardStartSector.toolTip = @"Supports multiple SCSI targets";
-    self.sectorSize.toolTip = @"Between 64 and 8192. Default of 512 is suitable in most cases.";
-    self.sectorCount.toolTip = @"Number of sectors (device size)";
-    self.deviceSize.toolTip = @"Device size";
-    self.deviceUnit.toolTip = @"Units for device: GB, MB, etc";
-    self.vendor.toolTip = @"SCSI Vendor string. eg. ' codesrc'";
-    self.productId.toolTip = @"SCSI Product ID string. eg. 'SCSI2SD";
-    self.revsion.toolTip = @"SCSI device revision string. eg. '3.5a'";
-    self.serialNumber.toolTip = @"SCSI serial number. eg. '13eab5632a'";
-    self.autoStartSector.toolTip = @"Auto start sector based on other targets";
-    self.sectorsPerTrack.toolTip = @"Number of sectors in each track";
-    self.headsPerCylinder.toolTip = @"Number of heads in cylinder";
+    [enableSCSITarget setToolTip: @"Enable this device"];
+    SCSIID.toolTip = @"Unique SCSI ID for target device";
+    deviceType.toolTip = @"Dervice type: HD, Removable, etc";
+    sdCardStartSector.toolTip = @"Supports multiple SCSI targets";
+    sectorSize.toolTip = @"Between 64 and 8192. Default of 512 is suitable in most cases.";
+    sectorCount.toolTip = @"Number of sectors (device size)";
+    deviceSize.toolTip = @"Device size";
+    deviceUnit.toolTip = @"Units for device: GB, MB, etc";
+    vendor.toolTip = @"SCSI Vendor string. eg. ' codesrc'";
+    productId.toolTip = @"SCSI Product ID string. eg. 'SCSI2SD";
+    revsion.toolTip = @"SCSI device revision string. eg. '3.5a'";
+    serialNumber.toolTip = @"SCSI serial number. eg. '13eab5632a'";
+    autoStartSector.toolTip = @"Auto start sector based on other targets";
+    sectorsPerTrack.toolTip = @"Number of sectors in each track";
+    headsPerCylinder.toolTip = @"Number of heads in cylinder";
     
     // Initial values
-    self.autoErrorText.stringValue = @"";
-    self.scsiIdErrorText.stringValue = @"";
+    autoErrorText.stringValue = @"";
+    scsiIdErrorText.stringValue = @"";
 }
 
 - (NSData *) structToData: (S2S_TargetCfg)config withMutableData: (NSMutableData *)d
@@ -91,39 +71,39 @@
 {
     S2S_TargetCfg config = [self dataToStruct: data];
     
-    self.enableSCSITarget.state = (config.scsiId & 0x80) ? NSOnState : NSOffState;
-    [self.SCSIID setStringValue:
+    enableSCSITarget.state = (config.scsiId & 0x80) ? NSOnState : NSOffState;
+    [SCSIID setStringValue:
      [NSString stringWithFormat: @"%d", (config.scsiId & 0x80) ?
       (config.scsiId - 0x80) : config.scsiId]];
-    [self.deviceType selectItemAtIndex: config.deviceType];
-    [self.sdCardStartSector setStringValue:[NSString stringWithFormat:@"%d", config.sdSectorStart]];
-    [self.sectorSize setStringValue: [NSString stringWithFormat: @"%d", config.bytesPerSector]];
-    [self.sectorCount setStringValue: [NSString stringWithFormat: @"%d", config.scsiSectors]];
-    [self.deviceSize setStringValue: [NSString stringWithFormat: @"%d", (((config.scsiSectors * config.bytesPerSector) / (1024 * 1024)) + 1) / 1024]];
+    [deviceType selectItemAtIndex: config.deviceType];
+    [sdCardStartSector setStringValue:[NSString stringWithFormat:@"%d", config.sdSectorStart]];
+    [sectorSize setStringValue: [NSString stringWithFormat: @"%d", config.bytesPerSector]];
+    [sectorCount setStringValue: [NSString stringWithFormat: @"%d", config.scsiSectors]];
+    [deviceSize setStringValue: [NSString stringWithFormat: @"%d", (((config.scsiSectors * config.bytesPerSector) / (1024 * 1024)) + 1) / 1024]];
     // Heads per cylinder is missing... should add it here.
     // Sectors per track...
-    [self.vendor setStringValue: [NSString stringWithCString:config.vendor length:8]];
-    [self.productId setStringValue: [NSString stringWithCString:config.prodId length:16]];
-    [self.revsion setStringValue: [NSString stringWithCString:config.revision length:4]];
-    [self.serialNumber setStringValue: [NSString stringWithCString:config.serial length:16]];
-    [self.sectorsPerTrack setStringValue: [NSString stringWithFormat: @"%d", config.sectorsPerTrack]];
-    [self.headsPerCylinder setStringValue: [NSString stringWithFormat: @"%d", config.headsPerCylinder]];
-    // [self.autoStartSector setState:]
+    [vendor setStringValue: [NSString stringWithCString:config.vendor length:8]];
+    [productId setStringValue: [NSString stringWithCString:config.prodId length:16]];
+    [revsion setStringValue: [NSString stringWithCString:config.revision length:4]];
+    [serialNumber setStringValue: [NSString stringWithCString:config.serial length:16]];
+    [sectorsPerTrack setStringValue: [NSString stringWithFormat: @"%d", config.sectorsPerTrack]];
+    [headsPerCylinder setStringValue: [NSString stringWithFormat: @"%d", config.headsPerCylinder]];
+    // [autoStartSector setState:]
 }
 
 - (void) getTargetConfigData: (NSMutableData *)d
 {
     S2S_TargetCfg targetConfig;
-    targetConfig.scsiId = self.SCSIID.intValue + self.enableSCSITarget.state == NSOnState ? 0x80 : 0x0;
-    targetConfig.deviceType = self.deviceType.indexOfSelectedItem;
-    targetConfig.sdSectorStart = self.sdCardStartSector.intValue;
-    targetConfig.bytesPerSector = self.sectorSize.intValue;
-    targetConfig.scsiSectors = self.sectorCount.intValue;
-    targetConfig.headsPerCylinder = self.headsPerCylinder.intValue;
-    strncpy(targetConfig.vendor, [self.vendor.stringValue cStringUsingEncoding:NSUTF8StringEncoding], 8);
-    strncpy(targetConfig.prodId, [self.productId.stringValue cStringUsingEncoding:NSUTF8StringEncoding], 16);
-    strncpy(targetConfig.revision, [self.revsion.stringValue cStringUsingEncoding:NSUTF8StringEncoding], 4);
-    strncpy(targetConfig.serial, [self.serialNumber.stringValue cStringUsingEncoding:NSUTF8StringEncoding], 16);
+    targetConfig.scsiId = SCSIID.intValue + enableSCSITarget.state == NSOnState ? 0x80 : 0x0;
+    targetConfig.deviceType = deviceType.indexOfSelectedItem;
+    targetConfig.sdSectorStart = sdCardStartSector.intValue;
+    targetConfig.bytesPerSector = sectorSize.intValue;
+    targetConfig.scsiSectors = sectorCount.intValue;
+    targetConfig.headsPerCylinder = headsPerCylinder.intValue;
+    strncpy(targetConfig.vendor, [vendor.stringValue cStringUsingEncoding:NSUTF8StringEncoding], 8);
+    strncpy(targetConfig.prodId, [productId.stringValue cStringUsingEncoding:NSUTF8StringEncoding], 16);
+    strncpy(targetConfig.revision, [revsion.stringValue cStringUsingEncoding:NSUTF8StringEncoding], 4);
+    strncpy(targetConfig.serial, [serialNumber.stringValue cStringUsingEncoding:NSUTF8StringEncoding], 16);
     [self structToData: targetConfig withMutableData: d];
 }
 
@@ -149,39 +129,39 @@
 
 - (BOOL) isEnabled
 {
-    return self.enableSCSITarget.state == NSOnState;
+    return enableSCSITarget.state == NSOnState;
 }
 
 - (NSUInteger) getSCSIId
 {
-    return (NSUInteger)self.SCSIID.integerValue;
+    return (NSUInteger)SCSIID.integerValue;
 }
 
 - (void) setDuplicateID: (BOOL)flag
 {
-    self.duplicateId = flag;
+    duplicateId = flag;
     if(flag)
-        self.scsiIdErrorText.stringValue = @"Duplicate IDs.";
+        scsiIdErrorText.stringValue = @"Duplicate IDs.";
     else
-        self.scsiIdErrorText.stringValue = @"";
+        scsiIdErrorText.stringValue = @"";
 }
 - (void) setSDSectorOverlap: (BOOL)flag
 {
-    self.sectorOverlap = flag;
+    sectorOverlap = flag;
     if(flag)
-        self.autoErrorText.stringValue = @"Sectors overlap.";
+        autoErrorText.stringValue = @"Sectors overlap.";
     else
-        self.autoErrorText.stringValue = @"";
+        autoErrorText.stringValue = @"";
 }
 
 - (NSRange) getSDSectorRange
 {
-    return NSMakeRange(self.sdCardStartSector.integerValue,
-                       self.sectorCount.integerValue);
+    return NSMakeRange(sdCardStartSector.integerValue,
+                       sectorCount.integerValue);
 }
 
 - (void) setAutoStartSectorValue: (NSUInteger)sector
 {
-    self.sdCardStartSector.integerValue = (NSInteger)sector;
+    sdCardStartSector.integerValue = (NSInteger)sector;
 }
 @end

@@ -14,6 +14,20 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SettingsController : NSObject
+{
+    IBOutlet NSButton *enableSCSITerminator;
+    IBOutlet NSPopUpButton *speedLimit;
+    IBOutlet NSTextField *startupDelay;
+    IBOutlet NSTextField *startupSelectionDelay;
+    IBOutlet NSButton *enableParity;
+    IBOutlet NSButton *enableUnitAttention;
+    IBOutlet NSButton *enableSCSI2Mode;
+    IBOutlet NSButton *respondToShortSCSISelection;
+    IBOutlet NSButton *mapLUNStoSCSIIDs;
+    IBOutlet NSButton *enableGlitch;
+    IBOutlet NSButton *enableCache;
+    IBOutlet NSButton *enableDisconnect;
+}
 
 - (NSString *) toXml;
 - (void) setConfig: (S2S_BoardCfg)config;
