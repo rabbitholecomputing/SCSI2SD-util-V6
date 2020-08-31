@@ -45,7 +45,7 @@ SCSI2SD-util-v6_OBJCPP_FILES =
 SCSI2SD-util-v6_RESOURCE_FILES = SCSI2SD-util/Assets.xcassets \
 	SCSI2SD-util/en.lproj/MainMenu.xib \
 	SCSI2SD-util/SCSI2SD-V6-util-512.png \
-	English.lproj 
+	SCSI2SD-utilInfo.plist 
 
 ADDITIONAL_INCLUDE_DIRS += -I. \
 	-I./SCSI2SD-util/Modules/Firmware \
@@ -56,9 +56,8 @@ ADDITIONAL_INCLUDE_DIRS += -I. \
 	-I./SCSI2SD-util/ViewControllers \
 	-I./SCSI2SD-util 
 
-ADDITIONAL_OBJCFLAGS += -fobjc-exceptions
-
-ADDITIONAL_LDFLAGS += -lusb-1.0 -ludev
+ADDITIONAL_OBJC_LIBS += -lusb-1.0 \
+	-ludev 
 
 include $(GNUSTEP_MAKEFILES)/common.make
 include $(GNUSTEP_MAKEFILES)/application.make

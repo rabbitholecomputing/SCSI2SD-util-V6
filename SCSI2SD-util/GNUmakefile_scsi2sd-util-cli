@@ -50,7 +50,7 @@ ADDITIONAL_INCLUDE_DIRS += -I. \
 	-I./SCSI2SD-util/Modules/Firmware \
 	-I./scsi2sd-util-v6-cli 
 
-ADDITIONAL_LDFLAGS += -lusb-1.0 \
+ADDITIONAL_OBJC_LIBS += -lusb-1.0 \
 	-ludev 
 
 include $(GNUSTEP_MAKEFILES)/common.make
