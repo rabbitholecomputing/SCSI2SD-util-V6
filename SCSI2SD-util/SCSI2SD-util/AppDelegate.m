@@ -733,9 +733,11 @@ out:
     }
     else
     {
+      [self showReadCompletionPanel: self];
+      /*
         [self performSelectorOnMainThread:@selector(showReadCompletionPanel:)
                                withObject:nil
-                            waitUntilDone:NO];
+                            waitUntilDone:NO]; */
     }
     
     [my_pool release];

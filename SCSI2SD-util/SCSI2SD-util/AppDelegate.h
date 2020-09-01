@@ -72,5 +72,8 @@
 - (IBAction) scsiSelfTest:(id)sender;
 - (IBAction) shouldLogScsiData: (id)sender;
 
+- (void) evaluate;
+- (void) logScsiData;
+
 @end
 

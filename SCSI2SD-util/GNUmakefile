@@ -56,8 +56,9 @@ ADDITIONAL_INCLUDE_DIRS += -I. \
 	-I./SCSI2SD-util/ViewControllers \
 	-I./SCSI2SD-util 
 
+ADDITIONAL_OBJCFLAGS += -fobjc-exceptions
 ADDITIONAL_OBJC_LIBS += -lusb-1.0 \
-	-ludev 
+	-lsetupapi
 
 include $(GNUSTEP_MAKEFILES)/common.make
 include $(GNUSTEP_MAKEFILES)/application.make
