@@ -186,52 +186,80 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 
 - (void) showWrongFilenamePanel: (id)sender
 {
+#ifndef __MINGW32__
     NSAlert *alert = [[NSAlert alloc] init];
 
     [self hideProgress:self];
     alert.messageText = @"Wrong filename";
     alert.informativeText = @"Firmware does not match device hardware";
     [alert runModal];
+#else
+    [logPanel orderFrontRegardless];
+#endif
 }
 
 - (void) showReadCompletionPanel: (id)sender
 {
+#ifndef __MINGW32__
     NSAlert *alert = [[NSAlert alloc] init];
 
     [self hideProgress:self];
     alert.messageText = @"Operation Completed";
     alert.informativeText = @"Configuration was read from device";
+    NSWindow *aw = [alert window];
+    [aw orderFrontRegardless];
+    NSRect f = [aw frame];
+    f.origin.x += 10.0;
+    f.origin.y += 10.0;
+    [aw setFrame: f
+	 display: YES
+	 animate: YES];
     [alert runModal];
+#else
+    [logPanel orderFrontRegardless];
+#endif
 }
 
 - (void) showReadErrorPanel: (id)sender
 {
+#ifndef __MINGW32__
     NSAlert *alert = [[NSAlert alloc] init];
 
     [self hideProgress:self];
     alert.messageText = @"Operation not Completed!!";
     alert.informativeText = @"Configuration was NOT read from device!!!";
     [alert runModal];
+#else
+    [logPanel orderFrontRegardless];
+#endif
 }
 
 - (void) showWriteCompletionPanel: (id)sender
 {
+#ifndef __MINGW32__
     NSAlert *alert = [[NSAlert alloc] init];
 
     [self hideProgress:self];
     alert.messageText = @"Operation Completed!!";
     alert.informativeText = @"Configuration was written to device";
     [alert runModal];
+#else
+    [logPanel orderFrontRegardless];
+#endif
 }
 
 - (void) showWriteErrorPanel: (id)sender
 {
+#ifndef __MINGW32__
     NSAlert *alert = [[NSAlert alloc] init];
 
     [self hideProgress:self];
     alert.messageText = @"Operation not Complete!!";
     alert.informativeText = @"Configuration was NOT written to device";
     [alert runModal];
+#else
+    [logPanel orderFrontRegardless];
+#endif
 }
 
 // Start polling for the device...
@@ -733,11 +761,10 @@ out:
     }
     else
     {
-      [self showReadCompletionPanel: self];
-      /*
         [self performSelectorOnMainThread:@selector(showReadCompletionPanel:)
                                withObject:nil
-                            waitUntilDone:NO]; */
+                            waitUntilDone:NO]; 
+
     }
     
     [my_pool release];

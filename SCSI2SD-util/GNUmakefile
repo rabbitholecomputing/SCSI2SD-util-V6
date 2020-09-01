@@ -44,8 +44,11 @@ SCSI2SD-util-v6_OBJCPP_FILES =
 
 SCSI2SD-util-v6_RESOURCE_FILES = SCSI2SD-util/Assets.xcassets \
 	SCSI2SD-util/en.lproj/MainMenu.xib \
-	SCSI2SD-util/SCSI2SD-V6-util-512.png \
-	SCSI2SD-utilInfo.plist 
+	SCSI2SD-util/SCSI2SD-V6-util-512.png
+
+SCSI2SD-util-v6_MAIN_MODEL_FILE = MainMenu.xib
+
+SCSI2SD-util-v6_APPLICATION_ICON = SCSI2SD-V6-util-512.png
 
 ADDITIONAL_INCLUDE_DIRS += -I. \
 	-I./SCSI2SD-util/Modules/Firmware \
