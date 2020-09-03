@@ -814,7 +814,7 @@ out:
         [cfgData appendData:raw];
     }
     
-    uint32_t sector = [myHID getSDCapacity]; //  myHID->getSDCapacity() - 2;
+    uint32_t sector = [myHID getSDCapacity] - 2; //  myHID->getSDCapacity() - 2;
     // size_t i = 0;
     for (i = 0; i < 2; ++i)
     {

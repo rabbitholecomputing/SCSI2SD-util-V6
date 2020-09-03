@@ -2,7 +2,7 @@
 
 PROJECT_DIR=$1
 XIB_NAME=${3:-MainMenu.xib}
-LANG_NAME=${2:-Base}
+LANG_NAME=${2:-en}
 FULL_XIB_NAME=${PROJECT_DIR}/${LANG_NAME}.lproj/${XIB_NAME}
 
 echo "Replacing usesAutolayout and translatesAutoresizingMaskIntoConstraints"
