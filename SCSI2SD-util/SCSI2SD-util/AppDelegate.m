@@ -275,7 +275,10 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 // Pause the timer...
 - (void) stopTimer
 {
-    [pollDeviceTimer invalidate];
+  if (pollDeviceTimer != nil)
+    {
+      [pollDeviceTimer invalidate];
+    }
 }
 
 // Reset the HID...
@@ -693,7 +696,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     size_t i = 0;
     for (i = 0; i < 2; ++i)
     {
-        [self logStringToPanel:  @"\nReading sector %d", sector];
+        [self logStringToPanel:  @"\nReading SD sector %d", sector];
         currentProgress += 1;
         if (currentProgress == totalProgress)
         {
@@ -814,9 +817,9 @@ out:
         [cfgData appendData:raw];
     }
     
-    uint32_t sector = [myHID getSDCapacity]; //  myHID->getSDCapacity() - 2;
+    uint32_t sector = [myHID getSDCapacity] - 2; //  myHID->getSDCapacity() - 2;
     // size_t i = 0;
-    for (i = 0; i < 2; ++i)
+    for (i = 0; i < 2; i++)
     {
         [self logStringToPanel: @"\nWriting SD Sector %zu",sector];
         currentProgress += 1;
@@ -831,15 +834,10 @@ out:
             NSRange r = NSMakeRange(i * 512, 512);
             NSData *sd = [cfgData subdataWithRange:r];
             [myHID writeSector:sector++ input: sd];
-            /*
-            std::vector<uint8_t> buf;
-            buf.insert(buf.end(), &cfgData[i * 512], &cfgData[(i+1) * 512]);
-            myHID->writeSector(sector++, buf);
-             */
         }
         @catch (NSException *e)
         {
-            [self logStringToPanel:  @"\nException %@",[e reason]];
+            [self logStringToPanel: @"\nException %@",[e reason]];
             error = YES;
             goto err;
         }

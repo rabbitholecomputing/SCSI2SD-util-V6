@@ -13,6 +13,11 @@ int main(int argc, const char * argv[]) {
     @autoreleasepool {
         // Setup code that might create autoreleased objects goes here.
     }
+#else
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    [[NSUserDefaults standardUserDefaults] setObject: @"WinUXTheme"
+					      forKey: @"GSTheme"]; 
+    RELEASE(pool);
 #endif
     return NSApplicationMain(argc, argv);
 }

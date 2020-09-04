@@ -188,12 +188,14 @@
     
     if ([output length] < 1)
     {
-        [NSException raise:NSInternalInconsistencyException format:@"Could not write sector"];
+      // [NSException raise:NSInternalInconsistencyException format:@"Could not write sector"];
+      NSLog(@"Could not write sector");
     }
     
     if (((int *)[output bytes])[0] != S2S_CFG_STATUS_GOOD)
     {
-        [NSException raise:NSInternalInconsistencyException format:@"Could not write sector, got bad status"];
+      // [NSException raise:NSInternalInconsistencyException format:@"Could not write sector, got bad status"];
+      NSLog(@"Could not write sector, got bad status.");
     }
 }
 
@@ -369,7 +371,8 @@
     if (result < 0)
     {
         const wchar_t* err = hid_error(myConfigHandle);
-        [NSException raise:NSInternalInconsistencyException format:@"USB HID Read Failure: %@", [NSString stringFromWchar:err]];
+        // [NSException raise:NSInternalInconsistencyException format:@"USB HID Read Failure: %@", [NSString stringFromWchar:err]];
+	NSLog(@"USB HID Read Failure: %@", [NSString stringFromWchar:err]);
     }
 }
 
@@ -403,7 +406,8 @@
         if (result <= 0)
         {
             const wchar_t* err = hid_error(myConfigHandle);
-            [NSException raise:NSInternalInconsistencyException format:@"USB HID write failure: %@", [NSString stringFromWchar:err]];
+            // [NSException raise:NSInternalInconsistencyException format:@"USB HID write failure: %@", [NSString stringFromWchar:err]];
+	    NSLog(@"USB HID write failure: %@", [NSString stringFromWchar:err]);
         }
         chunk = hidPacket_getHIDBytes(hidBuf);
     }
@@ -422,7 +426,8 @@
 
     if (!resp)
     {
-        [NSException raise:NSInternalInconsistencyException format:@"SCSI2SD config protocol error"];
+      // [NSException raise:NSInternalInconsistencyException format:@"SCSI2SD config protocol error"];
+      NSLog(@"SCSI2SD config protocol error");
     }
 
     // Append to the response...
