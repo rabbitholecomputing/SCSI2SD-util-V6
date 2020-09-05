@@ -838,7 +838,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -881,7 +881,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
