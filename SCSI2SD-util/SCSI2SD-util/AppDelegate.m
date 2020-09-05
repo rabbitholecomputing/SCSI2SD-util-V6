@@ -373,12 +373,14 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 {
     // Insert code here to initialize your application
     signal(SIGINT , clean_exit_on_sig);
-    signal(SIGABRT , clean_exit_on_sig);
+    signal(SIGABRT, clean_exit_on_sig);
     signal(SIGILL , clean_exit_on_sig);
     signal(SIGFPE , clean_exit_on_sig);
     signal(SIGSEGV, clean_exit_on_sig); // <-- this one is for segmentation fault
-    signal(SIGTERM , clean_exit_on_sig);
+    signal(SIGTERM, clean_exit_on_sig);
     
+    // Check to see if another instance of the app is running...
+
     @try
     {
         //myHID.reset(SCSI2SD::HID::Open());

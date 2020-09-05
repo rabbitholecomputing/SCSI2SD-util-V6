@@ -189,14 +189,16 @@
     if ([output length] < 1)
     {
       // [NSException raise:NSInternalInconsistencyException format:@"Could not write sector"];
-      NSLog(@"Could not write sector");
+      NSLog(@"Could not write sector %u.", sector);
     }
     
+#ifndef __MINGW32__
     if (((int *)[output bytes])[0] != S2S_CFG_STATUS_GOOD)
     {
       // [NSException raise:NSInternalInconsistencyException format:@"Could not write sector, got bad status"];
-      NSLog(@"Could not write sector, got bad status.");
+      NSLog(@"Could not write sector %u, got bad status.", sector);
     }
+#endif // this does not get set on windows for some reason, but it is writing successfully.
 }
 
 - (BOOL) ping
