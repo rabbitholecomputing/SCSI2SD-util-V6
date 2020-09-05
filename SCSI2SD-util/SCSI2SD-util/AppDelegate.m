@@ -21,7 +21,9 @@
 NSString *dfuOutputNotification = @"DFUOutputNotification";
 NSString *dfuProgressNotification = @"DFUProgressNotification";
 
+#ifdef __MINGW32__
 int find_process( char *name );
+#endif
 
 int dfu_util(int argc, char **argv, unsigned char *buf); // our one and only interface with the dfu library...
 
@@ -381,11 +383,19 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     signal(SIGSEGV, clean_exit_on_sig); // <-- this one is for segmentation fault
     signal(SIGTERM, clean_exit_on_sig);
     
+#ifdef __MINGW32__
     // Check to see if another instance of the app is running...
     if(find_process("SCSI2SD"))
       {
+	NSAlert *alert = [[NSAlert alloc] init];
+	
+	alert.messageText = @"Duplicate Process";
+	alert.informativeText = @"Another instance of SCSI2SD is running, terminating.";
+	[alert runModal];
+
 	[NSApp terminate: self];
       }
+#endif
 
     @try
     {
