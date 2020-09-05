@@ -21,6 +21,8 @@
 NSString *dfuOutputNotification = @"DFUOutputNotification";
 NSString *dfuProgressNotification = @"DFUProgressNotification";
 
+int find_process( char *name );
+
 int dfu_util(int argc, char **argv, unsigned char *buf); // our one and only interface with the dfu library...
 
 void dfu_printf(char *format, ...)
@@ -380,6 +382,10 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     signal(SIGTERM, clean_exit_on_sig);
     
     // Check to see if another instance of the app is running...
+    if(find_process("SCSI2SD"))
+      {
+	[NSApp terminate: self];
+      }
 
     @try
     {
