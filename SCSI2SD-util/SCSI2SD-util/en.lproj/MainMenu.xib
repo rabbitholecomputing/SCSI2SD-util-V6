@@ -2917,7 +2917,7 @@
             </view>
             <point key="canvasLocation" x="33" y="128"/>
         </window>
-        <window title="Log Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="dr2-Hc-cWT" userLabel="Log">
+        <window title="Log Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="dr2-Hc-cWT" userLabel="Log">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="213" y="227" width="630" height="413"/>
@@ -2957,7 +2957,7 @@
             </view>
             <point key="canvasLocation" x="939" y="-424.5"/>
         </window>
-        <window title="DFU Log Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="Dxm-J0-DmK" userLabel="DFU Log">
+        <window title="DFU Log Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Dxm-J0-DmK" userLabel="DFU Log">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="213" y="227" width="616" height="429"/>
