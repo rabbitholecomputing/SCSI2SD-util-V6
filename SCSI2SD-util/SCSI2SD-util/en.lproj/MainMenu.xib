@@ -184,7 +184,6 @@
                 <outlet property="device5" destination="i9u-bG-GAU" id="Ilg-d9-ITQ"/>
                 <outlet property="device6" destination="RDl-9l-zXo" id="8Eb-3w-TBb"/>
                 <outlet property="device7" destination="5Ee-7c-Xde" id="z0b-Zl-yzT"/>
-                <outlet property="dfuLogPanel" destination="nc8-Rm-Ytl" id="tHq-qd-xyV"/>
                 <outlet property="dfuPanel" destination="346-q5-iyk" id="LzR-jS-ZkY"/>
                 <outlet property="dfuTextView" destination="6FQ-IP-ivO" id="rqQ-Jg-dhm"/>
                 <outlet property="infoLabel" destination="ara-s3-3mi" id="zBW-ar-FhY"/>
