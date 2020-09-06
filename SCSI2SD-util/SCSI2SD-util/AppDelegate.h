@@ -43,7 +43,7 @@
     IBOutlet NSTextField *infoLabel;
 
   
-    IBOutlet NSView *dfuLogPanel;
+    IBOutlet NSPanel *dfuPanel;
     IBOutlet NSPanel *logPanel;
     IBOutlet NSTextView *dfuTextView;
     IBOutlet NSTextView *logTextView;
