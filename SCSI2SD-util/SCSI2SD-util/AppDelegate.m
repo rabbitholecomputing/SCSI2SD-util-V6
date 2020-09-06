@@ -21,6 +21,10 @@
 NSString *dfuOutputNotification = @"DFUOutputNotification";
 NSString *dfuProgressNotification = @"DFUProgressNotification";
 
+#ifdef __MINGW32__
+int find_process( char *name );
+#endif
+
 int dfu_util(int argc, char **argv, unsigned char *buf); // our one and only interface with the dfu library...
 
 void dfu_printf(char *format, ...)
@@ -275,7 +279,10 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 // Pause the timer...
 - (void) stopTimer
 {
-    [pollDeviceTimer invalidate];
+  if (pollDeviceTimer != nil)
+    {
+      [pollDeviceTimer invalidate];
+    }
 }
 
 // Reset the HID...
@@ -370,12 +377,26 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 {
     // Insert code here to initialize your application
     signal(SIGINT , clean_exit_on_sig);
-    signal(SIGABRT , clean_exit_on_sig);
+    signal(SIGABRT, clean_exit_on_sig);
     signal(SIGILL , clean_exit_on_sig);
     signal(SIGFPE , clean_exit_on_sig);
     signal(SIGSEGV, clean_exit_on_sig); // <-- this one is for segmentation fault
-    signal(SIGTERM , clean_exit_on_sig);
+    signal(SIGTERM, clean_exit_on_sig);
     
+#ifdef __MINGW32__
+    // Check to see if another instance of the app is running...
+    if(find_process("SCSI2SD"))
+      {
+	NSAlert *alert = [[NSAlert alloc] init];
+	
+	alert.messageText = @"Duplicate Process";
+	alert.informativeText = @"Another instance of SCSI2SD is running, terminating.";
+	[alert runModal];
+
+	[NSApp terminate: self];
+      }
+#endif
+
     @try
     {
         //myHID.reset(SCSI2SD::HID::Open());
@@ -706,7 +727,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     size_t i = 0;
     for (i = 0; i < 2; ++i)
     {
-        [self logStringToPanel:  @"\nReading sector %d", sector];
+        [self logStringToPanel:  @"\nReading SD sector %d", sector];
         currentProgress += 1;
         if (currentProgress == totalProgress)
         {
@@ -829,7 +850,7 @@ out:
     
     uint32_t sector = [myHID getSDCapacity] - 2; //  myHID->getSDCapacity() - 2;
     // size_t i = 0;
-    for (i = 0; i < 2; ++i)
+    for (i = 0; i < 2; i++)
     {
         [self logStringToPanel: @"\nWriting SD Sector %zu",sector];
         currentProgress += 1;
@@ -844,15 +865,10 @@ out:
             NSRange r = NSMakeRange(i * 512, 512);
             NSData *sd = [cfgData subdataWithRange:r];
             [myHID writeSector:sector++ input: sd];
-            /*
-            std::vector<uint8_t> buf;
-            buf.insert(buf.end(), &cfgData[i * 512], &cfgData[(i+1) * 512]);
-            myHID->writeSector(sector++, buf);
-             */
         }
         @catch (NSException *e)
         {
-            [self logStringToPanel:  @"\nException %@",[e reason]];
+            [self logStringToPanel: @"\nException %@",[e reason]];
             error = YES;
             goto err;
         }

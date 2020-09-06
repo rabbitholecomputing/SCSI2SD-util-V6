@@ -36,7 +36,8 @@ SCSI2SD-util-v6_C_FILES = SCSI2SD-util/Modules/Firmware/time.c \
 	SCSI2SD-util/Modules/hwversion.c \
 	SCSI2SD-util/Modules/DFU/dfu.c \
 	SCSI2SD-util/Modules/DFU/dfu_util.c \
-	SCSI2SD-util/Modules/Driver/stm32f2xx_hal_rcc.c 
+	SCSI2SD-util/Modules/Driver/stm32f2xx_hal_rcc.c \
+	SCSI2SD-util/enum_process.c
 
 SCSI2SD-util-v6_CPP_FILES = 
 
@@ -44,7 +45,8 @@ SCSI2SD-util-v6_OBJCPP_FILES =
 
 SCSI2SD-util-v6_RESOURCE_FILES = SCSI2SD-util/Assets.xcassets \
 	SCSI2SD-util/en.lproj/MainMenu.xib \
-	SCSI2SD-util/SCSI2SD-V6-util-512.png
+	SCSI2SD-util/SCSI2SD-V6-util-512.png \
+	./SCSI2SD-util-v6.ico
 
 SCSI2SD-util-v6_MAIN_MODEL_FILE = MainMenu.xib
 
@@ -61,7 +63,8 @@ ADDITIONAL_INCLUDE_DIRS += -I. \
 
 ADDITIONAL_OBJCFLAGS += -fobjc-exceptions
 ADDITIONAL_OBJC_LIBS += -lusb-1.0 \
-	-lsetupapi
+	-lsetupapi \
+	-lpsapi
 
 include $(GNUSTEP_MAKEFILES)/common.make
 include $(GNUSTEP_MAKEFILES)/application.make
