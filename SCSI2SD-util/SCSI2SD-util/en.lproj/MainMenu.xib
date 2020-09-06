@@ -9,8 +9,6 @@
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
             <connections>
                 <outlet property="delegate" destination="Voe-Tx-rLC" id="GzC-gU-4Uq"/>
-                <outlet property="dfuPanel" destination="6Xd-hU-hPD" id="Wh2-Te-1Sf"/>
-                <outlet property="logPanel" destination="rQF-M4-so8" id="dRr-xe-TE1"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -186,11 +184,11 @@
                 <outlet property="device5" destination="i9u-bG-GAU" id="Ilg-d9-ITQ"/>
                 <outlet property="device6" destination="RDl-9l-zXo" id="8Eb-3w-TBb"/>
                 <outlet property="device7" destination="5Ee-7c-Xde" id="z0b-Zl-yzT"/>
-                <outlet property="dfuPanel" destination="0Kb-9m-aMM" id="LRp-Y7-Ywf"/>
-                <outlet property="dfuTextView" destination="m9q-Cf-8kY" id="8Vy-Qg-C7u"/>
+                <outlet property="dfuPanel" destination="Dxm-J0-DmK" id="oz7-5U-9Yq"/>
+                <outlet property="dfuTextView" destination="8Fu-WA-wyO" id="Tql-x7-Z94"/>
                 <outlet property="infoLabel" destination="ara-s3-3mi" id="zBW-ar-FhY"/>
-                <outlet property="logPanel" destination="H9u-55-H3N" id="0ax-Oo-P3x"/>
-                <outlet property="logTextView" destination="IUe-Fz-GvN" id="xlT-NK-QdU"/>
+                <outlet property="logPanel" destination="dr2-Hc-cWT" id="uG0-3q-v0f"/>
+                <outlet property="logTextView" destination="rv1-pe-3ie" id="7Bj-4X-PJG"/>
                 <outlet property="mainWindow" destination="QvC-M9-y7g" id="aa3-CG-2Ja"/>
                 <outlet property="openMenu" destination="IAo-SY-fd9" id="p23-ve-9Tb"/>
                 <outlet property="progress" destination="Buk-nO-Jap" id="RvG-jV-7y1"/>
@@ -263,6 +261,12 @@
                             <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV">
                                 <connections>
                                     <action selector="saveFile:" target="Voe-Tx-rLC" id="r2G-Wt-bvb"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Save Logs" id="Gqq-UA-kJs">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="saveLogFiles:" target="Voe-Tx-rLC" id="pnh-ms-GqR"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
@@ -2832,89 +2836,7 @@
             </view>
             <point key="canvasLocation" x="56.5" y="-358"/>
         </window>
-        <window title="SCSI-util V6 Log" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="H9u-55-H3N" customClass="NSPanel">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="1481" y="449" width="629" height="378"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1129"/>
-            <view key="contentView" id="zVs-ES-bFT">
-                <rect key="frame" x="0.0" y="0.0" width="629" height="378"/>
-                <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQF-M4-so8">
-                        <rect key="frame" x="0.0" y="0.0" width="629" height="378"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="3KJ-QQ-yLC">
-                            <rect key="frame" x="0.0" y="0.0" width="614" height="378"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <subviews>
-                                <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="IUe-Fz-GvN">
-                                    <rect key="frame" x="0.0" y="0.0" width="614" height="378"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="minSize" width="614" height="378"/>
-                                    <size key="maxSize" width="629" height="10000000"/>
-                                    <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                </textView>
-                            </subviews>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </clipView>
-                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="sD6-qG-kw1">
-                            <rect key="frame" x="-100" y="-100" width="240" height="16"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                        </scroller>
-                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="Q8r-c7-fdv">
-                            <rect key="frame" x="614" y="0.0" width="15" height="378"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                        </scroller>
-                    </scrollView>
-                </subviews>
-            </view>
-            <point key="canvasLocation" x="799.5" y="-393"/>
-        </window>
-        <window title="DFU Update" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="0Kb-9m-aMM" customClass="NSPanel">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="211" y="124" width="629" height="376"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1129"/>
-            <view key="contentView" id="PVE-wg-usZ">
-                <rect key="frame" x="0.0" y="0.0" width="629" height="376"/>
-                <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Xd-hU-hPD">
-                        <rect key="frame" x="-6" y="0.0" width="629" height="376"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="H32-El-DSP">
-                            <rect key="frame" x="0.0" y="0.0" width="614" height="376"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <subviews>
-                                <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="m9q-Cf-8kY">
-                                    <rect key="frame" x="0.0" y="0.0" width="614" height="376"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="minSize" width="614" height="376"/>
-                                    <size key="maxSize" width="629" height="10000000"/>
-                                    <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                </textView>
-                            </subviews>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </clipView>
-                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="mTG-TV-8ZP">
-                            <rect key="frame" x="-100" y="-100" width="240" height="16"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                        </scroller>
-                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="QiV-Ar-SGB">
-                            <rect key="frame" x="614" y="0.0" width="15" height="376"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                        </scroller>
-                    </scrollView>
-                </subviews>
-            </view>
-            <point key="canvasLocation" x="799.5" y="55"/>
-        </window>
-        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="VTA-nH-0mE">
+        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="VTA-nH-0mE" userLabel="Info">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="-1517" y="307" width="480" height="270"/>
             <rect key="screenRect" x="-1680" y="102" width="1680" height="1050"/>
@@ -2940,7 +2862,7 @@
                         <rect key="frame" x="222" y="211" width="195" height="14"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Version 1.0.0" id="wDo-gs-FH5">
-                            <font key="font" metaFont="menu" size="11"/>
+                            <font key="font" metaFont="controlContent" size="11"/>
                             <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -2958,7 +2880,7 @@
                         <rect key="frame" x="234" y="162" width="195" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Copyright Rabbit Hole Computing" id="WZ1-1g-GvN">
-                            <font key="font" metaFont="menu" size="11"/>
+                            <font key="font" metaFont="controlContent" size="11"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -2976,7 +2898,7 @@
                         <rect key="frame" x="234" y="114" width="195" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Copyright Micheal McMaster" id="Vao-gh-TZm">
-                            <font key="font" metaFont="menu" size="11"/>
+                            <font key="font" metaFont="controlContent" size="11"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -2985,7 +2907,7 @@
                         <rect key="frame" x="224" y="20" width="238" height="86"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" selectable="YES" id="ed2-cz-ijZ">
-                            <font key="font" metaFont="menu" size="11"/>
+                            <font key="font" metaFont="controlContent" size="11"/>
                             <string key="title">SCSI2SD-util-V6 is licensed under the GPL v3.0.  You should have received a copy of the license with the application.  If you did not, please visit https://www.gnu.org/licenses/</string>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2993,7 +2915,87 @@
                     </textField>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="1405" y="108"/>
+            <point key="canvasLocation" x="33" y="128"/>
+        </window>
+        <window title="Log Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="dr2-Hc-cWT" userLabel="Log">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="213" y="227" width="630" height="413"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1129"/>
+            <view key="contentView" id="FqO-dU-sZf">
+                <rect key="frame" x="0.0" y="0.0" width="630" height="413"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tWc-Ik-zfX">
+                        <rect key="frame" x="0.0" y="0.0" width="630" height="413"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="1xL-Ct-bYj">
+                            <rect key="frame" x="0.0" y="0.0" width="615" height="413"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="rv1-pe-3ie">
+                                    <rect key="frame" x="0.0" y="0.0" width="615" height="413"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="minSize" width="615" height="413"/>
+                                    <size key="maxSize" width="615" height="10000000"/>
+                                    <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                </textView>
+                            </subviews>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="BGD-zT-kOk">
+                            <rect key="frame" x="-100" y="-100" width="225" height="15"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="eVW-M5-mjm">
+                            <rect key="frame" x="615" y="0.0" width="15" height="413"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="939" y="-424.5"/>
+        </window>
+        <window title="DFU Log Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="Dxm-J0-DmK" userLabel="DFU Log">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="213" y="227" width="616" height="429"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1129"/>
+            <view key="contentView" id="kKX-xJ-tu3">
+                <rect key="frame" x="0.0" y="0.0" width="616" height="429"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SeS-kY-bfk">
+                        <rect key="frame" x="0.0" y="0.0" width="616" height="429"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="d6j-wh-cig">
+                            <rect key="frame" x="0.0" y="0.0" width="601" height="429"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="8Fu-WA-wyO">
+                                    <rect key="frame" x="0.0" y="0.0" width="601" height="429"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="minSize" width="601" height="429"/>
+                                    <size key="maxSize" width="621" height="10000000"/>
+                                    <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                </textView>
+                            </subviews>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="dNT-QH-uEb">
+                            <rect key="frame" x="-100" y="-100" width="225" height="15"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="1aA-4a-aVT">
+                            <rect key="frame" x="601" y="0.0" width="15" height="429"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="902" y="165.5"/>
         </window>
     </objects>
     <resources>

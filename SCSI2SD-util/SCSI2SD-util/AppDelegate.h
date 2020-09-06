@@ -41,12 +41,13 @@
     IBOutlet NSWindow *window;
     IBOutlet NSWindow *mainWindow;
     IBOutlet NSTextField *infoLabel;
-    IBOutlet NSPanel *logPanel;
-    IBOutlet NSPanel *dfuPanel;
+
+    IBOutlet NSWindow *logPanel;
+    IBOutlet NSWindow *dfuPanel;
     IBOutlet NSTextView *logTextView;
     IBOutlet NSTextView *dfuTextView;
+    
     IBOutlet NSTabView *tabView;
-
     IBOutlet DeviceController *device1;
     IBOutlet DeviceController *device2;
     IBOutlet DeviceController *device3;

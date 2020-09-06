@@ -432,6 +432,19 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     [deviceControllers removeAllObjects];
 }
 
+- (IBAction)saveLogFiles:(id)sender {
+    [logTextView.string writeToFile:@"SCSI2SD_log.txt"
+                         atomically:YES
+                           encoding:NSUTF8StringEncoding
+                              error:NULL];
+    [dfuTextView.string writeToFile:@"SCSI2SD_DFU_log.txt"
+                         atomically:YES
+                           encoding:NSUTF8StringEncoding
+                              error:NULL];
+    [self logStringToPanel:@"Logs saved."];
+    [logPanel orderFrontRegardless];
+}
+
 - (void) dumpScsiData: (NSMutableData *) buffer
 {
     NSString *msg = @"";
