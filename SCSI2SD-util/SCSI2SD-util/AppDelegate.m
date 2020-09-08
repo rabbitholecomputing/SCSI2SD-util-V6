@@ -419,6 +419,9 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     [deviceControllers addObject: device6];
     [deviceControllers addObject: device7];
     
+    [dfuScroller setEnabled:YES];
+    [logScroller setEnabled:YES];
+    
     [tabView selectTabViewItemAtIndex:0];
     [progress setMinValue: 0.0];
     [progress setMaxValue: 100.0];

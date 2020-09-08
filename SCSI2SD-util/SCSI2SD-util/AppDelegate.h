@@ -56,7 +56,9 @@
     IBOutlet DeviceController *device5;
     IBOutlet DeviceController *device6;
     IBOutlet DeviceController *device7;
-
+    IBOutlet NSScroller *dfuScroller;
+    IBOutlet NSScroller *logScroller;
+    
     IBOutlet NSProgressIndicator *progress;
 
     IBOutlet NSMenuItem *saveMenu;

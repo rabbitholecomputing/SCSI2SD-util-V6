@@ -185,9 +185,11 @@
                 <outlet property="device6" destination="RDl-9l-zXo" id="8Eb-3w-TBb"/>
                 <outlet property="device7" destination="5Ee-7c-Xde" id="z0b-Zl-yzT"/>
                 <outlet property="dfuPanel" destination="346-q5-iyk" id="LzR-jS-ZkY"/>
+                <outlet property="dfuScroller" destination="2wt-VC-rRm" id="YlH-wh-zkS"/>
                 <outlet property="dfuTextView" destination="6FQ-IP-ivO" id="rqQ-Jg-dhm"/>
                 <outlet property="infoLabel" destination="ara-s3-3mi" id="zBW-ar-FhY"/>
                 <outlet property="logPanel" destination="zue-3B-0wh" id="e0i-Of-KDt"/>
+                <outlet property="logScroller" destination="52e-zI-DaK" id="Q1N-BL-6Yq"/>
                 <outlet property="logTextView" destination="j7o-zP-h3T" id="lur-wA-scZ"/>
                 <outlet property="mainWindow" destination="QvC-M9-y7g" id="aa3-CG-2Ja"/>
                 <outlet property="openMenu" destination="IAo-SY-fd9" id="p23-ve-9Tb"/>
@@ -2962,7 +2964,7 @@
                     </scrollView>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="971" y="282.5"/>
+            <point key="canvasLocation" x="958" y="283"/>
         </window>
     </objects>
     <resources>
