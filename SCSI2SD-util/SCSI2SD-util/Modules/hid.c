@@ -664,8 +664,6 @@ int HID_API_EXPORT HID_API_CALL hid_write(hid_device *dev, const unsigned char *
 			goto end_of_function;
 		}
 	}
-	
-	Sleep(250); // Sleep to allow I/O operation to finish...
 
 	/* Wait here until the write is done. This makes
 	   hid_write() synchronous. */
