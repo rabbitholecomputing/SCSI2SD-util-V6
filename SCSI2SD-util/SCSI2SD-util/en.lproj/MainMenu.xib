@@ -209,13 +209,6 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="SCSI2SD-util-v6" systemMenu="apple" id="uQy-DD-JDr">
                         <items>
-                            <menuItem title="About SCSI2SD-util-v6" id="5kV-Vb-QxS">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="handleAboutPanel:" target="Voe-Tx-rLC" id="EHE-QB-7xE"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
                             <menuItem title="Hide scsi2sd" keyEquivalent="h" id="Olw-nP-bQN">
                                 <connections>
                                     <action selector="hide:" target="-1" id="PnN-Uc-m68"/>
@@ -572,6 +565,12 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                         <items>
+                            <menuItem title="About SCSI2SD-util-v6" id="iRG-MG-CNc">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="handleAboutPanel:" target="Voe-Tx-rLC" id="nud-NS-wt1"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="scsi2sd-util-v6 Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                 <connections>
                                     <action selector="showHelp:" target="-1" id="y7X-2Q-9no"/>
