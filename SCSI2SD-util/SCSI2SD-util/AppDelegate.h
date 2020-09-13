@@ -75,6 +75,7 @@
 - (IBAction) loadDefaults: (id)sender;
 - (IBAction) scsiSelfTest:(id)sender;
 - (IBAction) shouldLogScsiData: (id)sender;
+- (IBAction) updateDFU2020: (id)sender;
 
 - (void) evaluate;
 - (void) logScsiData;
