@@ -395,6 +395,17 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 
 	[NSApp terminate: self];
       }
+
+    if(find_process("scsi2sd"))
+      {
+	NSAlert *alert = [[NSAlert alloc] init];
+	
+	alert.messageText = @"Duplicate Process";
+	alert.informativeText = @"Another instance of SCSI2SD is running, terminating.";
+	[alert runModal];
+
+	[NSApp terminate: self];
+      }
 #endif
 
     @try
