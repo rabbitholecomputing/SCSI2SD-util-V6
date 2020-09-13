@@ -998,6 +998,13 @@ out:
     return NO;
 }
 
+- (IBAction)updateDFU2020:(id)sender
+{
+    NSString *filename = [[NSBundle mainBundle] pathForResource:@"firmware" ofType: @"dfu"];
+    [NSThread performSelectorInBackground: @selector(upgradeFirmwareThread:)
+                               withObject: filename];
+}
+
 // Upgrade firmware...
 - (void) upgradeFirmwareThread: (NSString *)filename
 {

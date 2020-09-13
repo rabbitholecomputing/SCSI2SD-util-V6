@@ -68,6 +68,7 @@
 		14DEC5EF23A4C76000ECD04A /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DEC5EE23A4C76000ECD04A /* NSString+Extensions.m */; };
 		14F2F96523C94A4400169DD2 /* SCSI2SDTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2F96423C94A4400169DD2 /* SCSI2SDTask.m */; };
 		14F2F96C23CA23F700169DD2 /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DEC5EE23A4C76000ECD04A /* NSString+Extensions.m */; };
+		14FE48E0250EA5FC00298F33 /* firmware.dfu in Resources */ = {isa = PBXBuildFile; fileRef = 14FE48DF250EA5FC00298F33 /* firmware.dfu */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -221,6 +222,7 @@
 		14DEC5EE23A4C76000ECD04A /* NSString+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extensions.m"; sourceTree = "<group>"; };
 		14F2F96423C94A4400169DD2 /* SCSI2SDTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCSI2SDTask.m; sourceTree = "<group>"; };
 		14F2F96E23CA2E8B00169DD2 /* scsi2sd-util-cli.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "scsi2sd-util-cli.entitlements"; sourceTree = "<group>"; };
+		14FE48DF250EA5FC00298F33 /* firmware.dfu */ = {isa = PBXFileReference; lastKnownFileType = file; name = firmware.dfu; path = ../../../../Downloads/firmware.dfu; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -478,6 +480,7 @@
 				1482B1EC23973F42001BA513 /* MainMenu.xib */,
 				1482B1EF23973F42001BA513 /* Info.plist */,
 				14B8ABFA249C175000DD2E88 /* SCSI2SD-V6-util-512.png */,
+				14FE48DF250EA5FC00298F33 /* firmware.dfu */,
 				1482B1EA23973F42001BA513 /* Assets.xcassets */,
 			);
 			path = "SCSI2SD-util";
@@ -602,6 +605,7 @@
 			files = (
 				1482B1EB23973F42001BA513 /* Assets.xcassets in Resources */,
 				1482B1EE23973F42001BA513 /* MainMenu.xib in Resources */,
+				14FE48E0250EA5FC00298F33 /* firmware.dfu in Resources */,
 				14B8ABFB249C175000DD2E88 /* SCSI2SD-V6-util-512.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
