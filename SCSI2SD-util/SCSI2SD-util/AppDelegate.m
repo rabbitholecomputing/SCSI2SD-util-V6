@@ -390,7 +390,18 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 	NSAlert *alert = [[NSAlert alloc] init];
 	
 	alert.messageText = @"Duplicate Process";
-	alert.informativeText = @"Another instance of SCSI2SD is running, terminating.";
+	alert.informativeText = @"Another instance of SCSI2SD-V6 or SCSI2SD-v6-util is running.  This process will now exit.";
+	[alert runModal];
+
+	[NSApp terminate: self];
+      }
+
+    if(find_process("scsi2sd"))
+      {
+	NSAlert *alert = [[NSAlert alloc] init];
+	
+	alert.messageText = @"Duplicate Process";
+	alert.informativeText = @"Another instance of SCSI2SD-V6 or SCSI2SD-v6-util is running.  This process will now exit.";
 	[alert runModal];
 
 	[NSApp terminate: self];
