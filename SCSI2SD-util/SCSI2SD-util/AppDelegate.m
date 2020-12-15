@@ -73,8 +73,8 @@ char** convertNSArrayToCArrayForMain(NSArray *array)
 }
 
 BOOL RangesIntersect(NSRange range1, NSRange range2) {
-    if(range1.location > range2.location + range2.length) return NO;
-    if(range2.location > range1.location + range1.length) return NO;
+    if(range1.location > range2.location + range2.length - 1) return NO;
+    if(range2.location > range1.location + range1.length - 1) return NO;
     return YES;
 }
 
@@ -370,6 +370,19 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
         [alert runModal];
     }
     [self updateProgress:n];
+}
+
+- (BOOL) validateMenuItem:(NSMenuItem *)menuItem
+{
+    if (menuItem == self.writeMenu ||
+        menuItem == self.readMenu ||
+        // menuItem == self.upgradeFirmware ||
+        menuItem == self.scsiLogData ||
+        menuItem == self.scsiSelfTest)
+    {
+        return (myHID != nil); // [self evaluate];
+    }
+    return YES;
 }
 
 // Initialize everything once we finish launching...

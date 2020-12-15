@@ -59,6 +59,11 @@
     // Initial values
     self.autoErrorText.stringValue = @"";
     self.scsiIdErrorText.stringValue = @"";
+    
+    // Set delegate..
+    self.sectorCount.delegate = (id<NSTextFieldDelegate>)[NSApp delegate];
+    self.sdCardStartSector.delegate = (id<NSTextFieldDelegate>)[NSApp delegate];
+    self.deviceSize.delegate = (id<NSTextFieldDelegate>)[NSApp delegate];
 }
 
 - (NSData *) structToData: (S2S_TargetCfg)config withMutableData: (NSMutableData *)d
@@ -90,6 +95,9 @@
 - (void) setTargetConfigData: (NSData *)data
 {
     S2S_TargetCfg config = [self dataToStruct: data];
+    NSInteger sectors = (NSInteger)(config.scsiSectors);
+    NSInteger bytesPerSector = (NSInteger)(config.bytesPerSector);
+    NSInteger deviceSize = (NSInteger)((sectors * bytesPerSector) / (1024 * 1024 * 1024));
     
     self.enableSCSITarget.state = (config.scsiId & S2S_CFG_TARGET_ENABLED) ? NSOnState : NSOffState;
     [self.SCSIID setStringValue:
@@ -98,7 +106,7 @@
     [self.sdCardStartSector setStringValue:[NSString stringWithFormat:@"%d", config.sdSectorStart]];
     [self.sectorSize setStringValue: [NSString stringWithFormat: @"%d", config.bytesPerSector]];
     [self.sectorCount setStringValue: [NSString stringWithFormat: @"%d", config.scsiSectors]];
-    [self.deviceSize setStringValue: [NSString stringWithFormat: @"%d", (((config.scsiSectors * config.bytesPerSector) / (1024 * 1024)) + 1) / 1024]];
+    [self.deviceSize setStringValue: [NSString stringWithFormat: @"%lld", (long long)deviceSize]];
     // Heads per cylinder is missing... should add it here.
     // Sectors per track...
     [self.vendor setStringValue: [NSString stringWithCString:config.vendor length:8]];
@@ -146,12 +154,6 @@
     return [ConfigUtil targetCfgToXML: [self getTargetConfig]]; // [NSString stringWithCString:str.c_str() encoding:NSUTF8StringEncoding];
 }
 
-- (BOOL) evaluate
-{
-    // NSLog(@"fromXml");
-    return YES;
-}
-
 - (BOOL) isEnabled
 {
     return self.enableSCSITarget.state == NSOnState;
@@ -188,5 +190,169 @@
 - (void) setAutoStartSectorValue: (NSUInteger)sector
 {
     self.sdCardStartSector.integerValue = (NSInteger)sector;
+}
+
+- (void)controlTextDidChange:(NSNotification *)notification
+{
+    NSTextField *textfield = [notification object];
+    NSCharacterSet *charSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+
+    char *stringResult = (char *)malloc([textfield.stringValue length]);
+    int cpt=0;
+    for (int i = 0; i < [textfield.stringValue length]; i++) {
+        unichar c = [textfield.stringValue characterAtIndex:i];
+        if ([charSet characterIsMember:c]) {
+            stringResult[cpt]=c;
+            cpt++;
+        }
+        else
+        {
+            NSBeep();
+        }
+    }
+    stringResult[cpt]='\0';
+    textfield.stringValue = [NSString stringWithUTF8String:stringResult];
+    free(stringResult);
+}
+
+- (void) recalculate
+{
+    [self evaluate];
+}
+
+- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
+{
+    if (control == self.sectorSize || control == self.sectorCount)
+    {
+        [self recalculate];
+        [self evaluateSize];
+    }
+    else if (control == self.deviceSize)
+    {
+        NSInteger sc = [self convertUnitsToSectors];
+        self.sectorCount.stringValue = [NSString stringWithFormat:@"%lld", (long long)sc];
+    }
+
+    return YES;
+}
+
+- (BOOL) evaluate
+{
+    BOOL valid = YES;
+    BOOL enabled = self.enableSCSITarget.state == NSOnState;
+
+    /*
+    self.SCSIID.enabled = enabled;
+    self.deviceType.enabled = enabled;
+    self.sdCardStartSector.enabled = enabled;
+    self.autoStartSector.enabled = enabled;
+    self.sectorSize.enabled = enabled;
+    self.sectorCount.enabled = enabled;
+    self.deviceSize.enabled = enabled;
+    self.deviceUnit.enabled = enabled;
+    self.vendor.enabled = enabled;
+    self.productId.enabled = enabled;
+    self.revsion.enabled = enabled;
+    self.serialNumber.enabled = enabled;*/
+
+    switch (self.deviceType.indexOfSelectedItem)
+    {
+        case S2S_CFG_FLOPPY_14MB:
+            self.sectorSize.stringValue = @"512";
+            self.sectorSize.enabled = NO;
+            self.sectorCount.stringValue = @"2880";
+            self.sectorCount.enabled = NO;
+            self.deviceUnit.enabled = NO;
+            self.deviceSize.enabled = NO;
+
+            [self evaluateSize];
+            break;
+    };
+
+    NSUInteger sectorSize = self.sectorSize.integerValue;
+    if (sectorSize < 64 || sectorSize > 8192)
+    {
+        // Set error (TBD)
+        valid = NO;
+    }
+    else
+    {
+        // clear error (TBD)
+    }
+    
+    NSUInteger numSectors = self.sectorCount.integerValue;
+    if (numSectors == 0)
+    {
+        // myNumSectorMsg->SetLabelMarkup(wxT("<span foreground='red' weight='bold'>Invalid size</span>"));
+        valid = NO;
+    }
+    else
+    {
+        // myNumSectorMsg->SetLabelMarkup("");
+    }
+    // [self evaluateSize];
+
+    return valid || !enabled;
+}
+
+- (void) evaluateSize
+{
+    NSInteger numSectors = self.sectorCount.integerValue;
+
+    if (numSectors > 0)
+    {
+        NSInteger size = 0;
+        NSInteger bytes = numSectors * self.sectorSize.integerValue;
+        if (bytes >= 1024 * 1024 * 1024)
+        {
+            size = (bytes / (1024.0 * 1024 * 1024));
+            NSMenuItem *item = [self.deviceUnit itemAtIndex:0]; // GB
+            [self.deviceUnit selectItem:item];
+        }
+        else if (bytes >= 1024 * 1024)
+        {
+            size = (bytes / (1024.0 * 1024));
+            NSMenuItem *item = [self.deviceUnit itemAtIndex:1]; // MB
+            [self.deviceUnit selectItem:item];
+        }
+        else
+        {
+            size = (bytes / (1024));
+            NSMenuItem *item = [self.deviceUnit itemAtIndex:1]; // KB
+            [self.deviceUnit selectItem:item];
+        }
+        
+        self.deviceSize.stringValue = [NSString stringWithFormat:@"%lld",(long long)size];
+    }
+}
+
+- (NSInteger) convertUnitsToSectors
+{
+    NSUInteger multiplier = 0;
+    switch (self.deviceUnit.indexOfSelectedItem)
+    {
+        case 2:
+            multiplier = 1024;
+            break;
+        case 1:
+            multiplier = 1024 * 1024;
+            break;
+        case 0:
+            multiplier = 1024 * 1024 * 1024;
+            break;
+    }
+
+    NSInteger size;
+    size = self.deviceSize.integerValue;
+
+    NSInteger sectorSize = self.sectorSize.integerValue; //  CtrlGetValue<uint16_t>(mySectorSizeCtrl).first;
+    NSInteger sectors = ceil(multiplier * size / sectorSize);
+
+    if (sectors > INT_MAX)
+    {
+        sectors = INT_MAX;
+    }
+
+    return sectors;
 }
 @end
