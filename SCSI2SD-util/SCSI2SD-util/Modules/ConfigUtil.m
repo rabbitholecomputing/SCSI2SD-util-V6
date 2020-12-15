@@ -23,6 +23,7 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSXMLElement.h>
 #import <Foundation/NSException.h>
+#import <AppKit/NSPanel.h>
 
 #import "MF_Base64Additions.h"
 
@@ -721,6 +722,7 @@ uint32_t fromLE32(uint32_t in)
     if(data == nil)
     {
         puts("Could not read file.");
+        NSRunAlertPanel(@"Error Reading File",[NSString stringWithFormat:@"Cannot read file %@", filename], @"OK", nil, nil);
         return nil;
     }
     
@@ -748,7 +750,6 @@ uint32_t fromLE32(uint32_t in)
     S2S_BoardCfg boardConfig = [self defaultBoardConfig];
     int boardConfigFound = 0;
 
-    S2S_TargetCfg *targets;
     NSArray *children = [[doc rootElement] children]; // doc.GetRoot()->GetChildren();
     NSEnumerator *en = [children objectEnumerator];
     NSXMLElement *child = [en nextObject];
@@ -771,7 +772,8 @@ uint32_t fromLE32(uint32_t in)
 
     if (!boardConfigFound && [p targetCount] > 0)
     {
-        boardConfig.flags = targets[0].flagsDEPRECATED;
+        S2S_TargetCfg target = [p targetCfgAtIndex: 0];
+        boardConfig.flags = target.flagsDEPRECATED;
     }
     
     return p;

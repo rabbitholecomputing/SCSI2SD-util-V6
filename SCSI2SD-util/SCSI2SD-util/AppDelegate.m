@@ -584,6 +584,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     if (NO == success)
     {
         NSLog(@"Error writing file %@", error);
+        NSRunAlertPanel(@"Error Writing File", error.localizedDescription, @"OK", nil, nil);
     }
 }
 
