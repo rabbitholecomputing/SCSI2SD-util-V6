@@ -40,6 +40,8 @@
 #include "dfu_load.h"
 #include "quirks.h"
 
+void dfu_printf(char *format, ...);
+
 int dfuload_do_upload(struct dfu_if *dif, int xfer_size,
     int expected_size, unsigned char *abuf)
 {

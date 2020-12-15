@@ -38,6 +38,8 @@
 #include "dfuse.h"
 #include "quirks.h"
 
+void dfu_printf(char *format, ...);
+
 /*
  * Look for a descriptor in a concatenated descriptor list. Will
  * return upon the first match of the given descriptor type. Returns length of

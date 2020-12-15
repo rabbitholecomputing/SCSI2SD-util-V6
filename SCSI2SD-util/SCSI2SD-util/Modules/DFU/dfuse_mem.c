@@ -28,6 +28,8 @@
 #include "dfu_file.h"
 #include "dfuse_mem.h"
 
+void dfu_printf(char *format, ...);
+
 int add_segment(struct memsegment **segment_list, struct memsegment segment)
 {
 	struct memsegment *new_element;

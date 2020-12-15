@@ -61,6 +61,8 @@ int dfuse_mass_erase = 0;
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wconversion"
 
+void dfu_printf(char *format, ...);
+
 void reset_dfuse_globals()
 {
     last_erased_page = 1; /* non-aligned value, won't match */

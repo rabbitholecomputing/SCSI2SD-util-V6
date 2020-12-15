@@ -468,7 +468,6 @@
 			isa = PBXGroup;
 			children = (
 				14CF47CF248EFFD900D2B6AF /* SCSI2SD-util-v6.entitlements */,
-				14C54CB0244BBC250086316F /* Precompiled */,
 				14DEC5EC23A4C67A00ECD04A /* Categories */,
 				1482B1F8239748DB001BA513 /* ViewControllers */,
 				147E4F0A249EC645005E31B7 /* Modules */,
@@ -492,13 +491,6 @@
 				1482B203239748DB001BA513 /* DeviceController.m */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		14C54CB0244BBC250086316F /* Precompiled */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Precompiled;
 			sourceTree = "<group>";
 		};
 		14D96BCD23C935330008E7B3 /* scsi2sd-util-v6-cli */ = {
@@ -838,7 +830,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -881,7 +873,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
