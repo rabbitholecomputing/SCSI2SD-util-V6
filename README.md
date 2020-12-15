@@ -35,3 +35,6 @@ Also copy the script in udev in the parent directory to /etc/udev/rules.d
 
 To run the app you should be able to open the app wrapper using gopen or invoke it directly ./SCSI2SD-v6-util/build/SCSI2SD-v6-util/Products/SCSI2SD-v6-util.app/SCSI2SD-v6-util
 
+# SCSI2SD-util-v6, a Native macOS application
+SCSI2SD-util-v6 is an adaptation and native Cocoa reimplimentation of the SCSI2SD V6 configuration utility, as a native Mac application. Funded by Rabbit Hole Computing, this port includes a new command-line tool, for loading and saving configurations to SCSI2SD V6 boards, via USB, as well as firmware updates, via an integrated Device Firmware Update Utility.
+
