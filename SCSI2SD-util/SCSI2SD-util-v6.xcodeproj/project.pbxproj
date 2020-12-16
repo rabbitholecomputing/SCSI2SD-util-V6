@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B52E6CF258A6C6300D5E6B4 /* libusb-1.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 0B52E6CD258A6C6300D5E6B4 /* libusb-1.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		0B52E6D3258A6D2D00D5E6B4 /* libusb-1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B52E6CD258A6C6300D5E6B4 /* libusb-1.0.0.dylib */; };
 		1414360A24A393F600521DB6 /* MF_Base64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1414360924A393F600521DB6 /* MF_Base64Additions.m */; };
 		1414360B24A3940600521DB6 /* MF_Base64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1414360924A393F600521DB6 /* MF_Base64Additions.m */; };
 		147E4F7E249EC646005E31B7 /* time.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F0D249EC645005E31B7 /* time.c */; };
@@ -63,7 +65,6 @@
 		1482B210239748DB001BA513 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1482B204239748DB001BA513 /* SettingsController.m */; };
 		14B8ABFB249C175000DD2E88 /* SCSI2SD-V6-util-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B8ABFA249C175000DD2E88 /* SCSI2SD-V6-util-512.png */; };
 		14BCFEEC24AD4D2400706907 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14BCFEEB24AD4D2400706907 /* IOKit.framework */; };
-		14BCFEED24AD4D3400706907 /* libusb-1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 145E1E6B24ABF1140007344C /* libusb-1.0.a */; };
 		14D96BCF23C935330008E7B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D96BCE23C935330008E7B3 /* main.m */; };
 		14DEC5EF23A4C76000ECD04A /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DEC5EE23A4C76000ECD04A /* NSString+Extensions.m */; };
 		14F2F96523C94A4400169DD2 /* SCSI2SDTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2F96423C94A4400169DD2 /* SCSI2SDTask.m */; };
@@ -71,6 +72,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		0B52E6D0258A6C6300D5E6B4 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0B52E6CF258A6C6300D5E6B4 /* libusb-1.0.0.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		14D96BCA23C935320008E7B3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -83,15 +95,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0B52E6BE258A685B00D5E6B4 /* libusb-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusb-1.0.0.dylib"; path = "../../../libusb 2020-12-16 08-06-26/Products/usr/local/lib/libusb-1.0.0.dylib"; sourceTree = "<group>"; };
+		0B52E6C8258A6B9D00D5E6B4 /* libs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libs; sourceTree = "<group>"; };
+		0B52E6CD258A6C6300D5E6B4 /* libusb-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusb-1.0.0.dylib"; path = "../libs/libusb-1.0.0.dylib"; sourceTree = "<group>"; };
 		1414360824A393F600521DB6 /* MF_Base64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MF_Base64Additions.h; sourceTree = "<group>"; };
 		1414360924A393F600521DB6 /* MF_Base64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MF_Base64Additions.m; sourceTree = "<group>"; };
 		1414360C24A3958200521DB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		145E1C3024A64F700007344C /* SCSI2SDTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSI2SDTask.h; sourceTree = "<group>"; };
 		145E1C3124A650F50007344C /* SCSI2SD_HID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSI2SD_HID.h; sourceTree = "<group>"; };
-		145E1E6B24ABF1140007344C /* libusb-1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libusb-1.0.a"; path = "libs/lib/libusb-1.0.a"; sourceTree = "<group>"; };
 		145E1E6D24ABF9840007344C /* clock_gettime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = clock_gettime.h; sourceTree = "<group>"; };
 		145E1E6E24ABF9840007344C /* clock_gettime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = clock_gettime.c; sourceTree = "<group>"; };
-		145E1E7324AD070E0007344C /* libusb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libusb.a; path = libs/lib/libusb.a; sourceTree = "<group>"; };
 		1474BFEB2399677E003C67D5 /* cybtldr_api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cybtldr_api.h; sourceTree = "<group>"; };
 		1474BFEC2399677E003C67D5 /* cybtldr_api2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cybtldr_api2.h; sourceTree = "<group>"; };
 		1474BFED2399677E003C67D5 /* cybtldr_parse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cybtldr_parse.h; sourceTree = "<group>"; };
@@ -228,6 +241,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B52E6D3258A6D2D00D5E6B4 /* libusb-1.0.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,7 +249,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14BCFEED24AD4D3400706907 /* libusb-1.0.a in Frameworks */,
 				14BCFEEC24AD4D2400706907 /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,9 +259,10 @@
 		145E1E6A24ABF1130007344C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0B52E6CD258A6C6300D5E6B4 /* libusb-1.0.0.dylib */,
+				0B52E6C8258A6B9D00D5E6B4 /* libs */,
+				0B52E6BE258A685B00D5E6B4 /* libusb-1.0.0.dylib */,
 				14BCFEEB24AD4D2400706907 /* IOKit.framework */,
-				145E1E7324AD070E0007344C /* libusb.a */,
-				145E1E6B24ABF1140007344C /* libusb-1.0.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -525,6 +539,7 @@
 				1482B1E023973F3E001BA513 /* Sources */,
 				1482B1E123973F3E001BA513 /* Frameworks */,
 				1482B1E223973F3E001BA513 /* Resources */,
+				0B52E6D0258A6C6300D5E6B4 /* Embed Libraries */,
 			);
 			buildRules = (
 			);
@@ -808,10 +823,10 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = "SCSI2SD-util/SCSI2SD-util-v6.entitlements";
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 768T4SN737;
+				DEVELOPMENT_TEAM = Q6H75D8GN6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -828,7 +843,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/lib",
+					"$(PROJECT_DIR)/libs",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = (
@@ -836,7 +851,6 @@
 					"-ObjC",
 					"-framework",
 					"\"IOKit\"",
-					"-l\"usb-1.0\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rabbitholecomputing.SCSI2SD-util";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -851,10 +865,10 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = "SCSI2SD-util/SCSI2SD-util-v6.entitlements";
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 768T4SN737;
+				DEVELOPMENT_TEAM = Q6H75D8GN6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -871,7 +885,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/lib",
+					"$(PROJECT_DIR)/libs",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = (
@@ -879,7 +893,6 @@
 					"-ObjC",
 					"-framework",
 					"\"IOKit\"",
-					"-l\"usb-1.0\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rabbitholecomputing.SCSI2SD-util";
 				PRODUCT_NAME = "$(TARGET_NAME)";
