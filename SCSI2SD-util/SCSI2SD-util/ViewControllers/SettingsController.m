@@ -81,7 +81,7 @@
     self.enableParity.state = (config.flags & S2S_CFG_ENABLE_PARITY) ? NSOnState : NSOffState;
     self.enableUnitAttention.state = (config.flags & S2S_CFG_ENABLE_UNIT_ATTENTION) ? NSOnState : NSOffState;
     self.enableSCSI2Mode.state = (config.flags & S2S_CFG_ENABLE_SCSI2) ? NSOnState : NSOffState;
-    self.enableSCSITerminator.state = (config.flags & S2S_CFG_ENABLE_TERMINATOR) ? NSOnState : NSOffState;
+    self.enableSCSITerminator.state = (config.flags6 & S2S_CFG_ENABLE_TERMINATOR) ? NSOnState : NSOffState;
     self.enableGlitch.state = (config.flags & S2S_CFG_DISABLE_GLITCH) ? NSOnState : NSOffState;
     self.enableCache.state = (config.flags & S2S_CFG_ENABLE_CACHE) ? NSOnState : NSOffState;
     self.enableDisconnect.state = (config.flags & S2S_CFG_ENABLE_DISCONNECT) ? NSOnState : NSOffState;
