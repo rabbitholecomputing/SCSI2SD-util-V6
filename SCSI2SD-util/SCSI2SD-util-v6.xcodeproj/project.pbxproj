@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B52E6CF258A6C6300D5E6B4 /* libusb-1.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 0B52E6CD258A6C6300D5E6B4 /* libusb-1.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		0B52E6D3258A6D2D00D5E6B4 /* libusb-1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B52E6CD258A6C6300D5E6B4 /* libusb-1.0.0.dylib */; };
+		0B52E6D9258A75E100D5E6B4 /* libusb-1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B52E6D8258A75E100D5E6B4 /* libusb-1.0.0.dylib */; };
+		0B52E6DA258A75E100D5E6B4 /* libusb-1.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 0B52E6D8258A75E100D5E6B4 /* libusb-1.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		1414360A24A393F600521DB6 /* MF_Base64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1414360924A393F600521DB6 /* MF_Base64Additions.m */; };
 		1414360B24A3940600521DB6 /* MF_Base64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1414360924A393F600521DB6 /* MF_Base64Additions.m */; };
 		147E4F7E249EC646005E31B7 /* time.c in Sources */ = {isa = PBXBuildFile; fileRef = 147E4F0D249EC645005E31B7 /* time.c */; };
@@ -78,7 +78,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0B52E6CF258A6C6300D5E6B4 /* libusb-1.0.0.dylib in Embed Libraries */,
+				0B52E6DA258A75E100D5E6B4 /* libusb-1.0.0.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,7 +97,7 @@
 /* Begin PBXFileReference section */
 		0B52E6BE258A685B00D5E6B4 /* libusb-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusb-1.0.0.dylib"; path = "../../../libusb 2020-12-16 08-06-26/Products/usr/local/lib/libusb-1.0.0.dylib"; sourceTree = "<group>"; };
 		0B52E6C8258A6B9D00D5E6B4 /* libs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libs; sourceTree = "<group>"; };
-		0B52E6CD258A6C6300D5E6B4 /* libusb-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusb-1.0.0.dylib"; path = "../libs/libusb-1.0.0.dylib"; sourceTree = "<group>"; };
+		0B52E6D8258A75E100D5E6B4 /* libusb-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusb-1.0.0.dylib"; path = "libs/libusb-1.0.0.dylib"; sourceTree = "<group>"; };
 		1414360824A393F600521DB6 /* MF_Base64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MF_Base64Additions.h; sourceTree = "<group>"; };
 		1414360924A393F600521DB6 /* MF_Base64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MF_Base64Additions.m; sourceTree = "<group>"; };
 		1414360C24A3958200521DB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -241,7 +241,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B52E6D3258A6D2D00D5E6B4 /* libusb-1.0.0.dylib in Frameworks */,
+				0B52E6D9258A75E100D5E6B4 /* libusb-1.0.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +259,7 @@
 		145E1E6A24ABF1130007344C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0B52E6CD258A6C6300D5E6B4 /* libusb-1.0.0.dylib */,
+				0B52E6D8258A75E100D5E6B4 /* libusb-1.0.0.dylib */,
 				0B52E6C8258A6B9D00D5E6B4 /* libs */,
 				0B52E6BE258A685B00D5E6B4 /* libusb-1.0.0.dylib */,
 				14BCFEEB24AD4D2400706907 /* IOKit.framework */,
