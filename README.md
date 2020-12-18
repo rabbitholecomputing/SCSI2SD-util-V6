@@ -1,4 +1,4 @@
-# SCSI2SD-V6-Cocoa
+# SCSI2SD-util-V6 Native+Universal Mac App (Cocoa)
 New repo for Xcode based SCSI2SD application for V6 boards.
 
 Building for Mac OS 10.6:
