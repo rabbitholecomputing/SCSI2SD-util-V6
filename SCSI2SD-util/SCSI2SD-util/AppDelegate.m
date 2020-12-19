@@ -437,7 +437,8 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     
     // Order out...
     [self.dfuPanel orderOut: self];
-    [self.logPanel orderOut: self];
+    // [self.logPanel orderOut: self];
+    [self.logPanel orderFrontRegardless];
     
     [self startTimer];
     aLock = [[NSLock alloc] init];
