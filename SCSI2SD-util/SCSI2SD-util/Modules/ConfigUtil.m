@@ -418,7 +418,7 @@ uint32_t fromLE32(uint32_t in)
         @"    card before all the SCSI data has been received. Can cause problems"
         @"    with some SCSI hosts"
         @"    ********************************************************* -->"
-        @"    <blindWrites>%d</blindWrites>"
+        @"    <blindWrites>%s</blindWrites>"
         @"</S2S_BoardCfg>\n";
     
     NSString *str = [NSString stringWithFormat:s,
@@ -431,7 +431,7 @@ uint32_t fromLE32(uint32_t in)
                      config.selectionDelay,
                      config.startupDelay,
                      config.scsiSpeed,
-                     config.flags6 & S2S_CFG_ENABLE_BLIND_WRITES];
+                     config.flags6 & S2S_CFG_ENABLE_BLIND_WRITES ? "true" : "false"];
     
     return str;
 }
@@ -719,8 +719,17 @@ uint32_t fromLE32(uint32_t in)
         }
         else if ([[child name] isEqualToString: @"blindWrites"])
         {
-            result.scsiSpeed = [self parseInt:child limit:S2S_CFG_ENABLE_BLIND_WRITES]; //parseInt(child, S2S_CFG_SPEED_SYNC_10);
+            NSString *s = [child stringValue];
+            if ([s isEqualToString: @"true"])
+            {
+                result.flags6 |= S2S_CFG_ENABLE_BLIND_WRITES;
+            }
+            else
+            {
+                result.flags = result.flags6 & ~S2S_CFG_ENABLE_BLIND_WRITES;
+            }
         }
+
         child = [en nextObject];
     }
     return result;
