@@ -22,6 +22,7 @@
 @property IBOutlet NSButton *enableGlitch;
 @property IBOutlet NSButton *enableCache;
 @property IBOutlet NSButton *enableDisconnect;
+@property IBOutlet NSButton *enableBlindWrites;
 
 @end
 
@@ -89,6 +90,7 @@
     self.mapLUNStoSCSIIDs.state = (config.flags & S2S_CFG_MAP_LUNS_TO_IDS) ? NSOnState : NSOffState;
     self.startupDelay.intValue = config.startupDelay;
     self.startupSelectionDelay.intValue = config.selectionDelay;
+    self.enableBlindWrites.intValue = config.flags6 & S2S_CFG_ENABLE_BLIND_WRITES;
     [self.speedLimit selectItemAtIndex: config.scsiSpeed];
 }
 
@@ -104,11 +106,16 @@
         (self.enableCache.state == NSOnState ? S2S_CFG_ENABLE_CACHE: 0) |
         (self.enableDisconnect.state == NSOnState ? S2S_CFG_ENABLE_DISCONNECT: 0) |
         (self.respondToShortSCSISelection.state == NSOnState ? S2S_CFG_ENABLE_SEL_LATCH : 0) |
-        (self.mapLUNStoSCSIIDs.state == NSOnState ? S2S_CFG_MAP_LUNS_TO_IDS : 0) |
-        (self.enableSCSITerminator.state == NSOnState ? S2S_CFG_ENABLE_TERMINATOR : 0);
+        (self.mapLUNStoSCSIIDs.state == NSOnState ? S2S_CFG_MAP_LUNS_TO_IDS : 0);
+    
+    config.flags6 =
+        (self.enableSCSITerminator.state == NSOnState ? S2S_CFG_ENABLE_TERMINATOR : 0) |
+        (self.enableBlindWrites.state == NSOnState ? S2S_CFG_ENABLE_BLIND_WRITES : 0);
+    
     config.startupDelay = self.startupDelay.intValue;
     config.selectionDelay = self.startupSelectionDelay.intValue;
     config.scsiSpeed = self.speedLimit.indexOfSelectedItem;
+    
     [self structToData: config withMutableData: d];
 }
 

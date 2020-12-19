@@ -17,6 +17,10 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="eJ5-Xi-KA2" customClass="SettingsController">
             <connections>
+                <outlet property="enableBlindWrites" destination="KPP-j3-4TP" id="WCd-wZ-M28"/>
+                <outlet property="enableCache" destination="vOj-gL-ygv" id="YU5-HE-yqh"/>
+                <outlet property="enableDisconnect" destination="kb7-1z-XXK" id="UXB-gG-e0H"/>
+                <outlet property="enableGlitch" destination="FHU-Av-KXV" id="AnG-GE-A0a"/>
                 <outlet property="enableParity" destination="ael-0l-G7C" id="g5Y-nF-2B9"/>
                 <outlet property="enableSCSI2Mode" destination="1Kk-W6-IiR" id="k8Z-OS-jHQ"/>
                 <outlet property="enableSCSITerminator" destination="dQS-Ei-zP6" id="jYv-jR-fiK"/>

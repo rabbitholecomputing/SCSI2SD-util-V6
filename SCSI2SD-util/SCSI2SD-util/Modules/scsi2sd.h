@@ -60,10 +60,13 @@ typedef enum
 	S2S_CFG_MAP_LUNS_TO_IDS = 128
 } S2S_CFG_FLAGS;
 
+
 typedef enum
 {
-	S2S_CFG_ENABLE_TERMINATOR = 1
+    S2S_CFG_ENABLE_TERMINATOR = 1,
+    S2S_CFG_ENABLE_BLIND_WRITES = 2,
 } S2S_CFG_FLAGS6;
+
 
 typedef enum
 {

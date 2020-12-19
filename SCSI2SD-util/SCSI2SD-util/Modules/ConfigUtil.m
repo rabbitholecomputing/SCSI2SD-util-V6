@@ -413,6 +413,12 @@ uint32_t fromLE32(uint32_t in)
         @"    5    Sync 10MB/s\n"
         @"    ********************************************************* -->\n"
         @"    <scsiSpeed>%d</scsiSpeed>\n"
+        @"    <!-- ********************************************************"
+        @"    Enable SD card blind writes, which starts writing to the SD"
+        @"    card before all the SCSI data has been received. Can cause problems"
+        @"    with some SCSI hosts"
+        @"    ********************************************************* -->"
+        @"    <blindWrites>%d</blindWrites>"
         @"</S2S_BoardCfg>\n";
     
     NSString *str = [NSString stringWithFormat:s,
@@ -424,7 +430,8 @@ uint32_t fromLE32(uint32_t in)
                      (config.flags & S2S_CFG_MAP_LUNS_TO_IDS ? "true" : "false"),
                      config.selectionDelay,
                      config.startupDelay,
-                     config.scsiSpeed];
+                     config.scsiSpeed,
+                     config.flags6 & S2S_CFG_ENABLE_BLIND_WRITES];
     
     return str;
 }
