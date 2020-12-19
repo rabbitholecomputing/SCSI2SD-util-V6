@@ -501,6 +501,42 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     [self logStringToPanel: @"\n"];
 }
 
+- (void) showConnectInfo
+{
+    [self logStringToLabel: @"SCSI2SD Ready, firmware version %@", [myHID getFirmwareVersionStr]];
+    [self logStringToPanel: @"SCSI2SD Ready, firmware version %@\n", [myHID getFirmwareVersionStr]];
+    [self logStringToPanel: @"Hardware version: %@\n", [myHID getHardwareVersion]];
+    [self logStringToPanel: @"Serial Number: %@\n", [myHID getSerialNumber]];
+    uint8_t *csd = [myHID getSD_CSD];
+    uint8_t *cid = [myHID getSD_CID];
+    [self logStringToPanel: @"SD Capacity (512-byte sectors): %d\n", [myHID getSDCapacity]];
+
+    [self logStringToPanel: @"SD CSD Register: "];
+    for (size_t i = 0; i < 16 /*csd.size()*/; ++i)
+    {
+        [self logStringToPanel: @"%0X", (int)csd[i]];
+    }
+    [self logStringToPanel: @"\nSD CID Register: "];
+    for (size_t i = 0; i < 16 /*cid.size()*/; ++i)
+    {
+        [self logStringToPanel: @"%0X", (int)cid[i]];
+    }
+    [self logStringToPanel: @"\n"];
+
+    if ([[self scsiSelfTest] state] == NSControlStateValueOn)
+    {
+        [self runScsiSelfTest];
+    }
+
+    if (!myInitialConfig)
+    {
+/* This doesn't work properly, and causes crashes.
+        wxCommandEvent loadEvent(wxEVT_NULL, ID_BtnLoad);
+        GetEventHandler()->AddPendingEvent(loadEvent);
+*/
+    }
+}
+
 // Periodically check to see if Device is present...
 - (void) doTimer
 {
@@ -508,10 +544,19 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
     if (now == myLastPollTime) return;
     myLastPollTime = now;
-
+    static BOOL shown = NO;
+    
     // Check if we are connected to the HID device.
     @try
     {
+        if (myHID && [myHID ping])
+        {
+            if( !shown )
+            {
+                [self showConnectInfo];
+                shown = YES;
+            }
+        }
         if (myHID && ![myHID ping])
         {
             // Verify the USB HID connection is valid
@@ -524,39 +569,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
             myHID = [HID open];
             if (myHID)
             {
-                [self logStringToLabel: @"SCSI2SD Ready, firmware version %@", [myHID getFirmwareVersionStr]];
-                [self logStringToPanel: @"SCSI2SD Ready, firmware version %@\n", [myHID getFirmwareVersionStr]];
-                [self logStringToPanel: @"Hardware version: %@\n", [myHID getHardwareVersion]];
-                [self logStringToPanel: @"Serial Number: %@\n", [myHID getSerialNumber]];
-                uint8_t *csd = [myHID getSD_CSD];
-                uint8_t *cid = [myHID getSD_CID];
-                [self logStringToPanel: @"SD Capacity (512-byte sectors): %d\n", [myHID getSDCapacity]];
-
-                [self logStringToPanel: @"SD CSD Register: "];
-                for (size_t i = 0; i < 16 /*csd.size()*/; ++i)
-                {
-                    [self logStringToPanel: @"%0X", (int)csd[i]];
-                }
-                [self logStringToPanel: @"\nSD CID Register: "];
-                for (size_t i = 0; i < 16 /*cid.size()*/; ++i)
-                {
-                    [self logStringToPanel: @"%0X", (int)cid[i]];
-                }
-                [self logStringToPanel: @"\n"];
-
-                if ([[self scsiSelfTest] state] == NSControlStateValueOn)
-                {
-                    [self runScsiSelfTest];
-                }
-
-                if (!myInitialConfig)
-                {
-/* This doesn't work properly, and causes crashes.
-                    wxCommandEvent loadEvent(wxEVT_NULL, ID_BtnLoad);
-                    GetEventHandler()->AddPendingEvent(loadEvent);
-*/
-                }
-
+                [self showConnectInfo];
             }
             else
             {
