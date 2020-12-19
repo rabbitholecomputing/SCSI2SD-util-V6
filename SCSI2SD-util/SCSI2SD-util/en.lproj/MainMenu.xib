@@ -18,9 +18,6 @@
         <customObject id="eJ5-Xi-KA2" customClass="SettingsController">
             <connections>
                 <outlet property="enableBlindWrites" destination="KPP-j3-4TP" id="WCd-wZ-M28"/>
-                <outlet property="enableCache" destination="vOj-gL-ygv" id="YU5-HE-yqh"/>
-                <outlet property="enableDisconnect" destination="kb7-1z-XXK" id="UXB-gG-e0H"/>
-                <outlet property="enableGlitch" destination="FHU-Av-KXV" id="AnG-GE-A0a"/>
                 <outlet property="enableParity" destination="ael-0l-G7C" id="g5Y-nF-2B9"/>
                 <outlet property="enableSCSI2Mode" destination="1Kk-W6-IiR" id="k8Z-OS-jHQ"/>
                 <outlet property="enableSCSITerminator" destination="dQS-Ei-zP6" id="jYv-jR-fiK"/>
@@ -509,14 +506,6 @@
                                                 </menu>
                                             </popUpButtonCell>
                                         </popUpButton>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FHU-Av-KXV">
-                                            <rect key="frame" x="266" y="138" width="140" height="18"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="check" title="Enable Glitch Mode" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="4HD-Ec-qYX">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                        </button>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gH7-9Y-z4m">
                                             <rect key="frame" x="266" y="178" width="150" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -557,7 +546,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GWm-ur-sda">
-                                            <rect key="frame" x="266" y="78" width="261" height="18"/>
+                                            <rect key="frame" x="266" y="118" width="261" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="check" title="Respond to short SCSI selection pulses" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="bYO-xf-T2V">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -565,31 +554,15 @@
                                             </buttonCell>
                                         </button>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L86-uX-2AA">
-                                            <rect key="frame" x="266" y="98" width="171" height="18"/>
+                                            <rect key="frame" x="266" y="138" width="171" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="check" title="Map LUNS to SCSI IDs" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="6Cc-mB-FAO">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vOj-gL-ygv">
-                                            <rect key="frame" x="266" y="118" width="143" height="18"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="check" title="Enable Cache Mode" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="rfg-tc-ubB">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                        </button>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kb7-1z-XXK">
-                                            <rect key="frame" x="266" y="58" width="136" height="18"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="check" title="Enable Disconnect" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="0Kc-Hb-jF7">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                        </button>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KPP-j3-4TP">
-                                            <rect key="frame" x="266" y="38" width="139" height="18"/>
+                                            <rect key="frame" x="267" y="98" width="139" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="check" title="Enable Blind Writes" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Int-WR-fhF">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
