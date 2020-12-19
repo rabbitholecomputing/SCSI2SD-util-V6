@@ -21,36 +21,37 @@
       "size" : "32x32"
     },
     {
-      "filename" : "SCSI2SD-V6-util-128.png",
+      "filename" : "SCSI2SD-util-V6-icon-128x128.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "128x128"
     },
     {
-      "filename" : "SCSI2SD-V6-util-257.png",
+      "filename" : "SCSI2SD-util-V6-icon-256x256-1.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "128x128"
     },
     {
-      "filename" : "SCSI2SD-V6-util-256.png",
+      "filename" : "SCSI2SD-util-V6-icon-256x256.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "256x256"
     },
     {
-      "filename" : "SCSI2SD-V6-util-512.png",
+      "filename" : "SCSI2SD-util-V6-icon-512x512.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
-      "filename" : "SCSI2SD-V6-util-513.png",
+      "filename" : "SCSI2SD-util-V6-icon-512x512-1.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
+      "filename" : "SCSI2SD-util-V6-icon-1024x1024.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"
