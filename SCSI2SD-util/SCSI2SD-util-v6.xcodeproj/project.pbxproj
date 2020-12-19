@@ -64,6 +64,7 @@
 		1482B20F239748DB001BA513 /* DeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1482B203239748DB001BA513 /* DeviceController.m */; };
 		1482B210239748DB001BA513 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1482B204239748DB001BA513 /* SettingsController.m */; };
 		14BCFEEC24AD4D2400706907 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14BCFEEB24AD4D2400706907 /* IOKit.framework */; };
+		14D621FB258E8C6300572C88 /* SCSI2SD-util-V6-icon-1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D621FA258E8C6300572C88 /* SCSI2SD-util-V6-icon-1024x1024.png */; };
 		14D96BCF23C935330008E7B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D96BCE23C935330008E7B3 /* main.m */; };
 		14DEC5EF23A4C76000ECD04A /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DEC5EE23A4C76000ECD04A /* NSString+Extensions.m */; };
 		14F2F96523C94A4400169DD2 /* SCSI2SDTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F2F96423C94A4400169DD2 /* SCSI2SDTask.m */; };
@@ -226,6 +227,7 @@
 		14BCFEEB24AD4D2400706907 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		14C63FE7244A339500848412 /* libusb-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusb-1.0.0.dylib"; path = "../../../../src/scsi2sd-util6/libusb-1.0.23/libusb/libs/libusb-1.0.0.dylib"; sourceTree = "<group>"; };
 		14CF47CF248EFFD900D2B6AF /* SCSI2SD-util-v6.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "SCSI2SD-util-v6.entitlements"; sourceTree = "<group>"; };
+		14D621FA258E8C6300572C88 /* SCSI2SD-util-V6-icon-1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SCSI2SD-util-V6-icon-1024x1024.png"; path = "Assets.xcassets/AppIcon.appiconset/SCSI2SD-util-V6-icon-1024x1024.png"; sourceTree = "<group>"; };
 		14D96BCC23C935320008E7B3 /* scsi2sd-util-v6-cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "scsi2sd-util-v6-cli"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14D96BCE23C935330008E7B3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		14DEC5ED23A4C76000ECD04A /* NSString+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Extensions.h"; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 				1482B1EC23973F42001BA513 /* MainMenu.xib */,
 				1482B1EF23973F42001BA513 /* Info.plist */,
 				1482B1EA23973F42001BA513 /* Assets.xcassets */,
+				14D621FA258E8C6300572C88 /* SCSI2SD-util-V6-icon-1024x1024.png */,
 			);
 			path = "SCSI2SD-util";
 			sourceTree = "<group>";
@@ -605,6 +608,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1482B1EB23973F42001BA513 /* Assets.xcassets in Resources */,
+				14D621FB258E8C6300572C88 /* SCSI2SD-util-V6-icon-1024x1024.png in Resources */,
 				1482B1EE23973F42001BA513 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
