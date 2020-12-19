@@ -717,6 +717,10 @@ uint32_t fromLE32(uint32_t in)
         {
             result.scsiSpeed = [self parseInt:child limit:S2S_CFG_SPEED_SYNC_10]; //parseInt(child, S2S_CFG_SPEED_SYNC_10);
         }
+        else if ([[child name] isEqualToString: @"blindWrites"])
+        {
+            result.scsiSpeed = [self parseInt:child limit:S2S_CFG_ENABLE_BLIND_WRITES]; //parseInt(child, S2S_CFG_SPEED_SYNC_10);
+        }
         child = [en nextObject];
     }
     return result;
