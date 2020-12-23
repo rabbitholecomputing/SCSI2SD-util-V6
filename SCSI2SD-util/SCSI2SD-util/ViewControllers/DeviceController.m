@@ -64,6 +64,7 @@
     self.sectorCount.delegate = self;
     self.sdCardStartSector.delegate = self;
     self.deviceSize.delegate = self;
+    [self evaluate];
 }
 
 - (NSData *) structToData: (S2S_TargetCfg)config withMutableData: (NSMutableData *)d
