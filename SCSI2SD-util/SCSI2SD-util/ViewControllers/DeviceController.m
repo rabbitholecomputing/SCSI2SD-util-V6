@@ -61,9 +61,9 @@
     self.scsiIdErrorText.stringValue = @"";
     
     // Set delegate..
-    self.sectorCount.delegate = (id<NSTextFieldDelegate>)[NSApp delegate];
-    self.sdCardStartSector.delegate = (id<NSTextFieldDelegate>)[NSApp delegate];
-    self.deviceSize.delegate = (id<NSTextFieldDelegate>)[NSApp delegate];
+    self.sectorCount.delegate = self;
+    self.sdCardStartSector.delegate = self;
+    self.deviceSize.delegate = self;
 }
 
 - (NSData *) structToData: (S2S_TargetCfg)config withMutableData: (NSMutableData *)d

@@ -15,7 +15,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DeviceController : NSObject
+@interface DeviceController : NSObject <NSTextFieldDelegate>
 
 - (void) setTargetConfigData: (NSData *)data;
 - (void) setTargetConfig: (S2S_TargetCfg)config;
