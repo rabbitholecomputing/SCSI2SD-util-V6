@@ -613,6 +613,10 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
         NSLog(@"Error writing file %@", error);
         NSRunAlertPanel(@"Error Writing File", error.localizedDescription, @"OK", nil, nil);
     }
+    else
+    {
+        NSRunAlertPanel(@"File Saved",@"File written successfully", @"OK", nil, nil);
+    }
 }
 
 - (IBAction)saveFile:(id)sender
