@@ -726,7 +726,7 @@ uint32_t fromLE32(uint32_t in)
             }
             else
             {
-                result.flags = result.flags6 & ~S2S_CFG_ENABLE_BLIND_WRITES;
+                result.flags6 = result.flags6 & ~S2S_CFG_ENABLE_BLIND_WRITES;
             }
         }
 
