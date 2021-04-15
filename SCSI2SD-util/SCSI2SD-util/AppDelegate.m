@@ -142,6 +142,11 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     [self.customAboutWindow orderFrontRegardless];
 }
 
+- (IBAction) enableTarget: (id)sender
+{
+    [self autoButton: sender];
+}
+
 - (IBAction)handleLogPanel:(id)sender {
     if ([self.logPanel isVisible])
     {
@@ -1194,19 +1199,27 @@ out:
 - (IBAction) autoButton: (id)sender
 {
     // recalculate...
-    NSButton *but = sender;
-    if(but.state == NSOnState)
+    NSUInteger secStart = 0;
+    NSUInteger index = 0;
+    NSEnumerator *en = [deviceControllers objectEnumerator];
+    DeviceController *dev = nil;
+    while ((dev = [en nextObject]) != nil)
     {
-        NSUInteger index = [sender tag]; // [deviceControllers indexOfObject:sender];
-        if(index > 0)
+        if ([dev isEnabled] && dev.autoStartSector.state == NSOnState)
         {
-            NSUInteger j = index - 1;
-            DeviceController *dev = [deviceControllers objectAtIndex:j];
             NSRange sectorRange = [dev getSDSectorRange];
             NSUInteger len = sectorRange.length;
-            NSUInteger secStart = len + 1;
-            DeviceController *devToUpdate = [deviceControllers objectAtIndex:index];
-            [devToUpdate setAutoStartSectorValue:secStart];
+            secStart += len + 1;
+            index++; // update next one...
+            
+            if (index < [deviceControllers count])
+            {
+                DeviceController *devToUpdate = [deviceControllers objectAtIndex:index];
+                if ([devToUpdate isEnabled] && devToUpdate.autoStartSector.state == NSOnState)
+                {
+                    [devToUpdate setAutoStartSectorValue:secStart];
+                }
+            }
         }
     }
 }
