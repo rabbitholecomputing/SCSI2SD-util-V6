@@ -259,6 +259,11 @@
                 // Definitely the 2020c or newer hardware.
                 return @"V6, 2020c or newer";
             }
+            else if ([prodStr rangeOfString:@"2021"].location != NSNotFound)
+            {
+                // Definitely the 2020c or newer hardware.
+                return @"V6, 2021 or newer";
+            }
             else
             {
                 return @"V6, Rev F or older";
@@ -273,8 +278,8 @@
 {
     if (myFirmwareVersion < 0x0630)
     {
-        // Definitely the 2020c or newer hardware.
-        return [path rangeOfString: @"firmware.V6.revF.dfu"].location != NSNotFound ||
+      // Definitely the older hardware.
+      return [path rangeOfString: @"firmware.V6.revF.dfu"].location != NSNotFound ||
             [path rangeOfString: @"firmware.dfu"].location != NSNotFound;
     }
     else if (myFirmwareVersion == 0x0630)
@@ -297,6 +302,11 @@
             {
                 // Definitely the 2020c or newer hardware.
                 return [prodStr rangeOfString:@"firmware.V6.2020.dfu"].location != NSNotFound;
+            }
+            else if ([prodStr rangeOfString:@"2021"].location != NSNotFound)
+            {
+                // Definitely the 2020c or newer hardware.
+               return [prodStr rangeOfString: @"firmware.V6.2021.dfu"].location != NSNotFound;
             }
             else
             {
