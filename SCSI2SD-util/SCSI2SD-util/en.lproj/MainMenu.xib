@@ -819,7 +819,7 @@
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
-                                                <action selector="enableTarget:" target="Voe-Tx-rLC" id="etT-PX-C8w"/>
+                                                <action selector="enableSCSITarget:" target="Rxt-kb-gYI" id="4cp-bF-KVp"/>
                                             </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FL4-t4-ag4">
@@ -1113,7 +1113,7 @@
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
-                                                <action selector="enableTarget:" target="Voe-Tx-rLC" id="tko-nk-3ly"/>
+                                                <action selector="enableSCSITarget:" target="pNT-g4-Vd5" id="s2J-2S-dFi"/>
                                             </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kXv-gc-PXh">
@@ -1407,7 +1407,7 @@
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
-                                                <action selector="enableTarget:" target="Voe-Tx-rLC" id="72g-4P-GBi"/>
+                                                <action selector="enableSCSITarget:" target="YnD-md-VMP" id="apm-RE-sUf"/>
                                             </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Tc-Qo-VGF">
@@ -1701,7 +1701,7 @@
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
-                                                <action selector="enableTarget:" target="Voe-Tx-rLC" id="H4s-KD-tvS"/>
+                                                <action selector="enableSCSITarget:" target="eDc-Zj-phF" id="Krx-65-cut"/>
                                             </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dJK-Eu-mjm">
@@ -1995,7 +1995,7 @@
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
-                                                <action selector="enableTarget:" target="Voe-Tx-rLC" id="uQp-ZH-KBa"/>
+                                                <action selector="enableSCSITarget:" target="i9u-bG-GAU" id="Z5o-C2-lyb"/>
                                             </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fXJ-8Y-PXc">
@@ -2298,7 +2298,7 @@
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
-                                                <action selector="enableTarget:" target="Voe-Tx-rLC" id="Vov-qs-saK"/>
+                                                <action selector="enableSCSITarget:" target="RDl-9l-zXo" id="JMX-Q5-oUh"/>
                                             </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y01-oJ-dry">
@@ -2592,7 +2592,7 @@
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
-                                                <action selector="enableTarget:" target="Voe-Tx-rLC" id="Pxg-Ar-RjG"/>
+                                                <action selector="enableSCSITarget:" target="5Ee-7c-Xde" id="cil-Ql-v7M"/>
                                             </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fqg-4p-zmN">

@@ -752,7 +752,16 @@ uint32_t fromLE32(uint32_t in)
                                                        error: &error];
     if (error != nil)
     {
-        NSLog(@"%@", error);
+        NSDictionary *userInfo = [error userInfo];
+        NSString *description = [userInfo objectForKey: NSLocalizedDescriptionKey];
+        if (description != nil)
+        {
+            [NSException raise: NSInternalInconsistencyException format: @"%@", description];
+        }
+        else
+        {
+            [NSException raise: NSInternalInconsistencyException format: @"Could not parse XML file"];
+        }
     }
     
     Pair *p = [[Pair alloc] init];

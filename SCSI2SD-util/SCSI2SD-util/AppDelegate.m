@@ -445,6 +445,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     // [self.logPanel orderOut: self];
     [self.logPanel orderFrontRegardless];
     
+    [self.window makeKeyAndOrderFront:self];
     [self startTimer];
     aLock = [[NSLock alloc] init];
     [self loadDefaults: nil];
@@ -626,15 +627,36 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 
 - (IBAction)saveFile:(id)sender
 {
+#ifdef GNUSTEP
+    // Do the save..
     NSSavePanel *panel = [NSSavePanel savePanel];
     NSString *defaultPath = [@"~/Downloads" stringByExpandingTildeInPath];
-    [panel setDirectoryURL:[NSURL fileURLWithPath:defaultPath isDirectory:YES]];
-    [panel beginSheetForDirectory:nil
+    [panel beginSheetForDirectory:defaultPath
                              file:nil
                    modalForWindow:[self mainWindow]
                     modalDelegate:self
                    didEndSelector:@selector(saveFileEnd:)
                       contextInfo:nil];
+#else
+    // Authorize the dir
+    NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+    [openPanel setMessage: @"Authorize the folder where you want to save (necessary for security)"];
+    [openPanel setPrompt: @"Select"];
+    [openPanel setCanChooseFiles: NO];
+    [openPanel setCanChooseDirectories: YES];
+    [openPanel setCanCreateDirectories: YES];
+    [openPanel beginWithCompletionHandler:^(NSModalResponse result) {
+        // Do the save..
+        NSSavePanel *panel = [NSSavePanel savePanel];
+        [panel setDirectoryURL: openPanel.URL];
+        [panel beginSheetForDirectory:[[openPanel URL] path]
+                                 file:nil
+                       modalForWindow:[self mainWindow]
+                        modalDelegate:self
+                       didEndSelector:@selector(saveFileEnd:)
+                          contextInfo:nil];
+    }];
+#endif
 }
 
 // Open XML file...
@@ -654,12 +676,20 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
         size_t i;
         for (i = 0; i < [configs targetCount] && i < [self->deviceControllers count]; ++i)
         {
+            if (i >= 7)
+            {
+                break;
+            }
             DeviceController *devCon = [self->deviceControllers objectAtIndex:i];
             [devCon setTargetConfig: [configs targetCfgAtIndex:i]];
         }
 
         for (; i < [self->deviceControllers count]; ++i)
         {
+            if (i >= 7)
+            {
+                break;
+            }
             DeviceController *devCon = [self->deviceControllers objectAtIndex:i];
             [devCon setTargetConfig: [configs targetCfgAtIndex: i]];
         }
@@ -668,10 +698,12 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     {
         NSArray *paths = [panel filenames];
         NSString *path = [paths objectAtIndex: 0];
-        [self logStringToPanel:[NSString stringWithFormat: @
-            "Cannot load settings from file '%@'.\n%@",
-            path,
-            [e reason]]];
+        NSString *msg = [NSString stringWithFormat: @
+                          "Cannot load settings from file '%@'.\n%@",
+                          path,
+                          [e reason]];
+        NSRunAlertPanel(@"Error while loading XML", msg, @"Ok", nil, nil);
+        [self logStringToPanel: msg];
     }
 }
 
@@ -701,6 +733,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
         // myTargets[i]->setConfig(ConfigUtil::Default(i));
         DeviceController *devCon = [self->deviceControllers objectAtIndex:i];
         [devCon setTargetConfig: [ConfigUtil defaultTargetConfig:i]];
+        [devCon autoStartSector].enabled = ([devCon enableSCSITarget].state == NSOnState);
     }
 }
 
