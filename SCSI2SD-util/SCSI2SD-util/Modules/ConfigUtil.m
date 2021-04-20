@@ -739,17 +739,16 @@ uint32_t fromLE32(uint32_t in)
 + (Pair *) fromXML: (NSString *)filename
 {
     NSData *data = [NSData dataWithContentsOfFile: filename];
-    if(data == nil)
-    {
-        puts("Could not read file.");
-        NSRunAlertPanel(@"Error Reading File",[NSString stringWithFormat:@"Cannot read file %@", filename], @"OK", nil, nil);
-        return nil;
-    }
-    
     NSError *error = nil;
     NSXMLDocument *doc = [[NSXMLDocument alloc] initWithData: data
                                                      options: NSXMLNodeOptionsNone
                                                        error: &error];
+    if(data == nil)
+    {
+        NSString *msg = [NSString stringWithFormat:@"Cannot read file %@", filename];
+        [NSException raise:NSInternalInconsistencyException format:msg];
+    }
+
     if (error != nil)
     {
         NSDictionary *userInfo = [error userInfo];

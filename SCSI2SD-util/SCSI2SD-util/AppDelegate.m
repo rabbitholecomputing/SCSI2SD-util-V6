@@ -676,14 +676,11 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
         size_t i;
         for (i = 0; i < [configs targetCount] && i < [self->deviceControllers count]; ++i)
         {
-            if (i >= 7)
-            {
-                break;
-            }
             DeviceController *devCon = [self->deviceControllers objectAtIndex:i];
             [devCon setTargetConfig: [configs targetCfgAtIndex:i]];
         }
 
+        /*
         for (; i < [self->deviceControllers count]; ++i)
         {
             if (i >= 7)
@@ -692,7 +689,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
             }
             DeviceController *devCon = [self->deviceControllers objectAtIndex:i];
             [devCon setTargetConfig: [configs targetCfgAtIndex: i]];
-        }
+        } */
     }
     @catch (NSException *e)
     {
