@@ -678,6 +678,8 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
         {
             DeviceController *devCon = [self->deviceControllers objectAtIndex:i];
             [devCon setTargetConfig: [configs targetCfgAtIndex:i]];
+            [devCon autoStartSector].enabled = ([devCon enableSCSITarget].state == NSOnState);
+            [devCon evaluateSize];
         }
 
         /*
@@ -731,6 +733,8 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
         DeviceController *devCon = [self->deviceControllers objectAtIndex:i];
         [devCon setTargetConfig: [ConfigUtil defaultTargetConfig:i]];
         [devCon autoStartSector].enabled = ([devCon enableSCSITarget].state == NSOnState);
+        
+        [devCon evaluateSize];
     }
 }
 
