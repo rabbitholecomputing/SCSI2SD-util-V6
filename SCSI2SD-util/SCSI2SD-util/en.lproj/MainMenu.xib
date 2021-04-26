@@ -482,6 +482,9 @@
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
+                                            <connections>
+                                                <outlet property="delegate" destination="Voe-Tx-rLC" id="P7y-v5-avm"/>
+                                            </connections>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hla-Z9-zyP">
                                             <rect key="frame" x="15" y="247" width="226" height="17"/>
@@ -548,6 +551,9 @@
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
+                                            <connections>
+                                                <outlet property="delegate" destination="Voe-Tx-rLC" id="QOH-SZ-mk9"/>
+                                            </connections>
                                         </textField>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GWm-ur-sda">
                                             <rect key="frame" x="265" y="132" width="261" height="18"/>
