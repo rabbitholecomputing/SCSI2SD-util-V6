@@ -223,6 +223,11 @@
     
 - (NSString *) getSerialNumber
 {
+    if (myConfigHandle == NULL)
+    {
+        return nil;
+    }
+    
     const size_t maxUsbString = 255;
     wchar_t wstr[maxUsbString];
     int res = hid_get_serial_number_string(myConfigHandle, wstr, maxUsbString);
@@ -385,6 +390,11 @@
                 output: (NSMutableData *)outputData
                 length: (size_t)responseLength
 {
+    if (myConfigHandle == NULL)
+    {
+        return;
+    }
+    
     NSAssert([cmdData length] <= HIDPACKET_MAX_LEN, @"Packet length too long");
     uint8_t *cmd = (uint8_t *)[cmdData bytes];
     hidPacket_send(&cmd[0], [cmdData length]);

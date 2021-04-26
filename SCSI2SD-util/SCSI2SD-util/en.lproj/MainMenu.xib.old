@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,7 +17,9 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="eJ5-Xi-KA2" customClass="SettingsController">
             <connections>
-                <outlet property="enableBlindWrites" destination="KPP-j3-4TP" id="WCd-wZ-M28"/>
+                <outlet property="enableCache" destination="vOj-gL-ygv" id="7pk-Vi-IWu"/>
+                <outlet property="enableDisconnect" destination="kb7-1z-XXK" id="wAa-xH-mfw"/>
+                <outlet property="enableGlitch" destination="FHU-Av-KXV" id="FBI-R5-ouU"/>
                 <outlet property="enableParity" destination="ael-0l-G7C" id="g5Y-nF-2B9"/>
                 <outlet property="enableSCSI2Mode" destination="1Kk-W6-IiR" id="k8Z-OS-jHQ"/>
                 <outlet property="enableSCSITerminator" destination="dQS-Ei-zP6" id="jYv-jR-fiK"/>
@@ -37,7 +39,7 @@
                 <outlet property="deviceSize" destination="mf7-2L-91G" id="A8a-e2-UGd"/>
                 <outlet property="deviceType" destination="EbT-lY-RTW" id="bUI-fh-sfD"/>
                 <outlet property="deviceUnit" destination="WuS-Tz-H4h" id="1cu-eh-LBX"/>
-                <outlet property="enableSCSITarget" destination="6wM-D2-KLl" id="LVs-za-Xnw"/>
+                <outlet property="enableSCSITarget" destination="EvT-5c-g2M" id="Vvw-KV-gkH"/>
                 <outlet property="headsPerCylinder" destination="XKi-sB-NTx" id="pG2-uS-tgf"/>
                 <outlet property="productId" destination="J70-FD-mTc" id="Ox3-Xm-tvY"/>
                 <outlet property="revsion" destination="rrQ-oQ-gU1" id="pPh-Jr-Y2z"/>
@@ -120,7 +122,6 @@
                 <outlet property="autoStartSector" destination="5Ac-XG-hdq" id="2v7-iK-NIi"/>
                 <outlet property="deviceSize" destination="0I7-nT-pf8" id="fUs-xV-3tW"/>
                 <outlet property="deviceType" destination="6A2-9t-YJR" id="7ZB-Lm-Evh"/>
-                <outlet property="deviceUnit" destination="ZuA-PU-Fbd" id="XJJ-5s-PVs"/>
                 <outlet property="enableSCSITarget" destination="Ibk-0R-vRE" id="gSR-9G-ccv"/>
                 <outlet property="headsPerCylinder" destination="Fnq-W8-Zci" id="uTV-L1-naZ"/>
                 <outlet property="productId" destination="u2l-LN-EOK" id="wbc-NL-Ryj"/>
@@ -141,7 +142,6 @@
                 <outlet property="autoStartSector" destination="hNf-cg-lVc" id="J58-l9-buy"/>
                 <outlet property="deviceSize" destination="0yt-XE-qQq" id="ZV0-v3-Nf6"/>
                 <outlet property="deviceType" destination="77u-bG-vJh" id="2T9-TY-5Eu"/>
-                <outlet property="deviceUnit" destination="06T-JI-3Qd" id="Tmd-Uf-MOt"/>
                 <outlet property="enableSCSITarget" destination="a4Q-GD-Yqw" id="zo8-eY-RvF"/>
                 <outlet property="headsPerCylinder" destination="Unr-a9-dPE" id="K5e-uc-P0h"/>
                 <outlet property="productId" destination="mP8-PK-zhX" id="kuH-K4-Tre"/>
@@ -207,11 +207,11 @@
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
-                <menuItem title="SCSI2SD-util-V6" id="1Xt-HY-uBw">
+                <menuItem title="scsi2sd-v6-util" id="1Xt-HY-uBw">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="SCSI2SD-util-V6" systemMenu="apple" id="uQy-DD-JDr">
+                    <menu key="submenu" title="scsi2sd-v6-util" systemMenu="apple" id="uQy-DD-JDr">
                         <items>
-                            <menuItem title="About SCSI2SD-util-V6" id="5kV-Vb-QxS">
+                            <menuItem title="About scsi2sd-util-v6" id="5kV-Vb-QxS">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="handleAboutPanel:" target="Voe-Tx-rLC" id="EHE-QB-7xE"/>
@@ -322,6 +322,192 @@
                                     <action selector="paste:" target="-1" id="GQ9-b5-Wkb"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Paste and Match Style" keyEquivalent="V" id="SJT-rD-zHr">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="pasteAsPlainText:" target="-1" id="yyK-dA-M2S"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Delete" id="hpx-Hi-hJP">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="delete:" target="-1" id="HTi-xv-Ldk"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Select All" keyEquivalent="a" id="xWu-Od-C7f">
+                                <connections>
+                                    <action selector="selectAll:" target="-1" id="TGM-pg-T94"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="iH3-8H-TnV"/>
+                            <menuItem title="Find" id="KE8-46-1nN">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Find" id="qNb-5A-gEY">
+                                    <items>
+                                        <menuItem title="Find…" tag="1" keyEquivalent="f" id="3Ni-aw-xJ4">
+                                            <connections>
+                                                <action selector="performFindPanelAction:" target="-1" id="Cgu-rb-Shc"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Find and Replace…" tag="12" keyEquivalent="f" id="Of4-0x-iJv">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="performTextFinderAction:" target="-1" id="ySx-vE-lcx"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Find Next" tag="2" keyEquivalent="g" id="0q2-OU-pm3">
+                                            <connections>
+                                                <action selector="performFindPanelAction:" target="-1" id="oRj-03-s0l"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Find Previous" tag="3" keyEquivalent="G" id="AFI-5v-dxc">
+                                            <connections>
+                                                <action selector="performFindPanelAction:" target="-1" id="VCz-4N-5GP"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Use Selection for Find" tag="7" keyEquivalent="e" id="aoP-0l-4ck">
+                                            <connections>
+                                                <action selector="performFindPanelAction:" target="-1" id="m4z-uO-PV8"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Jump to Selection" keyEquivalent="j" id="OZX-zD-tS5">
+                                            <connections>
+                                                <action selector="centerSelectionInVisibleArea:" target="-1" id="pRD-Ch-nPf"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Spelling and Grammar" id="Fa6-5X-0i1">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Spelling" id="MAL-Cu-h1v">
+                                    <items>
+                                        <menuItem title="Show Spelling and Grammar" keyEquivalent=":" id="aVd-GH-GpS">
+                                            <connections>
+                                                <action selector="showGuessPanel:" target="-1" id="KZ8-Qo-wyX"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Check Document Now" keyEquivalent=";" id="fCN-vl-edt">
+                                            <connections>
+                                                <action selector="checkSpelling:" target="-1" id="aX9-JS-05C"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="J7I-Ib-nCy"/>
+                                        <menuItem title="Check Spelling While Typing" id="V3l-pf-fWH">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="toggleContinuousSpellChecking:" target="-1" id="65W-vS-DD7"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Check Grammar With Spelling" id="azx-lF-bjq">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="toggleGrammarChecking:" target="-1" id="Ans-Kg-rPb"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Correct Spelling Automatically" id="A0K-bC-qlE">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="toggleAutomaticSpellingCorrection:" target="-1" id="cTr-dP-7Xk"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Substitutions" id="eeX-hf-kfd">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Substitutions" id="a9u-fU-1l1">
+                                    <items>
+                                        <menuItem title="Show Substitutions" id="xl1-i4-Sg3">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="orderFrontSubstitutionsPanel:" target="-1" id="Ven-hg-dEQ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="SWM-J9-kDn"/>
+                                        <menuItem title="Smart Copy/Paste" id="9mH-Pl-ksk">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="toggleSmartInsertDelete:" target="-1" id="3mO-ls-2Fm"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Smart Quotes" id="bfT-IZ-0Hv">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="toggleAutomaticQuoteSubstitution:" target="-1" id="D63-oM-V7q"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Smart Dashes" id="Oth-kH-n1l">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="toggleAutomaticDashSubstitution:" target="-1" id="LMk-uw-bqK"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Smart Links" id="nxM-Dt-Lwz">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="toggleAutomaticLinkDetection:" target="-1" id="Ed1-25-70w"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Data Detectors" id="690-cs-dcR">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="toggleAutomaticDataDetection:" target="-1" id="KyL-WQ-Kho"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Text Replacement" id="8fu-5h-SLx">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="toggleAutomaticTextReplacement:" target="-1" id="5T2-YJ-Naq"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Transformations" id="umW-Ly-jKz">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Transformations" id="AKR-Eo-5e4">
+                                    <items>
+                                        <menuItem title="Make Upper Case" id="shy-Pa-BdA">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="uppercaseWord:" target="-1" id="i0J-L0-MmD"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Make Lower Case" id="i07-8t-6Li">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="lowercaseWord:" target="-1" id="nmU-RY-Nyh"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Capitalize" id="UX3-fk-TV8">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="capitalizeWord:" target="-1" id="ch6-1J-eG9"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Speech" id="SDo-0U-gVV">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Speech" id="sX2-7t-xVz">
+                                    <items>
+                                        <menuItem title="Start Speaking" id="FWS-Qi-8OD">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="startSpeaking:" target="-1" id="Ypr-cp-wpX"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Stop Speaking" id="oaE-IP-nv2">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="stopSpeaking:" target="-1" id="E6p-mO-Uhg"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -404,24 +590,11 @@
             <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="192" y="561" width="723" height="448"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1127"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1129"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="723" height="448"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ara-s3-3mi">
-                        <rect key="frame" x="18" y="5" width="475" height="17"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="Searching for SCSI2SD device |" id="c5c-ML-7wz">
-                            <font key="font" usesAppearanceFont="YES"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <progressIndicator hidden="YES" toolTip="Show progress of current task" wantsLayer="YES" fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Buk-nO-Jap">
-                        <rect key="frame" x="499" y="3" width="204" height="20"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    </progressIndicator>
                     <tabView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pmn-E4-Otb">
                         <rect key="frame" x="13" y="20" width="697" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -433,7 +606,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8n8-Ud-LdI">
-                                            <rect key="frame" x="15" y="310" width="150" height="17"/>
+                                            <rect key="frame" x="15" y="285" width="150" height="17"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="SCSI Speed Limit" id="Xjl-De-x6L">
                                                 <font key="font" usesAppearanceFont="YES"/>
@@ -442,7 +615,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vjD-kA-vow">
-                                            <rect key="frame" x="15" y="278" width="151" height="17"/>
+                                            <rect key="frame" x="15" y="253" width="151" height="17"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Startup Delay (seconds)" id="pwX-Kg-yKT">
                                                 <font key="font" usesAppearanceFont="YES"/>
@@ -451,7 +624,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <button toolTip="Enable active terminator. Both ends of the SCSI chain must be terminated." verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dQS-Ei-zP6">
-                                            <rect key="frame" x="265" y="334" width="162" height="18"/>
+                                            <rect key="frame" x="265" y="309" width="162" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="check" title="Enable SCSI terminator" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ixw-Kg-1ib">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -459,7 +632,7 @@
                                             </buttonCell>
                                         </button>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ael-0l-G7C">
-                                            <rect key="frame" x="265" y="223" width="162" height="18"/>
+                                            <rect key="frame" x="265" y="186" width="162" height="27"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="check" title="Enable Parity" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="79N-mG-1HY">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -467,15 +640,31 @@
                                             </buttonCell>
                                         </button>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Kk-W6-IiR">
-                                            <rect key="frame" x="265" y="178" width="141" height="18"/>
+                                            <rect key="frame" x="265" y="142" width="141" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="check" title="Enable SCSI2 Mode" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="yPU-O5-Fio">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GWm-ur-sda">
+                                            <rect key="frame" x="265" y="47" width="261" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="check" title="Respond to short SCSI selection pulses" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="bYO-xf-T2V">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L86-uX-2AA">
+                                            <rect key="frame" x="265" y="21" width="158" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="check" title="Map LUNS to SCSI IDs" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="6Cc-mB-FAO">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </button>
                                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Udt-SV-7Gs">
-                                            <rect key="frame" x="267" y="278" width="96" height="22"/>
+                                            <rect key="frame" x="267" y="253" width="96" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="0" drawsBackground="YES" id="iaz-sZ-XKj">
                                                 <font key="font" metaFont="system"/>
@@ -484,7 +673,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hla-Z9-zyP">
-                                            <rect key="frame" x="15" y="247" width="226" height="17"/>
+                                            <rect key="frame" x="15" y="222" width="226" height="17"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="SCSI Selection Delay ms, 255 = auto" id="bcZ-5u-tUC">
                                                 <font key="font" usesAppearanceFont="YES"/>
@@ -493,11 +682,11 @@
                                             </textFieldCell>
                                         </textField>
                                         <popUpButton toolTip="Limit SCSI interface speed" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YQw-dR-rmW">
-                                            <rect key="frame" x="265" y="303" width="159" height="25"/>
+                                            <rect key="frame" x="265" y="278" width="159" height="25"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <popUpButtonCell key="cell" type="push" title="No Limit (safe)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="LeL-rm-YSp" id="QTo-ub-H5S">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="lg0-gW-kcG">
                                                     <items>
                                                         <menuItem title="No Limit (safe)" state="on" id="LeL-rm-YSp"/>
@@ -521,8 +710,32 @@
                                                 </menu>
                                             </popUpButtonCell>
                                         </popUpButton>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FHU-Av-KXV">
+                                            <rect key="frame" x="265" y="118" width="140" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="check" title="Enable Glitch Mode" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="4HD-Ec-qYX">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vOj-gL-ygv">
+                                            <rect key="frame" x="265" y="95" width="143" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="check" title="Enable Cache Mode" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="rfg-tc-ubB">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kb7-1z-XXK">
+                                            <rect key="frame" x="265" y="67" width="136" height="27"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="check" title="Enable Disconnect" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="0Kc-Hb-jF7">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </button>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gH7-9Y-z4m">
-                                            <rect key="frame" x="265" y="201" width="150" height="18"/>
+                                            <rect key="frame" x="265" y="166" width="150" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="check" title="Enable Unit Attention" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="eRX-6G-UaF">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -530,7 +743,7 @@
                                             </buttonCell>
                                         </button>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="enj-xl-C8e">
-                                            <rect key="frame" x="11" y="45" width="187" height="32"/>
+                                            <rect key="frame" x="-3" y="42" width="189" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="push" title="Read From Device   ⌘R" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aGX-Sl-4ot">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -540,41 +753,8 @@
                                                 <action selector="loadFromDevice:" target="Voe-Tx-rLC" id="py4-OD-J3h"/>
                                             </connections>
                                         </button>
-                                        <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iwE-bZ-4i0">
-                                            <rect key="frame" x="267" y="247" width="96" height="22"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="255" drawsBackground="YES" id="CWl-Al-s7c">
-                                                <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GWm-ur-sda">
-                                            <rect key="frame" x="265" y="132" width="261" height="18"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="check" title="Respond to short SCSI selection pulses" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="bYO-xf-T2V">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                        </button>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L86-uX-2AA">
-                                            <rect key="frame" x="265" y="156" width="171" height="18"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="check" title="Map LUNS to SCSI IDs" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="6Cc-mB-FAO">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                        </button>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KPP-j3-4TP">
-                                            <rect key="frame" x="265" y="102" width="139" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="check" title="Enable Blind Writes" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Int-WR-fhF">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                        </button>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vhx-Fe-7uR">
-                                            <rect key="frame" x="11" y="9" width="187" height="32"/>
+                                            <rect key="frame" x="-3" y="16" width="189" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="push" title="Write To Device        ⌘W" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="diR-UM-Q4b">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -584,6 +764,15 @@
                                                 <action selector="saveToDevice:" target="Voe-Tx-rLC" id="m9h-Dn-oZB"/>
                                             </connections>
                                         </button>
+                                        <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iwE-bZ-4i0">
+                                            <rect key="frame" x="267" y="222" width="96" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="255" drawsBackground="YES" id="CWl-Al-s7c">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
                                     </subviews>
                                 </view>
                             </tabViewItem>
@@ -699,7 +888,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <popUpButtonCell key="cell" type="push" title="Hard Drive" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="T9u-RL-aZx" id="tp1-qk-w5s">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="PAX-aA-R96">
                                                     <items>
                                                         <menuItem title="Hard Drive" state="on" id="T9u-RL-aZx"/>
@@ -794,7 +983,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <popUpButtonCell key="cell" type="push" title="GB" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="JWR-tm-nNV" id="aAg-f0-0ce">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="vCO-wV-EVm">
                                                     <items>
                                                         <menuItem title="GB" state="on" id="JWR-tm-nNV"/>
@@ -820,9 +1009,6 @@
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
-                                            <connections>
-                                                <action selector="enableSCSITarget:" target="Rxt-kb-gYI" id="4cp-bF-KVp"/>
-                                            </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FL4-t4-ag4">
                                             <rect key="frame" x="137" y="61" width="112" height="17"/>
@@ -993,7 +1179,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <popUpButtonCell key="cell" type="push" title="Hard Drive" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="824-vI-Xw2" id="NNU-YT-brJ">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="TYb-Bb-18v">
                                                     <items>
                                                         <menuItem title="Hard Drive" state="on" id="824-vI-Xw2"/>
@@ -1097,7 +1283,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <popUpButtonCell key="cell" type="push" title="GB" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="ww4-wL-l3T" id="4jm-M0-Ckn">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="kFe-WX-qAX">
                                                     <items>
                                                         <menuItem title="GB" state="on" id="ww4-wL-l3T"/>
@@ -1114,9 +1300,6 @@
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
-                                            <connections>
-                                                <action selector="enableSCSITarget:" target="pNT-g4-Vd5" id="s2J-2S-dFi"/>
-                                            </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kXv-gc-PXh">
                                             <rect key="frame" x="137" y="61" width="112" height="17"/>
@@ -1287,7 +1470,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <popUpButtonCell key="cell" type="push" title="Hard Drive" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="c5S-Lh-GAB" id="d2F-q7-yUl">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="VnH-6q-AXt">
                                                     <items>
                                                         <menuItem title="Hard Drive" state="on" id="c5S-Lh-GAB"/>
@@ -1382,7 +1565,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <popUpButtonCell key="cell" type="push" title="GB" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="2E3-eB-d1Z" id="GzT-q8-3YH">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="pGI-Ab-tjv">
                                                     <items>
                                                         <menuItem title="GB" state="on" id="2E3-eB-d1Z"/>
@@ -1408,9 +1591,6 @@
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
-                                            <connections>
-                                                <action selector="enableSCSITarget:" target="YnD-md-VMP" id="apm-RE-sUf"/>
-                                            </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Tc-Qo-VGF">
                                             <rect key="frame" x="137" y="61" width="112" height="17"/>
@@ -1581,7 +1761,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <popUpButtonCell key="cell" type="push" title="Hard Drive" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="sWd-0L-fAM" id="KCJ-bx-Na8">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="bMB-xt-yNr">
                                                     <items>
                                                         <menuItem title="Hard Drive" state="on" id="sWd-0L-fAM"/>
@@ -1676,7 +1856,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <popUpButtonCell key="cell" type="push" title="GB" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Ma1-in-rTt" id="6bw-Nb-iDX">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="DuE-tK-bcv">
                                                     <items>
                                                         <menuItem title="GB" state="on" id="Ma1-in-rTt"/>
@@ -1702,9 +1882,6 @@
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
-                                            <connections>
-                                                <action selector="enableSCSITarget:" target="eDc-Zj-phF" id="Krx-65-cut"/>
-                                            </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dJK-Eu-mjm">
                                             <rect key="frame" x="137" y="61" width="112" height="17"/>
@@ -1875,7 +2052,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <popUpButtonCell key="cell" type="push" title="Hard Drive" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="PKA-Jb-NQK" id="YmI-h1-ABb">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="WIa-mi-kqj">
                                                     <items>
                                                         <menuItem title="Hard Drive" state="on" id="PKA-Jb-NQK"/>
@@ -1970,7 +2147,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <popUpButtonCell key="cell" type="push" title="GB" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="tNA-z0-ymo" id="aGC-6R-AF2">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="Z8c-Au-hhf">
                                                     <items>
                                                         <menuItem title="GB" state="on" id="tNA-z0-ymo"/>
@@ -1996,9 +2173,6 @@
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
-                                            <connections>
-                                                <action selector="enableSCSITarget:" target="i9u-bG-GAU" id="Z5o-C2-lyb"/>
-                                            </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fXJ-8Y-PXc">
                                             <rect key="frame" x="137" y="61" width="112" height="17"/>
@@ -2169,7 +2343,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <popUpButtonCell key="cell" type="push" title="Hard Drive" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="GaH-qq-MGR" id="WMA-CK-G94">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="4GT-ue-S7K">
                                                     <items>
                                                         <menuItem title="Hard Drive" state="on" id="GaH-qq-MGR"/>
@@ -2202,9 +2376,6 @@
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
-                                            <connections>
-                                                <outlet property="delegate" destination="Rxt-kb-gYI" id="E9g-kM-xMM"/>
-                                            </connections>
                                         </textField>
                                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CAi-AD-m57">
                                             <rect key="frame" x="362" y="208" width="96" height="22"/>
@@ -2214,9 +2385,6 @@
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
-                                            <connections>
-                                                <outlet property="delegate" destination="Rxt-kb-gYI" id="Tt3-dQ-KuN"/>
-                                            </connections>
                                         </textField>
                                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0yt-XE-qQq">
                                             <rect key="frame" x="362" y="181" width="96" height="22"/>
@@ -2226,9 +2394,6 @@
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
-                                            <connections>
-                                                <outlet property="delegate" destination="Rxt-kb-gYI" id="qUw-ll-6IE"/>
-                                            </connections>
                                         </textField>
                                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0sP-kq-YlB">
                                             <rect key="frame" x="362" y="156" width="96" height="22"/>
@@ -2273,7 +2438,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <popUpButtonCell key="cell" type="push" title="GB" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="XaU-tf-D2k" id="GPp-6x-uB5">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="R92-PK-ePQ">
                                                     <items>
                                                         <menuItem title="GB" state="on" id="XaU-tf-D2k"/>
@@ -2299,9 +2464,6 @@
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
-                                            <connections>
-                                                <action selector="enableSCSITarget:" target="RDl-9l-zXo" id="JMX-Q5-oUh"/>
-                                            </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y01-oJ-dry">
                                             <rect key="frame" x="137" y="61" width="112" height="17"/>
@@ -2472,7 +2634,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <popUpButtonCell key="cell" type="push" title="Hard Drive" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="b9y-ue-gJr" id="rV1-Lt-tkc">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="eYz-S9-NUK">
                                                     <items>
                                                         <menuItem title="Hard Drive" state="on" id="b9y-ue-gJr"/>
@@ -2567,7 +2729,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <popUpButtonCell key="cell" type="push" title="GB" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="P65-6g-OvO" id="EHG-pq-av0">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="system"/>
                                                 <menu key="menu" id="bdq-Vx-sf0">
                                                     <items>
                                                         <menuItem title="GB" state="on" id="P65-6g-OvO"/>
@@ -2593,9 +2755,6 @@
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
-                                            <connections>
-                                                <action selector="enableSCSITarget:" target="5Ee-7c-Xde" id="cil-Ql-v7M"/>
-                                            </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fqg-4p-zmN">
                                             <rect key="frame" x="137" y="61" width="112" height="17"/>
@@ -2656,15 +2815,28 @@
                             </tabViewItem>
                         </tabViewItems>
                     </tabView>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ara-s3-3mi">
+                        <rect key="frame" x="18" y="5" width="475" height="17"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Searching for SCSI2SD device |" id="c5c-ML-7wz">
+                            <font key="font" usesAppearanceFont="YES"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <progressIndicator hidden="YES" toolTip="Show progress of current task" wantsLayer="YES" fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Buk-nO-Jap">
+                        <rect key="frame" x="499" y="3" width="204" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </progressIndicator>
                 </subviews>
             </view>
             <point key="canvasLocation" x="56.5" y="-358"/>
         </window>
-        <window title="SCSI-util V6 Log" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="H9u-55-H3N" userLabel="SCSI2SD-util-V6 Activity Log">
+        <window title="SCSI-util V6 Log" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="H9u-55-H3N" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="1481" y="449" width="629" height="378"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1127"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1129"/>
             <view key="contentView" id="zVs-ES-bFT">
                 <rect key="frame" x="0.0" y="0.0" width="629" height="378"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -2674,7 +2846,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="3KJ-QQ-yLC">
                             <rect key="frame" x="0.0" y="0.0" width="614" height="378"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="IUe-Fz-GvN">
                                     <rect key="frame" x="0.0" y="0.0" width="614" height="378"/>
@@ -2705,7 +2877,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="211" y="124" width="629" height="376"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1127"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1129"/>
             <view key="contentView" id="PVE-wg-usZ">
                 <rect key="frame" x="0.0" y="0.0" width="629" height="376"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -2715,7 +2887,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="H32-El-DSP">
                             <rect key="frame" x="0.0" y="0.0" width="614" height="376"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="m9q-Cf-8kY">
                                     <rect key="frame" x="0.0" y="0.0" width="614" height="376"/>
@@ -2753,7 +2925,7 @@
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QIM-6x-VrC">
                         <rect key="frame" x="20" y="95" width="168" height="155"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="SCSI2SD-util-V6-icon-1024x1024" id="FYT-s3-uOL"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="SCSI2SD-V6-util-512" id="FYT-s3-uOL"/>
                     </imageView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PaB-GE-t3J">
                         <rect key="frame" x="222" y="230" width="195" height="20"/>
@@ -2825,6 +2997,6 @@
         </window>
     </objects>
     <resources>
-        <image name="SCSI2SD-util-V6-icon-1024x1024" width="828.40447998046875" height="828.40447998046875"/>
+        <image name="SCSI2SD-V6-util-512" width="207.10111999511719" height="207.10111999511719"/>
     </resources>
 </document>

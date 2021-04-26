@@ -337,8 +337,8 @@ uint32_t fromLE32(uint32_t in)
     memcpy(revision, config.revision, 4);
     memcpy(serial, config.serial, 8);
     NSString *str = [NSString stringWithFormat:s,
-                     (int)config.scsiId, // & S2S_CFG_TARGET_ID_BITS,
-                     config.scsiId & S2S_CFG_TARGET_ENABLED ? "true" : "false",
+                     (int)(config.scsiId & S2S_CFG_TARGET_ID_BITS),
+                     (config.scsiId & S2S_CFG_TARGET_ENABLED) ? "true" : "false",
                      config.deviceType,
                      config.deviceTypeModifier,
                      config.sdSectorStart,

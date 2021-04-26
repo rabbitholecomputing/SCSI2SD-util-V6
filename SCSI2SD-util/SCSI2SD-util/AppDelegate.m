@@ -510,6 +510,10 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
 
 - (void) showConnectInfo
 {
+    if ([myHID getSerialNumber] == nil)
+    {
+        [self reset_hid];
+    }
     [self logStringToLabel: @"SCSI2SD Ready, firmware version %@", [myHID getFirmwareVersionStr]];
     [self logStringToPanel: @"SCSI2SD Ready, firmware version %@\n", [myHID getFirmwareVersionStr]];
     [self logStringToPanel: @"Hardware version: %@\n", [myHID getHardwareVersion]];
@@ -552,6 +556,15 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     if (now == myLastPollTime) return;
     myLastPollTime = now;
     static BOOL shown = NO;
+    static BOOL first = YES;
+    
+    if (first)
+    {
+        [self reset_hid];
+        [self reset_bootloader];
+        first = NO;
+        return;
+    }
     
     // Check if we are connected to the HID device.
     @try
