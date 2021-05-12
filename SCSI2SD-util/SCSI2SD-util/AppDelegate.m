@@ -448,7 +448,7 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
     [self.window makeKeyAndOrderFront:self];
     [self startTimer];
     aLock = [[NSLock alloc] init];
-    [self loadDefaults: nil];
+    [self loadDefaults: self];
 }
 
 // Shutdown everything when termination happens...
@@ -748,6 +748,31 @@ BOOL RangesIntersect(NSRange range1, NSRange range2) {
         [devCon autoStartSector].enabled = ([devCon enableSCSITarget].state == NSOnState);
         
         [devCon evaluateSize];
+    }
+    
+    // recalculate...
+    NSUInteger secStart = 0;
+    NSUInteger index = 0;
+    NSEnumerator *en = [deviceControllers objectEnumerator];
+    DeviceController *dev = nil;
+    while ((dev = [en nextObject]) != nil)
+    {
+        // if ([dev isEnabled] && dev.autoStartSector.state == NSOnState)
+        {
+            NSRange sectorRange = [dev getSDSectorRange];
+            NSUInteger len = sectorRange.length;
+            secStart += len + 1;
+            index++; // update next one...
+            
+            if (index < [deviceControllers count])
+            {
+                DeviceController *devToUpdate = [deviceControllers objectAtIndex:index];
+                // if ([devToUpdate isEnabled] && devToUpdate.autoStartSector.state == NSOnState)
+                {
+                    [devToUpdate setAutoStartSectorValue:secStart];
+                }
+            }
+        }
     }
 }
 
