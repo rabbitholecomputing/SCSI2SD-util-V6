@@ -1,7 +1,7 @@
 # SCSI2SD-util-V6 Native+Universal Mac App (Cocoa)
-New repo for Xcode based SCSI2SD application for V6 boards.
+New repo for Xcode based SCSI2SD application for V6 boards. This utility will "just build" with Xcode 12
 
-Building for Mac OS 10.6:
+Alternative instructions for building for Mac OS 10.6 (Snow Leopard, from 2008)
 -
 * You must open up the MainMenu.xib AS SOURCE CODE and do the following:
 	* replace translatesAutoresizingMaskIntoConstraints="NO" with
