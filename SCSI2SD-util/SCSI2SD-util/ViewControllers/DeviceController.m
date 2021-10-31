@@ -234,7 +234,7 @@
 - (void)controlTextDidChange:(NSNotification *)notification
 {
     NSTextField *textfield = [notification object];
-    NSCharacterSet *charSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    NSCharacterSet *charSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
 
     char *stringResult = (char *)malloc([textfield.stringValue length]);
     int cpt=0;
@@ -363,7 +363,7 @@
     NSUInteger gb_size = 1024 * 1024 * 1024,
     mb_size = 1024 * 1024,
     kb_size = 1024;
-    NSUInteger size = (NSUInteger)[[self.deviceSize stringValue] integerValue];
+    CGFloat size = (CGFloat)[[self.deviceSize stringValue] floatValue];
     NSUInteger sectorSize = (NSUInteger)[[self.sectorSize stringValue] integerValue];
     NSUInteger num_sectors = 0;
     NSUInteger size_factor = 0;
