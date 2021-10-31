@@ -179,7 +179,7 @@ uint32_t fromLE32(uint32_t in)
 
     // Default to 2GB. Many systems have trouble with > 2GB disks, and
     // a few start to complain at 1GB.
-    config.scsiSectors = 4194304; // 2GB - 1 sector
+    config.scsiSectors = 4194303; // 2GB - 1 sector
     config.bytesPerSector = 512;
     config.sectorsPerTrack = 63;
     config.headsPerCylinder = 255;
