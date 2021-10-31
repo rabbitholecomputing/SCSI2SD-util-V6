@@ -384,7 +384,7 @@
             break;
     }
     
-    num_sectors = ((size * size_factor) / sectorSize) - 1;
+    num_sectors = ((size * size_factor) / sectorSize);
     return num_sectors;
 }
 @end
