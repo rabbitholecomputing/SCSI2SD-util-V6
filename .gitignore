@@ -1,3 +1,10 @@
-SCSI2SD-util/SCSI2SD-util-v6.xcodeproj/project.xcworkspace/xcuserdata/heron.xcuserdatad/UserInterfaceState.xcuserstate
-SCSI2SD-util/SCSI2SD-util-v6.xcodeproj/xcshareddata/
-SCSI2SD-util/SCSI2SD-util-v6.xcodeproj/xcuserdata
+.DS_Store
+SCSI2SD-util/.DS_Store
+SCSI2SD-util/Assets.xcassets/.DS_Store
+SCSI2SD-util/CPPModules/hid.c.orig
+build/
+SCSI2SD-util/SCSI2SD-util-v6.xcodeproj/project.xcworkspace/xcuserdata
+libusb-1.0.23/libusb/*
+libusb-1.0.23/examples/*
+libusb-1.0.23/tests/*
+

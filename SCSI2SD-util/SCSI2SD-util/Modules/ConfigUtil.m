@@ -281,7 +281,7 @@ uint32_t fromLE32(uint32_t in)
         @"    0x2    Optical drive  (ie. CD drive).\n"
         @"    0x3    1.44MB Floppy Drive.\n"
         @"    ********************************************************* -->\n"
-        @"    <deviceType>%x</deviceType>\n"
+        @"    <deviceType>0x%x</deviceType>\n"
         @"\n\n"
         @"    <!-- ********************************************************\n"
         @"    Device type modifier is usually 0x00. Only change this if your\n"
@@ -289,7 +289,7 @@ uint32_t fromLE32(uint32_t in)
         @"\n"
         @"    0x4C    Data General Micropolis disk\n"
         @"    ********************************************************* -->\n"
-        @"    <deviceTypeModifier>%x</deviceTypeModifier>\n"
+        @"    <deviceTypeModifier>0x%x</deviceTypeModifier>\n"
         @"\n\n"
         @"    <!-- ********************************************************\n"
         @"    SD card offset, as a sector number (always 512 bytes).\n"
@@ -448,7 +448,7 @@ uint32_t fromLE32(uint32_t in)
     NSString *s = nil;
     if ([str rangeOfString:@"0x" options:0].location != NSNotFound)
     {
-        s = [NSString stringWithFormat: @"%@",[str substringToIndex:2]];
+        s = [NSString stringWithFormat: @"%@",[str substringFromIndex:2]];
     }
     else
     {

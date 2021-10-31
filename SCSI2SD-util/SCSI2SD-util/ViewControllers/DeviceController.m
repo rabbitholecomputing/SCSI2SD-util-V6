@@ -106,21 +106,38 @@
     NSInteger sectors = (NSInteger)(config.scsiSectors);
     NSInteger bytesPerSector = (NSInteger)(config.bytesPerSector);
     NSInteger deviceSize = (NSInteger)((sectors * bytesPerSector) / (1024 * 1024 * 1024));
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+
+    f.hasThousandSeparators = NO;
+    self.enableSCSITarget.formatter = f;
+    self.sdCardStartSector.formatter = f;
+    self.sectorSize.formatter = f;
+    self.sectorCount.formatter = f;
+    self.sectorsPerTrack.formatter = f;
+    self.headsPerCylinder.formatter = f;
     
     self.enableSCSITarget.state = (config.scsiId & S2S_CFG_TARGET_ENABLED) ? NSOnState : NSOffState;
     [self.SCSIID setStringValue:
      [NSString stringWithFormat: @"%d", (config.scsiId & S2S_CFG_TARGET_ID_BITS)]];
     [self.deviceType selectItemAtIndex: config.deviceType];
-    [self.sdCardStartSector setStringValue:[NSString stringWithFormat:@"%d", config.sdSectorStart]];
-    [self.sectorSize setStringValue: [NSString stringWithFormat: @"%d", config.bytesPerSector]];
-    [self.sectorCount setStringValue: [NSString stringWithFormat: @"%d", config.scsiSectors]];
-    [self.deviceSize setStringValue: [NSString stringWithFormat: @"%lld", (long long)deviceSize]];
+    [self.sdCardStartSector setStringValue:
+     [[NSString stringWithFormat:@"%d", config.sdSectorStart] stringByReplacingOccurrencesOfString:@"," withString:@""]];
+    [self.sectorSize setStringValue:
+     [[NSString stringWithFormat: @"%d", config.bytesPerSector] stringByReplacingOccurrencesOfString:@"," withString:@""]];
+    [self.sectorCount setStringValue:
+     [[NSString stringWithFormat: @"%d", config.scsiSectors]  stringByReplacingOccurrencesOfString:@"," withString:@""]];
+    [self.deviceSize setStringValue:
+     [[NSString stringWithFormat: @"%lld", (long long)deviceSize] stringByReplacingOccurrencesOfString:@"," withString:@""]];
     [self.vendor setStringValue: [NSString stringWithCString:config.vendor length:8]];
     [self.productId setStringValue: [NSString stringWithCString:config.prodId length:16]];
     [self.revsion setStringValue: [NSString stringWithCString:config.revision length:4]];
     [self.serialNumber setStringValue: [NSString stringWithCString:config.serial length:16]];
-    [self.sectorsPerTrack setStringValue: [NSString stringWithFormat: @"%d", config.sectorsPerTrack]];
-    [self.headsPerCylinder setStringValue: [NSString stringWithFormat: @"%d", config.headsPerCylinder]];
+    [self.sectorsPerTrack setStringValue:
+     [[NSString stringWithFormat: @"%d", config.sectorsPerTrack] stringByReplacingOccurrencesOfString:@"," withString:@""]];
+    [self.headsPerCylinder setStringValue:
+     [[NSString stringWithFormat: @"%d", config.headsPerCylinder] stringByReplacingOccurrencesOfString:@"," withString:@""]];
+    
+    [f autorelease];
     
     [self evaluateSize];
 }
@@ -217,7 +234,7 @@
 - (void)controlTextDidChange:(NSNotification *)notification
 {
     NSTextField *textfield = [notification object];
-    NSCharacterSet *charSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    NSCharacterSet *charSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
 
     char *stringResult = (char *)malloc([textfield.stringValue length]);
     int cpt=0;
@@ -346,7 +363,7 @@
     NSUInteger gb_size = 1024 * 1024 * 1024,
     mb_size = 1024 * 1024,
     kb_size = 1024;
-    NSUInteger size = (NSUInteger)[[self.deviceSize stringValue] integerValue];
+    CGFloat size = (CGFloat)[[self.deviceSize stringValue] floatValue];
     NSUInteger sectorSize = (NSUInteger)[[self.sectorSize stringValue] integerValue];
     NSUInteger num_sectors = 0;
     NSUInteger size_factor = 0;
@@ -367,7 +384,7 @@
             break;
     }
     
-    num_sectors = ((size * size_factor) / sectorSize) - 1;
+    num_sectors = ((size * size_factor) / sectorSize);
     return num_sectors;
 }
 @end
