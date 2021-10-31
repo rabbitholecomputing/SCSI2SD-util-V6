@@ -5,3 +5,6 @@ SCSI2SD-util/CPPModules/hid.c.orig
 build/
 SCSI2SD-util/SCSI2SD-util-v6.xcodeproj/project.xcworkspace/xcuserdata
 libusb-1.0.23/libusb/*
+libusb-1.0.23/examples/*
+libusb-1.0.23/tests/*
+
