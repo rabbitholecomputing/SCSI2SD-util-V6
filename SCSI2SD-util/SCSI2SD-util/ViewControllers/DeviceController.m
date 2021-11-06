@@ -234,26 +234,47 @@
 - (void)controlTextDidChange:(NSNotification *)notification
 {
     NSTextField *textfield = [notification object];
-    NSCharacterSet *charSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
-
-    char *stringResult = (char *)malloc([textfield.stringValue length]);
-    int cpt=0;
-    for (int i = 0; i < [textfield.stringValue length]; i++) {
-        unichar c = [textfield.stringValue characterAtIndex:i];
-        if ([charSet characterIsMember:c]) {
-            stringResult[cpt]=c;
-            cpt++;
-        }
-        else
-        {
-            NSBeep();
-        }
+    if (textfield != self.vendor &&
+        textfield != self.productId &&
+        textfield != self.serialNumber &&
+        textfield != self.revsion &&
+        textfield != self.SCSIID &&
+        textfield != self.sdCardStartSector &&
+        textfield != self.deviceSize &&
+        textfield != self.sectorCount &&
+        textfield != self.sectorSize &&
+        textfield != self.sectorsPerTrack &&
+        textfield != self.headsPerCylinder)
+    {
+        return; // from another controller... return.
     }
-    stringResult[cpt]='\0';
-    textfield.stringValue = [NSString stringWithUTF8String:stringResult];
-    free(stringResult);
     
-    [self _recalcOnTextChange: textfield];
+    if (textfield != self.vendor &&
+        textfield != self.productId &&
+        textfield != self.serialNumber &&
+        textfield != self.revsion)
+    {
+        NSCharacterSet *charSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
+
+        char *stringResult = (char *)malloc([textfield.stringValue length]);
+        int cpt=0;
+        for (int i = 0; i < [textfield.stringValue length]; i++) {
+            unichar c = [textfield.stringValue characterAtIndex:i];
+            if ([charSet characterIsMember:c]) {
+                stringResult[cpt]=c;
+                cpt++;
+            }
+            else
+            {
+                NSBeep();
+            }
+        }
+        stringResult[cpt]='\0';
+        textfield.stringValue = [NSString stringWithUTF8String:stringResult];
+        free(stringResult);
+        
+        [self _recalcOnTextChange: textfield];
+    }
 }
 
 - (void) recalculate
