@@ -1,4 +1,7 @@
 {
-  "substitutions" = { "-l\"IOKit\"" = "" };
-  "additional" = ("-lusb-1.0", "-ludev");
+        headerPaths = (
+                    "../libusb-1.0.23/libusb"
+                    );
+        substitutions = { "-l\"IOKit\"" = ""; };
+        additional = ("-lusb-1.0", "-ludev");
 }
